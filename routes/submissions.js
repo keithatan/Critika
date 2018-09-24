@@ -8,6 +8,7 @@ router.get("/",  function(req, res) {
     res.send('This route is for all submission related tasks');
 });
 
+/* Register */
 router.post("/register", function(req, res){
     if(!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion){
         res.status(401).json({message: "User data is incomplete"});
@@ -21,6 +22,19 @@ router.post("/register", function(req, res){
         password: bcrypt.hashSync(req.body.password, 10),
         security_question: req.body.securityquestion,
       }
+});
+
+/* Login */
+router.post("/login", function(req, res) {
+    if(req.body.email && req.body.password){
+      var email = req.body.email;
+      var password = req.body.password;
+    }
+    else{
+        res.status(401).json({message: "Login information is incomplete"});
+        return;
+    }
+
 });
 
 module.exports = router;
