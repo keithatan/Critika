@@ -2,6 +2,8 @@ const express = require ('express');
 
 /* Routes */
 var user = require('./routes/user.js');
+var submission = require('./routes/submissions.js');
+
 
 const app = express();
 
@@ -14,5 +16,6 @@ app.listen(3000, () => {
 });
 
 app.use('/user', user);
+app.use('/submission', submission);
 
 module.exports = app;
