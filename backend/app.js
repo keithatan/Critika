@@ -1,7 +1,7 @@
 const express = require ('express');
 
 /* Routes */
-var user = require('./routes/user');
+var user = require('./routes/user.js');
 
 const app = express();
 
@@ -14,3 +14,5 @@ app.listen(3000, () => {
 });
 
 app.use('/user', user);
+
+module.exports = app;
