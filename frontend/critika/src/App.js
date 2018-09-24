@@ -26,7 +26,11 @@ class App extends Component {
        <Layout>
     <Header>
       
-      <header className="App-header">CRITIKA</header>
+      <header className="App-header">
+      CRITIKA
+      </header>
+      
+  
     </Header>
     <Layout>
       <Sider width={200} style={{ background: '#fff' }}>
