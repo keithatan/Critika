@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
-import { Carousel, Menu, Dropdown, Icon, Button } from 'antd'
+import { Carousel, Menu, Dropdown, Icon, Button, Slider } from 'antd'
 
 class Submissions extends React.Component{
     
@@ -24,6 +24,32 @@ class Submissions extends React.Component{
           </Menu.Item>
         </Menu>
       );
+
+      class IconSlider extends React.Component {
+        state = {
+          value: 0,
+        }
+      
+        handleChange = (value) => {
+          this.setState({ value });
+        }
+      
+        render() {
+          const { max, min } = this.props;
+          const { value } = this.state;
+          const mid = ((max - min) / 2).toFixed(5);
+          const preColor = value >= mid ? '' : 'rgba(0, 0, 0, .45)';
+          const nextColor = value >= mid ? 'rgba(0, 0, 0, .45)' : '';
+          return (
+            <div className="icon-wrapper">
+              Beginner
+              <Slider {...this.props} onChange={this.handleChange} value={value} />
+              Professional
+            </div>
+          );
+        }
+      }
+      
   return (
       
     <div>
@@ -44,6 +70,8 @@ class Submissions extends React.Component{
         <div><h3>3</h3></div>
         <div><h3>4</h3></div>
       </Carousel>
+
+      <IconSlider min={0} max={20} />
 
     </div>
   );
