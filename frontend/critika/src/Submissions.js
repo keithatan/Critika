@@ -14,13 +14,13 @@ class Submissions extends React.Component{
       const menu = (
         <Menu>
           <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.alipay.com/">1st menu item</a>
+            <a>Most Recent</a>
           </Menu.Item>
           <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.taobao.com/">2nd menu item</a>
+            <a>Most Popular</a>
           </Menu.Item>
           <Menu.Item>
-            <a target="_blank" rel="noopener noreferrer" href="http://www.tmall.com/">3rd menu item</a>
+            <a>Top Rated</a>
           </Menu.Item>
         </Menu>
       );
@@ -33,7 +33,7 @@ class Submissions extends React.Component{
         <a className="ant-dropdown-link" href="#">
           Submissions type <Icon type="down" />
         </a>
-  </Dropdown>
+      </Dropdown>
 
       <Carousel afterChange={onChange}>
         <div><h3>1</h3></div>
