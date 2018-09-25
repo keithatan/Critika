@@ -4,6 +4,7 @@ const express = require ('express');
 var user = require('./routes/user.js');
 var submission = require('./routes/submissions.js');
 
+const config = require('./config/config');
 
 const app = express();
 
