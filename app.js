@@ -1,4 +1,6 @@
 const express = require ('express');
+var cookieParser = require('cookie-parser');
+var bodyParser = require('body-parser');
 
 /* Routes */
 var user = require('./routes/user.js');
@@ -15,6 +17,12 @@ app.get('/', (res, req) => {
 app.listen(3000, () => {
     console.log('The application is running on localhost:3000')
 });
+
+/* Parsers */
+app.use(cookieParser());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
+
 
 /* Routes */
 app.use('/user', user);
