@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
-import { Carousel, Menu, Dropdown, Icon } from 'antd'
+import { Carousel, Menu, Dropdown, Icon, Button } from 'antd'
 
 class Submissions extends React.Component{
     
@@ -34,6 +34,9 @@ class Submissions extends React.Component{
           Submissions type <Icon type="down" />
         </a>
       </Dropdown>
+
+      <Button type="primary">Remove Submission</Button>
+      <Button type="primary">Edit Submission</Button>
 
       <Carousel afterChange={onChange}>
         <div><h3>1</h3></div>
