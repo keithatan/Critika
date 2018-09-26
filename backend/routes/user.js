@@ -32,9 +32,9 @@ router.post("/register", function(req, res){
         verified: false
       });
 
+      /* Add to database */
       newUser.save(function (err) {
         if (err) return handleError(err);
-        // saved!
       });      
 
 
@@ -42,9 +42,24 @@ router.post("/register", function(req, res){
 
 /* Login */
 router.post("/login", function(req, res) {
-    if(req.body.email && req.body.password){
-      var email = req.body.email;
+    if(req.body.username && req.body.password){
+      var username = req.body.email;
       var password = req.body.password;
+      var existQuery = User.where({ username: username, password: password});
+      existQuery.findOne(function (err, kitten) {
+          if (err) return handleError(err);
+          if (kitten) {
+                if (kitten == null){
+                    res.status(401).json({message: "Wrong login information"});
+                }
+                    res.status(401).json({message: "Exists"});
+
+
+             }
+            
+            });
+
+
     }
     else{
         res.status(401).json({message: "Login information is incomplete"});
