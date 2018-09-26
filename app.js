@@ -9,7 +9,6 @@ require('dotenv').config();
 let user = require('./routes/user.js');
 let submission = require('./routes/submissions.js');
 
-const config = require('./config/config');
 
 const app = express();
 
