@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
 
+let mongodb = require('mongoose');
+
 
 router.get("/",  function(req, res) {
     res.send('This route is for all user related tasks');
@@ -21,6 +23,8 @@ router.post("/register", function(req, res){
         password: bcrypt.hashSync(req.body.password, 10),
         security_question: req.body.securityquestion,
       }
+
+      
 });
 
 /* Login */
