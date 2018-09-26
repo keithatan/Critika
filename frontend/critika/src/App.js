@@ -12,6 +12,7 @@ import Explore from './Explore';
 import Settings from './Settings';
 import Notifications from './Notifications';
 import Dashboard from './Dashboard';
+import Register from './Register';
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -62,7 +63,6 @@ class App extends Component {
             <Menu.Item key="7"><Link to="/messages">Messages</Link></Menu.Item>
             <Menu.Item key="8"><Link to="/submissions">Submissions</Link></Menu.Item>
             <Menu.Item key="9"><Link to="/feedbackGiven">FeedbackGiven</Link></Menu.Item>
-
         
         </Menu>
       </Sider>
@@ -106,6 +106,9 @@ class App extends Component {
       />
       <Route path='/dashboard' render = { () => (
         <Dashboard/>)} 
+      />
+      <Route path='/register' render = { () => (
+        <Register/>)} 
       />
        
     </Switch>
