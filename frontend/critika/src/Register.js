@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css'
 
-import { Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button, Menu, Dropdown, message  } from 'antd';
+
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -46,6 +47,19 @@ class Register extends React.Component{
 
 
   render() {
+    const menu = (
+      <Menu>
+        <Menu.Item>
+          <a>Security Question 1</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a>Security Question 2</a>
+        </Menu.Item>
+        <Menu.Item>
+          <a>Security Question 3</a>
+        </Menu.Item>
+      </Menu>
+    );
 
     const formItemLayout = {
       labelCol: {
@@ -71,6 +85,7 @@ class Register extends React.Component{
     };
 
     return (
+      <div>
       <Form onSubmit={this.handleSubmit}>
 
       <FormItem 
@@ -111,9 +126,15 @@ class Register extends React.Component{
                 <Icon type="question-circle-o" />
               </Tooltip>
             </span>
+      
+          
           )}
         >
-        <Input placeholder="Security Question" />
+       <Dropdown overlay={menu}>
+      <Button >
+        Choose a Security Question <Icon type="down" />
+      </Button>
+    </Dropdown>
         </FormItem>
 
          <FormItem
@@ -131,6 +152,7 @@ class Register extends React.Component{
           <Button type="primary" htmlType="submit">Register</Button>
         </FormItem>
       </Form>
+      </div>
     );
   }
 }
