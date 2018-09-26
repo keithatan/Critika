@@ -7,7 +7,11 @@ class Profile extends React.Component{
   render(){
   return (
     <div>
+<<<<<<< HEAD
       <h1>User Profile <Button style={{backgroundColor: 'rgb(194, 165, 211)'}} type="secondary" size="large">+ Add Friend</Button> </h1>
+=======
+      <h1>User Profile <Button type="primary" size="large">+ Add Friend</Button> <Button type="primary" size="large">Submissions</Button> </h1>
+>>>>>>> 9b67e6cab82e6307db260a3bbce7141ccbda5f4f
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Row gutter={16}>
