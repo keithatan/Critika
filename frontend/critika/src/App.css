@@ -8,11 +8,7 @@
 }
 
 .App-header {
-  
-    text-align: left;
     font-size: 4em;
-    height: 50px;
-    padding: 10px;
     color: white;
 }
 
@@ -24,9 +20,11 @@
   font-size: large;
 }
 
-.header-bar{
-
+.Nav-bar{
+    text-align: right;
+    font-size: 0.65em;
 }
+
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }

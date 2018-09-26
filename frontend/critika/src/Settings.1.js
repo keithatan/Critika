@@ -1,14 +1,14 @@
 import React from 'react'
 import './App.css'
 
-class Messages extends React.Component{
+class Dashboard extends React.Component{
   render(){
   return (
     <div>
-      <h1>Messages</h1>
+      <h1>Dashboard</h1>
     </div>
   );
   }
 } 
 
-export default Messages
+export default Dashboard

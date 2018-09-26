@@ -1,14 +1,14 @@
 import React from 'react'
 import './App.css'
 
-class Messages extends React.Component{
+class Settings extends React.Component{
   render(){
   return (
     <div>
-      <h1>Messages</h1>
+      <h1>Settings</h1>
     </div>
   );
   }
 } 
 
-export default Messages
+export default Settings

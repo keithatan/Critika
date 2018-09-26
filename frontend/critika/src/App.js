@@ -9,14 +9,18 @@ import Messages from './Messages';
 import Friends from './Friends';
 import Community from './Community';
 import Explore from './Explore';
-
+import Settings from './Settings';
+import Notifications from './Notifications';
+import Dashboard from './Dashboard';
+import './Login.css';
 import './App.css';
-import { Button, Layout, Menu, Breadcrumb, Icon } from 'antd';
+import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
 import 'antd/dist/antd.css';
 import { Link, Switch, Route, Redirect } from 'react-router-dom'
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
+const FormItem = Form.Item;
 
 class App extends Component {
   render() {
@@ -24,13 +28,22 @@ class App extends Component {
       
       <div>
        <Layout>
-    <Header>
-      
+    <Header style={{backgroundColor: 'rgb(194, 165, 211)'}} >
       <header className="App-header">
-      CRITIKA
-      </header>
       
-  
+      CRITIKA
+     
+      
+      <Link  to='/profile'>
+      <Icon className="Nav-bar" type="user" style={{ color: 'rgb(255,255,255)'}} />
+        </Link>
+        <Link to='/notifications'>
+      <Icon className="Nav-bar" type="bell" style={{ color: 'rgb(255,255,255)'}} />
+        </Link>
+      <Link to='/settings'>
+      <Icon className="Nav-bar" type="setting" style={{ color: 'rgb(255,255,255)'}} />
+        </Link>
+      </header>
     </Header>
     <Layout>
       <Sider width={200} style={{ background: '#fff' }}>
@@ -40,14 +53,15 @@ class App extends Component {
           defaultOpenKeys={['sub1']}
           style={{ height: '100%', borderRight: 0 }}
         >
-            <Menu.Item key="1"><Link to="/login">Login</Link></Menu.Item>
-            <Menu.Item key="2"><Link to="/community">Community</Link></Menu.Item>
-            <Menu.Item key="3"><Link to="/explore">Explore</Link></Menu.Item>
+            <Menu.Item key="1" ><Link to="/login">Login</Link></Menu.Item>
+            <Menu.Item key="2" ><Link to="/dashboard">Dashboard</Link></Menu.Item>
+            <Menu.Item key="3"><Link to="/community">Community</Link></Menu.Item>
+            <Menu.Item key="4"><Link to="/explore">Explore</Link></Menu.Item>
             <Menu.Item key="5"><Link to="/profile">Profile</Link></Menu.Item>
             <Menu.Item key="6"><Link to="/groups">Groups</Link></Menu.Item>
             <Menu.Item key="7"><Link to="/messages">Messages</Link></Menu.Item>
             <Menu.Item key="8"><Link to="/submissions">Submissions</Link></Menu.Item>
-            <Menu.Item key="8"><Link to="/feedbackGiven">FeedbackGiven</Link></Menu.Item>
+            <Menu.Item key="9"><Link to="/feedbackGiven">FeedbackGiven</Link></Menu.Item>
 
         
         </Menu>
@@ -83,6 +97,15 @@ class App extends Component {
       />
       <Route path='/explore' render = { () => (
         <Explore/>)} 
+      />
+      <Route path='/settings' render = { () => (
+        <Settings/>)} 
+      />
+      <Route path='/notifications' render = { () => (
+        <Notifications/>)} 
+      />
+      <Route path='/dashboard' render = { () => (
+        <Dashboard/>)} 
       />
        
     </Switch>
