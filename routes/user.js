@@ -1,9 +1,17 @@
 var express = require('express');
 var router = express.Router();
 const bcrypt = require('bcrypt');
+let mongoose = require('mongoose');
 
-let mongodb = require('mongoose');
+mongoose.connect(process.env.MONGODB_HOST);
 
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
+
+/* Objects */
+var User = require('../model/user');
 
 router.get("/",  function(req, res) {
     res.send('This route is for all user related tasks');
@@ -16,15 +24,20 @@ router.post("/register", function(req, res){
         return;
       }
       /* User Data */
-      let userData = {
-        verified: false,
+      var newUser = new User({
         username: req.body.username,
         email: req.body.email,
-        password: bcrypt.hashSync(req.body.password, 10),
-        security_question: req.body.securityquestion,
-      }
+        password: req.body.password,
+        securityquestion: req.body.securityquestion,
+        verified: false
+      });
 
-      
+      newUser.save(function (err) {
+        if (err) return handleError(err);
+        // saved!
+      });      
+
+
 });
 
 /* Login */
