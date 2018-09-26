@@ -41,10 +41,10 @@ router.post("/register", function(req, res){
 });
 
 /* Get User */
-
+/* This should be an admin only thing */
 router.get("/find", function(req, res){ 
-    if (req.body.username){
-        var query = User.where({ username: username});
+    if (req.headers.username){
+        var query = User.where({ username: req.headers.username});
         query.findOne(function (err, user) {
           if (err) return handleError(err);
           if (user) {
