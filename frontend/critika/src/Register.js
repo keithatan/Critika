@@ -87,19 +87,43 @@ class Register extends React.Component{
         >
         <Input placeholder="Password" />
         </FormItem>
-        <FormItem
-          {...formItemLayout}
-          label="E-mail"
-        >
-         <Input placeholder="E-mail" />
-        </FormItem>
+
         <FormItem
           {...formItemLayout}
           label="Confirm Password"
         >
          <Input placeholder="Confirm Password" />
         </FormItem>
+
+        <FormItem
+          {...formItemLayout}
+          label="E-mail"
+        >
+         <Input placeholder="E-mail" />
+        </FormItem>
         
+        <FormItem
+          {...formItemLayout}
+          label={(
+            <span>
+              Security Question&nbsp;
+              <Tooltip title="Write a question only you can answer">
+                <Icon type="question-circle-o" />
+              </Tooltip>
+            </span>
+          )}
+        >
+        <Input placeholder="Security Question" />
+        </FormItem>
+
+         <FormItem
+          {...formItemLayout}
+          label="Answer to Security Question"
+        >
+         <Input placeholder="Answer" />
+        </FormItem>
+
+  
         <FormItem {...tailFormItemLayout}>
             <Checkbox>I have read the <a href="">agreement</a></Checkbox>
         </FormItem>
