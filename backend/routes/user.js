@@ -36,8 +36,6 @@ router.post("/register", function(req, res){
       newUser.save(function (err) {
         if (err) return handleError(err);
       });      
-
-
 });
 
 /* Get User */
@@ -54,16 +52,10 @@ router.get("/find", function(req, res){
                     res.send(user)
              }
             });
-
     }
     else{
         return handleError(err)
     }
-
-
-
-
-
 });
 
 /* Login */
