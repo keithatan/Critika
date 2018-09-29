@@ -4,7 +4,7 @@
   "description": "",
   "main": "app.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "keywords": [],
   "author": "",
@@ -18,5 +18,8 @@
     "mongodb": "^3.1.6",
     "mongoose": "^5.2.17",
     "pug": "^2.0.3"
+  },
+  "devDependencies": {
+    "jest": "^23.6.0"
   }
 }
