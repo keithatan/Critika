@@ -1,6 +1,8 @@
 /* Any dependencies needed */
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+const crypto = require('crypto');
+const jwt = require('jsonwebtoken');
 
 /* Make the schema */
 let userSchema = new Schema({
