@@ -42,8 +42,8 @@ router.post("/register", function (req, res) {
 
 });
 
+/* Send email*/
 router.post("/email", function(req, res){
-     /* Send email*/
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -94,6 +94,25 @@ router.get("/find", function (req, res) {
     }
 });
 
+/* View Profile */
+router.get("/profile", function(req, res){
+    if (req.headers.username && req.headers.email) {
+        var query = User.where({ username: req.headers.username });
+        query.findOne(function (err, user) {
+            if (err) return handleError(err);
+            if (user) {
+                if (user == null) {
+                    res.status(400).json({ message: "Wrong login information" });
+                }
+                res.send(user)
+            }
+        });
+    }
+    else {
+        return handleError(err)
+    }
+})
+
 /* Login */
 router.post("/login", function (req, res) {
     if (req.body.username && req.body.password) {
@@ -116,6 +135,7 @@ router.post("/login", function (req, res) {
     }
 });
 
+/* Change Password*/
 router.post("/change-password", function(req, res){
     if(!req.body.username){
         res.status(400).json({message: "No username provided"});
@@ -129,5 +149,7 @@ router.post("/change-password", function(req, res){
         if(err) return handleError(err);
     })
 })
+
+
 
 module.exports = router;
