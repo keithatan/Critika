@@ -34,12 +34,11 @@ router.post("/register", function (req, res) {
     });
 
     /* Add to database */
-    newUser.save(function (err) {
-        if (err) return handleError(err);
+    newUser.save().then((doc) => {
+        res.send(doc);
+    }, (err) => {
+        res.status().send(err);
     });
-
-   
-
 });
 
 /* Send email*/
