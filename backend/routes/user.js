@@ -116,4 +116,18 @@ router.post("/login", function (req, res) {
     }
 });
 
+router.post("/change-password", function(req, res){
+    if(!req.body.username){
+        res.status(400).json({message: "No username provided"});
+        return;
+    }
+
+    var username = req.body.username;
+    var newPassword = req.body.password;
+    
+    User.findOneAndUpdate({username : username}, { $set : {password : newPassword} }, function(err){
+        if(err) return handleError(err);
+    })
+})
+
 module.exports = router;
