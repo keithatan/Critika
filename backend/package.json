@@ -17,6 +17,8 @@
     "express": "^4.16.3",
     "mongodb": "^3.1.6",
     "mongoose": "^5.2.17",
+    "node-mandrill": "^1.0.1",
+    "nodemailer": "^4.6.8",
     "pug": "^2.0.3"
   },
   "devDependencies": {
