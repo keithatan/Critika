@@ -14,6 +14,7 @@ import Notifications from './Notifications';
 import Dashboard from './Dashboard';
 import Register from './Register';
 import ResetPassword from './ResetPassword';
+import EditProfile from './EditProfile';
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -114,6 +115,10 @@ class App extends Component {
 
     <Route path='/resetPassword' render = { () => (
         <ResetPassword/>)} 
+      />
+    
+    <Route path='/editProfile' render = { () => (
+        <EditProfile/>)} 
       />
        
     </Switch>
