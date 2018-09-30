@@ -7,6 +7,11 @@ class Profile extends React.Component{
   render(){
   return (
     <div>
+      <Button.Group size={"small"}>
+          <Button type="primary">
+            <Icon type="left" />Return to Dashboard
+          </Button>
+      </Button.Group>
       <h1>User Profile <Button type="primary" size="large">+ Add Friend</Button> <Button type="primary" size="large">Submissions</Button> </h1>
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
