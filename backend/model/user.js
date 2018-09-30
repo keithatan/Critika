@@ -18,7 +18,17 @@ let userSchema = new Schema({
     }
   },
   security_question: String,
-  
+  tokens: [{
+    access: {
+      type: String,
+      required: True
+      
+    },
+    token:[{
+      type: String,
+      require: True
+    }]
+  }]
 });
 
 /* Creating the user model from the schema and giving it to Mongoose */
