@@ -1,4 +1,5 @@
 const add = require('./add');
+const user = require('../model/user.js')
 
 /*
 HOW TO USE
@@ -19,11 +20,13 @@ EXAMPLES BELOW
 DONE USING JEST
 */
 
-test('add 1+2=3', () => {
-  expect(add(1, 2)).toBe(3);
-});
 
-test('add 10+20=30', () => {
-  expect(add(10, 20)).toBe(30);
+var assert = require('assert');
+describe('Array', function() {
+  describe('#indexOf()', function() {
+    it('should return -1 when the value is not present', function() {
+      assert.equal([1,2,3].indexOf(4), -1);
+    });
+  });
 });
 
