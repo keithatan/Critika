@@ -1,17 +1,23 @@
 import React from 'react'
 import './App.css'
-import {Button} from 'antd'
+import {Button, Icon} from 'antd'
 import {Link} from 'react-router-dom'
 
 class Dashboard extends React.Component{
   render(){
   return (
     <div>
+        <Button.Group size={"small"}>
+          <Button type="primary">
+            <Icon type="left" />Return to Profile
+          </Button>
+      </Button.Group>
+ 
       <h1>Dashboard</h1>
-      <Button>
-      <Link to="/profile">Profile</Link>
-      </Button>
-      
+      {/* <Input prefix={<Icon type="user" style={{ color: 'rgba(0,0,0,.25)'}} />} placeholder="Username" /> */}
+
+
+     
     </div>
   );
   }
