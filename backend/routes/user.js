@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+var nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 let mongoose = require('mongoose');
 
@@ -13,69 +14,104 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var User = require('../model/user');
 
-router.get("/",  function(req, res) {
+router.get("/", function (req, res) {
     res.send('This route is for all user related tasks');
 });
 
 /* Register */
-router.post("/register", function(req, res){
-    if(!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion){
-        res.status(400).json({message: "User data is incomplete"});
+router.post("/register", function (req, res) {
+    if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
+        res.status(400).json({ message: "User data is incomplete" });
         return;
-      }
-      /* User Data */
-      var newUser = new User({
+    }
+    /* User Data */
+    var newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         securityquestion: req.body.securityquestion,
         verified: false
-      });
+    });
 
-      /* Add to database */
-      newUser.save(function (err) {
+    /* Add to database */
+    newUser.save(function (err) {
         if (err) return handleError(err);
-      });      
+    });
+
+   
+
 });
+
+router.post("/email", function(req, res){
+     /* Send email*/
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'critika.app@gmail.com',
+            pass: '307group2018'
+        }
+    });
+
+    var mailOptions = {
+        from: 'critika.app@gmail.com',
+        to: 'kensodetz@gmail.com',
+        subject: 'Sending Email using Node.js',
+        text: 'This is a test'
+    };
+
+    console.log("Sending...")
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.error(error);
+            res.status(400).json({ message: "Email Error" });
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).json({ message: "Email Sent" });
+        }
+    });
+
+});
+
+
 
 /* Get User */
 /* This should be an admin only thing */
-router.get("/find", function(req, res){ 
-    if (req.headers.username){
-        var query = User.where({ username: req.headers.username});
+router.get("/find", function (req, res) {
+    if (req.headers.username) {
+        var query = User.where({ username: req.headers.username });
         query.findOne(function (err, user) {
-          if (err) return handleError(err);
-          if (user) {
-                if (user == null){
-                    res.status(400).json({message: "Wrong login information"});
+            if (err) return handleError(err);
+            if (user) {
+                if (user == null) {
+                    res.status(400).json({ message: "Wrong login information" });
                 }
-                    res.send(user)
-             }
-            });
+                res.send(user)
+            }
+        });
     }
-    else{
+    else {
         return handleError(err)
     }
 });
 
 /* Login */
-router.post("/login", function(req, res) {
-    if(req.body.username && req.body.password){
-      var username = req.body.email;
-      var password = req.body.password;
-      var existQuery = User.where({ username: username, password: password});
-      existQuery.findOne(function (err, user) {
-          if (err) return handleError(err);
-          if (user) {
-                if (user == null){
-                    res.status(400).json({message: "Wrong login information"});
+router.post("/login", function (req, res) {
+    if (req.body.username && req.body.password) {
+        var username = req.body.email;
+        var password = req.body.password;
+        var existQuery = User.where({ username: username, password: password });
+        existQuery.findOne(function (err, user) {
+            if (err) return handleError(err);
+            if (user) {
+                if (user == null) {
+                    res.status(400).json({ message: "Wrong login information" });
                 }
-                    res.send(user)
-             }
-            });
+                res.send(user)
+            }
+        });
     }
-    else{
-        res.status(400).json({message: "Login information is incomplete"});
+    else {
+        res.status(400).json({ message: "Login information is incomplete" });
         return;
     }
 });
