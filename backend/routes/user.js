@@ -36,7 +36,7 @@ router.post("/register", (req, res) =>{
 
     /* Add to database */
     newUser.save().then(() => {
-        newUser.generateAuthToken();
+        return newUser.generateAuthToken();
     }).then((token)=>{
         res.header('x-auth', token).send(newUser);
     }).catch((err) =>{
@@ -98,20 +98,19 @@ router.get("/find", (req, res) =>{
 });
 */
 
-/* View Profile */
-router.get("/profile", function(req, res){
-    if (req.headers.username && req.headers.email) {
-        var query = User.where({ username: req.headers.username });
-        query.findOne().then((user) => {
-            res.send(user)
-        }).catch((err) =>{
-            res.status(400).send(err)
-        });
-    }
-    else {
-        res.status(400).send({ message: "Wrong user information" });
-    }
-})
+/* View Account */
+router.get("/account", function(req, res){
+    var token = req.header('x-auth');
+
+    User.findByToken(token).then((user) =>{
+        if (!user){
+            return Promise.reject();
+        }
+        res.send(user);
+    }).catch((err) =>{
+        res.status(401).send();
+    })
+});
 
 /* Login */
 router.post("/login", function (req, res) {
