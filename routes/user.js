@@ -37,7 +37,7 @@ router.post("/register", (req, res) =>{
     newUser.save().then(() => {
         newUser.generateAuthToken();
     }).then((token)=>{
-        res.send(newUser);
+        res.header('x-auth', token).send(newUser);
     }).catch((err) =>{
         res.status(400).send(err)
     })
