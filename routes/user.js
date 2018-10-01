@@ -38,14 +38,14 @@ router.post("/register", (req, res) =>{
     /* Add to database */
     newUser.save().then(() => {
         return newUser.generateAuthToken();
-    }).then((token)=>{
+    }).then((token) => {
         res.header('x-auth', token).send(newUser);
-    }).catch((err) =>{
+    }).catch((err) => {
         res.status(400).send(err)
     })
 });
 
-/* Send email*/
+/* Send email
 router.post("/email", (req, res) =>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -74,33 +74,10 @@ router.post("/email", (req, res) =>{
     });
 
 });
-
-
-
-/* Get User */
-/* This should be an admin only thing */
-/*
-router.get("/find", (req, res) =>{
-    if (req.headers.username) {
-        var query = User.where({ username: req.headers.username });
-        query.findOne((err, user) => {
-            if (err) return handleError(err);
-            if (user) {
-                if (user == null) {
-                    res.status(400).json({ message: "Wrong login information" });
-                }
-                res.send(user)
-            }
-        });
-    }
-    else {
-        return handleError(err)
-    }
-});
 */
 
 /* View Account */
-router.get("/account", authenticate, (req, res)=> {
+router.get("/account", authenticate, (req, res) => {
     res.send(req.user);
 });
 
@@ -126,7 +103,8 @@ router.post("/login", function (req, res) {
     }
 });
 
-/* Change Password*/
+/* Change Password */
+/* --- Not Functioning --- */
 router.post("/change-password", function(req, res){
     if(!req.body.username){
         res.status(400).json({message: "No username provided"});
