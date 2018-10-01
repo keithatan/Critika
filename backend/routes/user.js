@@ -85,9 +85,11 @@ router.get("/account", authenticate, (req, res) => {
 router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
        User.findByLogin(req.body.username, req.body.password).then((user) => {
-           res.send(user);
+           return user.generateAuthToken().then((token) => {
+               res.header('x-auth', token).send(user);
+           });
        }).catch((err) => {
-           res.status(400).send({message: "err"});
+           res.status(400).send({ message: "Error logging in"});
        });
     }
     else {
