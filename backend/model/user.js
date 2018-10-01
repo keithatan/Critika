@@ -1,6 +1,7 @@
 /* Any dependencies needed */
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
+const ld = require('lodash');
 const vdator = require('validator');
 
 /* Make the schema */
@@ -46,6 +47,11 @@ userSchema.methods.generateAuthToken = function (){
     return token;
   });
 
+};
+
+/* Function to prevent too much information from being returned on request when the response is the object */
+userSchema.methods.toJSON = function (){
+  return ld.pick(this.toObject(), ['_id', 'username', 'email'])
 };
 
 /* Creating the user model from the schema and giving it to Mongoose */
