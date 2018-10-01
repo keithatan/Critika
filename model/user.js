@@ -12,6 +12,7 @@ let userSchema = new mongoose.Schema({
   verified: Boolean,
   email:{  
     type: String,
+    unique: true,
     validate: {
       validator: vdator.isEmail,
       message: '{VALUE} is not a valid email'
@@ -84,9 +85,28 @@ userSchema.pre('save', function (next){
   else{
     next();
   }
-
-
 });
+
+userSchema.statics.findByLogin = function(username, password) {
+  var User = this;
+
+  return User.findOne({username}).then((user) => {
+    if (!user){
+      return Promise.reject();
+    }
+    
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res){
+          resolve(user);
+        }
+        else{
+          reject();
+        }
+      });
+    });
+  });
+};
 
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function (){
