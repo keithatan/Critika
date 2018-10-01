@@ -3,6 +3,7 @@ var router = express.Router();
 var nodemailer = require('nodemailer');
 const bcrypt = require('bcrypt');
 let mongoose = require('mongoose');
+var authenticate = require('../middleware/auth');
 
 mongoose.connect(process.env.MONGODB_HOST);
 
@@ -99,17 +100,8 @@ router.get("/find", (req, res) =>{
 */
 
 /* View Account */
-router.get("/account", function(req, res){
-    var token = req.header('x-auth');
-
-    User.findByToken(token).then((user) =>{
-        if (!user){
-            return Promise.reject();
-        }
-        res.send(user);
-    }).catch((err) =>{
-        res.status(401).send();
-    })
+router.get("/account", authenticate, (req, res)=> {
+    res.send(req.user);
 });
 
 /* Login */
