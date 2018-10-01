@@ -32,17 +32,19 @@ let userSchema = new mongoose.Schema({
 /* Function to generate the authentication token */
 userSchema.methods.generateAuthToken = function (){
   var user = this;
-  var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
   var access = 'auth';
+
+  var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+
 
 
   /* Add the token to the user object */
-  user.tokens = user.token.concat([{access, token}]);
+  user.tokens = user.tokens.concat([{access, token}]);
 
   /* Give the token */ 
   return user.save().then(() =>{
     return token;
-  })
+  });
 
 };
 

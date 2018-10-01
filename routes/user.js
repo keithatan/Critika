@@ -33,6 +33,7 @@ router.post("/register", (req, res) =>{
         verified: false
     });
 
+
     /* Add to database */
     newUser.save().then(() => {
         newUser.generateAuthToken();
