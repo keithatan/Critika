@@ -13,7 +13,7 @@ let userSchema = new Schema({
   email:{  
     type: String,
     validate: {
-      validator: vdator.isEmail(value),
+      validator: vdator.isEmail,
       message: '{VALUE} is not a valid email'
     }
   },
@@ -21,12 +21,12 @@ let userSchema = new Schema({
   tokens: [{
     access: {
       type: String,
-      required: True
+      required: true
       
     },
     token:[{
       type: String,
-      require: True
+      require: true
     }]
   }]
 });

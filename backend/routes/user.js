@@ -19,7 +19,7 @@ router.get("/", function (req, res) {
 });
 
 /* Register */
-router.post("/register", function (req, res) {
+router.post("/register", (req, res) =>{
     if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
         res.status(400).json({ message: "User data is incomplete" });
         return;
@@ -34,11 +34,11 @@ router.post("/register", function (req, res) {
     });
 
     /* Add to database */
-    newUser.save().then((doc) => {
-        res.send(doc);
-    }, (err) => {
-        res.status().send(err);
-    });
+    newUser.save().then((user) => {
+        res.send(user);
+    }).catch((err) =>{
+        res.status(400).send(err)
+    })
 });
 
 /* Send email*/
