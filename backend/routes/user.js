@@ -82,23 +82,16 @@ router.get("/account", authenticate, (req, res) => {
 });
 
 /* Login */
-router.post("/login", function (req, res) {
+router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
-        var username = req.body.email;
-        var password = req.body.password;
-        var existQuery = User.where({ username: username, password: password });
-        existQuery.findOne(function (err, user) {
-            if (err) return handleError(err);
-            if (user) {
-                if (user == null) {
-                    res.status(400).json({ message: "Wrong login information" });
-                }
-                res.send(user)
-            }
-        });
+       User.findByLogin(req.body.username, req.body.password).then((user) => {
+           res.send(user);
+       }).catch((err) => {
+           res.status(400).send({message: "err"});
+       });
     }
     else {
-        res.status(400).json({ message: "Login information is incomplete" });
+        res.status(400).send({ message: "Login information is incomplete" });
         return;
     }
 });
