@@ -3,6 +3,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const ld = require('lodash');
 const vdator = require('validator');
+const bcrypt = require('bcrypt');
 
 /* Make the schema */
 let userSchema = new mongoose.Schema({
@@ -49,6 +50,7 @@ userSchema.methods.generateAuthToken = function (){
 
 };
 
+/* Search for a user using a token */
 userSchema.statics.findByToken = function (token){
   var User = this
   var decodedTokenObj;
@@ -66,6 +68,25 @@ userSchema.statics.findByToken = function (token){
   });
 
 }
+
+/* Function that runs before an update/creation to user object and hashes password */
+userSchema.pre('save', function (next){
+  var user = this;
+
+  if (user.isModified('password')){
+    bcrypt.genSalt(10, (err,salt) => {
+      bcrypt.hash(user.password, salt, (err, hash) => {
+        user.password = hash;
+        next();
+      });
+    });
+  }
+  else{
+    next();
+  }
+
+
+});
 
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function (){
