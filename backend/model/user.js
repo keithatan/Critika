@@ -1,12 +1,11 @@
 /* Any dependencies needed */
 const mongoose = require('mongoose');
-let Schema = mongoose.Schema;
 const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const vdator = require('validator');
 
 /* Make the schema */
-let userSchema = new Schema({
+let userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, minlength: 1, trim: true },
   password: { type: String, required: true, minlength: 6 },
   verified: Boolean,

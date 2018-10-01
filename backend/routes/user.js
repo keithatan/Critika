@@ -21,7 +21,7 @@ router.get("/", function (req, res) {
 /* Register */
 router.post("/register", (req, res) =>{
     if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
-        res.status(400).json({ message: "User data is incomplete" });
+        res.status(400).send({ message: "User data is incomplete" });
         return;
     }
     /* User Data */
@@ -42,7 +42,7 @@ router.post("/register", (req, res) =>{
 });
 
 /* Send email*/
-router.post("/email", function(req, res){
+router.post("/email", (req, res) =>{
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -75,10 +75,11 @@ router.post("/email", function(req, res){
 
 /* Get User */
 /* This should be an admin only thing */
-router.get("/find", function (req, res) {
+/*
+router.get("/find", (req, res) =>{
     if (req.headers.username) {
         var query = User.where({ username: req.headers.username });
-        query.findOne(function (err, user) {
+        query.findOne((err, user) => {
             if (err) return handleError(err);
             if (user) {
                 if (user == null) {
@@ -92,23 +93,20 @@ router.get("/find", function (req, res) {
         return handleError(err)
     }
 });
+*/
 
 /* View Profile */
 router.get("/profile", function(req, res){
     if (req.headers.username && req.headers.email) {
         var query = User.where({ username: req.headers.username });
-        query.findOne(function (err, user) {
-            if (err) return handleError(err);
-            if (user) {
-                if (user == null) {
-                    res.status(400).json({ message: "Wrong login information" });
-                }
-                res.send(user)
-            }
+        query.findOne().then((user) => {
+            res.send(user)
+        }).catch((err) =>{
+            res.status(400).send(err)
         });
     }
     else {
-        return handleError(err)
+        res.status(400).send({ message: "Wrong user information" });
     }
 })
 
