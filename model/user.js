@@ -1,13 +1,12 @@
 /* Any dependencies needed */
 const mongoose = require('mongoose');
-const crypto = require('crypto');
 const jwt = require('jsonwebtoken');
 const vdator = require('validator');
 
 /* Make the schema */
 let userSchema = new mongoose.Schema({
-  username: { type: String, required: true, unique: true, minlength: 1, trim: true },
-  password: { type: String, required: true, minlength: 6 },
+  username: { type: String, required: true, unique: true, minlength: 6, trim: true },
+  password: { type: String, required: true, minlength: 8 },
   verified: Boolean,
   email:{  
     type: String,
@@ -29,6 +28,23 @@ let userSchema = new mongoose.Schema({
     }]
   }]
 });
+
+/* Function to generate the authentication token */
+userSchema.methods.generateAuthToken = function (){
+  var user = this;
+  var token = jwt.sign({_id: user._id.toHexString(), access}, process.env.JWT_SECRET).toString();
+  var access = 'auth';
+
+
+  /* Add the token to the user object */
+  user.tokens = user.token.concat([{access, token}]);
+
+  /* Give the token */ 
+  return user.save().then(() =>{
+    return token;
+  })
+
+};
 
 /* Creating the user model from the schema and giving it to Mongoose */
 let User = mongoose.model('User', userSchema);

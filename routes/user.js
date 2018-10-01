@@ -25,7 +25,7 @@ router.post("/register", (req, res) =>{
         return;
     }
     /* User Data */
-    var newUser = new User({
+    var user = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
@@ -34,7 +34,9 @@ router.post("/register", (req, res) =>{
     });
 
     /* Add to database */
-    newUser.save().then((user) => {
+    user.save().then((user) => {
+        user.generateAuthToken();
+    }).then((token)=>{
         res.send(user);
     }).catch((err) =>{
         res.status(400).send(err)
