@@ -12,7 +12,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 
-router.get("/",  function(req, res) {
+router.get("/",  (req, res) => {
     res.send('This route is for all submission related tasks');
 });
 
@@ -38,5 +38,12 @@ router.post("/add", authenticate, (req, res) => {
         res.status(400).send(err);
     })
 })
+
+router.get("/mine", authenticate, (req, res) => {
+
+    Submission.find({username: req.user.username}).then((users) => {
+        res.send(users);
+    });
+});
 
 module.exports = router;
