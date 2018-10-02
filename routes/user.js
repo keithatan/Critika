@@ -97,19 +97,16 @@ router.post("/login", (req, res) => {
 });
 
 /* Change Password */
-/* --- Not Functioning --- */
-router.post("/change-password", (req, res) => {
-    if(!req.body.username){
-        res.status(400).json({message: "No username provided"});
-        return;
-    }
-
-    var username = req.body.username;
+router.post("/change-password", authenticate, (req, res) => {
+    var username = req.user.username;
     var newPassword = req.body.password;
     
-    User.findOneAndUpdate({username : username}, { $set : {password : newPassword} }, function(err){
-        if(err) return handleError(err);
-    })
+    User.findOneAndUpdate({username : username}, { $set : {password : newPassword}}).then(() =>{
+        res.status(200).send({message: 'Password was successfully changed!'});
+    }).catch((err) => {
+        res.status(400).send({ message: "Login information is incomplete" });
+        res.send(err);
+    });
 })
 
 
