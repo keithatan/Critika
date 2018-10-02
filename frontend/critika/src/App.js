@@ -13,8 +13,13 @@ import Settings from './Settings';
 import Notifications from './Notifications';
 import Dashboard from './Dashboard';
 import Register from './Register';
+<<<<<<< HEAD
+import Users from './Users';
+import Reports from './Reports';
+=======
 import ResetPassword from './ResetPassword';
 import EditProfile from './EditProfile';
+>>>>>>> 3d9dd93f817f154931f4f039f54814b1b601354d
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -61,10 +66,14 @@ class App extends Component {
             <Menu.Item key="3"><Link to="/community">Community</Link></Menu.Item>
             <Menu.Item key="4"><Link to="/explore">Explore</Link></Menu.Item>
             <Menu.Item key="5"><Link to="/profile">Profile</Link></Menu.Item>
-            <Menu.Item key="6"><Link to="/groups">Groups</Link></Menu.Item>
-            <Menu.Item key="7"><Link to="/messages">Messages</Link></Menu.Item>
-            <Menu.Item key="8"><Link to="/submissions">Submissions</Link></Menu.Item>
-            <Menu.Item key="9"><Link to="/feedbackGiven">FeedbackGiven</Link></Menu.Item>
+            <Menu.Item key="6"><Link to="/friends">Friends</Link></Menu.Item>
+            <Menu.Item key="7"><Link to="/groups">Groups</Link></Menu.Item>
+            <Menu.Item key="8"><Link to="/messages">Messages</Link></Menu.Item>
+            <Menu.Item key="9"><Link to="/submissions">Submissions</Link></Menu.Item>
+            <Menu.Item key="10"><Link to="/feedbackGiven">Feedback Given</Link></Menu.Item>
+            <Menu.Item key="11"><Link to="/users">Users</Link></Menu.Item>
+            <Menu.Item key="12"><Link to="/reports">Reports</Link></Menu.Item>
+
         
         </Menu>
       </Sider>
@@ -112,6 +121,13 @@ class App extends Component {
       <Route path='/register' render = { () => (
         <Register/>)} 
       />
+<<<<<<< HEAD
+      <Route path='/users' render = { () => (
+        <Users/>)} 
+      />
+      <Route path='/reports' render = { () => (
+        <Reports/>)} 
+=======
 
     <Route path='/resetPassword' render = { () => (
         <ResetPassword/>)} 
@@ -119,6 +135,7 @@ class App extends Component {
     
     <Route path='/editProfile' render = { () => (
         <EditProfile/>)} 
+>>>>>>> 3d9dd93f817f154931f4f039f54814b1b601354d
       />
        
     </Switch>
