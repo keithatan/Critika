@@ -6,11 +6,11 @@ let Schema = mongoose.Schema;
 let submissionsSchema = new Schema({
   category: {type: String, required: true},
   submissionName: {type: String, required: true},
-  submissionID: {type: String, required: true, unique: true},
-  userID: {type: String, required: true}, 
+  submissionText: {type: String},
+  username: {type: String, required: true}, 
   dateSubmitted: {type: Date, default: Date.now},
-  receivedCritiqueIDs: {type: [String], required: true}, 
-  numberOfCritiquesRecieved: {type: Number}
+  //receivedCritiqueIDs: {type: [String], required: true}, 
+  numberOfCritiquesRecieved: {type: Number, default: 0}
 });
 
 

@@ -1,7 +1,7 @@
 var express = require('express');
 var router = express.Router();
-const bcrypt = require('bcrypt');
 let mongoose = require('mongoose');
+var authenticate = require('../middleware/auth');
 
 mongoose.connect(process.env.MONGODB_HOST);
 
@@ -16,9 +16,9 @@ router.get("/",  function(req, res) {
     res.send('This route is for all submission related tasks');
 });
 
-router.post("/add", function(req, res){
+router.post("/add", authenticate, (req, res) => {
 
-    if(!req.body.category || !req.body.submissionName || !req.body.submissionID || !req.body.userID || !req.body.receivedCritiqueIDs){
+    if(!req.body.category || !req.body.submissionName || !req.body.submissionText){
         res.status(400).json({message: "Submission data is incomplete"});
         return;
     }
@@ -27,15 +27,16 @@ router.post("/add", function(req, res){
     var newSubmission = new Submission({
         category: req.body.category,
         submissionName: req.body.submissionName,
-        submissionID: req.body.submissionID,
-        userID: req.body.userID,
-        receivedCritiqueIDs: req.body.receivedCritiqueIDs,
+        submissionText: req.body.submissionText,
+        username: req.user.username,
     });
 
-    newSubmission.save(function (err){
-        if (err) return handleError(err)
-    });
-
+    /* Add to database */
+    newSubmission.save().then(() =>{
+        res.status(200).send(newSubmission);
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
 })
 
 module.exports = router;
