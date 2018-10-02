@@ -9,7 +9,7 @@ var testAccountToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmIxYjM
 chai.use(chaiHttp);
 
 describe('Test GET', function(){
-  it('should list all users on /user GET', function(done){
+  it('response should be 200 with proper auth token', function(done){
     chai.request(server).get('/user/account', {'x-auth': testAccountToken}).end(function(err, res){
       res.should.have.status(200);
       done();
