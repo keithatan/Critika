@@ -96,6 +96,34 @@ router.post("/login", (req, res) => {
     }
 });
 
+/* Edit info */
+router.post("/edit-info", authenticate, (req, res) => {
+    if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    var userInfo = new User({
+        newEmail: req.body.email,
+        password: req.body.password,
+        newSecurityquestion: req.body.securityquestion,
+    });
+
+    User.findOneAndUpdate({username : req.body.username},
+         { $set : {
+            email : req.body.email,
+            securityquestion: req.body.securityquestion,
+        }}).then(() => {
+            res.status(200).send({message: 'User information successfully updated!'})
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+
+
+})
+
+
 /* Change Password */
 router.post("/change-password", authenticate, (req, res) => {
     var username = req.user.username;
