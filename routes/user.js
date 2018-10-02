@@ -100,7 +100,7 @@ router.post("/login", (req, res) => {
 
 /* Change Password */
 /* --- Not Functioning --- */
-router.post("/change-password", function(req, res){
+router.post("/change-password", (req, res) => {
     if(!req.body.username){
         res.status(400).json({message: "No username provided"});
         return;
