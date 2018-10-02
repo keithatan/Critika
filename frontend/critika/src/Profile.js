@@ -1,12 +1,21 @@
 import React from 'react'
 import './App.css'
 import { Card, Icon, Col, Row, Button } from 'antd'
-
+import {Link} from 'react-router-dom'
 class Profile extends React.Component{
     
   render(){
   return (
     <div>
+      <Button.Group size={"small"}>
+          <Button type="primary">
+            <Icon type="left" />Return to Dashboard
+          </Button>
+      </Button.Group>
+
+      {/* <Button style={{float: "right"}}> */}
+      <Link style={{float:"right"}} to="/editProfile"><Icon type="edit" theme="filled" />Edit Profile</Link>
+      {/* Edit Profile</Button> */}
       <h1>User Profile <Button type="primary" size="large">+ Add Friend</Button> <Button type="primary" size="large">Submissions</Button> </h1>
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
@@ -35,10 +44,10 @@ class Profile extends React.Component{
       <Col span={8}>
         <Card title="Personal Information" bordered={false}>
         <p>Member since: 9.24.18</p>
-        <p>Number of friends: </p>
-        <p>Number of submissions:</p>
-        <p>Number of critiques given:</p>
-        <p>Number of critiques received:</p>
+        <p>Number of friends: 30 </p>
+        <p>Number of submissions: 3</p>
+        <p>Number of critiques given: 16</p>
+        <p>Number of critiques received: 8</p>
         </Card>
       </Col>
     </Row>
