@@ -40,10 +40,21 @@ router.post("/add", authenticate, (req, res) => {
 })
 
 router.get("/mine", authenticate, (req, res) => {
-
-    Submission.find({username: req.user.username}).then((users) => {
-        res.send(users);
+    Submission.find({username: req.user.username}).then((subs) => {
+        res.send(subs);
     });
+});
+
+router.get("/all", authenticate, (req, res) => {
+
+    if (req.user.status == 'admin'){
+        Submission.find({}).then((subs) => {
+            res.send(subs);
+        });
+    }
+    else{
+        res.status(401).send({message: '401 ERROR: Access Denied'})
+    }
 });
 
 module.exports = router;
