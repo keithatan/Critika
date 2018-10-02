@@ -8,7 +8,7 @@ class Dashboard extends React.Component{
   return (
     <div>
         <Button.Group size={"small"}>
-          <Button type="primary">
+          <Button class="profilebtn" type="primary">
             <Icon type="left" />Return to Profile
           </Button>
       </Button.Group>
