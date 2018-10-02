@@ -11,29 +11,81 @@ var testAccountToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmIzYjY
 chai.use(chaiHttp);
 
 describe('Test GET', function(){
-  it('GET requset with correct auth token should return 200', function(done){
-    chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
-      res.should.have.status(200);
-      done();
+
+  describe('Test GET /user/account', function(){
+
+    it('GET request without auth token should return 401', function(done){
+      chai.request(server).get('/user/account').end(function(err, res){
+        res.should.have.status(401);
+        done();
+      });
     });
+
+    it('GET request without correct auth token should return 401', function(done){
+      chai.request(server).get('/user/account').set('x-auth', 'a bad key').end(function(err, res){
+        res.should.have.status(401);
+        done();
+      });
+    });
+
+    it('GET requset with correct auth token should return 200', function(done){
+      chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
+        res.should.have.status(200);
+        done();
+      });
+    });
+
+    it('GET request should return an object with id, username, and email', function(done){
+      chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
+        res.should.be.json;
+        res.body.should.be.a('object');
+        res.body.should.have.property('_id');
+        res.body.should.have.property('username');
+        res.body.should.have.property('email');
+        done();
+      });
+    })
   });
 
-  it('GET request should return an object with id, username, and email', function(done){
-    chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
-      res.should.be.json;
-      res.body.should.be.a('object');
-      res.body.should.have.property('_id');
-      res.body.should.have.property('username');
-      res.body.should.have.property('email');
-      done();
-    });
-  })
+  describe('Test GET /submission/mine', function(){
 
-  it('GET request without correct auth token should return 401', function(done){
-    chai.request(server).get('/user/account').set('x-auth', 'a bad key').end(function(err, res){
-      res.should.have.status(401);
-      done();
+    it('GET request without auth token should return 401', function(done){
+      chai.request(server).get('/submission/mine').end(function(err, res){
+        res.should.have.status(401);
+        done();
+      });
     });
+
+    it('GET request without correct auth token should return 401', function(done){
+      chai.request(server).get('/submission/mine').set('x-auth', 'bad token').end(function(err, res){
+        res.should.have.status(401);
+        done();
+      });
+    });
+
+    it('GET request without correct auth token should return 401', function(done){
+      chai.request(server).get('/submission/mine').set('x-auth', testAccountToken).end(function(err, res){
+        res.should.have.status(200);
+        done();
+      });
+    });
+
+    it('GET request should return all user submissions',
+     function(done){
+      chai.request(server).get('/submission/mine').set('x-auth', testAccountToken).end(function(err, res){
+        res.should.be.json;
+        res.body.should.be.a('array');
+        res.body[0].should.have.property('numberOfCritiquesRecieved');
+        res.body[0].should.have.property('_id');
+        res.body[0].should.have.property('category');
+        res.body[0].should.have.property('submissionName');
+        res.body[0].should.have.property('submissionText');
+        res.body[0].should.have.property('username');
+        res.body[0].should.have.property('dateSubmitted');
+        res.body[0].should.have.property('__v');
+        done();
+      });
+    })
   });
 
 });
