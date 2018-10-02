@@ -1,7 +1,5 @@
 var express = require('express');
 var router = express.Router();
-var nodemailer = require('nodemailer');
-const bcrypt = require('bcrypt');
 let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
 
