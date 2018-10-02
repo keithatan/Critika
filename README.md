@@ -1,11 +1,11 @@
 # Critika
 ### Team
-Keith Tan (Backend + Project Owner)
-Ken Sodetz (Backend)
-Connor Todd (Backend)
-Brandon Sung (Frontend)
-Cyrus Santiago (Frontend)
-Julien San Diego (Frontend)
+* Keith Tan (Backend + Project Owner)
+* Ken Sodetz (Backend)
+* Connor Todd (Backend)
+* Brandon Sung (Frontend)
+* Cyrus Santiago (Frontend)
+* Julien San Diego (Frontend)
 
 ### Technologies Used
 * React
