@@ -40,35 +40,12 @@ router.post("/register", (req, res) => {
         verificationNum: verificatonCode
     });
 
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'critika.app@gmail.com',
-            pass: process.env.EMAIL_PASSWD
-        }
-    });
-
     var newMemberEmailBody = "Dear " + req.body.username +
         ",\n\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
-        verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team"
+        verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team";
+    var newMemberEmailSubject = "Welcome to Critika!";
 
-    var mailOptions = {
-        from: 'critika.app@gmail.com',
-        to: req.body.email,
-        subject: 'Welcome to Critika!',
-        text: newMemberEmailBody
-    };
-
-    console.log("Sending...")
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.error(error);
-            res.status(400).json({ message: "Email Error" });
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).json({ message: "Email Sent" });
-        }
-    });
+    sendEmail(req.body.email, newMemberEmailSubject, newMemberEmailBody);
 
     // Add to database
     newUser.save().then(() => {
@@ -93,12 +70,17 @@ router.get("/account", authenticate, (req, res) => {
 router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
         User.findByLogin(req.body.username, req.body.password).then((user) => {
+           if (!user.verified) {
+                res.status(200).send({ message: "Account has not been verified. Please verify your account" });
+            }
             return user.generateAuthToken().then((token) => {
                 res.header('x-auth', token).send(user);
             });
+ 
         }).catch((err) => {
-            res.status(400).send({ message: "Error logging in" });
+            res.status(400).send({ message: "Error Loging in. Username or Password is incorrect." });
         });
+
     }
     else {
         res.status(400).send({ message: "Login information is incomplete" });
@@ -106,10 +88,7 @@ router.post("/login", (req, res) => {
     }
 
     // If the user has not verified their email, then prompt for verification code
-    if (!user.verified) {
-        res.status(400).send({ message: "Account has not been verified. PLease verify your account" });
-        return;
-    }
+
 
 });
 
