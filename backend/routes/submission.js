@@ -35,6 +35,9 @@ router.post("/add", authenticate, (req, res) => {
         username: req.user.username,
     });
 
+    req.user.submissionNum = req.user.submissionNum +1;
+    
+
     /* Add to database */
     newSubmission.save().then(() => {
         res.status(200).send(newSubmission);
