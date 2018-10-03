@@ -68,28 +68,24 @@ router.get("/account", authenticate, (req, res) => {
  * Login 
  */
 router.post("/login", (req, res) => {
+    // check for username and password
     if (req.body.username && req.body.password) {
         User.findByLogin(req.body.username, req.body.password).then((user) => {
+            // If the user has not verified their email, then prompt for verification code
            if (!user.verified) {
                 res.status(200).send({ message: "Account has not been verified. Please verify your account" });
             }
             return user.generateAuthToken().then((token) => {
                 res.header('x-auth', token).send(user);
             });
- 
         }).catch((err) => {
             res.status(400).send({ message: "Error Loging in. Username or Password is incorrect." });
         });
-
     }
     else {
-        res.status(400).send({ message: "Login information is incomplete" });
+        res.status(400).send({ message: "Login information is incomplete. Missing username or password." });
         return;
     }
-
-    // If the user has not verified their email, then prompt for verification code
-
-
 });
 
 /**
@@ -220,12 +216,13 @@ router.post("/reset-password-email", (req, res) => {
         return;
     }
 
+    // check and find user by email
     if (req.body.email) {
         User.findByEmail(req.body.email).then((email) => {
             var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
             var email_subject = "Critika Password Reset";
             var email_body = "Dear " + email + ", \n\nOur records indicate that you have requested a password " +
-                "reset. Click the link below and enter the four digit code to begin the process.\n" +
+                "reset. Click the link below and enter the four digit code to begin the process.\n\n" +
                 verificatonCode + "\n\nSincerely, \n\nThe Critika Team"
 
             User.findOneAndUpdate({ email: email }, { $set: { verificationNum: verificatonCode } }).then(() => {
@@ -238,11 +235,18 @@ router.post("/reset-password-email", (req, res) => {
             // send email
             sendEmail(email, email_subject, email_body);
         }).catch((err) => {
-            res.status(400).send({ message: "Error logging in" });
+            res.status(400).send({ message: "Email does not exist in our records." });
         });
     }
 })
 
+/**
+ * Sends an email from critika.app@gmail.com to the specified 'to' email, with a subject and body given by the 
+ * function caller.
+ * @param {string} to 
+ * @param {string} subject 
+ * @param {string} body 
+ */
 function sendEmail(to, subject, body) {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -259,7 +263,7 @@ function sendEmail(to, subject, body) {
         text: body
     };
 
-    console.log("Sending...")
+    console.log("Sending to: " + to)
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.error(error);
