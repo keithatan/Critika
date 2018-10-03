@@ -1,7 +1,8 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
-import { Carousel, Menu, Dropdown, Icon, Button, Slider } from 'antd'
+import { Carousel, Menu, Dropdown, Icon, Button, Slider} from 'antd'
+import { Link } from 'react-router-dom'
 
 class Submissions extends React.Component{
     
@@ -53,6 +54,7 @@ class Submissions extends React.Component{
   return (
       
     <div>
+      <Button type="primary"><Link to="/createSubmission"> + Add New Submission </Link></Button>
       <h1>Your submissions</h1>
 
       <Dropdown overlay={menu}>
@@ -72,6 +74,7 @@ class Submissions extends React.Component{
       </Carousel>
 
       <IconSlider min={0} max={20} />
+
 
     </div>
   );

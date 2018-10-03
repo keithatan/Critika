@@ -17,6 +17,7 @@ import Users from './Users';
 import Reports from './Reports';
 import ResetPassword from './ResetPassword';
 import EditProfile from './EditProfile';
+import CreateSubmission from './CreateSubmission';
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -70,6 +71,7 @@ class App extends Component {
             <Menu.Item key="10"><Link to="/feedbackGiven">Feedback Given</Link></Menu.Item>
             <Menu.Item key="11"><Link to="/users">Users</Link></Menu.Item>
             <Menu.Item key="12"><Link to="/reports">Reports</Link></Menu.Item>
+
 
         
         </Menu>
@@ -131,6 +133,10 @@ class App extends Component {
     <Route path='/editProfile' render = { () => (
         <EditProfile/>)} 
       />
+
+    <Route path='/createSubmission' render = { () => (
+        <CreateSubmission/>)} 
+    />
        
     </Switch>
         </Content>

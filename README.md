@@ -18,6 +18,6 @@
 
 ### Code and Guides Used
 * The Complete Node.js Developer Course (2nd Edition)
-* Ant Design
+* [Ant Design](https://ant.design/)
 * [Create React App](https://github.com/facebookincubator/create-react-app)
 

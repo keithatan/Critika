@@ -59,6 +59,33 @@ router.post("/add", authenticate, (req, res) => {
 })
 
 /**
+ * Adds submission
+ */
+router.post("/edit", authenticate, (req, res) => {
+
+    if (!req.body.submissionText || !req.body.submissionName) {
+        res.status(400).json({ message: "Submission data is incomplete" });
+        return;
+    }
+
+    /* Change submission num */
+
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName , username: req.user.username},
+        {
+            $set: {
+                submissionText: req.body.submissionText
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Submission information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+
+})
+
+
+/**
  * Remove from databse
  */
 router.post("/remove", authenticate, (req, res) => {
