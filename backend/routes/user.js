@@ -26,7 +26,7 @@ router.post("/register", (req, res) => {
         return;
     }
 
-    var verificatonCode = Math.floor(Math.random() * 1000) + 1;
+    var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
     /* User Data */
     var newUser = new User({
@@ -35,10 +35,10 @@ router.post("/register", (req, res) => {
         password: req.body.password,
         securityquestion: req.body.securityquestion,
         verified: false,
-        verificatonCode: verificatonCode
+        verificationNum: verificatonCode
     });
 
-
+    console.log(verificatonCode)
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
     });
 
     var newMemberEmailBody = "Dear " + req.body.username + 
-        ",\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
+        ",\n\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
         verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team"
 
     var mailOptions = {
@@ -157,34 +157,6 @@ router.post("/edit-info", authenticate, (req, res) => {
             res.send(err);
         })
 })
-
-/* Create/Update Rating */
-router.post("/rating", authenticate, (req, res) => {
-    if (!req.body || !req.body.rating || !req.body.recuser){
-        res.status(400).send({ message: "User data is incomplete" });
-        return;
-    }
-
-    var recUser;
-
-    User.findOne({username: req.body.recuser}).then((foundUser) => {
-        recUser = foundUser
-    }).catch((err) =>{
-        res.status(400).send(err);
-    })
-
-    User.findOneAndUpdate({username : req.body.recuser},
-        { $set : {
-            ratingNum : recUser.rating + 1,
-           rating : (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating)))/ratingNo,
-       }}).then(() => {
-           res.status(200).send({message: 'Rating successfully updated!'})
-       }).catch((err) => {
-           res.status(400).send({ message: "Error changing rating" });
-           res.send(err);
-       })
-
-});
 
 
 /* Change Password */
