@@ -10,6 +10,8 @@ let userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true, minlength: 6, trim: true },
   password: { type: String, required: true, minlength: 8 },
   verified: Boolean,
+  rating: {type: Schema.Types.Decimal128, default: 0},
+  submissionNum: { type: Number, default: 0},
   email:{  
     type: String,
     unique: true,
