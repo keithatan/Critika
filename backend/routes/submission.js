@@ -35,7 +35,19 @@ router.post("/add", authenticate, (req, res) => {
         username: req.user.username,
     });
 
-    req.user.submissionNum = req.user.submissionNum +1;
+    /* Change submission num */
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                submissionNum: req.user.submissionNum + 1
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
     
 
     /* Add to database */
@@ -55,6 +67,18 @@ router.post("/remove", authenticate, (req, res) => {
         res.status(400).json({ message: "No submission data" });
         return;
     }
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                submissionNum: req.user.submissionNum - 1
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
 
     User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
             res.status(200).send({ message: "Submission succesfully removed!" })
