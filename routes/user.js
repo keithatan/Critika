@@ -122,7 +122,7 @@ router.post("/edit-info", authenticate, (req, res) => {
 
 })
 
-/* Update Rating */
+/* Create/Update Rating */
 router.post("/rating", authenticate, (req, res) => {
     if (!req.body || !req.body.rating || !req.body.recuser){
         res.status(400).send({ message: "User data is incomplete" });
@@ -139,7 +139,7 @@ router.post("/rating", authenticate, (req, res) => {
 
     User.findOneAndUpdate({username : req.body.recuser},
         { $set : {
-            ratingNo : recUser.rating + 1,
+            ratingNum : recUser.rating + 1,
            rating : (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating)))/ratingNo,
        }}).then(() => {
            res.status(200).send({message: 'Rating successfully updated!'})
