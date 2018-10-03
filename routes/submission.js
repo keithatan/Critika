@@ -11,6 +11,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /* Objects */
 var Submission = require('../model/submission');
+var User = require('../model/user');
 
 router.get("/", (req, res) => {
     res.send('This route is for all submission related tasks');
