@@ -67,6 +67,14 @@ router.get("/mine", authenticate, (req, res) => {
     });
 });
 
+router.get("/available", authenticate, (req, res) => {
+    Submission.find({}).then((subs) => {
+            res.send(subs);
+        }).catch((err)=>{
+            res.status(400).send(err)
+        })
+});
+
 router.get("/all", authenticate, (req, res) => {
 
     if (req.user.status == 'admin') {
