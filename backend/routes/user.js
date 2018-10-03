@@ -98,18 +98,17 @@ router.post("/login", (req, res) => {
 
 /* Edit info */
 router.post("/edit-info", authenticate, (req, res) => {
-    if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
+    if (!req.body || !req.body.email || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
 
     var userInfo = new User({
         newEmail: req.body.email,
-        password: req.body.password,
         newSecurityquestion: req.body.securityquestion,
     });
 
-    User.findOneAndUpdate({username : req.body.username},
+    User.findOneAndUpdate({username : req.user.username},
          { $set : {
             email : req.body.email,
             securityquestion: req.body.securityquestion,
