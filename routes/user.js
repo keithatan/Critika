@@ -4,13 +4,12 @@ let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
 var nodemailer = require('nodemailer');
 
-
 mongoose.connect(process.env.MONGODB_HOST);
 
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
+var email_address = "critika.app@gmail.com";
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
-
 
 /* Objects */
 var User = require('../model/user');
@@ -19,16 +18,19 @@ router.get("/", function (req, res) {
     res.send('This route is for all user related tasks');
 });
 
-/* Register */
+/*
+ * Register 
+ */
 router.post("/register", (req, res) => {
     if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
 
+    // Create a verification code between 1000 and 9999
     var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
-    /* User Data */
+    // User Data
     var newUser = new User({
         username: req.body.username,
         email: req.body.email,
@@ -37,8 +39,7 @@ router.post("/register", (req, res) => {
         verified: false,
         verificationNum: verificatonCode
     });
-    
-    console.log(verificatonCode)
+
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -47,7 +48,7 @@ router.post("/register", (req, res) => {
         }
     });
 
-    var newMemberEmailBody = "Dear " + req.body.username + 
+    var newMemberEmailBody = "Dear " + req.body.username +
         ",\n\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
         verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team"
 
@@ -68,9 +69,8 @@ router.post("/register", (req, res) => {
             res.status(200).json({ message: "Email Sent" });
         }
     });
-    
 
-    /* Add to database */
+    // Add to database
     newUser.save().then(() => {
         return newUser.generateAuthToken();
     }).then((token) => {
@@ -80,43 +80,16 @@ router.post("/register", (req, res) => {
     })
 });
 
-/* Send email
-router.post("/email", (req, res) =>{
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: 'critika.app@gmail.com',
-            pass: '307group2018'
-        }
-    });
-
-    var mailOptions = {
-        from: 'critika.app@gmail.com',
-        to: 'kensodetz@gmail.com',
-        subject: 'Sending Email using Node.js',
-        text: 'This is a test'
-    };
-
-    console.log("Sending...")
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.error(error);
-            res.status(400).json({ message: "Email Error" });
-        } else {
-            console.log('Email sent: ' + info.response);
-            res.status(200).json({ message: "Email Sent" });
-        }
-    });
-
-});
-*/
-
-/* View Account */
+/* 
+ * View Account 
+ */
 router.get("/account", authenticate, (req, res) => {
     res.send(req.user);
 });
 
-/* Login */
+/*
+ * Login 
+ */
 router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
         User.findByLogin(req.body.username, req.body.password).then((user) => {
@@ -131,9 +104,43 @@ router.post("/login", (req, res) => {
         res.status(400).send({ message: "Login information is incomplete" });
         return;
     }
+
+    // If the user has not verified their email, then prompt for verification code
+    if (!user.verified) {
+        res.status(400).send({ message: "Account has not been verified. PLease verify your account" });
+        return;
+    }
+
 });
 
-/* Edit info */
+/**
+ * Route to verify the user's email address
+ */
+router.post("/verify-email", authenticate, (req, res) => {
+    // Check if user data is complete
+    if (!req.body || !req.body.verificationNum) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    // Check if user has entered in the correct verification number
+    if (!req.user.verificationNum == req.body.verificationNum) {
+        res.status(400).send({ message: "Verification code does not match" });
+        return;
+    }
+
+    // Update the database if the verification number is correct
+    User.findOneAndUpdate({ username: req.user.username }, { $set: { verified: true } }).then(() => {
+        res.status(200).send({ message: "User has been succesfully verified!" });
+    }).catch((err) => {
+        res.status(400).send({ message: "An error has occoured with verifying your account" });
+        res.send(err);
+    });
+})
+
+/**
+ * Route to edit a user's email and security question
+ */
 router.post("/edit-info", authenticate, (req, res) => {
     if (!req.body || !req.body.email || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
@@ -159,41 +166,47 @@ router.post("/edit-info", authenticate, (req, res) => {
         })
 })
 
-/* Create/Update Rating */
+/**
+ * Create/Update Rating 
+ */
 router.post("/rating", authenticate, (req, res) => {
-    if (!req.body || !req.body.rating || !req.body.recuser){
+    if (!req.body || !req.body.rating || !req.body.recuser) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
 
     var recUser;
 
-    User.findOne({username: req.body.recuser}).then((foundUser) => {
+    User.findOne({ username: req.body.recuser }).then((foundUser) => {
         recUser = foundUser
-    }).catch((err) =>{
+    }).catch((err) => {
         res.status(400).send(err);
     })
 
-    User.findOneAndUpdate({username : req.body.recuser},
-        { $set : {
-            ratingNum : recUser.rating + 1,
-           rating : (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating)))/ratingNo,
-       }}).then(() => {
-           res.status(200).send({message: 'Rating successfully updated!'})
-       }).catch((err) => {
-           res.status(400).send({ message: "Error changing rating" });
-           res.send(err);
-       })
+    User.findOneAndUpdate({ username: req.body.recuser },
+        {
+            $set: {
+                ratingNum: recUser.rating + 1,
+                rating: (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating))) / ratingNo,
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Rating successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing rating" });
+            res.send(err);
+        })
 
 });
 
-/* Get All Users */
-router.get("/allUsers", authenticate, (req, res) =>{
+/**
+ * Get All Users
+ */
+router.get("/allUsers", authenticate, (req, res) => {
 
     if (req.user.status == 'admin') {
         User.find({}).then((users) => {
             res.send(users);
-        }).catch((err)=>{
+        }).catch((err) => {
             res.status(400).send(err);
 
         })
@@ -203,8 +216,9 @@ router.get("/allUsers", authenticate, (req, res) =>{
     }
 })
 
-
-/* Change Password */
+/*
+ * Change Password 
+ */
 router.post("/change-password", authenticate, (req, res) => {
     var username = req.user.username;
     var newPassword = req.body.password;
@@ -217,6 +231,65 @@ router.post("/change-password", authenticate, (req, res) => {
     });
 })
 
+/**
+ * Route to reset password
+ */
+router.post("/reset-password-email", (req, res) => {
 
+    if (!req.body || !req.body.email) {
+        res.status(400).send({ message: "Reset information is incomplete" });
+        return;
+    }
+
+    if (req.body.email) {
+        User.findByEmail(req.body.email).then((email) => {
+            var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+            var email_subject = "Critika Password Reset";
+            var email_body = "Dear " + email + ", \n\nOur records indicate that you have requested a password " +
+                "reset. Click the link below and enter the four digit code to begin the process.\n" +
+                verificatonCode + "\n\nSincerely, \n\nThe Critika Team"
+
+            User.findOneAndUpdate({ email: email }, { $set: { verificationNum: verificatonCode } }).then(() => {
+                res.status(200).send({ message: 'Verification code set' });
+            }).catch((err) => {
+                res.status(400).send({ message: "Verification code was not set" });
+                res.send(err);
+            });
+
+            // send email
+            sendEmail(email, email_subject, email_body);
+        }).catch((err) => {
+            res.status(400).send({ message: "Error logging in" });
+        });
+    }
+})
+
+function sendEmail(to, subject, body) {
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: email_address,
+            pass: process.env.EMAIL_PASSWD
+        }
+    });
+
+    var mailOptions = {
+        from: email_address,
+        to: to,
+        subject: subject,
+        text: body
+    };
+
+    console.log("Sending...")
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.error(error);
+            res.status(400).json({ message: "Email Error" });
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).json({ message: "Email Sent" });
+        }
+    });
+}
 
 module.exports = router;

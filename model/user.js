@@ -113,6 +113,20 @@ userSchema.statics.findByLogin = function(username, password) {
   });
 };
 
+userSchema.statics.findByEmail = function(email) {
+  var User = this;
+
+  return User.findOne({email}).then((user) => {
+    console.log(user.email)
+    if (!user.email) {
+      return Promise.reject();
+    }
+    else {
+      return Promise.resolve(user.email);
+    }
+  });
+};
+
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function (){
   return ld.pick(this.toObject(), ['_id', 'username', 'email'])
