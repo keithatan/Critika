@@ -73,17 +73,17 @@ router.post("/login", (req, res) => {
         User.findByLogin(req.body.username, req.body.password).then((user) => {
             // If the user has not verified their email, then prompt for verification code
            if (!user.verified) {
-                res.status(200).send({ message: "Account has not been verified. Please verify your account" });
+                res.status(200).send({ message: "Account has not been verified, please verify your account" });
             }
             return user.generateAuthToken().then((token) => {
                 res.header('x-auth', token).send(user);
             });
         }).catch((err) => {
-            res.status(400).send({ message: "Error Loging in. Username or Password is incorrect." });
+            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
     else {
-        res.status(400).send({ message: "Login information is incomplete. Missing username or password." });
+        res.status(400).send({ message: "Login information is incomplete, missing username or password" });
         return;
     }
 });
@@ -106,7 +106,7 @@ router.post("/verify-email", authenticate, (req, res) => {
 
     // Update the database if the verification number is correct
     User.findOneAndUpdate({ username: req.user.username }, { $set: { verified: true } }).then(() => {
-        res.status(200).send({ message: "User has been succesfully verified!" });
+        res.status(200).send({ message: "User has been succesfully verified" });
     }).catch((err) => {
         res.status(400).send({ message: "An error has occoured with verifying your account" });
         res.send(err);
@@ -134,7 +134,7 @@ router.post("/edit-info", authenticate, (req, res) => {
                 securityquestion: req.body.securityquestion,
             }
         }).then(() => {
-            res.status(200).send({ message: 'User information successfully updated!' })
+            res.status(200).send({ message: 'User information successfully updated' })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
@@ -165,7 +165,7 @@ router.post("/rating", authenticate, (req, res) => {
                 rating: (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating))) / ratingNo,
             }
         }).then(() => {
-            res.status(200).send({ message: 'Rating successfully updated!' })
+            res.status(200).send({ message: 'Rating successfully updated' })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing rating" });
             res.send(err);
@@ -199,7 +199,7 @@ router.post("/change-password", authenticate, (req, res) => {
     var newPassword = req.body.password;
 
     User.findOneAndUpdate({ username: username }, { $set: { password: newPassword } }).then(() => {
-        res.status(200).send({ message: 'Password was successfully changed!' });
+        res.status(200).send({ message: 'Password was successfully changed' });
     }).catch((err) => {
         res.status(400).send({ message: "Login information is incomplete" });
         res.send(err);
@@ -223,8 +223,9 @@ router.post("/reset-password-email", (req, res) => {
             var email_subject = "Critika Password Reset";
             var email_body = "Dear " + email + ", \n\nOur records indicate that you have requested a password " +
                 "reset. Click the link below and enter the four digit code to begin the process.\n\n" +
-                verificatonCode + "\n\nSincerely, \n\nThe Critika Team"
-
+                verificatonCode + "\n\nSincerely, \n\nThe Critika Team";
+            
+            // find user by email and set verification number
             User.findOneAndUpdate({ email: email }, { $set: { verificationNum: verificatonCode } }).then(() => {
                 res.status(200).send({ message: 'Verification code set' });
             }).catch((err) => {
@@ -235,7 +236,7 @@ router.post("/reset-password-email", (req, res) => {
             // send email
             sendEmail(email, email_subject, email_body);
         }).catch((err) => {
-            res.status(400).send({ message: "Email does not exist in our records." });
+            res.status(400).send({ message: "Email does not exist in our records" });
         });
     }
 })
