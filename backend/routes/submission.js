@@ -13,6 +13,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Submission = require('../model/submission');
 var User = require('../model/user');
 
+/**
+ * All submission related routes
+ */
 router.get("/", (req, res) => {
     res.send('This route is for all submission related tasks');
 });
@@ -27,7 +30,7 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
-    /* New Submission Data */
+    // New Submission Data
     var newSubmission = new Submission({
         category: req.body.category,
         submissionName: req.body.submissionName,
@@ -35,7 +38,7 @@ router.post("/add", authenticate, (req, res) => {
         username: req.user.username,
     });
 
-    /* Change submission num */
+    // Change submission num
 
     User.findOneAndUpdate({ username: req.user.username },
         {
@@ -50,7 +53,7 @@ router.post("/add", authenticate, (req, res) => {
         })
     
 
-    /* Add to database */
+    // Add to database 
     newSubmission.save().then(() => {
         res.status(200).send(newSubmission);
     }).catch((err) => {
@@ -59,7 +62,7 @@ router.post("/add", authenticate, (req, res) => {
 })
 
 /**
- * Adds submission
+ * Edits existing submission
  */
 router.post("/edit", authenticate, (req, res) => {
 
@@ -81,12 +84,11 @@ router.post("/edit", authenticate, (req, res) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
-
 })
 
 
 /**
- * Remove from databse
+ * Remove submission from databse
  */
 router.post("/remove", authenticate, (req, res) => {
 
@@ -115,12 +117,18 @@ router.post("/remove", authenticate, (req, res) => {
         })
 })
 
+/**
+ * Get user's peronal submissions
+ */
 router.get("/mine", authenticate, (req, res) => {
     Submission.find({ username: req.user.username }).then((subs) => {
         res.send(subs);
     });
 });
 
+/**
+ * Route to get available submissions 
+ */
 router.get("/available", authenticate, (req, res) => {
     Submission.find({}).then((subs) => {
             res.send(subs);
@@ -129,6 +137,9 @@ router.get("/available", authenticate, (req, res) => {
         })
 });
 
+/**
+ * Get all submissions (admin)
+ */
 router.get("/all", authenticate, (req, res) => {
 
     if (req.user.status == 'admin') {

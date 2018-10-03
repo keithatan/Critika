@@ -14,6 +14,9 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var User = require('../model/user');
 
+/**
+ * All user related routes
+ */
 router.get("/", function (req, res) {
     res.send('This route is for all user related tasks');
 });
