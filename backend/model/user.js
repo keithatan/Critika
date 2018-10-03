@@ -11,7 +11,7 @@ let userSchema = new mongoose.Schema({
   password: { type: String, required: true, minlength: 8 },
   verified: Boolean,
   rating: {type: mongoose.Schema.Types.Decimal128, default: 0},
-  verificationCode: {type: Number, default: 0},
+  verificationNum: {type: Number, default: 0},
   submissionNum: { type: Number, default: 0},
   ratingNum: { type: Number, default: 0},
   status: {type: String, default: 'reg-user'},

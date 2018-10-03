@@ -26,7 +26,7 @@ router.post("/register", (req, res) => {
         return;
     }
 
-    var verificatonCode = Math.floor(Math.random() * 1000) + 1;
+    var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
 
     /* User Data */
     var newUser = new User({
@@ -35,10 +35,10 @@ router.post("/register", (req, res) => {
         password: req.body.password,
         securityquestion: req.body.securityquestion,
         verified: false,
-        verificatonCode: verificatonCode
+        verificationNum: verificatonCode
     });
-
-
+    
+    console.log(verificatonCode)
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
@@ -48,7 +48,7 @@ router.post("/register", (req, res) => {
     });
 
     var newMemberEmailBody = "Dear " + req.body.username + 
-        ",\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
+        ",\n\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
         verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team"
 
     var mailOptions = {
@@ -68,6 +68,7 @@ router.post("/register", (req, res) => {
             res.status(200).json({ message: "Email Sent" });
         }
     });
+    
 
     /* Add to database */
     newUser.save().then(() => {

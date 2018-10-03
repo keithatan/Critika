@@ -35,6 +35,21 @@ router.post("/add", authenticate, (req, res) => {
         username: req.user.username,
     });
 
+    /* Change submission num */
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                submissionNum: req.user.submissionNum + 1
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+    
+
     /* Add to database */
     newSubmission.save().then(() => {
         res.status(200).send(newSubmission);
@@ -42,6 +57,33 @@ router.post("/add", authenticate, (req, res) => {
         res.status(400).send(err);
     })
 })
+
+/**
+ * Adds submission
+ */
+router.post("/edit", authenticate, (req, res) => {
+
+    if (!req.body.submissionText || !req.body.submissionName) {
+        res.status(400).json({ message: "Submission data is incomplete" });
+        return;
+    }
+
+    /* Change submission num */
+
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName , username: req.user.username},
+        {
+            $set: {
+                submissionText: req.body.submissionText
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Submission information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+
+})
+
 
 /**
  * Remove from databse
@@ -52,6 +94,18 @@ router.post("/remove", authenticate, (req, res) => {
         res.status(400).json({ message: "No submission data" });
         return;
     }
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                submissionNum: req.user.submissionNum - 1
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User information successfully updated!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
 
     User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
             res.status(200).send({ message: "Submission succesfully removed!" })
