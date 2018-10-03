@@ -2,6 +2,8 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
+var nodemailer = require('nodemailer');
+
 
 mongoose.connect(process.env.MONGODB_HOST);
 
@@ -18,20 +20,54 @@ router.get("/", function (req, res) {
 });
 
 /* Register */
-router.post("/register", (req, res) =>{
+router.post("/register", (req, res) => {
     if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
+
+    var verificatonCode = Math.floor(Math.random() * 1000) + 1;
+
     /* User Data */
     var newUser = new User({
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
         securityquestion: req.body.securityquestion,
-        verified: false
+        verified: false,
+        verificatonCode: verificatonCode
     });
 
+
+    var transporter = nodemailer.createTransport({
+        service: 'gmail',
+        auth: {
+            user: 'critika.app@gmail.com',
+            pass: process.env.EMAIL_PASSWD
+        }
+    });
+
+    var newMemberEmailBody = "Dear " + req.body.username + 
+        ",\nWelcome to Critika! We ask you to please verify your account with us. Your verification code is:\n" +
+        verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team"
+
+    var mailOptions = {
+        from: 'critika.app@gmail.com',
+        to: req.body.email,
+        subject: 'Welcome to Critika!',
+        text: newMemberEmailBody
+    };
+
+    console.log("Sending...")
+    transporter.sendMail(mailOptions, function (error, info) {
+        if (error) {
+            console.error(error);
+            res.status(400).json({ message: "Email Error" });
+        } else {
+            console.log('Email sent: ' + info.response);
+            res.status(200).json({ message: "Email Sent" });
+        }
+    });
 
     /* Add to database */
     newUser.save().then(() => {
@@ -82,13 +118,13 @@ router.get("/account", authenticate, (req, res) => {
 /* Login */
 router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
-       User.findByLogin(req.body.username, req.body.password).then((user) => {
-           return user.generateAuthToken().then((token) => {
-               res.header('x-auth', token).send(user);
-           });
-       }).catch((err) => {
-           res.status(400).send({ message: "Error logging in"});
-       });
+        User.findByLogin(req.body.username, req.body.password).then((user) => {
+            return user.generateAuthToken().then((token) => {
+                res.header('x-auth', token).send(user);
+            });
+        }).catch((err) => {
+            res.status(400).send({ message: "Error logging in" });
+        });
     }
     else {
         res.status(400).send({ message: "Login information is incomplete" });
@@ -108,18 +144,18 @@ router.post("/edit-info", authenticate, (req, res) => {
         newSecurityquestion: req.body.securityquestion,
     });
 
-    User.findOneAndUpdate({username : req.user.username},
-         { $set : {
-            email : req.body.email,
-            securityquestion: req.body.securityquestion,
-        }}).then(() => {
-            res.status(200).send({message: 'User information successfully updated!'})
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                email: req.body.email,
+                securityquestion: req.body.securityquestion,
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User information successfully updated!' })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
-
-
 })
 
 
@@ -127,9 +163,9 @@ router.post("/edit-info", authenticate, (req, res) => {
 router.post("/change-password", authenticate, (req, res) => {
     var username = req.user.username;
     var newPassword = req.body.password;
-    
-    User.findOneAndUpdate({username : username}, { $set : {password : newPassword}}).then(() =>{
-        res.status(200).send({message: 'Password was successfully changed!'});
+
+    User.findOneAndUpdate({ username: username }, { $set: { password: newPassword } }).then(() => {
+        res.status(200).send({ message: 'Password was successfully changed!' });
     }).catch((err) => {
         res.status(400).send({ message: "Login information is incomplete" });
         res.send(err);
