@@ -158,6 +158,50 @@ router.post("/edit-info", authenticate, (req, res) => {
         })
 })
 
+/* Create/Update Rating */
+router.post("/rating", authenticate, (req, res) => {
+    if (!req.body || !req.body.rating || !req.body.recuser){
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    var recUser;
+
+    User.findOne({username: req.body.recuser}).then((foundUser) => {
+        recUser = foundUser
+    }).catch((err) =>{
+        res.status(400).send(err);
+    })
+
+    User.findOneAndUpdate({username : req.body.recuser},
+        { $set : {
+            ratingNum : recUser.rating + 1,
+           rating : (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating)))/ratingNo,
+       }}).then(() => {
+           res.status(200).send({message: 'Rating successfully updated!'})
+       }).catch((err) => {
+           res.status(400).send({ message: "Error changing rating" });
+           res.send(err);
+       })
+
+});
+
+/* Get All Users */
+router.get("/allUsers", authenticate, (req, res) =>{
+
+    if (req.user.status == 'admin') {
+        User.find({}).then((users) => {
+            res.send(users);
+        }).catch((err)=>{
+            res.status(400).send(err);
+
+        })
+    }
+    else {
+        res.status(401).send({ message: '401 ERROR: Access Denied' })
+    }
+})
+
 
 /* Change Password */
 router.post("/change-password", authenticate, (req, res) => {

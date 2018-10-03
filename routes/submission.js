@@ -35,6 +35,9 @@ router.post("/add", authenticate, (req, res) => {
         username: req.user.username,
     });
 
+    req.user.submissionNum = req.user.submissionNum +1;
+    
+
     /* Add to database */
     newSubmission.save().then(() => {
         res.status(200).send(newSubmission);
@@ -65,6 +68,14 @@ router.get("/mine", authenticate, (req, res) => {
     Submission.find({ username: req.user.username }).then((subs) => {
         res.send(subs);
     });
+});
+
+router.get("/available", authenticate, (req, res) => {
+    Submission.find({}).then((subs) => {
+            res.send(subs);
+        }).catch((err)=>{
+            res.status(400).send(err)
+        })
 });
 
 router.get("/all", authenticate, (req, res) => {
