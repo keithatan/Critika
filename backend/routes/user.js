@@ -186,6 +186,22 @@ router.post("/rating", authenticate, (req, res) => {
 
 });
 
+/* Get All Users */
+router.get("/allUsers", authenticate, (req, res) =>{
+
+    if (req.user.status == 'admin') {
+        User.find({}).then((users) => {
+            res.send(users);
+        }).catch((err)=>{
+            res.status(400).send(err);
+
+        })
+    }
+    else {
+        res.status(401).send({ message: '401 ERROR: Access Denied' })
+    }
+})
+
 
 /* Change Password */
 router.post("/change-password", authenticate, (req, res) => {
