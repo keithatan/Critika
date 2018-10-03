@@ -10,6 +10,9 @@ class ResetPassword extends React.Component{
   return (
     <Form style={{width: "300px", textAlign: "center"}}>
         <FormItem >
+            <Input placeholder="Current Password" />
+        </FormItem>
+        <FormItem >
             <Input placeholder="New Password" />
         </FormItem>
 
