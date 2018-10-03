@@ -13,13 +13,10 @@ import Settings from './Settings';
 import Notifications from './Notifications';
 import Dashboard from './Dashboard';
 import Register from './Register';
-<<<<<<< HEAD
 import Users from './Users';
 import Reports from './Reports';
-=======
 import ResetPassword from './ResetPassword';
 import EditProfile from './EditProfile';
->>>>>>> 3d9dd93f817f154931f4f039f54814b1b601354d
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -121,21 +118,18 @@ class App extends Component {
       <Route path='/register' render = { () => (
         <Register/>)} 
       />
-<<<<<<< HEAD
       <Route path='/users' render = { () => (
         <Users/>)} 
       />
       <Route path='/reports' render = { () => (
         <Reports/>)} 
-=======
-
-    <Route path='/resetPassword' render = { () => (
+      />
+      <Route path='/resetPassword' render = { () => (
         <ResetPassword/>)} 
       />
     
     <Route path='/editProfile' render = { () => (
         <EditProfile/>)} 
->>>>>>> 3d9dd93f817f154931f4f039f54814b1b601354d
       />
        
     </Switch>

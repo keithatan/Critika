@@ -14,6 +14,7 @@ let userSchema = new mongoose.Schema({
   verificationNum: {type: Number, default: 0},
   submissionNum: { type: Number, default: 0},
   ratingNum: { type: Number, default: 0},
+  status: {type: String, default: 'reg-user'},
   email:{  
     type: String,
     unique: true,
