@@ -37,7 +37,7 @@ router.post("/register", (req, res) => {
         verified: false,
         verificationNum: verificatonCode
     });
-    /*
+    
     console.log(verificatonCode)
     var transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -68,7 +68,7 @@ router.post("/register", (req, res) => {
             res.status(200).json({ message: "Email Sent" });
         }
     });
-    */
+    
 
     /* Add to database */
     newUser.save().then(() => {
