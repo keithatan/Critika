@@ -72,10 +72,7 @@ class Submissions extends React.Component{
         <div><h3>3</h3></div>
         <div><h3>4</h3></div>
       </Carousel>
-
-      <IconSlider min={0} max={20} />
-
-
+      
     </div>
   );
   }
