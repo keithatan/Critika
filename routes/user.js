@@ -22,10 +22,10 @@ router.get("/", function (req, res) {
 });
 
 /*
- * Register 
+ * Register new user 
  */
 router.post("/register", (req, res) => {
-    if (!req.body || !req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
+    if (!req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -92,7 +92,7 @@ router.post("/login", (req, res) => {
 });
 
 /**
- * Route to verify the user's email address
+ * Verify new user's email
  */
 router.post("/verify-email", authenticate, (req, res) => {
     // Check if user data is complete
@@ -117,7 +117,7 @@ router.post("/verify-email", authenticate, (req, res) => {
 })
 
 /**
- * Route to edit a user's email and security question
+ * Edit a user's email and security question
  */
 router.post("/edit-info", authenticate, (req, res) => {
     if (!req.body || !req.body.email || !req.body.securityquestion) {
@@ -210,7 +210,7 @@ router.post("/change-password", authenticate, (req, res) => {
 })
 
 /**
- * Route to reset password
+ * Reset Password
  */
 router.post("/reset-password-email", (req, res) => {
 
