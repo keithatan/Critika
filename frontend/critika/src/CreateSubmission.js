@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import {Form, Input, Button, Icon, Card, Checkbox, Dropdown, Menu} from 'antd'
+import {Form, Input, Button, Icon, Card, Checkbox, Dropdown, Menu, Slider} from 'antd'
 import {Link} from 'react-router-dom'
 import thumbnail from './default image.jpg'
 
@@ -27,6 +27,31 @@ class CreateSubmission extends React.Component{
           </Menu.Item>
         </Menu>
       );
+
+      class IconSlider extends React.Component {
+        state = {
+          value: 0,
+        }
+      
+        handleChange = (value) => {
+          this.setState({ value });
+        }
+      
+        render() {
+          const { max, min } = this.props;
+          const { value } = this.state;
+          const mid = ((max - min) / 2).toFixed(5);
+          const preColor = value >= mid ? '' : 'rgba(0, 0, 0, .45)';
+          const nextColor = value >= mid ? 'rgba(0, 0, 0, .45)' : '';
+          return (
+            <div className="icon-wrapper">
+              Skill Level <Slider {...this.props} onChange={this.handleChange} value={value} /> 
+            </div>
+          );
+        }
+      }
+
+
   return (
     <div>
       <h1>Upload Your Submission</h1>
@@ -41,11 +66,8 @@ class CreateSubmission extends React.Component{
             <Input placeholder="Submission Category"/>
         </FormItem>
 
-       <Dropdown overlay={menu}>
-        <a className="ant-dropdown-link" href="#">
-          Proficiency Level <Icon type="down" />
-        </a>
-      </Dropdown>
+        <IconSlider min={0} max={20} />
+
 
       <p>What kind of feedback are you looking for?
       <TextArea rows={4} />
