@@ -24,6 +24,7 @@ import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
 import 'antd/dist/antd.css';
 import { Link, Switch, Route, Redirect } from 'react-router-dom'
+import axios from 'axios';
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -154,6 +155,19 @@ class App extends Component {
     
       
     );
+  }
+
+  constructor(props){
+    super(props)
+    this.state = {
+      users: [],
+      store: []
+    }
+  }
+
+  componentDidMount(){
+    axios.get('http://localhost:5000/user/test')
+    .then(json => console.log(json))
   }
 }
 
