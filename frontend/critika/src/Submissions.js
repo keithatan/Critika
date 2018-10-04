@@ -64,7 +64,7 @@ class Submissions extends React.Component{
       </Dropdown>
 
       <Button type="primary">Remove Submission</Button>
-      <Button type="primary">Edit Submission</Button>
+      <Button type="primary"><Link to="/EditSubmission">Edit Submission</Link></Button>
 
       <Carousel afterChange={onChange} style={{backgroundColor: 'rgb(194, 165, 211)'}}>
         <div><h3>1</h3></div>

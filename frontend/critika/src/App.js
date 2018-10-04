@@ -18,6 +18,7 @@ import Reports from './Reports';
 import ResetPassword from './ResetPassword';
 import EditProfile from './EditProfile';
 import CreateSubmission from './CreateSubmission';
+import EditSubmission from './EditSubmission';
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
@@ -136,6 +137,10 @@ class App extends Component {
 
     <Route path='/createSubmission' render = { () => (
         <CreateSubmission/>)} 
+    />
+
+    <Route path='/EditSubmission' render = { () => (
+        <EditSubmission/>)} 
     />
        
     </Switch>
