@@ -58,7 +58,7 @@ class Submissions extends React.Component{
       const openNotification = () => {
         const key = `open${Date.now()}`;
         const btn = (
-          <Button type="primary" size="small" onClick={() => notification.close(key)}>
+          <Button type="primary" size="large" onClick={() => notification.close(key)}>
             Confirm
           </Button>
         );
