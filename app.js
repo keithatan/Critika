@@ -1,6 +1,6 @@
 const express = require ('express');
 let cookieParser = require('cookie-parser');
-
+var cors = require('cors');
 require('dotenv').config();
 
 
@@ -10,7 +10,7 @@ let user = require('./routes/user.js');
 let submission = require('./routes/submission.js');
 
 
-const app = express();
+const app = express(cors());
 
 
 
@@ -18,6 +18,13 @@ const app = express();
 app.use(cookieParser());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
+
+
+app.use((req, res, next) => {
+    res.header("Access-Control-Allow-Origin", "*");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 
 /* Routes */

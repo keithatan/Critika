@@ -67,6 +67,10 @@ router.get("/account", authenticate, (req, res) => {
     res.send(req.user);
 });
 
+router.get("/test", (req, res) => {
+    res.json({message: "This works"});
+});
+
 /*
  * Login 
  */
