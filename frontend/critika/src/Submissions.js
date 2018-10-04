@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
-import { Carousel, Menu, Dropdown, Icon, Button, Slider} from 'antd'
+import { Carousel, Menu, Dropdown, Icon, Button, Slider, notification} from 'antd'
 import { Link } from 'react-router-dom'
 
 class Submissions extends React.Component{
@@ -50,6 +50,26 @@ class Submissions extends React.Component{
           );
         }
       }
+
+      const close = () => {
+        console.log('Notification was closed. Either the close button was clicked or duration time elapsed.');
+      };
+      
+      const openNotification = () => {
+        const key = `open${Date.now()}`;
+        const btn = (
+          <Button type="primary" size="small" onClick={() => notification.close(key)}>
+            Confirm
+          </Button>
+        );
+        notification.open({
+          message: 'Remove Submission',
+          description: 'Are you sure you want to remove your submission',
+          btn,
+          key,
+          onClose: close,
+        });
+      };
       
   return (
       
@@ -63,7 +83,7 @@ class Submissions extends React.Component{
         </a>
       </Dropdown>
 
-      <Button type="primary">Remove Submission</Button>
+      <Button type="primary" onClick={openNotification}>Remove Submission </Button>
       <Button type="primary"><Link to="/EditSubmission">Edit Submission</Link></Button>
 
       <Carousel afterChange={onChange} style={{backgroundColor: 'rgb(194, 165, 211)'}}>
@@ -72,7 +92,7 @@ class Submissions extends React.Component{
         <div><h3>3</h3></div>
         <div><h3>4</h3></div>
       </Carousel>
-      
+
     </div>
   );
   }
