@@ -25,6 +25,22 @@ router.get("/", function (req, res) {
 /*
  * Register new user 
  */
+
+router.post('/add-friend', (req, res) => {
+    if (!req.body.email || !req.body.username || !req.body.friend) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+    else {
+        User.findOneAndUpdate({ username: req.body.username }, { $set: { friends: friends[numFriends++] = req.body.friend } }).then(() => {
+            res.status(200).send({ message: "Friend successfully added!" });
+        }).catch((err) => {
+            res.status(400).send({ message: "An error has occoured with adding friend" });
+            res.send(err);
+        });
+    }
+})
+
 router.post("/register", (req, res) => {
     if (!req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
         res.status(400).send({ message: "User data is incomplete" });
