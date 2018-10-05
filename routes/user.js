@@ -275,10 +275,8 @@ function sendEmail(to, subject, body) {
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             console.error(error);
-            res.status(400).json({ message: "Email Error" });
         } else {
             console.log('Email sent: ' + info.response);
-            res.status(200).json({ message: "Email Sent" });
         }
     });
 }
