@@ -26,7 +26,7 @@ class Users extends React.Component{
           Filter By <Icon type="down" />
         </a>
       </Dropdown>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div style={{ background: '#ECECEC', padding: '30px', borderRadius: '0.9em'  }}>
       <Row gutter={16}>
       <Col span={12}>
         <Card title="User1" bordered={false} style={{borderRadius: '0.9em' }}>
