@@ -130,6 +130,22 @@ userSchema.statics.findByEmail = function(email) {
   });
 };
 
+userSchema.statics.findVerificationNumByEmail = function(email) {
+  var User = this;
+
+  return User.findOne({email}).then((user) => {
+    console.log(user.verificationNum)
+    if (!user.verificationNum) {
+      return Promise.reject();
+    }
+    else {
+      return Promise.resolve(user.verificationNum);
+    }
+  });
+};
+
+
+
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function (){
   return ld.pick(this.toObject(), ['_id', 'username', 'email'])
