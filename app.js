@@ -32,7 +32,6 @@ app.use('/user', user);
 app.use('/submission', submission);
 
 app.get('/', (res, req) => {
-    console.log(process.env.MONGODB_HOST);
 });
 
 app.listen(process.env.PORT, () => {
