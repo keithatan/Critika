@@ -4,7 +4,8 @@ let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
 var nodemailer = require('nodemailer');
 
-mongoose.connect(process.env.MONGODB_HOST);
+mongoose.connect(process.env.MONGODB_HOST, { useNewUrlParser: true });
+mongoose.set('useCreateIndex', true);
 
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
