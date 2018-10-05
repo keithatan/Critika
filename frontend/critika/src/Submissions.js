@@ -86,6 +86,7 @@ class Submissions extends React.Component{
 
       <Button type="primary" onClick={openNotification}>Remove Submission </Button>
       <Button type="primary"><Link to="/EditSubmission">Edit Submission</Link></Button>
+      <p></p>
 
       <Carousel afterChange={onChange} style={{backgroundColor: 'rgb(194, 165, 211)'}}>
         <div>

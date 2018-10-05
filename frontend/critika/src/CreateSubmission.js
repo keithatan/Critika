@@ -7,6 +7,19 @@ import thumbnail from './default image.jpg'
 
 
 const FormItem = Form.Item;
+const menu = (
+    <Menu>
+      <Menu.Item>
+        <a>Category 1</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a>Category 2</a>
+      </Menu.Item>
+      <Menu.Item>
+        <a>Category 3</a>
+      </Menu.Item>
+    </Menu>
+  );
 
 class CreateSubmission extends React.Component{
 
@@ -14,19 +27,7 @@ class CreateSubmission extends React.Component{
 
   render(){
     const { TextArea } = Input;
-    const menu = (
-        <Menu>
-          <Menu.Item>
-            <a>Beginner</a>
-          </Menu.Item>
-          <Menu.Item>
-            <a>Intermediate</a>
-          </Menu.Item>
-          <Menu.Item>
-            <a>Expert</a>
-          </Menu.Item>
-        </Menu>
-      );
+    
 
       class IconSlider extends React.Component {
         state = {
@@ -62,14 +63,17 @@ class CreateSubmission extends React.Component{
       <Button type="primary"> <Icon type="upload" />Upload Submission</Button>
       <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="New Submission" bordered={false} style={{ width: 900 }}>
-      <Form style={{width: "300px", textAlign: "center"}}>
-      <Col span={12}>
+      <Col span={8} offset={8}>
+      <Form style={{width: "300px"}}>
+     
         <FormItem style={{ width: 250 }}>
             <Input placeholder="Submission Name"/>
         </FormItem>
-        <FormItem style={{ width: 250 }}>
-            <Input placeholder="Submission Category"/>
-        </FormItem>
+        <Dropdown overlay={menu}>
+        <a className="ant-dropdown-link" href="#">
+          Categories <Icon type="down" />
+        </a>
+      </Dropdown>
 
         <IconSlider min={0} max={20} />
 
@@ -77,8 +81,7 @@ class CreateSubmission extends React.Component{
       <p>What kind of feedback are you looking for?
       <TextArea rows={4}style={{ width: 250 }} />
       </p>
-      </Col>
-      <Col span={12}>
+     
       <img style={{ height: '13.4em', borderRadius: '0.9em' }} src={thumbnail}/>
       <Button type="primary" >
             Upload thumbnail
@@ -92,9 +95,9 @@ class CreateSubmission extends React.Component{
             
          
         </FormItem>
-        </Col>
+       
       </Form>
-     
+      </Col>
         </Card>
         
         </div>

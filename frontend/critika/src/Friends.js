@@ -7,52 +7,52 @@ class Friends extends React.Component{
   return (
     <div>
       <h1>You are friends with</h1>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <div style={{ background: '#ECECEC', padding: '30px', borderRadius: '0.9em'  }}>
       <Row gutter={16}>
       <Col span={12}>
-        <Card title="Friend1" bordered={false}>
+        <Card title="Friend1" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 1</p>
         
         
         </Card>
         <p></p>
-        <Card title="Friend3" bordered={false}>
+        <Card title="Friend3" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 3</p>
         
         </Card>
         <p></p>
 
-        <Card title="Friend5" bordered={false}>
+        <Card title="Friend5" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 5</p>
         
         </Card>
         <p></p>
 
-        <Card title="Friend7" bordered={false}>
+        <Card title="Friend7" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 7</p>
         
         </Card>
       </Col>
       <Col span={12}>
-        <Card title="Friend2" bordered={false}>
+        <Card title="Friend2" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 2</p>
         
         </Card>
         <p></p>
 
-        <Card title="Friend4" bordered={false}>
+        <Card title="Friend4" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 4</p>
         
         </Card>
         <p></p>
 
-        <Card title="Friend6" bordered={false}>
+        <Card title="Friend6" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 6</p>
         
         </Card>
         <p></p>
 
-        <Card title="Friend8" bordered={false}>
+        <Card title="Friend8" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Friend 8</p>
         
         </Card>

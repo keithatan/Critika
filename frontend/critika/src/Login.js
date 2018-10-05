@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Form, Icon, Input, Button, Checkbox } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Col } from 'antd';
 import { Link } from 'react-router-dom'
 import googlebutton from './login with google.png'
 import githubbutton from './login with github.png'
@@ -58,6 +58,7 @@ class Login extends React.Component {
   render() {
     const { getFieldDecorator } = this.props.form;
     return (
+      <Col span={8} offset={8}>
       <Form style={{ width: "300px", textAlign: "center" }} onSubmit={this.handleSubmit} className="login-form">
         <FormItem>
           {getFieldDecorator('userName', {
@@ -83,9 +84,9 @@ class Login extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in     
              </Button>
-             <br></br>  
+             
             Or  
-            <br></br>  
+          
 
              <Link to="/register">Register</Link>
             <h4>Forgot Password?</h4>
@@ -94,6 +95,7 @@ class Login extends React.Component {
           </p>
         </FormItem>
       </Form>
+      </Col>
     );
   }
 }
