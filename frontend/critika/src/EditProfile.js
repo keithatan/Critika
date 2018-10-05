@@ -1,10 +1,11 @@
 import React from 'react'
 import './App.css'
 
-import { Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button, Menu, Dropdown, message  } from 'antd';
+import { Form, Input, Select, Avatar, Button, Upload, Icon} from 'antd';
 
 
 const FormItem = Form.Item;
+const { TextArea } = Input;
 const Option = Select.Option;
 class EditProfile extends React.Component{
 
@@ -48,51 +49,57 @@ class EditProfile extends React.Component{
 
   render() {
     
-    const formItemLayout = {
-      labelCol: {
-        xs: { span: 24 },
-        sm: { span: 8 },
-      },
-      wrapperCol: {
-        xs: { span: 24 },
-        sm: { span: 16 },
-      },
-    };
-    const tailFormItemLayout = {
-      wrapperCol: {
-        xs: {
-          span: 24,
-          offset: 0,
-        },
-        sm: {
-          span: 16,
-          offset: 8,
-        },
-      },
-    };
+    // const formItemLayout = {
+    //   labelCol: {
+    //     xs: { span: 24 },
+    //     sm: { span: 8 },
+    //   },
+    //   wrapperCol: {
+    //     xs: { span: 24 },
+    //     sm: { span: 16 },
+    //   },
+    // };
+    // const tailFormItemLayout = {
+    //   wrapperCol: {
+    //     xs: {
+    //       span: 24,
+    //       offset: 0,
+    //     },
+    //     sm: {
+    //       span: 16,
+    //       offset: 8,
+    //     },
+    //   },
+    // };
 
     return (
       <div>
+        <h1>Edit Your Profile</h1>
+        <Avatar style={{float:"center"}} size={200} icon="user" />
+        <br></br>
+        <br></br>
+        <Upload style={{float:"unset"}}>
+          <Button>
+            <Icon type="upload" /> Click to Upload
+          </Button>
+        </Upload>
       <Form onSubmit={this.handleSubmit}>
 
+         <FormItem 
+         // {...formItemLayout}
+          label="Bio"
+        >
+        <Input placeholder="Type your bio" />
+    
+        </FormItem>
+
       <FormItem 
-          {...formItemLayout}
-          label="Change Username"
+         // {...formItemLayout}
+          label="About Me"
         >
-        <Input placeholder="Type your new username" />
-    
+        <TextArea rows={3} placeholder="Tell us about yourself" />
         </FormItem>
-
-          <FormItem 
-          {...formItemLayout}
-          label="Change Password"
-        >
-        <Input placeholder="Type your new password" />
-    
-        </FormItem>
-
-
-  
+        <Button type="primary" htmlType="submit">Save Changes</Button>
       </Form>
       </div>
     );
