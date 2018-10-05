@@ -1,8 +1,9 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
-import { Carousel, Menu, Dropdown, Icon, Button, Slider, notification} from 'antd'
+import { Carousel, Menu, Dropdown, Icon, Button, Slider, notification, Row, Col} from 'antd'
 import { Link } from 'react-router-dom'
+import thumbnail from './default image.jpg'
 
 class Submissions extends React.Component{
     
@@ -87,10 +88,18 @@ class Submissions extends React.Component{
       <Button type="primary"><Link to="/EditSubmission">Edit Submission</Link></Button>
 
       <Carousel afterChange={onChange} style={{backgroundColor: 'rgb(194, 165, 211)'}}>
-        <div><h3>1</h3></div>
-        <div><h3>2</h3></div>
-        <div><h3>3</h3></div>
-        <div><h3>4</h3></div>
+        <div>
+          <Button style={{  height: '7em', borderRadius: '0.9em' }} type="flex" justify="center"><img style={{ height: '7em', borderRadius: '0.9em' }} src={thumbnail}/></Button>
+        </div>
+        <div>      
+        <Button style={{  height: '7em', borderRadius: '0.9em' }} type="flex" justify="center"><img style={{ height: '7em', borderRadius: '0.9em' }} src={thumbnail}/></Button>
+        </div>
+        <div>      
+        <Button style={{  height: '7em', borderRadius: '0.9em' }} type="flex" justify="center"><img style={{ height: '7em', borderRadius: '0.9em' }} src={thumbnail}/></Button>
+        </div>
+        <div>      
+        <Button style={{  height: '7em', borderRadius: '0.9em' }} type="flex" justify="center"><img style={{ height: '7em', borderRadius: '0.9em' }} src={thumbnail}/></Button>
+        </div>
       </Carousel>
 
     </div>

@@ -77,15 +77,19 @@ class Login extends React.Component {
 
         <FormItem>
           <Checkbox>Remember me</Checkbox>
+          <br></br>
           {/* <a className="login-form-forgot" href="">Forgot password</a> */}
-          <Link className="login-form-forgot" to="/resetPassword">Reset Password</Link>
           <p>
             <Button type="primary" htmlType="submit" className="login-form-button">
-              Log in
+              Log in     
              </Button>
-            Or
+             <br></br>  
+            Or  
+            <br></br>  
 
              <Link to="/register">Register</Link>
+            <h4>Forgot Password?</h4>
+            <Link className="login-form-forgot" to="/resetPassword">Reset Password</Link>
             {/* <a href="">register now!</a> */}
           </p>
         </FormItem>

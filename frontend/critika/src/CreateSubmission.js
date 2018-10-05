@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import {Form, Input, Button, Icon, Card, Checkbox, Dropdown, Menu, Slider} from 'antd'
+import {Form, Input, Button, Icon, Card, Checkbox, Dropdown, Menu, Slider, Row, Col} from 'antd'
 import {Link} from 'react-router-dom'
 import thumbnail from './default image.jpg'
 
@@ -54,15 +54,20 @@ class CreateSubmission extends React.Component{
 
   return (
     <div>
+        <Row>
+      
+      
+    
       <h1>Upload Your Submission</h1>
       <Button type="primary"> <Icon type="upload" />Upload Submission</Button>
       <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Card title="New Submission" bordered={false} style={{ width: 900 }}>
       <Form style={{width: "300px", textAlign: "center"}}>
-        <FormItem >
+      <Col span={12}>
+        <FormItem style={{ width: 250 }}>
             <Input placeholder="Submission Name"/>
         </FormItem>
-        <FormItem >
+        <FormItem style={{ width: 250 }}>
             <Input placeholder="Submission Category"/>
         </FormItem>
 
@@ -70,10 +75,11 @@ class CreateSubmission extends React.Component{
 
 
       <p>What kind of feedback are you looking for?
-      <TextArea rows={4} />
+      <TextArea rows={4}style={{ width: 250 }} />
       </p>
-
-      <img src={thumbnail}/>
+      </Col>
+      <Col span={12}>
+      <img style={{ height: '13.4em', borderRadius: '0.9em' }} src={thumbnail}/>
       <Button type="primary" >
             Upload thumbnail
              </Button>
@@ -86,10 +92,13 @@ class CreateSubmission extends React.Component{
             
          
         </FormItem>
+        </Col>
       </Form>
+     
         </Card>
+        
         </div>
-
+        </Row>
     </div>
   );
   }
