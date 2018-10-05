@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { Card, Icon, Col, Row, Button, } from 'antd'
+import { Card, Icon, Col, Row, Button,Rate } from 'antd'
 import { Link } from 'react-router-dom'
 
 class Profile extends React.Component{
@@ -24,13 +24,8 @@ class Profile extends React.Component{
       <Col span={8}>
       <Card title="Critika Score" bordered={false} style={{ width: 250 }}>
 
-<p><Icon type="star" theme="filled" />
-<Icon type="star" theme="filled" />
-<Icon type="star" theme="filled" />
-<Icon type="star" theme="filled" />
-<Icon type="star" theme="outlined" />
-<h1> 4.0 </h1></p>
-
+    <Rate disabled defaultValue={2.5} />
+    <h1>2.0</h1>
 
 </Card>
       </Col>
