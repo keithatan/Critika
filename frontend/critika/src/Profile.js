@@ -24,6 +24,10 @@ class Profile extends React.Component{
       <Col span={8}>
       <Card title="Critika Score" bordered={false} style={{ width: 250 }}>
 
+<<<<<<< HEAD
+    <Rate disabled defaultValue={2.5} />
+    <h1>2.0</h1>
+=======
 <p><Icon type="star" theme="filled" />
 <Icon type="star" theme="filled" />
 <Icon type="star" theme="filled" />
@@ -31,6 +35,7 @@ class Profile extends React.Component{
 <Icon type="star" theme="outlined" />
 <h1> 4.0 </h1></p>
 
+>>>>>>> 9b84b905cab6cd5dbed85d1368352e1d6c6e090f
 
 </Card>
       </Col>

@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { Input, Menu, Dropdown, Icon } from 'antd'
+import { Input, Menu, Dropdown, Icon, Row, Col, Card } from 'antd'
 
 class Users extends React.Component{
   render(){
@@ -26,6 +26,59 @@ class Users extends React.Component{
           Filter By <Icon type="down" />
         </a>
       </Dropdown>
+      <div style={{ background: '#ECECEC', padding: '30px' }}>
+      <Row gutter={16}>
+      <Col span={12}>
+        <Card title="User1" bordered={false}>
+        <p>User 1</p>
+        
+        
+        </Card>
+        <p></p>
+        <Card title="User3" bordered={false}>
+        <p>User 3</p>
+        
+        </Card>
+        <p></p>
+
+        <Card title="User5" bordered={false}>
+        <p>User 5</p>
+        
+        </Card>
+        <p></p>
+
+        <Card title="User7" bordered={false}>
+        <p>User 7</p>
+        
+        </Card>
+      </Col>
+      <Col span={12}>
+        <Card title="User2" bordered={false}>
+        <p>User 1</p>
+        
+        </Card>
+        <p></p>
+
+        <Card title="User4" bordered={false}>
+        <p>User 4</p>
+        
+        </Card>
+        <p></p>
+
+        <Card title="User6" bordered={false}>
+        <p>User 6</p>
+        
+        </Card>
+        <p></p>
+
+        <Card title="User8" bordered={false}>
+        <p>User 8</p>
+        
+        </Card>
+      </Col>
+     
+    </Row>
+    </div>
     </div>
     
   );
