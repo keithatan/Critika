@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { Card, Icon, Col, Row, Button, Rate} from 'antd'
+import { Card, Icon, Col, Row, Button, } from 'antd'
 import { Link } from 'react-router-dom'
 
 class Profile extends React.Component{
@@ -8,16 +8,34 @@ class Profile extends React.Component{
   render(){
   return (
     <div>
+      <Button.Group size={"small"}>
+          <Button class="profilebtn" type="default">
+          <Icon type="left" theme="outlined" />
+          <Link to="/Dashboard">Return to your Dashboard Page</Link>
+          
+          </Button>
+      </Button.Group>
+      <Link style={{float:"right"}} to="/editProfile"><Icon type="edit" theme="filled" />Edit Profile</Link>
       <h1>User Profile <Button type="primary" size="large">+ Add Friend</Button> 
-      <Button type="primary" size="large"><Link to="/submissions">Submissions</Link></Button> </h1>
       
+      <Button type="primary" size="large"><Link to="/submissions">Submissions</Link></Button> </h1>
       <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Row gutter={16}>
       <Col span={8}>
       <Card title="Critika Score" bordered={false} style={{ width: 250 }}>
 
+<<<<<<< HEAD
     <Rate disabled defaultValue={2.5} />
     <h1>2.0</h1>
+=======
+<p><Icon type="star" theme="filled" />
+<Icon type="star" theme="filled" />
+<Icon type="star" theme="filled" />
+<Icon type="star" theme="filled" />
+<Icon type="star" theme="outlined" />
+<h1> 4.0 </h1></p>
+
+>>>>>>> 9b84b905cab6cd5dbed85d1368352e1d6c6e090f
 
 </Card>
       </Col>
