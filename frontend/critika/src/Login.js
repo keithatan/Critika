@@ -23,7 +23,7 @@ class Login extends React.Component {
             password: values.password
           })
             .then(function (response) {
-              console.log(response);
+              window.alert(response);
             })
             .catch(function (error) {
               console.log(error);
