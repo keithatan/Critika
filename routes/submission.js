@@ -132,7 +132,12 @@ router.get("/mine", authenticate, (req, res) => {
  */
 router.get("/available", authenticate, (req, res) => {
     Submission.find({}).then((subs) => {
-            res.send(subs);
+        var userMap = {};
+
+        subs.forEach(function(user) {
+          userMap[user._id] = user;
+        });
+        res.send(userMap);
         }).catch((err)=>{
             res.status(400).send(err)
         })
