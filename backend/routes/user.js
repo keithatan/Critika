@@ -70,7 +70,7 @@ router.get("/account", authenticate, (req, res) => {
 });
 
 router.get("/test", (req, res) => {
-    res.json({message: "This works"});
+    res.json({ message: "This works" });
 });
 
 /*
@@ -81,7 +81,7 @@ router.post("/login", (req, res) => {
     if (req.body.username && req.body.password) {
         User.findByLogin(req.body.username, req.body.password).then((user) => {
             // If the user has not verified their email, then prompt for verification code
-           if (!user.verified) {
+            if (!user.verified) {
                 res.status(200).send({ message: "Account has not been verified, please verify your account" });
             }
             return user.generateAuthToken().then((token) => {
@@ -100,26 +100,32 @@ router.post("/login", (req, res) => {
 /**
  * Verify new user's email
  */
-router.post("/verify-email", authenticate, (req, res) => {
+router.post("/verify-email", (req, res) => {
     // Check if user data is complete
-    if (!req.body || !req.body.verificationNum) {
+    if (!req.body || !req.body.verificationNum || !req.body.email) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
 
-    // Check if user has entered in the correct verification number
-    if (!req.user.verificationNum == req.body.verificationNum) {
-        res.status(400).send({ message: "Verification code does not match" });
-        return;
-    }
-
-    // Update the database if the verification number is correct
-    User.findOneAndUpdate({ username: req.user.username }, { $set: { verified: true } }).then(() => {
-        res.status(200).send({ message: "User has been succesfully verified" });
+    console.log(req.body.email)
+    User.findVerificationNumByEmail(req.body.email).then((verificationNum) => {
+        // Check if user has entered in the correct verification number
+        if (verificationNum != req.body.verificationNum) {
+            res.status(400).send({ message: "Verification code does not match" });
+            return;
+        }
+        else {
+            User.findOneAndUpdate({ email: req.body.email }, { $set: { verified: true } }).then(() => {
+                res.status(200).send({ message: "User has been succesfully verified" });
+            }).catch((err) => {
+                res.status(400).send({ message: "An error has occoured with verifying your account" });
+                res.send(err);
+            });
+        }
     }).catch((err) => {
-        res.status(400).send({ message: "An error has occoured with verifying your account" });
-        res.send(err);
+        res.status(400).send({ message: "Email does not exist in our records" });
     });
+
 })
 
 /**
@@ -233,7 +239,7 @@ router.post("/reset-password-email", (req, res) => {
             var email_body = "Dear " + email + ", \n\nOur records indicate that you have requested a password " +
                 "reset. Click the link below and enter the four digit code to begin the process.\n\n" +
                 verificatonCode + "\n\nSincerely, \n\nThe Critika Team";
-            
+
             // find user by email and set verification number
             User.findOneAndUpdate({ email: email }, { $set: { verificationNum: verificatonCode } }).then(() => {
                 res.status(200).send({ message: 'Verification code set' });
@@ -241,7 +247,6 @@ router.post("/reset-password-email", (req, res) => {
                 res.status(400).send({ message: "Verification code was not set" });
                 res.send(err);
             });
-
             // send email
             sendEmail(email, email_subject, email_body);
         }).catch((err) => {
