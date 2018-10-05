@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import Login from './Login';
 import Profile from './Profile';
 import Groups from './Groups';
@@ -21,10 +20,12 @@ import CreateSubmission from './CreateSubmission';
 import EditSubmission from './EditSubmission';
 import './Login.css';
 import './App.css';
-import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input} from 'antd';
+import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input, Col} from 'antd';
 import 'antd/dist/antd.css';
 import { Link, Switch, Route, Redirect } from 'react-router-dom'
 import axios from 'axios';
+import logo from './logo.svg'
+
 
 const { SubMenu } = Menu;
 const { Header, Content, Sider } = Layout;
@@ -39,9 +40,13 @@ class App extends Component {
     <Header style={{backgroundColor: 'rgb(194, 165, 211)'}} >
       <header className="App-header">
       
+      <Col span={4} offset={0}>
       CRITIKA
-     
-      
+      </Col>
+      <Col span={4} offset={16}>
+      <Link  to='/dashboard'>
+      <Icon className="Nav-bar" type="home" style={{ color: 'rgb(255,255,255)'}} />
+        </Link>
       <Link  to='/profile'>
       <Icon className="Nav-bar" type="user" style={{ color: 'rgb(255,255,255)'}} />
         </Link>
@@ -51,6 +56,7 @@ class App extends Component {
       <Link to='/settings'>
       <Icon className="Nav-bar" type="setting" style={{ color: 'rgb(255,255,255)'}} />
         </Link>
+        </Col>
       </header>
     </Header>
     <Layout>
