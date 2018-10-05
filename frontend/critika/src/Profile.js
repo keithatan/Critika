@@ -17,7 +17,7 @@ class Profile extends React.Component{
       <Card title="Critika Score" bordered={false} style={{ width: 250 }}>
 
     <Rate disabled defaultValue={2.5} />
-
+    <h1>2.0</h1>
 
 </Card>
       </Col>
