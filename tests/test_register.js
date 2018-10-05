@@ -127,8 +127,15 @@ describe('Test register route', function(){
     })
 
     it('test registering with correct information', function(done){
+        chai.request(server).post('/user/register')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({username: 'unitTestUsername' + Math.random(), password: 'password', email: 'connortodd21spam@gmail.com', securityquestion: 'ok'})
+        .end(function(err,res){
+            res.should.have.status(200);
+        })
 
         done();
     })
+
 })
 
