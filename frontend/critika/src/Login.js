@@ -12,24 +12,42 @@ const FormItem = Form.Item;
 
 class Login extends React.Component {
 
+  sendLogin = async (userName, password) => {
+    try {
+      return await axios.post('http://localhost:5000/user/login', {
+        username: userName,
+        password: password
+      })
+    } catch (err) {
+      console.log(err)
+    }
+  }
+
+
   handleSubmit = (e) => {
     e.preventDefault();
-    this.props.form.validateFields((err, values) => {
+    this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
-        const postdata = async () => {
-          const data = axios.post('http://localhost:5000/user/login', {
-            username: values.userName,
-            password: values.password
-          })
-            .then(function (response) {
-              console.log(response);
-            })
-            .catch(function (error) {
-              console.log(error);
-            });
-          return data;
-        }
+        const response = await this.sendLogin(values.userName, values.password)
+        
+        // if (response.data.message) {
+        //   console.log(response.data.message)
+        // }
+
+        // const postdata = async () => {
+        //   const data = axios.post('http://localhost:5000/user/login', {
+        //     username: values.userName,
+        //     password: values.password
+        //   })
+        //     .then(function (response) {
+        //       console.log(response);
+        //     })
+        //     .catch(function (error) {
+        //       console.log(error);
+        //     });
+        //   return data;
+        // }
       }
       else {
         console.log(err)
