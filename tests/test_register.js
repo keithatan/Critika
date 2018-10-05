@@ -102,7 +102,7 @@ describe('Test register route', function(){
     it('test registering with duplicate username', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'backendtestaccount234555', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
+        .send({username: 'unitTestUsername', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
         .end(function(err, res){
             res.should.be.a('object');
             res.should.have.property('diver');
