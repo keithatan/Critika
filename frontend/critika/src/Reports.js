@@ -10,7 +10,7 @@ class Reports extends React.Component{
       <div style={{ background: '#ECECEC', padding: '30px' }}>
       <Row gutter={16}>
       <Col span={12}>
-        <Card title="Reported Submissions" bordered={false}>
+        <Card title="Reported Submissions" bordered={false}  style={{borderRadius: '0.9em' }}>
         <p>Submission 1</p>
         <p>Submission 2</p>
         <p>Submission 3</p>
@@ -21,7 +21,7 @@ class Reports extends React.Component{
         </Card>
       </Col>
       <Col span={12}>
-        <Card title="Reported Comments" bordered={false}>
+        <Card title="Reported Comments" bordered={false} style={{borderRadius: '0.9em' }}>
         <p>Comment 1</p>
         <p>Comment 2</p>
         <p>Comment 3</p>
