@@ -1,6 +1,8 @@
 import React from 'react'
 import './App.css'
 import { Input, Menu, Dropdown, Icon, Row, Col, Card } from 'antd'
+import profilePic from './defaultprofile.jpg'
+
 
 class Users extends React.Component{
   render(){
@@ -30,49 +32,49 @@ class Users extends React.Component{
       <Row gutter={16}>
       <Col span={12}>
         <Card title="User1" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 1</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 1</p>
         
         
         </Card>
         <p></p>
         <Card title="User3" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 3</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 3</p>
         
         </Card>
         <p></p>
 
         <Card title="User5" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 5</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 5</p>
         
         </Card>
         <p></p>
 
         <Card title="User7" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 7</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 7</p>
         
         </Card>
       </Col>
       <Col span={12}>
         <Card title="User2" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 1</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 2</p>
         
         </Card>
         <p></p>
 
         <Card title="User4" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 4</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 4</p>
         
         </Card>
         <p></p>
 
         <Card title="User6" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 6</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 6</p>
         
         </Card>
         <p></p>
 
         <Card title="User8" bordered={false} style={{borderRadius: '0.9em' }}>
-        <p>User 8</p>
+        <p><img style={{ height: '5em', borderRadius: '0.9em' }} src={profilePic}/>User 8</p>
         
         </Card>
       </Col>
