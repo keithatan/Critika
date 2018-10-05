@@ -138,11 +138,6 @@ router.post("/edit-info", authenticate, (req, res) => {
         return;
     }
 
-    var userInfo = new User({
-        newEmail: req.body.email,
-        newSecurityquestion: req.body.securityquestion,
-    });
-
     User.findOneAndUpdate({ username: req.user.username },
         {
             $set: {
