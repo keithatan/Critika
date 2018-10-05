@@ -48,16 +48,18 @@ router.post("/register", (req, res) => {
         verificatonCode + "\nWe look forward to having you with us!\n\nSincerely, \nThe Critika Team";
     var newMemberEmailSubject = "Welcome to Critika!";
 
-    sendEmail(req.body.email, newMemberEmailSubject, newMemberEmailBody);
 
     // Add to database
     newUser.save().then(() => {
         return newUser.generateAuthToken();
     }).then((token) => {
         res.header('x-auth', token).send(newUser);
+        sendEmail(req.body.email, newMemberEmailSubject, newMemberEmailBody);
     }).catch((err) => {
         res.status(400).send(err)
+        return;
     })
+
 });
 
 /* 
