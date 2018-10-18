@@ -32,7 +32,8 @@ router.post('/add-friend', (req, res) => {
         return;
     }
     else {
-        User.findOneAndUpdate({ username: req.body.username }, { $set: { friends: friends[numFriends++] = req.body.friend } }).then(() => {
+
+        User.findOneAndUpdate({ username: req.body.username }, { $push: {friends: req.body.friend}}).then(() => {
             res.status(200).send({ message: "Friend successfully added!" });
         }).catch((err) => {
             res.status(400).send({ message: "An error has occoured with adding friend" });
