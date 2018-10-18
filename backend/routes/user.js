@@ -102,6 +102,9 @@ router.post("/login", (req, res) => {
             if (!user.verified) {
                 res.status(200).send({ message: "Account has not been verified, please verify your account" });
             }
+            if(user.standing == "banned"){
+                res.status(400).send({message: "This account has been banned due to violation of conduct"})
+            }
             return user.generateAuthToken().then((token) => {
                 res.header('x-auth', token).send(user);
             });
@@ -216,6 +219,23 @@ router.get("/allUsers", authenticate, (req, res) => {
     }
     else {
         res.status(401).send({ message: '401 ERROR: Access Denied' })
+    }
+})
+
+router.get("/banUser", authenticate, (req, res) => {
+    if(req.user.status != 'admin'){
+        res.status(401).send({ message: '401 ERROR: Access Denied' })
+    }
+    else{
+        User.findByLogin(req.body.username, req.body.password).then((user) => {
+            User.findOneAndUpdate({username: user.username}, {$set : {standing: "banned"}})
+            .then(() => {
+                /* Delete user from database or username to list of banned names? */
+                /* I think we should just delete the user, and instead store the email in an array of banned emails */
+            })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
+        });
     }
 })
 

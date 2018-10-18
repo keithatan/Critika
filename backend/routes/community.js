@@ -21,3 +21,10 @@ var Community = require('../model/community')
 router.get("/", (req, res) => {
     res.send('This route is for all community related tasks');
 });
+
+router.post("/create-community", authenticate, (req, res) => {
+    if (!req.body.category || !req.body.submissionName || !req.body.submissionText) {
+        res.status(400).json({ message: "Submission data is incomplete" });
+        return;
+    }
+})
