@@ -17,7 +17,6 @@ let userSchema = new mongoose.Schema({
   ratingNum: { type: Number, default: 0},
   status: {type: String, default: 'reg-user'},
   friends: {type: [String]},
-  numFriends: {type: Number},
   email:{  
     type: String,
     unique: true,
