@@ -18,6 +18,7 @@ let userSchema = new mongoose.Schema({
   status: {type: String, default: 'reg-user'},
   friends: {type: [String]},
   standing: {type: String, default: 'good'},
+  recoveryUsername: {type: String, unique: true, minlength: 6, trim: true },
   email:{  
     type: String,
     unique: true,
@@ -116,6 +117,27 @@ userSchema.statics.findByLogin = function(username, password) {
   });
 };
 
+userSchema.statics.findByRecoveryName = function(username, password) {
+  var User = this;
+
+  return User.findOne({recoveryUsername: username}).then((user) => {
+    if (!user){
+      return Promise.reject();
+    }
+    
+    return new Promise((resolve, reject) => {
+      bcrypt.compare(password, user.password, (err, res) => {
+        if (res){
+          resolve(user);
+        }
+        else{
+          reject();
+        }
+      });
+    });
+  });
+};
+
 userSchema.statics.findByEmail = function(email) {
   var User = this;
 
@@ -143,7 +165,6 @@ userSchema.statics.findVerificationNumByEmail = function(email) {
     }
   });
 };
-
 
 
 /* Function to prevent too much information from being returned on request when the response is the object */

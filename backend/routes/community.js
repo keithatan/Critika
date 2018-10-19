@@ -13,7 +13,8 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
-var Community = require('../model/community')
+var community = require('../model/community')
+
 
 /**
  * All community related routes
@@ -28,3 +29,5 @@ router.post("/create-community", authenticate, (req, res) => {
         return;
     }
 })
+
+module.exports = community;

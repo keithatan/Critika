@@ -15,6 +15,6 @@ let communitySchema = new Schema({
   
   
   /* Creating the user model from the schema and giving it to Mongoose */
-  let Community = mongoose.model('Community', communitySchema);
+  let community = mongoose.model('community', communitySchema);
   
-  module.exports = Community;
+  module.exports = community;
