@@ -105,18 +105,23 @@ router.post("/remove", authenticate, (req, res) => {
                 submissionNum: req.user.submissionNum - 1
             }
         }).then(() => {
-            res.status(200).send({ message: 'User information successfully updated!' })
+            Submission.remove({
+                submissionName: req.body.submissionName
+            }).then(() => 
+             res.status(200).send({ message: 'User information successfully updated!' })
+            )
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
 
-    User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
-            res.status(200).send({ message: "Submission succesfully removed!" })
-        }).catch((err) => {
-            res.status(400).send({ message: "No submission found" });
-            res.send(err);
-        })
+    // User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
+    //         res.status(200).send({ message: "Submission succesfully removed!" })
+    //     }).catch((err) => {
+    //         res.status(400).send({ message: "No submission found" });
+    //         res.send(err);
+    //     })
+        
 })
 
 /**
