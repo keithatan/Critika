@@ -84,6 +84,12 @@ router.post("/register", (req, res) => {
  * View Account 
  */
 router.get("/account", authenticate, (req, res) => {
+
+    if(User.standing == "banned"){
+        res.status(400).send({message: "This account has been banned due to violation of conduct"})
+        return;
+    }
+
     res.send(req.user);
 });
 
@@ -97,13 +103,16 @@ router.get("/test", (req, res) => {
 router.post("/login", (req, res) => {
     // check for username and password
     if (req.body.username && req.body.password) {
+
+        if(User.standing == "banned"){
+            res.status(400).send({message: "This account has been banned due to violation of conduct"})
+            return;
+        }
+
         User.findByLogin(req.body.username, req.body.password).then((user) => {
             // If the user has not verified their email, then prompt for verification code
             if (!user.verified) {
                 res.status(200).send({ message: "Account has not been verified, please verify your account" });
-            }
-            if(user.standing == "banned"){
-                res.status(400).send({message: "This account has been banned due to violation of conduct"})
             }
             return user.generateAuthToken().then((token) => {
                 res.header('x-auth', token).send(user);
@@ -222,14 +231,46 @@ router.get("/allUsers", authenticate, (req, res) => {
     }
 })
 
-router.get("/banUser", authenticate, (req, res) => {
+/*
+ * Route to ban user, ADMIN only function 
+ */
+
+router.post("/ban-user", authenticate, (req, res) => {
     if(req.user.status != 'admin'){
-        res.status(401).send({ message: '401 ERROR: Access Denied' })
+        res.status(401).send({ message: '401 ERROR: Access Denied, user is not an admin' })
     }
+
     else{
-        User.findByLogin(req.body.username, req.body.password).then((user) => {
-            User.findOneAndUpdate({username: user.username}, {$set : {standing: "banned"}})
+
+        var randomName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+
+        User.findByLogin(req.body.usernameToBeBanned, req.body.password).then((user) => {
+            User.findOneAndUpdate({username: req.body.usernameToBeBanned}, {$set : {recoveryUsername: req.body.usernameToBeBanned, username: randomName, standing: "banned"}})
             .then(() => {
+                res.status(200).send({message: "User is now banned"})
+                /* Delete user from database or username to list of banned names? */
+                /* I think we should just delete the user, and instead store the email in an array of banned emails */
+            })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
+        });
+    }
+})
+
+/*
+ * Route to un-ban user, ADMIN only function 
+ */
+
+router.post("/restore-user", authenticate, (req, res) => {
+    if(req.user.status != 'admin'){
+        res.status(401).send({ message: '401 ERROR: Access Denied, user is not an admin' })
+    }
+
+    else{
+        User.findByRecoveryName(req.body.usernameToBeRestored, req.body.password).then((user) => {
+            User.findOneAndUpdate({recoveryUsername: req.body.usernameToBeRestored}, {$set : {username: req.body.usernameToBeRestored, standing: "good"}})
+            .then(() => {
+                res.status(200).send({message: "User is now restored"})
                 /* Delete user from database or username to list of banned names? */
                 /* I think we should just delete the user, and instead store the email in an array of banned emails */
             })
@@ -253,6 +294,26 @@ router.post("/change-password", authenticate, (req, res) => {
         res.send(err);
     });
 })
+
+/*
+ * Make a user an admin, admin only function
+ */
+
+ router.post("/become-admin", authenticate, (req, res) => {
+
+    if(!req.body || !req.body.username){
+        res.status(400).send({message: "Information incomplete"})
+    }
+
+    else{
+        User.findOneAndUpdate({ username: req.body.username }, { $set: { status: "admin" } }).then(() => {
+            res.status(200).send({ message: 'User is now an admin' });
+        }).catch((err) => {
+            res.status(400).send({ message: "Information incomplete" });
+            res.send(err);
+        });
+    }
+ })
 
 /**
  * Reset Password
