@@ -32,13 +32,17 @@ router.post('/add-friend', (req, res) => {
         return;
     }
     else {
-
-        User.findOneAndUpdate({ username: req.body.username }, { $push: {friends: req.body.friend}}).then(() => {
-            res.status(200).send({ message: "Friend successfully added!" });
+        User.findByLogin({username: req.body.friend}).then((friend) => {
+            User.findOneAndUpdate({ username: req.body.username }, { $push: {friends: req.body.friend}}).then(() => {
+                res.status(200).send({ message: "Friend successfully added!" });
+            }).catch((err) => {
+                res.status(400).send({ message: "An error has occoured with adding friend" });
+                res.send(err);
+            });
         }).catch((err) => {
-            res.status(400).send({ message: "An error has occoured with adding friend" });
+            res.status(400).send({ message: "Friend does not exist" });
             res.send(err);
-        });
+        })
     }
 })
 

@@ -9,6 +9,7 @@ let submissionsSchema = new Schema({
   submissionText: {type: String},
   submissionSkillLevel: {type: String},
   username: {type: String, required: true}, 
+  community: {type: String},
   dateSubmitted: {type: Date, default: Date.now},
   //receivedCritiqueIDs: {type: [String], required: true}, 
   numberOfCritiquesRecieved: {type: Number, default: 0}
