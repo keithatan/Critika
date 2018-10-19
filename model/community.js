@@ -8,7 +8,7 @@ let communitySchema = new Schema({
     communityID: {type: String},
     dateCreated: {type: Date, default: Date.now},
     numberOfSubscribers: {type: Number, default: 0},
-    admins: {type: [String]},
+    moderators: {type: [String]},
 
     /* Need to store all the submissions for this community, Array? of what? */
   });
