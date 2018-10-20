@@ -13,7 +13,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
-var community = require('../model/community')
+var Community = require('../model/community')
 
 
 /**
@@ -23,14 +23,38 @@ router.get("/", (req, res) => {
     res.send('This route is for all community related tasks');
 });
 
+
 /**
  * Create a new community
  */
 router.post("/create-community", authenticate, (req, res) => {
-    if (!req.body.category || !req.body.submissionName || !req.body.submissionText) {
-        res.status(400).json({ message: "Submission data is incomplete" });
+
+    if (!req.body || !req.body.username || !req.body.communityName || !req.body.communityDescription) {
+        res.status(400).json({ message: "Community data is incomplete" });
         return;
     }
-})
+    var mods = {};
 
-module.exports = community;
+    // New Submission Data
+    var newCommunity = new Community({
+        communityName: req.body.communityName,
+        communityDescription: req.body.communityDescription,
+        founder: req.body.username,
+    });
+    
+    // Add to database 
+    newCommunity.save().then(() => {
+        res.status(200).send(newCommunity)
+    }).catch((err) => {
+        res.status(400).send(err);
+    }).then(() => {
+        Community.findOneAndUpdate({ communityName: req.body.communityName }, { $push: {moderators: req.body.username}}).then(() => {
+            }).catch((err) => {
+                res.status(400).send({ message: "An error has occoured with adding initial mod" });
+                res.send(err);
+                return
+        });
+    })
+});
+
+module.exports = router;
