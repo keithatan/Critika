@@ -33,9 +33,8 @@ router.post("/create-community", authenticate, (req, res) => {
         res.status(400).json({ message: "Community data is incomplete" });
         return;
     }
-    var mods = {};
 
-    // New Submission Data
+    // New Community Data
     var newCommunity = new Community({
         communityName: req.body.communityName,
         communityDescription: req.body.communityDescription,
