@@ -248,6 +248,37 @@ router.post("/add-coin", authenticate, (req, res) => {
 
 });
 
+/**
+ * Remove coins from user
+ */
+router.post("/Remove-coin", authenticate, (req, res) => {
+    if (!req.body || !req.body.coins|| !req.body.recuser) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    var recUser;
+
+    User.findOne({ username: req.body.recuser }).then((foundUser) => {
+        recUser = foundUser
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
+
+    User.findOneAndUpdate({ username: req.body.recuser },
+        {
+            $set: {
+                coins: recUser.coins - parseInt(req.body.coins),
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Coins successfully removed' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error removing coins" });
+            res.send(err);
+        })
+
+});
+
 
 
 /**
