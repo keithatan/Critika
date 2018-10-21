@@ -173,7 +173,7 @@ class Register extends React.Component{
           )}          
           </FormItem>
           
-          <FormItem
+          {/* <FormItem
             {...formItemLayout}
             label={(
               <span>
@@ -202,7 +202,7 @@ class Register extends React.Component{
           })(
             <Input placeholder="Security Question Answer" type="text"/>
           )}            
-          </FormItem>
+          </FormItem> */}
   
     
           <FormItem {...tailFormItemLayout}>
