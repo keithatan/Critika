@@ -18,6 +18,7 @@ let userSchema = new mongoose.Schema({
   status: {type: String, default: 'reg-user'},
   friends: {type: [String]},
   standing: {type: String, default: 'good'},
+  coins: { type: Number, default: 5},
   recoveryUsername: {type: String, unique: true, minlength: 6, trim: true },
   email:{  
     type: String,
