@@ -37,6 +37,7 @@ router.post("/add", authenticate, (req, res) => {
         submissionName: req.body.submissionName,
         submissionText: req.body.submissionText,
         username: req.user.username,
+        community: req.body.community,
     });
 
     // Change submission num
@@ -104,18 +105,23 @@ router.post("/remove", authenticate, (req, res) => {
                 submissionNum: req.user.submissionNum - 1
             }
         }).then(() => {
-            res.status(200).send({ message: 'User information successfully updated!' })
+            Submission.remove({
+                submissionName: req.body.submissionName
+            }).then(() => 
+             res.status(200).send({ message: 'User information successfully updated!' })
+            )
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
 
-    User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
-            res.status(200).send({ message: "Submission succesfully removed!" })
-        }).catch((err) => {
-            res.status(400).send({ message: "No submission found" });
-            res.send(err);
-        })
+    // User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
+    //         res.status(200).send({ message: "Submission succesfully removed!" })
+    //     }).catch((err) => {
+    //         res.status(400).send({ message: "No submission found" });
+    //         res.send(err);
+    //     })
+        
 })
 
 /**
@@ -128,11 +134,25 @@ router.get("/mine", authenticate, (req, res) => {
 });
 
 /**
+ * Get all submissions in a community
+ */
+router.get("/all-community", authenticate, (req, res) => {
+    Submission.find({ community: req.headers.community }).then((subs) => {
+        res.send(subs);
+    });
+});
+
+/**
  * Route to get available submissions 
  */
 router.get("/available", authenticate, (req, res) => {
     Submission.find({}).then((subs) => {
-            res.send(subs);
+        var userMap = {};
+
+        subs.forEach(function(user) {
+          userMap[user._id] = user;
+        });
+        res.send(userMap);
         }).catch((err)=>{
             res.status(400).send(err)
         })
