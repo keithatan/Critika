@@ -9,16 +9,18 @@ class Profile extends React.Component{
   return (
     <div>
       <Button.Group size={"small"}>
-          <Button class="profilebtn" type="default">
+          <Button class="profilebtn" type="default" > 
           <Icon type="left" theme="outlined" />
           <Link to="/Dashboard">Return to your Dashboard Page</Link>
-          
           </Button>
       </Button.Group>
+
       <Link style={{float:"right"}} to="/editProfile"><Icon type="edit" theme="filled" />Edit Profile</Link>
-      <h1>User Profile <Button type="primary" size="large">+ Add Friend</Button> 
+
+      <h1>User Profile <Button type="primary" size="large"> + Add Friend</Button> 
+
       <Button type="primary" size="large"><Link to="/submissions">Submissions</Link></Button> </h1>
-      <div style={{ background: '#ECECEC', padding: '30px' }}>
+   <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Row gutter={16}>
       <Col span={8}>
 
