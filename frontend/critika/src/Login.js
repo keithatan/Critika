@@ -8,8 +8,6 @@ import githubbutton from './login with github.png'
 
 const FormItem = Form.Item;
 
-
-
 class Login extends React.Component {
 
   sendLogin = async (userName, password) => {
@@ -23,31 +21,12 @@ class Login extends React.Component {
     }
   }
 
-
   handleSubmit = (e) => {
     e.preventDefault();
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         console.log('Received values of form: ', values);
         const response = await this.sendLogin(values.userName, values.password)
-        
-        // if (response.data.message) {
-        //   console.log(response.data.message)
-        // }
-
-        // const postdata = async () => {
-        //   const data = axios.post('http://localhost:5000/user/login', {
-        //     username: values.userName,
-        //     password: values.password
-        //   })
-        //     .then(function (response) {
-        //       console.log(response);
-        //     })
-        //     .catch(function (error) {
-        //       console.log(error);
-        //     });
-        //   return data;
-        // }
       }
       else {
         console.log(err)
@@ -75,7 +54,6 @@ class Login extends React.Component {
           )}
         </FormItem>
 
-
         <FormItem>
           <Checkbox>Remember me</Checkbox>
           <br></br>
@@ -84,10 +62,7 @@ class Login extends React.Component {
             <Button type="primary" htmlType="submit" className="login-form-button">
               Log in     
              </Button>
-             
             Or  
-          
-
              <Link to="/register">Register</Link>
             <h4>Forgot Password?</h4>
             <Link className="login-form-forgot" to="/resetPassword">Reset Password</Link>
