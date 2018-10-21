@@ -218,6 +218,39 @@ router.post("/rating", authenticate, (req, res) => {
 });
 
 /**
+ * Add coins to user
+ */
+router.post("/add-coin", authenticate, (req, res) => {
+    if (!req.body || !req.body.coins|| !req.body.recuser) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    var recUser;
+
+    User.findOne({ username: req.body.recuser }).then((foundUser) => {
+        recUser = foundUser
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
+
+    User.findOneAndUpdate({ username: req.body.recuser },
+        {
+            $set: {
+                coins: recUser.coins + parseInt(req.body.coins),
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Coins successfully added' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error adding coins" });
+            res.send(err);
+        })
+
+});
+
+
+
+/**
  * Get All Users
  */
 router.get("/allUsers", authenticate, (req, res) => {
