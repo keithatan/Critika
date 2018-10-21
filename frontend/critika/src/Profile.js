@@ -21,7 +21,22 @@ class Profile extends React.Component{
       <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Row gutter={16}>
       <Col span={8}>
-      <Card title="Critika Score" bordered={false} style={{ width: 250 , borderRadius: '0.9em' }}>
+
+
+<Card title="About Me" bordered={false} style={{ width: 250 , borderRadius: '0.9em' }}>
+
+  <h3>Bio</h3>
+  <p> Placeholder for about me</p>
+
+  <h3>Description</h3>
+  <p> Placeholder for about Me</p>
+
+</Card>
+
+<br></br>
+
+
+<Card title="Critika Score" bordered={false} style={{ width: 250 , borderRadius: '0.9em', marginBottom: '20px' }}>
 
     <Rate disabled defaultValue={2.5} />
     <h1>2.0</h1>
@@ -29,7 +44,7 @@ class Profile extends React.Component{
 </Card>
       </Col>
       <Col span={8}>
-      <Card title="Badges" bordered={false} style={{ width: 250, borderRadius: '0.9em'  }}>
+      <Card title="Badges" bordered={false} style={{ width: 250, borderRadius: '0.9em', marginBottom: '20px'  }}>
 
 <p> Made 100 connections <Icon type="user" theme="outlined" /></p>
 <p> Received 100 likes on comments<Icon type="like" theme="outlined" /></p>
@@ -37,7 +52,7 @@ class Profile extends React.Component{
 </Card>
       </Col>
       <Col span={8}>
-        <Card title="Personal Information" bordered={false} style={{borderRadius: '0.9em' }}>
+        <Card title="Personal Information" bordered={false} style={{borderRadius: '0.9em',marginBottom: '20px' }}>
         <p>Member since: 9.24.18</p>
         <p>Number of friends: </p>
         <p>Number of submissions:</p>
