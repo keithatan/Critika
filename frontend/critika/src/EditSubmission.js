@@ -56,7 +56,7 @@ class EditSubmission extends React.Component{
     <div>
       
       <div style={{ background: '#ECECEC', padding: '30px' }}>
-      <Card title="New Submission" bordered={false} style={{ width: 900 }}>
+      <Card title="Edit Submission" bordered={false} style={{ width: 900 }}>
       <Form style={{width: "300px", textAlign: "center"}}>
         <FormItem >
             <Input placeholder="Submission Name"/>

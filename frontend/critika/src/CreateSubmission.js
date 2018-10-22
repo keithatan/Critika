@@ -28,7 +28,9 @@ class CreateSubmission extends React.Component{
   render(){
     const { TextArea } = Input;
     
-
+    function onChange(e) {
+      console.log(`checked = ${e.target.checked}`);
+    }
       class IconSlider extends React.Component {
         state = {
           value: 0,
@@ -89,7 +91,9 @@ class CreateSubmission extends React.Component{
 
         <FormItem>
            
-              <Button type="primary" htmlType="submit" >
+        <Checkbox onChange={onChange}>Spend Coin on Submission</Checkbox>
+
+            <Button type="primary" htmlType="submit" >
             Create Submission
              </Button>
             

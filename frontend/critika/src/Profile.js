@@ -17,9 +17,11 @@ class Profile extends React.Component{
 
       <Link style={{float:"right"}} to="/editProfile"><Icon type="edit" theme="filled" />Edit Profile</Link>
 
-      <h1>User Profile <Button type="primary" size="large"> + Add Friend</Button> 
-
-      <Button type="primary" size="large"><Link to="/submissions">Submissions</Link></Button> </h1>
+      <h1>User Profile 
+        <Button type="primary" size="large">Spend Coins</Button>
+        <Button type="primary" size="large"> + Add Friend</Button> 
+        <Button type="primary" size="large"><Link to="/submissions">Submissions</Link></Button> 
+      </h1>
    <div style={{ background: '#ECECEC', padding: '30px' }}>
     <Row gutter={16}>
       <Col span={8}>

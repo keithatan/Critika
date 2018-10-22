@@ -43,7 +43,11 @@ class App extends Component {
       <Col span={4} offset={0}>
       CRITIKA
       </Col>
-      <Col span={4} offset={16}>
+      <Col span={1} offset={13}>
+        <Icon type="copyright" style={{ color: 'rgb(255,255,255)'}}/>
+      </Col>
+      
+      <Col span={4} offset={1}>
       <Link  to='/dashboard'>
       <Icon className="Nav-bar" type="home" style={{ color: 'rgb(255,255,255)'}} />
         </Link>
