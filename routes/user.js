@@ -279,8 +279,6 @@ router.post("/Remove-coin", authenticate, (req, res) => {
 
 });
 
-
-
 /**
  * Get All Users
  */
