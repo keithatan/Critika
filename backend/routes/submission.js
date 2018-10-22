@@ -88,6 +88,31 @@ router.post("/edit", authenticate, (req, res) => {
         })
 })
 
+/**
+ * Adds comment to a submission
+ */
+router.post("/add-comment", authenticate, (req, res) => {
+
+    if (!req.body.comment || !req.body.submissionID) {
+        res.status(400).json({ message: "Comment data is incomplete" });
+        return;
+    }
+
+    Submission.findOneAndUpdate({ _id: req.body.submissionID},
+        {
+            $push: {
+                'comments': {
+                    user: req.user.username, 
+                    message: req.body.comment
+                }
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Comment successfully added!' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+})
 
 /**
  * Remove submission from databse
