@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Form, Icon, Input, Button, Checkbox, Col } from 'antd';
+import { Form, Icon, Input, Button, Checkbox, Col, Alert } from 'antd';
 import { Link } from 'react-router-dom'
 import { Redirect } from 'react-router-dom'
 import googlebutton from './login with google.png'
@@ -12,7 +12,8 @@ const FormItem = Form.Item;
 class Login extends React.Component {
 
   state = {
-    redirect: false
+    redirect: false,
+    failed: false
   }
 
   sendLogin = async (userName, password) => {
@@ -31,9 +32,12 @@ class Login extends React.Component {
     this.props.form.validateFields(async (err, values) => {
       if (!err) {
         const response = await this.sendLogin(values.userName, values.password)
-        console.log(response)
-        if (response != undefined)
-          this.setState({ redirect: true })
+        if (response != undefined) {
+          this.setState({ redirect: true, failed: false })
+        }
+        else {
+          this.setState({ failed: true })
+        }
       }
       else {
         console.log(err)
@@ -43,7 +47,9 @@ class Login extends React.Component {
 
   render() {
 
-    const { redirect } = this.state;
+    const { redirect, failed } = this.state;
+
+    // if redirect is set, redirect to dashboard
     if (redirect) {
       return <Redirect to='/dashboard' />
     }
@@ -83,6 +89,9 @@ class Login extends React.Component {
             </p>
           </FormItem>
         </Form>
+       {failed ? (
+                    <Alert message="Username or Password is Incorrect" type="error" banner="true"/>
+                    ) : (null)} 
       </Col>
     );
   }
