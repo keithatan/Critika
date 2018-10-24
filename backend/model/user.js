@@ -29,11 +29,11 @@ let userSchema = new mongoose.Schema({
     }
   },
   security_question: String,
+  security_question_answer: String,
   tokens: [{
     access: {
       type: String,
       required: true
-      
     },
     token:[{
       type: String,
