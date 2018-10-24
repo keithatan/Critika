@@ -22,9 +22,7 @@ router.get("/", function (req, res) {
     res.send('This route is for all user related tasks');
 });
 
-/*
- * Register new user 
- */
+
 
 router.post('/add-friend', (req, res) => {
     if (!req.body.email || !req.body.username || !req.body.friend) {
@@ -46,8 +44,11 @@ router.post('/add-friend', (req, res) => {
     }
 })
 
+/*
+ * Register new user 
+ */
 router.post("/register", (req, res) => {
-    if (!req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion) {
+    if (!req.body.email || !req.body.password || !req.body.username || !req.body.securityquestion || !req.body.securityquestionanswer) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -60,7 +61,8 @@ router.post("/register", (req, res) => {
         username: req.body.username,
         email: req.body.email,
         password: req.body.password,
-        securityquestion: req.body.securityquestion,
+        security_question: req.body.securityquestion,
+        security_question_answer: req.body.securityquestionanswer,
         verified: false,
         verificationNum: verificatonCode
     });
