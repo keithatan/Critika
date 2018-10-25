@@ -1,16 +1,16 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, Menu } from 'antd';
-
+import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, Alert } from 'antd';
+import { Redirect } from 'react-router-dom'
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 
 class Register extends React.Component {
 
-
   state = {
+    success: false,
     redirect: false
   }
 
@@ -35,7 +35,7 @@ class Register extends React.Component {
         const response = await this.sendRegister(values.userName, values.password, values.email, values.securityQuestion, values.securityQuestionAnswer)
         console.log(response)
         if (response != undefined) {
-          this.setState({ redirect: true })
+          this.setState({ success: true })
         }
       }
       else {
@@ -71,7 +71,17 @@ class Register extends React.Component {
     }
   }
 
+  handleClose = () => {
+    this.setState({ redirect: true });
+  }
+
   render() {
+
+    const { success, redirect } = this.state;
+
+    if (redirect) {
+      return <Redirect to='/login' />
+    }
 
     const formItemLayout = {
       labelCol: {
@@ -109,7 +119,7 @@ class Register extends React.Component {
               rules: [{
                 required: true, message: 'Please input your username.'
               }, {
-              validator: this.validateUsername
+                validator: this.validateUsername
               }]
             })(
               <Input placeholder="Username" type="text" />
@@ -123,7 +133,7 @@ class Register extends React.Component {
             {getFieldDecorator('password', {
               rules: [{
                 required: true, message: 'Please input your password.'
-              }, 
+              },
               {
                 validator: this.validatePassword
               }],
@@ -202,6 +212,17 @@ class Register extends React.Component {
           <FormItem {...tailFormItemLayout}>
             <Button type="primary" htmlType="submit">Register</Button>
           </FormItem>
+          {success ? (
+            <Alert
+            message="Success!"
+            description="Account has been successfully created! You'll have to verify your email first. Check your email for the four digit verifivation code and head to the login page."
+            type="success"
+            showIcon
+            banner
+            closable
+            afterClose={this.handleClose}
+          />
+          ) : (null)}
         </Form>
       </div>
 

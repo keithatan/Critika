@@ -18,6 +18,7 @@ import ResetPassword from './ResetPassword';
 import EditProfile from './EditProfile';
 import CreateSubmission from './CreateSubmission';
 import EditSubmission from './EditSubmission';
+import VerifyEmail from './VerifyEmail'
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input, Col} from 'antd';
@@ -152,6 +153,10 @@ class App extends Component {
 
     <Route path='/EditSubmission' render = { () => (
         <EditSubmission/>)} 
+    />
+
+    <Route path='/verifyemail' render = { () => (
+        <VerifyEmail/>)} 
     />
        
     </Switch>

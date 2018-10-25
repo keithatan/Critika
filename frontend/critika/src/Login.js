@@ -13,7 +13,9 @@ class Login extends React.Component {
 
   state = {
     redirect: false,
-    failed: false
+    failed: false,
+    banned: false,
+    needToVerify: false
   }
 
   sendLogin = async (userName, password) => {
@@ -24,7 +26,20 @@ class Login extends React.Component {
       })
     } catch (err) {
       console.log(err.response.data)
+      if (err.response.data.message == "This account has been banned due to violation of conduct") {
+        this.setState({ banned: true })
+      }
+      else if (err.response.data.message == "Account has not been verified, please verify your account") {
+        this.setState({ needToVerify: true })
+      }
+      else {
+        this.setState({ failed: true })
+      }
     }
+  }
+
+  handleClose = () => {
+    this.setState({ redirect: true })
   }
 
   handleSubmit = (e) => {
@@ -35,9 +50,6 @@ class Login extends React.Component {
         if (response != undefined) {
           this.setState({ redirect: true, failed: false })
         }
-        else {
-          this.setState({ failed: true })
-        }
       }
       else {
         console.log(err)
@@ -47,10 +59,13 @@ class Login extends React.Component {
 
   render() {
 
-    const { redirect, failed } = this.state;
+    const { redirect, failed, banned, needToVerify } = this.state;
 
     // if redirect is set, redirect to dashboard
-    if (redirect) {
+    if (redirect && needToVerify) {
+      return <Redirect to='/register' />
+    }
+    else if (redirect) {
       return <Redirect to='/dashboard' />
     }
 
@@ -89,9 +104,21 @@ class Login extends React.Component {
             </p>
           </FormItem>
         </Form>
-       {failed ? (
-                    <Alert message="Username or Password is Incorrect" type="error" banner="true"/>
-                    ) : (null)} 
+        {failed ? (
+          <Alert message="Username or Password is Incorrect" type="error" banner="true" />
+        ) : banned ? (
+          <Alert message="It appears this account has been suspended. Please contact the team if you have any questions." type="error" banner="true" />
+        ) : needToVerify ? (
+         <Alert
+            message="Need To Verify"
+            description="Your account still needs to be verified. Close this alert to verify your email."
+            type="info"
+            showIcon
+            banner
+            closable
+            afterClose={this.handleClose}
+          />
+        ) : (null)}
       </Col>
     );
   }
