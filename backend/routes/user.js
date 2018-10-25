@@ -124,7 +124,7 @@ router.post("/login", (req, res) => {
                 res.header('x-auth', token).send(user);
             });
         }).catch((err) => {
-            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
+            res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
     else {

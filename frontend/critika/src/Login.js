@@ -23,7 +23,7 @@ class Login extends React.Component {
         password: password
       })
     } catch (err) {
-      console.log(err)
+      console.log(err.response.data)
     }
   }
 

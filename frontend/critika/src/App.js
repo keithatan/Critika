@@ -175,10 +175,10 @@ class App extends Component {
     }
   }
 
-  componentDidMount(){
-    axios.get('http://localhost:5000/user/test')
-    .then(json => console.log(json))
-  }
+  // componentDidMount(){
+  //   axios.get('http://localhost:5000/user/test')
+  //   .then(json => console.log(json))
+  // }
 }
 
 

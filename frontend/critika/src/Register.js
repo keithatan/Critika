@@ -1,8 +1,7 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Link } from 'react-router-dom'
-import { Form, Input, Tooltip, Icon, Select, Row, Col, Checkbox, Button, Menu, Dropdown, message, } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, Menu } from 'antd';
 
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -21,11 +20,11 @@ class Register extends React.Component {
         username: userName,
         password: password,
         email: email,
-        securityquestion: securityQuestion, 
+        securityquestion: securityQuestion,
         securityquestionanswer: securityQuestionAnswer
       })
     } catch (err) {
-      console.log(err)
+      console.log(err.response.data)
     }
   }
 
@@ -48,26 +47,31 @@ class Register extends React.Component {
   compareToFirstPassword = (rule, value, callback) => {
     const form = this.props.form;
     if (value && value !== form.getFieldValue('password')) {
-      callback('Two passwords that you enter is inconsistent!');
+      callback('The two passwords entered do not match.');
     } else {
       callback();
     }
   }
 
+  validatePassword = (rule, value, callback) => {
+    if (value.length < 8) {
+      callback('Password length must be 8 or more characters long.');
+    }
+    else {
+      callback();
+    }
+  }
+
+  validateUsername = (rule, value, callback) => {
+    if (value.length < 8) {
+      callback('Username length must be 8 or more characters long.');
+    }
+    else {
+      callback();
+    }
+  }
+
   render() {
-    const menu = (
-      <Menu>
-        <Menu.Item>
-          <a>What is your mother's maiden name?</a>
-        </Menu.Item>
-        <Menu.Item>
-          <a>What is the name of your elementary school you went to?</a>
-        </Menu.Item>
-        <Menu.Item>
-          <a>What is the name of your favorite drink?</a>
-        </Menu.Item>
-      </Menu>
-    );
 
     const formItemLayout = {
       labelCol: {
@@ -102,7 +106,11 @@ class Register extends React.Component {
             label="Username"
           >
             {getFieldDecorator('userName', {
-              rules: [{ required: true, message: 'Please input your username!' }],
+              rules: [{
+                required: true, message: 'Please input your username.'
+              }, {
+              validator: this.validateUsername
+              }]
             })(
               <Input placeholder="Username" type="text" />
             )}
@@ -114,9 +122,10 @@ class Register extends React.Component {
           >
             {getFieldDecorator('password', {
               rules: [{
-                required: true, message: 'Please input your password!',
-              }, {
-                validator: this.validateToNextPassword,
+                required: true, message: 'Please input your password.'
+              }, 
+              {
+                validator: this.validatePassword
               }],
             })(
               <Input type="password" placeholder="Password" />
@@ -129,7 +138,7 @@ class Register extends React.Component {
           >
             {getFieldDecorator('confirm', {
               rules: [{
-                required: true, message: 'Please confirm your password!',
+                required: true, message: 'Please confirm your password.',
               }, {
                 validator: this.compareToFirstPassword,
               }],
@@ -140,13 +149,13 @@ class Register extends React.Component {
 
           <FormItem
             {...formItemLayout}
-            label="E-mail"
+            label="Email"
           >
             {getFieldDecorator('email', {
               rules: [{
-                type: 'email', message: 'The input is not valid E-mail!',
+                type: 'email', message: 'The input is not valid Email.',
               }, {
-                required: true, message: 'E-mail is required',
+                required: true, message: 'Please input your Email.',
               }],
             })(
               <Input placeholder="Email" type="text" />
@@ -158,20 +167,20 @@ class Register extends React.Component {
             label={(
               <span>
                 Security Question&nbsp;
-                <Tooltip title="Write a question only you can answer">
+                <Tooltip title="Pick a question that only you can answer.">
                   <Icon type="question-circle-o" />
                 </Tooltip>
               </span>
             )}
           >
-          {getFieldDecorator('securityQuestion', {
-              rules: [{ required: true, message: 'Security Question is Required' }],
+            {getFieldDecorator('securityQuestion', {
+              rules: [{ required: true, message: 'Please pick a security question.' }],
             })(
-            <Select style={{ width: 300 }}>
-              <Option value="What is the name of your favorite drink?">What is the name of your favorite drink?</Option>
-              <Option value="What is your mother's maiden name?">What is your mother's maiden name?</Option>
-              <Option value="What is the name of your elementary school you went to?">What is the name of your elementary school you went to?</Option>
-            </Select>
+              <Select defaultValue="What is your mother's maiden name?" style={{ width: 300 }}>
+                <Option value="What is the name of your favorite drink?">What is the name of your favorite drink?</Option>
+                <Option value="What is your mother's maiden name?">What is your mother's maiden name?</Option>
+                <Option value="What is the name of your elementary school you went to?">What is the name of your elementary school you went to?</Option>
+              </Select>
             )}
           </FormItem>
 
@@ -180,7 +189,7 @@ class Register extends React.Component {
             label="Answer to Security Question"
           >
             {getFieldDecorator('securityQuestionAnswer', {
-              rules: [{ required: true, message: 'Security Question Answer is Required' }],
+              rules: [{ required: true, message: 'Please answer the secutiry question.' }],
             })(
               <Input placeholder="Security Question Answer" type="text" />
             )}
