@@ -2,8 +2,7 @@ import React from 'react'
 import './App.css'
 import axios from 'axios'
 import { Form, Icon, Input, Button, Checkbox, Col, Alert } from 'antd';
-import { Link } from 'react-router-dom'
-import { Redirect } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 import googlebutton from './login with google.png'
 import githubbutton from './login with github.png'
 
@@ -63,7 +62,7 @@ class Login extends React.Component {
 
     // if redirect is set, redirect to dashboard
     if (redirect && needToVerify) {
-      return <Redirect to='/register' />
+      return <Redirect to='/verifyemail' />
     }
     else if (redirect) {
       return <Redirect to='/dashboard' />

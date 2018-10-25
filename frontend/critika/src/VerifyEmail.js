@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Form, InputNumber, Col, Input, Button } from 'antd';
+import { Form, InputNumber, Col, Input, Button, Alert} from 'antd';
 import { Link, Redirect } from 'react-router-dom'
 
 const FormItem = Form.Item;
@@ -10,7 +10,9 @@ class VerifyEmail extends React.Component {
 
     state = {
         redirect: false,
-        failed: false
+        success: false,
+        noMatch: false,
+        exists: true
     }
 
     sendUserCode = async (email, usercode) => {
@@ -21,6 +23,12 @@ class VerifyEmail extends React.Component {
             })
         } catch (err) {
             console.log(err.response.data.message)
+            if (err.response.data.message == "Verification code does not match") {
+                this.setState({ noMatch: true, exists: true })
+            }
+            else if (err.response.data.message == "Email does not exist in our records") {
+                this.setState({ exists: false })
+            }
         }
     }
 
@@ -30,7 +38,7 @@ class VerifyEmail extends React.Component {
             if (!err) {
                 const response = await this.sendUserCode(values.email, values.usercode)
                 if (response != undefined) {
-                    this.setState({ redirect: true, failed: false })
+                    this.setState({ success: true, noMatch: false })
                 }
             }
             else {
@@ -48,9 +56,18 @@ class VerifyEmail extends React.Component {
         }
     }
 
+    handleClose = () => {
+        this.setState({ redirect: true })
+    }
+
     render() {
 
         const { getFieldDecorator } = this.props.form;
+        const { redirect, success, noMatch, exists } = this.state;
+
+        if (redirect && success) {
+            return <Redirect to="/dashboard" />
+        }
 
         const formItemLayout = {
             labelCol: {
@@ -94,7 +111,22 @@ class VerifyEmail extends React.Component {
                     </FormItem>
                     <Button type="primary" htmlType="submit" className="verifyemail-form-button">
                         Verify Email
-          </Button>
+                    </Button>
+                    {!exists ? (
+                        <Alert message="Email does not exist in our records." type="error" banner="true" />
+                    ) : noMatch ? (
+                        <Alert message="The verification code does not match." type="error" banner="true" />
+                    ) : success ? (
+                        <Alert
+                            message="Account Verified!"
+                            description="Your account has been successfully verified! Close the alert to go to your dashboard."
+                            type="success"
+                            showIcon
+                            banner
+                            closable
+                            afterClose={this.handleClose}
+                        />
+                    ) : (null)}
                 </Form>
             </Col>
         );
