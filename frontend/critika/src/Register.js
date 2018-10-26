@@ -11,7 +11,8 @@ class Register extends React.Component {
 
   state = {
     success: false,
-    redirect: false
+    redirect: false,
+    mongoError: false
   }
 
   sendRegister = async (userName, password, email, securityQuestion, securityQuestionAnswer) => {
@@ -25,6 +26,9 @@ class Register extends React.Component {
       })
     } catch (err) {
       console.log(err.response.data)
+      if (err.response.data.name == "MongoError") {
+          this.setState({ mongoError: true })
+        }
     }
   }
 
@@ -77,7 +81,7 @@ class Register extends React.Component {
 
   render() {
 
-    const { success, redirect } = this.state;
+    const { success, redirect, mongoError } = this.state;
 
     if (redirect) {
       return <Redirect to='/login' />
@@ -199,7 +203,7 @@ class Register extends React.Component {
             label="Answer to Security Question"
           >
             {getFieldDecorator('securityQuestionAnswer', {
-              rules: [{ required: true, message: 'Please answer the secutiry question.' }],
+              rules: [{ required: true, message: 'Please answer the security question.' }],
             })(
               <Input placeholder="Security Question Answer" type="text" />
             )}
@@ -221,7 +225,8 @@ class Register extends React.Component {
             banner
             closable
             afterClose={this.handleClose}
-          />
+          /> ) : mongoError ? (
+            <Alert message="Account with that username / email already exists" type="error" banner="true" />
           ) : (null)}
         </Form>
       </div>

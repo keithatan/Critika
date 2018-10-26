@@ -388,31 +388,47 @@ router.post("/become-admin", authenticate, (req, res) => {
  */
 router.post("/reset-password-email", (req, res) => {
 
-    if (!req.body || !req.body.email) {
+    if (!req.body || !req.body.email || !req.body.security_question || !req.body.security_question_answer) {
         res.status(400).send({ message: "Reset information is incomplete" });
         return;
     }
 
     // check and find user by email
     if (req.body.email) {
-        User.findByEmail(req.body.email).then((email) => {
-            var verificatonCode = Math.floor(Math.random() * (9999 - 1000 + 1)) + 1000;
+        User.findByEmail(req.body.email).then((usr) => {
+            var tempPassword = Math.floor(Math.random() * (999999 - 100000 + 1)) + 100000;
             var email_subject = "Critika Password Reset";
-            var email_body = "Dear " + email + ", \n\nOur records indicate that you have requested a password " +
-                "reset. Click the link below and enter the four digit code to begin the process.\n\n" +
-                verificatonCode + "\n\nSincerely, \n\nThe Critika Team";
+            var email_body = "Dear " + usr.email + ", \n\nOur records indicate that you have requested a password " +
+                "reset. Your new temporary password is:\n\n" +
+                tempPassword + "\n\nSincerely, \n\nThe Critika Team";
+            console.log(usr.security_question_answer + " ------ " + req.body.security_question_answer )
+            if (usr.security_question == req.body.security_question) {
+                if (usr.security_question_answer.toUpperCase() !== req.body.security_question_answer.toUpperCase()) {
+                    res.status(400).send({ message: "Security question answer does not match." });
+                    return;
+                }
+            }
+            else {
+                res.status(400).send({ message: "Security question does not match." });
+                return;
+            }
 
             // find user by email and set verification number
-            User.findOneAndUpdate({ email: email }, { $set: { verificationNum: verificatonCode } }).then(() => {
-                res.status(200).send({ message: 'Verification code set' });
+            User.findOneAndUpdate({ email: usr.email }, { $set: { password: tempPassword } }).then(() => {
+                // res.status(200).send({ message: 'Verification code set' });
+                console.log("passwd set")
             }).catch((err) => {
-                res.status(400).send({ message: "Verification code was not set" });
+                res.status(400).send({ message: "New password not set." });
                 res.send(err);
             });
             // send email
-            sendEmail(email, email_subject, email_body);
+            sendEmail(usr.email, email_subject, email_body);
+            
+            res.status(200).send({ message: 'Password has successfully been reset.' });
         }).catch((err) => {
-            res.status(400).send({ message: "Email does not exist in our records" });
+            res.status(400).send({ message: "Email does not exist in our records." });
+            console.log(err)
+            return;
         });
     }
 })

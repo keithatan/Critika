@@ -143,12 +143,18 @@ userSchema.statics.findByEmail = function(email) {
   var User = this;
 
   return User.findOne({email}).then((user) => {
+    // console.log(user)
     console.log(user.email)
     if (!user.email) {
       return Promise.reject();
     }
     else {
-      return Promise.resolve(user.email);
+      var usr = {
+        email: user.email,
+        security_question: user.security_question, 
+        security_question_answer: user.security_question_answer
+      }
+      return Promise.resolve(usr);
     }
   });
 };
