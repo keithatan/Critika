@@ -1,7 +1,7 @@
 import React from 'react'
 import './App.css'
 import axios from 'axios'
-import { Form, Input, Tooltip, Icon, Select, Checkbox, Button, Alert } from 'antd';
+import { Form, Input, Tooltip, Icon, Select, Button, Alert } from 'antd';
 import { Redirect } from 'react-router-dom'
 const FormItem = Form.Item;
 const Option = Select.Option;
@@ -47,7 +47,6 @@ class FileReport extends React.Component {
   }
 
  
-
   handleClose = () => {
     this.setState({ redirect: true });
   }
