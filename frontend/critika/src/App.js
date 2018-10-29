@@ -19,6 +19,7 @@ import EditProfile from './EditProfile';
 import CreateSubmission from './CreateSubmission';
 import EditSubmission from './EditSubmission';
 import VerifyEmail from './VerifyEmail'
+import FileReport from './FileReport';
 import './Login.css';
 import './App.css';
 import { Button, Layout, Menu, Breadcrumb, Icon, Form, Input, Col} from 'antd';
@@ -157,6 +158,10 @@ class App extends Component {
 
     <Route path='/verifyemail' render = { () => (
         <VerifyEmail/>)} 
+    />
+
+    <Route path='/FileReport' render = { () => (
+        <FileReport/>)} 
     />
        
     </Switch>
