@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import {Row, Col, Card} from 'antd'
+import {Row, Col, Card, Button} from 'antd'
 
 class Reports extends React.Component{
   render(){
@@ -34,6 +34,8 @@ class Reports extends React.Component{
      
     </Row>
     </div>
+  <div style={{paddingTop: '20px'}}><Button type="primary" > File a Report </Button></div>
+    
     </div>
   );
   }
