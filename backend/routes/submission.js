@@ -59,7 +59,7 @@ router.post("/add", authenticate, (req, res) => {
     newSubmission.save().then(() => {
         res.status(200).send(newSubmission);
     }).catch((err) => {
-        res.status(400).send(err);
+        res.status(400);
     })
 })
 
@@ -180,6 +180,35 @@ router.post("/report-comment", authenticate, (req,res) => {
             res.send(err);
         })
 })
+
+/*
+ * Add feecback to submission
+ */
+router.post('/add-feedback', authenticate, (req, res) => {
+    if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionID){
+        res.status(400).json({ message: "Report comment data is incomplete" });
+        return;
+    }
+
+    Submission.findOneAndUpdate({_id: req.body.submissionID}, {
+        $push: {
+            'feedback' : {
+                username: req.body.username,
+                feedbackMessage: req.body.feedbackMessage,
+                feedbackSubject: req.body.feedbackSubject,
+            }
+        }
+    }).then(() => {
+        res.status(200).send({ message: 'Feedback successfully added' })
+    }).catch((err) => {
+        res.status(400).send({ message: "Error giving feedback" });
+        res.send(err);
+    })
+})
+
+/*
+ * Get all feedback for a given submission
+ */
 
 /*
  * Get all reported comments for a submission. 
