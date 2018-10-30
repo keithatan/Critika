@@ -149,6 +149,38 @@ router.post("/remove", authenticate, (req, res) => {
         
 })
 
+/*
+ * Report a bad comment
+ */
+router.post("/report-comment", authenticate, (req,res) => {
+
+    if (!req.body.comment || !req.body.submissionID || !req.body.reportedMessage || !req.body.reportedReason) {
+        res.status(400).json({ message: "Report comment data is incomplete" });
+        return;
+    }
+
+    Submission.findOneAndUpdate({ _id: req.body.submissionID},
+        {
+            $push: {
+                'comments': {
+                    reportedMessage: req.body.reportedMessage,
+                    reportedReason: req.body.reportedReason
+                }
+            }, 
+
+            $set: {
+                'comments': {
+                    reported: true,
+                }
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Comment successfully reported' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error reporting comment" });
+            res.send(err);
+        })
+})
+
 /**
  * Get user's peronal submissions
  */

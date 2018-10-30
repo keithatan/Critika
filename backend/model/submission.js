@@ -12,7 +12,10 @@ let submissionsSchema = new Schema({
   community: {type: String},
   comments:[{
       user: String,
-      message: String
+      message: String,
+      reported: Boolean,
+      reportedMessage: String,
+      reportedReason: String,
   }],
   dateSubmitted: {type: Date, default: Date.now},
   //receivedCritiqueIDs: {type: [String], required: true}, 
