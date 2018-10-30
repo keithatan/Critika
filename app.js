@@ -9,6 +9,7 @@ require('dotenv').config();
 let user = require('./routes/user.js');
 let submission = require('./routes/submission.js');
 let community = require('./routes/community.js');
+let feedback = require('./routes/feedback.js')
 
 
 const app = express(cors());
@@ -32,6 +33,7 @@ app.use((req, res, next) => {
 app.use('/user', user);
 app.use('/submission', submission);
 app.use('/community', community);
+app.use('/feedback', feedback);
 
 app.get('/', (res, req) => {
 });
