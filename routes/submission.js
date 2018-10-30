@@ -192,8 +192,8 @@ router.post('/add-feedback', authenticate, (req, res) => {
 
     Submission.findOneAndUpdate({_id: req.body.submissionID}, {
         $push: {
-            'feedback' : {
-                username: req.body.username,
+            feedback : {
+                user: req.body.username,
                 feedbackMessage: req.body.feedbackMessage,
                 feedbackSubject: req.body.feedbackSubject,
             }
@@ -209,6 +209,13 @@ router.post('/add-feedback', authenticate, (req, res) => {
 /*
  * Get all feedback for a given submission
  */
+router.get('/all-feedback', authenticate, (req, res) => {
+    Submission.find({_id: req.headers.submissionid}).then((subs) => {
+        res.send(subs[0].feedback[0])
+    }).catch((err) => {
+        res.status(400).send(err)
+    })
+})
 
 /*
  * Get all reported comments for a submission. 
@@ -221,7 +228,9 @@ router.get('/all-reported', authenticate, (req, res) => {
 
     Submission.find({comments: {reported: true}}).then((subs) => {
         res.send(subs)
-     })
+     }).catch((err) => {
+        res.status(400).send(err)
+    })
 })
 
 /**
@@ -239,7 +248,9 @@ router.get("/mine", authenticate, (req, res) => {
 router.get("/all-community", authenticate, (req, res) => {
     Submission.find({ community: req.headers.community }).then((subs) => {
         res.send(subs);
-    });
+    }).catch((err) => {
+        res.status(400).send(err)
+    })
 });
 
 /**
