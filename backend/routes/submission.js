@@ -182,42 +182,6 @@ router.post("/report-comment", authenticate, (req,res) => {
 })
 
 /*
- * Add feecback to submission
- */
-router.post('/add-feedback', authenticate, (req, res) => {
-    if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionID){
-        res.status(400).json({ message: "Report comment data is incomplete" });
-        return;
-    }
-
-    Submission.findOneAndUpdate({_id: req.body.submissionID}, {
-        $push: {
-            feedback : {
-                user: req.body.username,
-                feedbackMessage: req.body.feedbackMessage,
-                feedbackSubject: req.body.feedbackSubject,
-            }
-        }
-    }).then(() => {
-        res.status(200).send({ message: 'Feedback successfully added' })
-    }).catch((err) => {
-        res.status(400).send({ message: "Error giving feedback" });
-        res.send(err);
-    })
-})
-
-/*
- * Get all feedback for a given submission
- */
-router.get('/all-feedback', authenticate, (req, res) => {
-    Submission.find({_id: req.headers.submissionid}).then((subs) => {
-        res.send(subs[0].feedback[0])
-    }).catch((err) => {
-        res.status(400).send(err)
-    })
-})
-
-/*
  * Get all reported comments for a submission. 
  * Admin only
  */

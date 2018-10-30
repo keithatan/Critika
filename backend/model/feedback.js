@@ -7,11 +7,11 @@ let feedbackSchema = new Schema({
     feedbackMessage: {type: String, required: true},
     feedbackSubject: {type: String, required: true},
     feedbackRating: {type: Number, default: 0, min: 0, max: 5},
-    /* Need to store all the submissions for this community, Array? of what? */
+    submissionID: {type: String},
   });
   
   
   /* Creating the user model from the schema and giving it to Mongoose */
-  let feedback = mongoose.model('Community', feedbackSchema);
+  let feedback = mongoose.model('Feedback', feedbackSchema);
 
   module.exports = feedback;

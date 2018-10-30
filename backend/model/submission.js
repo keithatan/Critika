@@ -1,6 +1,7 @@
 /* Any dependencies needed */
 const mongoose = require('mongoose');
 let Schema = mongoose.Schema;
+var Feedback = require('./feedback.js')
 
 /* Make the schema */
 let submissionsSchema = new Schema({
@@ -9,20 +10,13 @@ let submissionsSchema = new Schema({
   submissionText: {type: String},
   submissionSkillLevel: {type: String},
   username: {type: String, required: true}, 
-  community: {type: String},
+  community: {type: String, unique: true},
   comments:[{
       user: String,
       message: String,
       reported: Boolean,
       reportedMessage: String,
       reportedReason: String,
-  }],
-  feedback: [{
-      user: String,
-      feedbackMessage: {type: String, required: true},
-      feedbackSubject: {type: String, required: true},
-      feedbackRating: {type: Number, default: 0, min: 0, max: 5},
-
   }],
   dateSubmitted: {type: Date, default: Date.now},
   //receivedCritiqueIDs: {type: [String], required: true}, 
