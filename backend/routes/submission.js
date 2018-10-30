@@ -181,6 +181,20 @@ router.post("/report-comment", authenticate, (req,res) => {
         })
 })
 
+/*
+ * Get all reported comments for a submission. 
+ * Admin only
+ */
+router.get('/all-reported', authenticate, (req, res) => {
+    if(req.user.status != 'admin'){
+        res.status(401).send({ message: '401 ERROR: Access Denied' })
+    }
+
+    Submission.find({comments: {reported: true}}).then((subs) => {
+        res.send(subs)
+     })
+})
+
 /**
  * Get user's peronal submissions
  */
