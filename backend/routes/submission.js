@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
  */
 router.post("/add", authenticate, (req, res) => {
 
-    if (!req.body.category || !req.body.submissionName || !req.body.submissionText) {
+    if (!req.body.category || !req.body.submissionName || !req.body.submissionText || !req.body.community) {
         res.status(400).json({ message: "Submission data is incomplete" });
         return;
     }
