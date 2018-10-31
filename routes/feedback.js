@@ -25,6 +25,7 @@ router.get("/", (req, res) => {
 
 /*
  * Add new feedback
+ * Each user can only give one feedback
  */
 router.post('/add-feedback', (req, res) => {
     if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionID){
@@ -39,6 +40,13 @@ router.post('/add-feedback', (req, res) => {
       feedbackSubject: req.body.feedbackSubject,
       submissionID: req.body.submissionID,
     });
+
+    Feedback.find({username: req.body.username}).then((subs) => {
+        if(req.body.username == sub[0].username){
+            res.status(400).json({ message: "You have already given feedback to this submission" });
+            return;
+        }
+    })
 
     // Add to database 
     newFeedback.save().then(() => {
