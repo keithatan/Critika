@@ -2,14 +2,15 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
-var nodemailer = require('nodemailer');
+var mailer = require('../middleware/email')
+// var nodemailer = require('nodemailer');
 
 mongoose.connect(process.env.MONGODB_HOST, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
 
 mongoose.Promise = global.Promise;
 var db = mongoose.connection;
-var email_address = "critika.app@gmail.com";
+// var email_address = "critika.app@gmail.com";
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 /* Objects */
@@ -78,7 +79,8 @@ router.post("/register", (req, res) => {
         return newUser.generateAuthToken();
     }).then((token) => {
         res.header('x-auth', token).send(newUser);
-        sendEmail(req.body.email, newMemberEmailSubject, newMemberEmailBody);
+        // sendEmail(req.body.email, newMemberEmailSubject, newMemberEmailBody);
+        mailer(req.body.email, newMemberEmailSubject, newMemberEmailBody);
     }).catch((err) => {
         res.status(400).send(err)
         return;
@@ -422,7 +424,8 @@ router.post("/reset-password-email", (req, res) => {
                 res.send(err);
             });
             // send email
-            sendEmail(usr.email, email_subject, email_body);
+            // sendEmail(usr.email, email_subject, email_body);
+            mailer(usr.email, email_subject, email_body);
             
             res.status(200).send({ message: 'Password has successfully been reset.' });
         }).catch((err) => {
@@ -433,37 +436,37 @@ router.post("/reset-password-email", (req, res) => {
     }
 })
 
-/**
- * Sends an email from critika.app@gmail.com to the specified 'to' email, with a subject and body given by the 
- * function caller.
- * @param {string} to 
- * @param {string} subject 
- * @param {string} body 
- */
-function sendEmail(to, subject, body) {
-    var transporter = nodemailer.createTransport({
-        service: 'gmail',
-        auth: {
-            user: email_address,
-            pass: process.env.EMAIL_PASSWD
-        }
-    });
+// /**
+//  * Sends an email from critika.app@gmail.com to the specified 'to' email, with a subject and body given by the 
+//  * function caller.
+//  * @param {string} to 
+//  * @param {string} subject 
+//  * @param {string} body 
+//  */
+// function sendEmail(to, subject, body) {
+//     var transporter = nodemailer.createTransport({
+//         service: 'gmail',
+//         auth: {
+//             user: email_address,
+//             pass: process.env.EMAIL_PASSWD
+//         }
+//     });
 
-    var mailOptions = {
-        from: email_address,
-        to: to,
-        subject: subject,
-        text: body
-    };
+//     var mailOptions = {
+//         from: email_address,
+//         to: to,
+//         subject: subject,
+//         text: body
+//     };
 
-    console.log("Sending to: " + to)
-    transporter.sendMail(mailOptions, function (error, info) {
-        if (error) {
-            console.error(error);
-        } else {
-            console.log('Email sent: ' + info.response);
-        }
-    });
-}
+//     console.log("Sending to: " + to)
+//     transporter.sendMail(mailOptions, function (error, info) {
+//         if (error) {
+//             console.error(error);
+//         } else {
+//             console.log('Email sent: ' + info.response);
+//         }
+//     });
+// }
 
 module.exports = router;
