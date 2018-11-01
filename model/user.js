@@ -97,20 +97,31 @@ userSchema.pre('save', function (next){
   }
 });
 
+userSchema.pre('findOneAndUpdate', function() {
+  console.log("middleware")
+  console.log(this)
+  console.log(this.password)
+  bcrypt.genSalt(10, (err,salt) => {
+    bcrypt.hash(this.password, salt, (err, hash) => {
+      this.password = hash;
+    });
+  });
+});
+
 userSchema.statics.findByLogin = function(username, password) {
   var User = this;
 
   return User.findOne({username}).then((user) => {
-    if (!user){
+    if (!user) {
       return Promise.reject();
     }
     
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, user.password, (err, res) => {
-        if (res){
+        if (res) {
           resolve(user);
         }
-        else{
+        else {
           reject();
         }
       });
@@ -122,16 +133,16 @@ userSchema.statics.findByRecoveryName = function(username, password) {
   var User = this;
 
   return User.findOne({recoveryUsername: username}).then((user) => {
-    if (!user){
+    if (!user) {
       return Promise.reject();
     }
     
     return new Promise((resolve, reject) => {
       bcrypt.compare(password, user.password, (err, res) => {
-        if (res){
+        if (res) {
           resolve(user);
         }
-        else{
+        else {
           reject();
         }
       });
@@ -149,12 +160,12 @@ userSchema.statics.findByEmail = function(email) {
       return Promise.reject();
     }
     else {
-      var usr = {
-        email: user.email,
-        security_question: user.security_question, 
-        security_question_answer: user.security_question_answer
-      }
-      return Promise.resolve(usr);
+      // var usr = {
+      //   email: user.email,
+      //   security_question: user.security_question, 
+      //   security_question_answer: user.security_question_answer
+      // }
+      return Promise.resolve(user);
     }
   });
 };
@@ -175,7 +186,7 @@ userSchema.statics.findVerificationNumByEmail = function(email) {
 
 
 /* Function to prevent too much information from being returned on request when the response is the object */
-userSchema.methods.toJSON = function (){
+userSchema.methods.toJSON = function () {
   return ld.pick(this.toObject(), ['_id', 'username', 'email'])
 };
 
