@@ -10,11 +10,11 @@ export default () =>{
   </button>
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav">
-      <li class="nav-item active">
+      <li class="nav-item">
         <Link to="/register">Signup</Link>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="#">Features</a>
+        <Link to="/login">Login</Link>
       </li>
     </ul>
   </div>
