@@ -8,7 +8,7 @@ export function login(userData){
           }).then((res) =>{
             const userToken = res.headers.token
             localStorage.setItem('jwtToken', userToken)
-            setAuth(token)
+            setAuth(userToken)
           }).catch((error) => {
             console.log(error);
           });
