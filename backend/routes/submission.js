@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
  */
 router.post("/add", authenticate, (req, res) => {
 
-    if (!req.body.category || !req.body.submissionName || !req.body.submissionText || !req.body.community) {
+    if (!req.body.category || !req.body.submissionName || !req.body.submissionText) {
         res.status(400).json({ message: "Submission data is incomplete" });
         return;
     }
@@ -37,7 +37,7 @@ router.post("/add", authenticate, (req, res) => {
         submissionName: req.body.submissionName,
         submissionText: req.body.submissionText,
         username: req.user.username,
-        community: req.body.community,
+        /*community: req.body.community,*/
     });
 
     // Change submission num
@@ -204,17 +204,6 @@ router.get("/mine", authenticate, (req, res) => {
     Submission.find({ username: req.user.username }).then((subs) => {
         res.send(subs);
     });
-});
-
-/**
- * Get all submissions in a community
- */
-router.get("/all-community", authenticate, (req, res) => {
-    Submission.find({ community: req.headers.community }).then((subs) => {
-        res.send(subs);
-    }).catch((err) => {
-        res.status(400).send(err)
-    })
 });
 
 /**

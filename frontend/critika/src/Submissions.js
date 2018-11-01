@@ -1,12 +1,22 @@
 import React from 'react'
 import './App.css'
 import './Submissions.css'
+import axios from 'axios'
 import { Carousel, Menu, Dropdown, Icon, Button, Slider, notification, Row, Col} from 'antd'
 import { Link } from 'react-router-dom'
 import thumbnail from './default image.jpg'
 
 class Submissions extends React.Component{
-    
+   
+  removeSub = async (subName) => {
+    try {
+      return await axios.post('http://localhost:5000/submissions/', {
+        submissionName: subName
+      })
+    }catch(error){
+
+    }
+  } 
     
   render(){
     function onChange(a, b, c) {
@@ -53,6 +63,7 @@ class Submissions extends React.Component{
       }
 
       const close = () => {
+        this.removeSub
         console.log('Notification was closed. Either the close button was clicked or duration time elapsed.');
       };
       

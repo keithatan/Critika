@@ -1,13 +1,20 @@
 import React from 'react'
 import './App.css'
-import { Form, Select, Input, Button, Col } from 'antd';
+import { Form, Select, Input, Button, Col, Alert } from 'antd';
 import axios from 'axios'
-import { Link } from 'react-router-dom'
+import { Link, Redirect } from 'react-router-dom'
 
 const FormItem = Form.Item;
 const Option = Select.Option;
 
 class ResetPassword extends React.Component {
+  A
+
+  state = {
+    success: false,
+    failed: false, 
+    redirect: false
+  }
 
 
   sendNewPassword = async (email, securityQuestion, securityQuestionAnswer) => {
@@ -19,6 +26,7 @@ class ResetPassword extends React.Component {
       })
     } catch (err) {
       console.log(err.response.data)
+      this.setState({ failed: true, success: false })
     }
   }
 
@@ -29,7 +37,7 @@ class ResetPassword extends React.Component {
         const response = await this.sendNewPassword(values.email, values.securityQuestion, values.securityQuestionAnswer)
         console.log(response);
         if (response != undefined) {
-
+          this.setState({ success: true, failed: false })
         }
       }
       else {
@@ -38,7 +46,13 @@ class ResetPassword extends React.Component {
     });
   }
 
+  handleClose = (e) => {
+    this.setState({ redirect: true })
+  }
+
   render() {
+
+    const { failed, success, redirect } = this.state;
 
     const formItemLayout = {
       labelCol: {
@@ -51,6 +65,11 @@ class ResetPassword extends React.Component {
       },
     };
     const { getFieldDecorator } = this.props.form;
+
+    if (redirect) {
+      return <Redirect to='/login' />
+    }
+
     return (
       <Col span={32} offset={8}>
         <Form style={{ width: "300px", textAlign: "center" }} onSubmit={this.handleSubmit} className="resetpassword-form">
@@ -100,6 +119,19 @@ class ResetPassword extends React.Component {
             </p>
           </FormItem>
         </Form>
+        {failed ? (
+          <Alert message="The security question or answer does not match our records" type="error" banner="true" />
+        ) : success ? (
+          <Alert
+            message="Password Reset Success"
+            description="Your password has been successfully reset. Check your email to find your new password."
+            type="success"
+            showIcon
+            banner
+            closable
+            onClose={this.handleClose}
+          />
+        ) : (null)}
       </Col>
     );
   }

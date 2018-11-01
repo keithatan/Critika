@@ -25,11 +25,11 @@ class Login extends React.Component {
       })
     } catch (err) {
       console.log(err.response.data)
-      if (err.response.data.message == "This account has been banned due to violation of conduct") {
+      if (err.response.data.message === "This account has been banned due to violation of conduct") {
         this.setState({ banned: true })
       }
-      else if (err.response.data.message == "Account has not been verified, please verify your account") {
-        this.setState({ needToVerify: true })
+      else if (err.response.data.message === "Account has not been verified, please verify your account") {
+        this.setState({ needToVerify: true, failed: false })
       }
       else {
         this.setState({ failed: true })
