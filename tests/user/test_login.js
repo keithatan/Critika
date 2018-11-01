@@ -1,9 +1,9 @@
 var express = require('express');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../app');
+var server = require('../../app');
 var should = chai.should();
-var functions = require('./unitTestFunctions.js')
+var functions = require('../unitTestFunctions.js')
 
 /* USAGE mocha /tests/<file> */
 
