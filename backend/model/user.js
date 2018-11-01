@@ -97,16 +97,16 @@ userSchema.pre('save', function (next){
   }
 });
 
-userSchema.pre('findOneAndUpdate', function() {
-  console.log("middleware")
-  console.log(this)
-  console.log(this.password)
-  bcrypt.genSalt(10, (err,salt) => {
-    bcrypt.hash(this.password, salt, (err, hash) => {
-      this.password = hash;
-    });
-  });
-});
+// userSchema.pre('findOneAndUpdate', function() {
+//   console.log("middleware")
+//   console.log(this)
+//   console.log(this.password)
+//   bcrypt.genSalt(10, (err,salt) => {
+//     bcrypt.hash(this.password, salt, (err, hash) => {
+//       this.password = hash;
+//     });
+//   });
+// });
 
 userSchema.statics.findByLogin = function(username, password) {
   var User = this;
@@ -155,16 +155,11 @@ userSchema.statics.findByEmail = function(email) {
 
   return User.findOne({email}).then((user) => {
     // console.log(user)
-    console.log(user.email)
+    console.log("email is: " + user.email)
     if (!user.email) {
       return Promise.reject();
     }
     else {
-      // var usr = {
-      //   email: user.email,
-      //   security_question: user.security_question, 
-      //   security_question_answer: user.security_question_answer
-      // }
       return Promise.resolve(user);
     }
   });

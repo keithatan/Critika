@@ -2,7 +2,8 @@ var express = require('express');
 var router = express.Router();
 let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
-var mailer = require('../middleware/email')
+var mailer = require('../middleware/email');
+var encryptPassword = require('../middleware/encrypt');
 
 mongoose.connect(process.env.MONGODB_HOST, { useNewUrlParser: true });
 mongoose.set('useCreateIndex', true);
@@ -107,7 +108,7 @@ router.get("/test", (req, res) => {
  */
 router.post("/login", (req, res) => {
     // check for username and password
-    console.log("&&&&&& " + req.body.username + " " + req.body.password )
+    console.log("&&&&&& " + req.body.username + " " + req.body.password)
     if (req.body.username && req.body.password) {
 
         User.findByLogin(req.body.username, req.body.password).then((user) => {
@@ -414,16 +415,21 @@ router.post("/reset-password-email", (req, res) => {
             }
 
             // find user by email and set verification number
-            User.findOneAndUpdate({ email: usr.email }, { $set: { password: tempPassword } }).then(() => {
-                // res.status(200).send({ message: 'Verification code set' });
-                console.log("passwd set")
-            }).catch((err) => {
-                res.status(400).send({ message: "New password not set." });
-                res.send(err);
+            encryptPassword(tempPassword).then(encryptedPassword => {
+                console.log("encrypt: " + encryptedPassword)
+                User.findOneAndUpdate({ email: usr.email }, { $set: { password: encryptedPassword } }).then(() => {
+                    console.log("passwd set")
+                }).catch((err) => {
+                    res.status(400).send({ message: "New password not set." });
+                    res.send(err);
+                });
+            }).catch(err => {
+                console.log("err: " + err)
             });
+
             // send email
             mailer(usr.email, email_subject, email_body);
-            
+
             res.status(200).send({ message: 'Password has successfully been reset.' });
         }).catch((err) => {
             res.status(400).send({ message: "Email does not exist in our records." });
