@@ -207,17 +207,6 @@ router.get("/mine", authenticate, (req, res) => {
 });
 
 /**
- * Get all submissions in a community
- */
-router.get("/all-community", authenticate, (req, res) => {
-    Submission.find({ community: req.headers.community }).then((subs) => {
-        res.send(subs);
-    }).catch((err) => {
-        res.status(400).send(err)
-    })
-});
-
-/**
  * Route to get available submissions 
  */
 router.get("/available", authenticate, (req, res) => {
