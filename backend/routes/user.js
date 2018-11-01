@@ -77,7 +77,7 @@ router.post("/register", (req, res) => {
     newUser.save().then(() => {
         return newUser.generateAuthToken();
     }).then((token) => {
-        res.header('x-auth', token).send(newUser);
+        res.header('x-auth', token).header('verificationNum', verificatonCode).send(newUser);
         mailer(req.body.email, newMemberEmailSubject, newMemberEmailBody);
     }).catch((err) => {
         res.status(400).send(err)
@@ -145,7 +145,7 @@ router.post("/verify-email", (req, res) => {
         return;
     }
 
-    console.log(req.body.email)
+    //console.log(req.body.email)
     User.findVerificationNumByEmail(req.body.email).then((verificationNum) => {
         // Check if user has entered in the correct verification number
         if (verificationNum != req.body.verificationNum) {

@@ -3,10 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../app');
 var should = chai.should();
-require('dotenv').config();
-
-/* USAGE mocha /tests/<file> */
-
 
 chai.use(chaiHttp);
 
@@ -17,6 +13,37 @@ var Community = require('../model/community')
 var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
+var verificationNum;
+
+/*
+ * Register function 
+ */
+function registerFunction(){
+    chai.request(server).post('/user/register')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send({username: uname, password: pword, email: mail, securityquestion: 'ok', securityquestionanswer: 'ok'})
+        .end(function(err,res){
+            verificationNum = header['verificationnum']
+            res.should.have.status(200);
+    })
+}
+
+/*
+ * verify email function 
+ */
+function verifyEmailFunction(){
+
+    User.findOne({username: uname}).then((user) => {
+        chai.request(server).post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send({username: uname, email: mail, verificationNum: user['verificationNum'],})
+            .end(function(err, res){
+              res.should.have.status(200);
+            })
+    })
+
+    
+}
 
 /*
  * Login function 
@@ -26,18 +53,6 @@ function loginFunction(){
         .set('content-type', 'application/x-www-form-urlencoded')
         .send({username: uname, password: pword})
         .end(function(err, res){
-            res.should.have.status(200);
-    })
-}
-
-/*
- * Register function 
- */
-function registerFunction(){
-    chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: uname, password: pword, email: mail, securityquestion: 'ok', securityAnswer: 'ok'})
-        .end(function(err,res){
             res.should.have.status(200);
     })
 }
@@ -66,13 +81,6 @@ function editInfoFunction(){
 /*
  * verify email function 
  */
-function verifyEmailFunction(){
-
-}
-
-/*
- * verify email function 
- */
 function getAllUsersFunction(){
 
 }
@@ -83,7 +91,7 @@ module.exports = {
     submissionMine: getSubmissionsFunction,
     userMine: userMineFunction,
     editInfo: editInfoFunction,
-    veriyEmail: verifyEmailFunction,
+    verifyEmail: verifyEmailFunction,
     getAllUsers: getAllUsersFunction,
 }
 
