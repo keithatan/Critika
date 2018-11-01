@@ -11,11 +11,16 @@ import reducers from './reducers';
 import Home from './components/Home/Home';
 import Test from './components/Test/test';
 import SignupPage from './components/SignupPage/SignupPage';
+import LoginPage from './components/LoginPage/LoginPage';
+import setAuth from './util/setAuth'
+
 
 const store = createStore(
     (state ={}) => state,
     applyMiddleware(thunk)
 );
+
+setAuth(localStorage.jwtToken)
 
 ReactDOM.render(
     <Provider store={store}>
@@ -23,7 +28,7 @@ ReactDOM.render(
             <div>
                 <Route path="/" component={ Home }/>
                 <Route path="/register" component={ SignupPage }/>
-
+                <Route path="/login" component={LoginPage}/>
             </div>
         </BrowserRouter>
     </Provider>
