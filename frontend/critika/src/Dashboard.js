@@ -125,7 +125,7 @@ class Dashboard extends React.Component {
 
                 <FormItem>
 
-                  <p style={{ height: '20px', marginTop: '20px' }}>Feedback</p>
+                  <p style={{ height: '20px' }}>Feedback</p>
                   <div>
 
                     <TextArea rows={4} placeholder="Please enter your feedback"></TextArea>
