@@ -1,6 +1,6 @@
 var nodemailer = require('nodemailer');
 
-var email_address = "critika.app@gmail.com";
+var email_address = process.env.EMAIL;
 
 /**
  * Sends an email from critika.app@gmail.com to the specified 'to' email, with a subject and body given by the 
