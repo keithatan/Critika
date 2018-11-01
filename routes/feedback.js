@@ -74,7 +74,9 @@ router.post('/rate-feedback', authenticate, (req, res) => {
     Feedback.findOneAndUpdate({submissionID:  req.body.submissionID}, 
         {
             $set: 
-            {feedbackRating: req.body.feedbackRating}
+            {
+                feedbackRating: req.body.feedbackRating
+            }
         }).then(() => {
             res.status(200).send({message: "Feedback has been rated!"})
         }).catch((err) => {
