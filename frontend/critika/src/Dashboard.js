@@ -111,7 +111,7 @@ class Dashboard extends React.Component {
 
               <Button style={{ margin: '5px' }} justify="center" onClick={this.showModal}> Critique </Button>
               <Modal 
-                title="Ciritque a Submission"
+                title="Critique a Submission"
                 visible={this.state.visible}
                 onOk={this.handleOk}
                 onCancel={this.handleCancel}
