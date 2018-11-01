@@ -42,7 +42,7 @@ router.post('/add-feedback', (req, res) => {
     });
 
     Feedback.find({username: req.body.username}).then((subs) => {
-        if(req.body.username == sub[0].username){
+        if(req.body.username == subs[0].username){
             res.status(400).json({ message: "You have already given feedback to this submission" });
             return;
         }
