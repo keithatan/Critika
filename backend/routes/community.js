@@ -56,4 +56,16 @@ router.post("/create-community", authenticate, (req, res) => {
     })
 });
 
+/**
+ * Get all submissions in a community
+ */
+router.get("/all-community", authenticate, (req, res) => {
+    Submission.find({ community: req.headers.community }).then((subs) => {
+        res.send(subs);
+    }).catch((err) => {
+        res.status(400).send(err)
+    })
+});
+
+
 module.exports = router;
