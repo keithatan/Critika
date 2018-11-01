@@ -1,10 +1,10 @@
 var express = require('express');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../app');
+var server = require('../../app');
 var should = chai.should();
+var functions = require('../unitTestFunctions.js')
 
-/* USAGE mocha /tests/<file> */
 
 var testAccountToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmI3MThhNDc4N2RiMjY3MWQ2YmJkM2YiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTM4NzI2MDUyfQ.uEq6an0foYBiskXd4d3Ud6wnm94up07feS-UJxjxSSU'
 

@@ -1,11 +1,9 @@
 var express = require('express');
 var chai = require('chai');
 var chaiHttp = require('chai-http');
-var server = require('../app');
+var server = require('../../app');
 var should = chai.should();
-
-/* USAGE mocha /tests/<file> */
-
+var functions = require('../unitTestFunctions.js')
 
 chai.use(chaiHttp);
 
@@ -41,12 +39,7 @@ describe('Test verify email', function(){
     })
 
     it('should return 200 if the email is registerd', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestKenKen213', email: 'connortodd21spam@gmail.com', verificationNum: '9979',})
-        .end(function(err, res){
-            res.should.have.status(200);
-        })
+        functions.verifyEmail()
         done();
     })
 
