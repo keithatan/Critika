@@ -4,6 +4,7 @@ let Schema = mongoose.Schema;
 /* Make the schema */
 let feedbackSchema = new Schema({
     username: {type: String, required: true},
+    anonymous: {type: Boolean, default: false},
     feedbackMessage: {type: String, required: true},
     feedbackSubject: {type: String, required: true},
     feedbackRating: {type: Number, default: 0, min: 0, max: 5},
