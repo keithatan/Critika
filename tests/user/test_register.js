@@ -6,6 +6,7 @@ var should = chai.should();
 var functions = require('../unitTestFunctions.js')
 
 chai.use(chaiHttp);
+var User = require('../../model/user');
 
 describe('Test register route', function(){
 
@@ -13,9 +14,7 @@ describe('Test register route', function(){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "User data is incomplete")
+            res.should.have.status(400)
         })
         done();
     })
@@ -23,11 +22,9 @@ describe('Test register route', function(){
     it('test registering without password', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
+        .send({username: 'kcsodetz', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "User data is incomplete")
+            res.should.have.status(400)
         })
         done();
     })
@@ -36,11 +33,9 @@ describe('Test register route', function(){
     it('test registering without username', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
+        .send({password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "User data is incomplete")
+            res.should.have.status(400)
         })
         done();
     })
@@ -48,11 +43,9 @@ describe('Test register route', function(){
     it('test registering without email', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', password: 'password',  securityquestion: 'ok'})
+        .send({username: 'kcsodetz', password: 'password',  securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "User data is incomplete")
+            res.should.have.status(400)
         })
         done();
     })
@@ -60,11 +53,9 @@ describe('Test register route', function(){
     it('test registering without security question', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', password: 'password', email: 'kcsodetz@gmail.com'})
+        .send({username: 'kcsodetz', password: 'password', email: 'kcsodetz@gmail.com', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "User data is incomplete")
+            res.should.have.status(400)
         })
         done();
     })
@@ -72,13 +63,9 @@ describe('Test register route', function(){
     it('test registering with username that is too short', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'one', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
+        .send({username: 'one', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('errors');
-            res.body['errors'].should.have.property('username');
-            res.body['errors']['username'].should.have.property('name');
-            res.body['errors']['username']['name'].should.equal('ValidatorError');
+            res.should.have.status(400)
         })
         done();
     })
@@ -86,26 +73,9 @@ describe('Test register route', function(){
     it('test registering with password that is too short', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'username', password: 'two', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
+        .send({username: 'username', password: 'two', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('errors');
-            res.body['errors'].should.have.property('password');
-            res.body['errors']['password'].should.have.property('name');
-            res.body['errors']['password']['name'].should.equal('ValidatorError');
-        })
-        done();
-    })
-
-    it('test registering with duplicate username', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok'})
-        .end(function(err, res){
-            res.should.be.a('object');
-            res.should.have.property('diver');
-            res['code'].should.equal(11000);
-
+            res.should.have.status(400)
         })
         done();
     })
@@ -113,24 +83,15 @@ describe('Test register route', function(){
     it('test registering with invalid email', function(done){
         chai.request(server).post('/user/register')
         .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'username', password: 'password', email: 'kcsodetz', securityquestion: 'ok'})
+        .send({username: 'username', password: 'password', email: 'INVALID', securityquestion: 'ok', securityquestionanswer: 'ok'})
         .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('errors');
-            res.body['errors'].should.have.property('email');
-            res.body['errors']['email'].should.have.property('name');
-            res.body['errors']['email']['name'].should.equal('ValidatorError');
+            res.should.have.status(400)
         })
         done();
     })
 
     it('test registering with correct information', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername' + Math.random(), password: 'password', email: 'connortodd21spam@gmail.com', securityquestion: 'ok'})
-        .end(function(err,res){
-            res.should.have.status(200);
-        })
+        functions.register()
         done();
     })
 
