@@ -8,7 +8,6 @@ const FormItem = Form.Item;
 const Option = Select.Option;
 
 class ResetPassword extends React.Component {
-  A
 
   state = {
     success: false,
