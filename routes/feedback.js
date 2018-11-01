@@ -42,7 +42,7 @@ router.post('/add-feedback', (req, res) => {
     });
 
     Feedback.find({username: req.body.username}).then((subs) => {
-        if(req.body.username == sub[0].username){
+        if(req.body.username == subs[0].username){
             res.status(400).json({ message: "You have already given feedback to this submission" });
             return;
         }
@@ -74,7 +74,9 @@ router.post('/rate-feedback', authenticate, (req, res) => {
     Feedback.findOneAndUpdate({submissionID:  req.body.submissionID}, 
         {
             $set: 
-            {feedbackRating: req.body.feedbackRating}
+            {
+                feedbackRating: req.body.feedbackRating
+            }
         }).then(() => {
             res.status(200).send({message: "Feedback has been rated!"})
         }).catch((err) => {
