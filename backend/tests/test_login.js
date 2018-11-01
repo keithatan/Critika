@@ -3,6 +3,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../app');
 var should = chai.should();
+var functions = require('./unitTestFunctions.js')
 
 /* USAGE mocha /tests/<file> */
 
@@ -70,14 +71,8 @@ describe('Test login', function(){
         done();
     })
 
-    it('login with correct username and password', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', password: 'password'})
-        .end(function(err, res){
-            res.should.have.status(200);
-        })
-        done();
+    it('login with correct username and password', function(){
+        functions.login();
     })
 })
 

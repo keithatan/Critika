@@ -3,9 +3,7 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../app');
 var should = chai.should();
-
-/* USAGE mocha /tests/<file> */
-
+var functions = require('./unitTestFunctions.js')
 
 chai.use(chaiHttp);
 

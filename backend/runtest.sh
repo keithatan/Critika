@@ -8,3 +8,5 @@ mocha tests/test_user_account.js --exit
 mocha tests/test_verify_email.js --exit
 mocha tests/test_getAllUsers --exit
 mocha tests/test_editInfo --exit
+
+mocha tests/end_test --exti
