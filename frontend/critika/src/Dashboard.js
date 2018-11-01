@@ -1,6 +1,6 @@
 import React from 'react'
 import './App.css'
-import { Button, Icon, Carousel, Modal, Form, Menu, Input, List, message, Spin, Avatar } from 'antd'
+import { Button, Icon, Carousel, Modal, Form, Menu, Input, List, message, Spin, Avatar, Card } from 'antd'
 import { Link } from 'react-router-dom'
 import thumbnail from './default image.jpg'
 import TextArea from 'antd/lib/input/TextArea';
@@ -9,6 +9,7 @@ import InfiniteScroll from 'react-infinite-scroller';
 import { userInfo } from 'os';
 
 const FormItem = Form.Item;
+const { Meta } = Card;
 
 const fakeDataUrl = 'https://randomuser.me/api/?results=5&inc=name,gender,email,nat&noinfo';
 
@@ -108,9 +109,8 @@ class Dashboard extends React.Component {
               </Button>
 
 
-
               <Button style={{ margin: '5px' }} justify="center" onClick={this.showModal}> Critique </Button>
-              <Modal 
+              <Modal
                 title="Critique a Submission"
                 visible={this.state.visible}
                 onOk={this.handleOk}
@@ -122,10 +122,20 @@ class Dashboard extends React.Component {
                   </Button>
                 ]}
               >
-
+                <h2 style={{textAlign:'center'}}> Submission Title </h2>
+                <Card
+                  style={{ width: 'max', position:'center' }}
+                  cover={<img alt="example" src="https://gw.alipayobjects.com/zos/rmsportal/JiqGstEfoWAOHiTxclqi.png" />}
+                >
+                  <Meta
+                    avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                    title="username"
+                    description="This is the description"
+                  />
+                </Card>
                 <FormItem>
 
-                  <p style={{ height: '20px' }}>Feedback</p>
+                  <p style={{ height: '20px', marginTop:'20px' }}>Feedback</p>
                   <div>
 
                     <TextArea rows={4} placeholder="Please enter your feedback"></TextArea>
@@ -160,13 +170,13 @@ class Dashboard extends React.Component {
                             </div>
                           )}
 
-                            <List.Item>
-                              <List.Item.Meta
-                                avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
-                                title={<a href="https://ant.design">User</a>}
-                                description={ <TextArea rows={4} placeholder="Please enter your comment"></TextArea>}
-                              />
-                            </List.Item>
+                          <List.Item>
+                            <List.Item.Meta
+                              avatar={<Avatar src="https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png" />}
+                              title={<a href="https://ant.design">User</a>}
+                              description={<TextArea rows={4} placeholder="Please enter your comment"></TextArea>}
+                            />
+                          </List.Item>
                         </List>
 
                       </InfiniteScroll>
