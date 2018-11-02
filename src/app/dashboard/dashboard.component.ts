@@ -42,7 +42,9 @@ export class DashboardComponent implements OnInit {
 
 
   ngOnInit(){
-    
+    this.authStatusSub = this.authService.getAuthStatus().subscribe(isAuthenticated =>{
+      this.userIsAuth = isAuthenticated;
+    })
   }
 
 
