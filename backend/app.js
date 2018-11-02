@@ -42,7 +42,7 @@ app.get('/', (res, req) => {
 
 
 app.listen(process.env.PORT, () => {
-    console.log('The application is running on localhost:' + process.env.PORT)
+    console.log('The application is running on localhost:' + process.env.PORT + process.env.MONGODB_HOST)
 });
 
 module.exports = app;
