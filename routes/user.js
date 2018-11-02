@@ -77,7 +77,7 @@ router.post("/register", (req, res) => {
     newUser.save().then(() => {
         return newUser.generateAuthToken();
     }).then((token) => {
-        res.header('x-auth', token).header('verificationNum', verificatonCode).send(newUser);
+        res.header('token', token).header('verificationNum', verificatonCode).send(newUser);
         mailer(req.body.email, newMemberEmailSubject, newMemberEmailBody);
     }).catch((err) => {
         res.status(400).send(err)
@@ -122,7 +122,7 @@ router.post("/login", (req, res) => {
                 return;
             }
             return user.generateAuthToken().then((token) => {
-                res.header('x-auth', token).send(user);
+                res.header('token', token).send(user);
             });
         }).catch((err) => {
             console.log(err)
