@@ -1,4 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Subscription } from 'rxjs';
+
+
+
 
 @Component({
   selector: 'app-dashboard',
@@ -6,23 +10,26 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+  
+  renderComponent: String = "";
 
-  renderComponent: String;
 
-  constructor() { 
-    this.renderComponent = "";
-  }
+  constructor(){}
+
 
   renderHome(){
     this.renderComponent = "home";
   }
+  ngOnDestroy() {
+}
 
   renderProfile(){
     this.renderComponent = "profile";
-  }
+
 
   renderMySubmissions(){
     this.renderComponent = "my-submissions";
+
   }
 
   ngOnInit() {
