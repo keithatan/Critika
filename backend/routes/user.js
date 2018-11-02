@@ -83,7 +83,6 @@ router.post("/register", (req, res) => {
         res.status(400).send(err)
         return;
     })
-
 });
 
 /* 

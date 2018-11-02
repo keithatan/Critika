@@ -4,18 +4,9 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
-
-chai.use(chaiHttp);
-var User = require('../../model/user');
-
-var express = require('express');
-var chai = require('chai');
-var chaiHttp = require('chai-http');
-var server = require('../../app');
-var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var request = require('request');
 var expect = require('Chai').expect;
+var User = require('../../model/user');
 
 chai.use(chaiHttp);
 
@@ -25,6 +16,11 @@ var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
 describe('Register', () => {
+
+    before(function(done){
+        User.findOneAndRemove({username: uname})
+        done();
+    })
 
     describe('Register without any information', () => {
         it('Should return 400', (done) => {
@@ -194,4 +190,6 @@ describe('Register', () => {
             });
         });
     });
+
+
 });

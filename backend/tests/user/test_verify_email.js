@@ -7,40 +7,104 @@ var functions = require('../unitTestFunctions.js')
 
 chai.use(chaiHttp);
 
-describe('Test verify email', function(){
-    it('should return 400 if there is no verification num', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', email: 'kcsodetz@gmail.com',})
-        .end(function(err, res){
-            res.should.have.status(400);
+describe('Verify Email', () => {
+
+    var headers = {
+        verificationNum: 0,
+        dummy: 'dummy',
+    }
+
+    before(function (){
+        
+    })
+
+    describe('Verify email without any info', function(done) {
+        it('Should return 400', (done) => {
+            chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send()
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+            });
         })
-        done();
     })
 
-    it('should return 400 if there is no email', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', verificationNum: '9979',})
-        .end(function(err, res){
-            res.should.have.status(400);
-        })
-        done();
+    describe('Verify email without verification num', function(done) {
+        var info = {
+            username: uname,
+            email: mail,
+        }
+        chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+        });
     })
 
-    it('should return 400 if there is no username', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({email: 'connortodd21spam@gmail.com', verificationNum: '9979',})
-        .end(function(err, res){
-            res.should.have.status(400);
-        })
-        done();
+    describe('Verify email without email', function(done) {
+        var info = {
+            username: uname,
+            verificationnum: 'WAIT',
+        }
+        chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+        });
     })
 
-    it('should return 200 if the email is registerd', function(done){
-        functions.verifyEmail()
-        done();
+    describe('Verify email without username', function(done) {
+        var info = {
+            email: mail,
+            verificationnum: 'WAIT',
+        }
+        chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+        });
     })
 
+    describe('Verify email with invalid verification number', function(done) {
+        var info = {
+            username: uname,
+            email: mail,
+            verificationnum: 'invalid',
+        }
+        chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+        });
+    })
+
+    describe('Correct verify', function(done) {
+        var info = {
+            username: uname,
+            email: mail,
+            verificationnum: 'WAIT',
+        }
+        chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                res.should.have.status(200);
+            done();
+        });
+    })
 })
