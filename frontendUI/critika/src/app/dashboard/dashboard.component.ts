@@ -7,9 +7,20 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DashboardComponent implements OnInit {
 
-  constructor() { }
+  renderComponent: String;
+
+  constructor() { 
+    this.renderComponent = "";
+  }
+
+  renderHome(){
+    this.renderComponent = "home";
+
+  }
 
   ngOnInit() {
   }
+
+
 
 }
