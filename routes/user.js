@@ -294,7 +294,7 @@ router.post("/remove-coin", authenticate, (req, res) => {
 /**
  * Get All Users
  */
-router.get("/allUsers", authenticate, (req, res) => {
+router.get("/all-users", authenticate, (req, res) => {
 
     if (req.user.status == 'admin') {
         User.find({}).then((users) => {
@@ -322,7 +322,7 @@ router.post("/ban-user", authenticate, (req, res) => {
 
         var randomName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-        User.findByLogin(req.body.usernameToBeBanned, req.body.password).then((user) => {
+        User.findByLogin(req.body.username, req.body.password).then((user) => {
             User.findOneAndUpdate({ username: req.body.usernameToBeBanned }, { $set: { recoveryUsername: req.body.usernameToBeBanned, username: randomName, standing: "banned" } })
                 .then(() => {
                     res.status(200).send({ message: "User is now banned" })
@@ -330,7 +330,7 @@ router.post("/ban-user", authenticate, (req, res) => {
                     /* I think we should just delete the user, and instead store the email in an array of banned emails */
                 })
         }).catch((err) => {
-            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
+            res.status(400).send({ message: "Error Banning, Username or Password is incorrect" });
         });
     }
 })
