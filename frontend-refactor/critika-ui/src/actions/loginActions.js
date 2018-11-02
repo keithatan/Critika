@@ -6,7 +6,9 @@ export function login(userData){
             username: userData.userlogin,
             password: userData.password
           }).then((res) =>{
+            console.log(res.headers)
             const userToken = res.headers.token
+            console.log(userToken)
             localStorage.setItem('jwtToken', userToken)
             setAuth(userToken)
           }).catch((error) => {
