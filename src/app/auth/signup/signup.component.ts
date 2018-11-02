@@ -11,9 +11,15 @@ export class SignupComponent{
 
     }
 
+    incomplete_form:string;
+
+    getIncompleteForm() {
+        return this.incomplete_form;
+    }
+
     onSignup(form: NgForm){
         console.log(form.value)
-        this.authService.registerUser(form.value.email, form.value.username, form.value.password, form.value.securityanswer, form.value.securityquestion)
+        this.incomplete_form = this.authService.registerUser(form.value.email, form.value.username, form.value.password, form.value.securityanswer, form.value.securityquestion)
     }
     
 }
