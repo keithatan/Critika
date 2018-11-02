@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { renderComponent } from '@angular/core/src/render3';
+import {SubmissionService} from '../my-submissions/my-submissions.service'
+import {Submission} from '../my-submissions/my-submissions.model'
 
 @Component({
   selector: 'app-home',
@@ -7,8 +8,10 @@ import { renderComponent } from '@angular/core/src/render3';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  possibleSubs:Submission[];
 
-  constructor() {
+
+  constructor(public subService:SubmissionService) {
     this.renderComponent = "";
   }
   renderComponent: String;
@@ -20,6 +23,9 @@ export class HomeComponent implements OnInit {
   Link: "Submission";
 
   ngOnInit() {
+    this.possibleSubs = this.subService.getAvailable();
   }
 
 }
+
+
