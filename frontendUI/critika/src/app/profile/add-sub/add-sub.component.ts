@@ -13,8 +13,8 @@ export class AddSubComponent implements OnInit {
   feedback: String
   SpendCoin: boolean
 
-  setSubName(name) {
-    
+  sendSubmission() {
+    console.log('yeeeet')
   }
 
   ngOnInit() {

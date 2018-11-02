@@ -9,6 +9,8 @@ export class HomeComponent implements OnInit {
 
   constructor() { }
 
+  Link: "Submission";
+
   ngOnInit() {
   }
 
