@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { renderComponent } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-profile',
@@ -7,7 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { }
+  constructor() { 
+    this.renderComponent = "";
+  }
+
+  renderComponent: String;
+
+  renderAddSub() {
+    this.renderComponent = "AddSub"
+  }
 
   ngOnInit() {
   }

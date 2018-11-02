@@ -1,3 +1,6 @@
 <p>
   profile works!
 </p>
+
+<button type="button" (click) = "renderAddSub()" class="btn btn-secondary">Add Submission</button>
+<app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>

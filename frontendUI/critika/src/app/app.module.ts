@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { FormsModule } from '@angular/forms'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router';
 import { AppRoutes } from './app.routing';
@@ -10,11 +11,13 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
+import {AddSubComponent} from './add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AddSubComponent,
     DashboardComponent,
     HomeComponent,
     MyQueueComponent,
@@ -22,6 +25,7 @@ import { ProfileComponent } from './profile/profile.component';
   ],
   imports: [
     BrowserModule,
+    FormsModule,
     RouterModule.forRoot(AppRoutes),
     MDBBootstrapModule.forRoot()
     //AppRoutingModule
