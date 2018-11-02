@@ -18,8 +18,8 @@ var mail = process.env.UNIT_TEST_EMAIL
 describe('Register', () => {
 
     before(function(done){
-        User.remove({username: uname}, function(err){
-            console.log(err)
+        User.deleteOne({username: uname}, function(err){
+            //console.log(err)
         })
         done();
     })
@@ -187,11 +187,10 @@ describe('Register', () => {
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send(info)
                 .end((err, res) => {
+                   // console.log(res.body)
                     res.should.have.status(200);
                 done();
             });
         });
     });
-
-
 });
