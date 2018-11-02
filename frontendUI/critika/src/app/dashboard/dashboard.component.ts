@@ -36,6 +36,10 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  renderCategories(){
+    this.renderComponent = "categories";
+  }
+
   renderAdmin() {
     this.renderComponent = "Admin";
   }

@@ -88,7 +88,7 @@ router.post('/rate-feedback', authenticate, (req, res) => {
 /*
  * Get all feedback for a given submission
  */
-router.get('/all', authenticate, (req, res) => {
+router.get('/all-submission', authenticate, (req, res) => {
     Feedback.find({submissionID: req.headers.submissionid}).then((subs) => {
         res.send(subs)
     }).catch((err) => {
@@ -96,6 +96,15 @@ router.get('/all', authenticate, (req, res) => {
     })
 })
 
-
+/*
+ * Get all feedback for a given submission
+ */
+router.get('/all-user', authenticate, (req, res) => {
+    Feedback.find({username: req.headers.username}).then((subs) => {
+        res.send(subs)
+    }).catch((err) => {
+        res.status(400).send(err)
+    })
+})
 
 module.exports = router;
