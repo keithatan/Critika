@@ -12,12 +12,21 @@ import { Observable } from 'rxjs';
 export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
 
+  renderComponent: string;
+  Text: string
+
 
   constructor(public subService:SubmissionService) { 
   }
 
   getSubmissionsPls(){
     this.mySubmissions = this.subService.getSubmissions();
+  }
+
+  renderEditSub() {
+    this.renderComponent = 'EditSub';
+    //this.Text = text
+
   }
 
   ngOnInit() {
