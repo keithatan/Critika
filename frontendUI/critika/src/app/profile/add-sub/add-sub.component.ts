@@ -14,7 +14,7 @@ export class AddSubComponent implements OnInit {
   SpendCoin: boolean
 
   sendSubmission() {
-    console.log('yeeeet')
+    
   }
 
   ngOnInit() {
