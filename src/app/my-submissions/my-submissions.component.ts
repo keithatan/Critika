@@ -14,7 +14,6 @@ export class MySubmissionsComponent implements OnInit {
 
 
   constructor(public subService:SubmissionService) { 
-    this.getSubmissionsPls();
   }
 
   getSubmissionsPls(){
@@ -22,8 +21,6 @@ export class MySubmissionsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.getSubmissionsPls();
-    console.log("init called")
   }
 
 }
