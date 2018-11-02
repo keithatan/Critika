@@ -12,21 +12,46 @@
         <div class="col-xs-8 col-sm-10 item item-00">
           <h6>Sample&nbsp;</h6>
           <p><button type="button" (click)="renderCritiqueForm()" class="btn btn-primary">Critique Form</button>
-
             <button type="button" class="btn btn-secondary">Test</button>
-
             <button type="button" class="btn btn-danger">Test</button></p>
-
+          <div class="p-2 profile">
+           <mdb-card>
+              <!--Card content-->
+              <mdb-card-body>
+                <!--Title-->
+                <mdb-card-title>
+                  <h2>DashBoard</h2>
+                </mdb-card-title>
+                <table class="table table-striped table-responsive-md btn-table">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Queue</th>
+                      <th></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <th scope="row">1</th>
+                      <td>
+                        {{Link}}
+                      </td>
+                      <td>
+                        <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0">Button</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </mdb-card-body>
+            </mdb-card>
+          </div>
         </div>
-
-      </div>
+        </div>
     </mdb-card-body>
   </mdb-card>
 
   <!-- Render the other component stuff -->
   <div class="d-flex flex-column justify-content-center animated fadeInUp">
-
     <app-critique-form *ngIf="renderComponent == 'critique-form'"></app-critique-form>
   </div>
-
 </div>

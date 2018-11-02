@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
     this.renderComponent = "critique-form";
   }
 
+  Link: "Submission";
+
   ngOnInit() {
   }
 

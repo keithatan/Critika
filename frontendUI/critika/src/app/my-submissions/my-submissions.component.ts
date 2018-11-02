@@ -1,4 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { SubmissionService } from './my-submissions.service';
+import { Submission } from './my-submissions.model';
+import { Observable } from 'rxjs';
+
 
 @Component({
   selector: 'app-my-submissions',
@@ -6,10 +10,20 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./my-submissions.component.scss']
 })
 export class MySubmissionsComponent implements OnInit {
+  mySubmissions:Submission[];
 
-  constructor() { }
+
+  constructor(public subService:SubmissionService) { 
+    this.getSubmissionsPls();
+  }
+
+  getSubmissionsPls(){
+    this.mySubmissions = this.subService.getSubmissions();
+  }
 
   ngOnInit() {
+    this.getSubmissionsPls();
+    console.log("init called")
   }
 
 }
