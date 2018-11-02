@@ -11,7 +11,7 @@ export class SignupComponent{
 
     }
 
-    incomplete_form:boolean;
+    incomplete_form:string;
 
     getIncompleteForm() {
         return this.incomplete_form;
