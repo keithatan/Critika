@@ -23,19 +23,6 @@ router.get("/", (req, res) => {
     res.send('This route is for all community related tasks');
 });
 
-/*
- * Get all communities
- */
-
-router.get("/get-all-community", authenticate, (req, res) => {
-
-    Community.find({}).then((community) => {
-        res.send(community);
-    }).catch((err) => {
-        res.status(400).send(err);
-    })
-})
-
 /**
  * Create a new community
  */
@@ -78,6 +65,19 @@ router.get("/all-community", authenticate, (req, res) => {
         res.status(400).send(err)
     })
 });
+
+/*
+ * Get all communities
+ */
+
+router.get("/get-all-community", authenticate, (req, res) => {
+
+    Community.find({}).then((community) => {
+        res.send(community);
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
+})
 
 
 module.exports = router;
