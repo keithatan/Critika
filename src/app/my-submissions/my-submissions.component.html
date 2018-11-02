@@ -1,18 +1,14 @@
 <div class="p-2 profile">
   <mdb-card class="outerCard">
     <button (click)="getSubmissionsPls()">Get Submissions</button>
-    <ul>
-      <div *ngFor="let submission of mySubmissions">
-        <li>{{submission.submissionName}}</li>
-        <li> {{submission.submissionText}}</li>
-      </div>
-    </ul>
-    <button type="button" class="btn btn-secondary">File Report</button>
-    
-    <!-- Render the other component stuff -->
-    <div class="d-flex flex-column justify-content-center animated fadeInUp">
-        
-    <app-file-report *ngIf="renderComponent == 'file-report'"></app-file-report>
-      </div>
+                <ul>
+                  <div *ngFor="let submission of mySubmissions">
+                    <li >{{submission.submissionName}}</li>
+                    <li> {{submission.submissionText}}</li>
+                    <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
+                  </div>
+                  </ul>
+                  <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
+
   </mdb-card>
 </div>

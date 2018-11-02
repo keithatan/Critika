@@ -27,6 +27,19 @@ export class SubmissionService{
 
     }
 
+    editSubmission(submissionname: string, submissiontext: string){
+        const submission:Object = {submissionName: submissionname, submissionText : submissiontext}
+        var p = new Submission(submission)
+        
+        this.http.post("http://localhost:5000/submission/edit", p)
+        .subscribe(response => {
+            console.log(response)
+            
+        });
+
+
+    }
+
     getAvailable(){
         this.http.get("http://localhost:5000/submission/available")
             .subscribe((response:string) => {
