@@ -171,7 +171,7 @@ router.post("/verify-email", (req, res) => {
  * Edit a user's email and security question
  */
 router.post("/edit-info", authenticate, (req, res) => {
-    if (!req.body || !req.body.email || !req.body.securityquestion) {
+    if (!req.body || !req.body.email || !req.body.securityquestion || !req.body.securityquestionanswer) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -181,6 +181,7 @@ router.post("/edit-info", authenticate, (req, res) => {
             $set: {
                 email: req.body.email,
                 securityquestion: req.body.securityquestion,
+                securityquestionanswer: req.body.securityquestionanswer
             }
         }).then(() => {
             res.status(200).send({ message: 'User information successfully updated' })
