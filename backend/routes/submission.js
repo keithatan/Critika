@@ -75,7 +75,7 @@ router.post("/edit", authenticate, (req, res) => {
 
     /* Change submission num */
 
-    Submission.findOneAndUpdate({ submissionName: req.body.submissionName , username: req.user.username},
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName},
         {
             $set: {
                 submissionText: req.body.submissionText
@@ -93,12 +93,12 @@ router.post("/edit", authenticate, (req, res) => {
  */
 router.post("/add-comment", authenticate, (req, res) => {
 
-    if (!req.body.comment || !req.body.submissionID) {
+    if (!req.body.comment || !req.body.submissionName) {
         res.status(400).json({ message: "Comment data is incomplete" });
         return;
     }
 
-    Submission.findOneAndUpdate({ _id: req.body.submissionID},
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName},
         {
             $push: {
                 'comments': {
@@ -139,14 +139,6 @@ router.post("/remove", authenticate, (req, res) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
-
-    // User.findOneAndRemove({ username: req.user.username, submissionName: req.body.submissionName }).then(() => {
-    //         res.status(200).send({ message: "Submission succesfully removed!" })
-    //     }).catch((err) => {
-    //         res.status(400).send({ message: "No submission found" });
-    //         res.send(err);
-    //     })
-        
 })
 
 /*
@@ -154,29 +146,25 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req,res) => {
 
-    if (!req.body.comment || !req.body.submissionID || !req.body.reportedMessage || !req.body.reportedReason) {
+    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage || !req.body.reportedReason) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
 
-    Submission.findOneAndUpdate({ _id: req.body.submissionID},
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName},
         {
-            $push: {
-                'comments': {
-                    reportedMessage: req.body.reportedMessage,
-                    reportedReason: req.body.reportedReason
-                }
-            }, 
-
             $set: {
                 'comments': {
+                    reportedMessage: req.body.reportedMessage,
+                    reportedReason: req.body.reportedReason,
                     reported: true,
                 }
-            }
+            }, 
         }).then(() => {
             res.status(200).send({ message: 'Comment successfully reported' })
         }).catch((err) => {
             res.status(400).send({ message: "Error reporting comment" });
+            console.log(err)
             res.send(err);
         })
 })

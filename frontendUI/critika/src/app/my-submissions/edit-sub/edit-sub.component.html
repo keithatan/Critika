@@ -9,13 +9,14 @@
 
     <!--Text-->
     <div class="md-form">
-      <h2>{{SubLink}}</h2>
+      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="text">
+      <label for="form1" class="">Link</label>
     </div>
 
     <!--Text-->
     <div class="md-form">
       <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="SubName">
-      <label for="form1" class="">{{SubName}}</label>
+      <label for="form1" class="">Submission Name</label>
     </div>
 
     <!--Dropdown primary-->
@@ -45,7 +46,7 @@
     <!-- Default unchecked -->
     <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>
 
-    <a href="#" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
+    <a href="#" (click) = "sendEdits()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
 
   </mdb-card-body>
 </mdb-card>

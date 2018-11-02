@@ -13,6 +13,8 @@ export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
   renderComponent: string = "";
 
+  Text: string
+
 
   constructor(public subService:SubmissionService) { 
   }
@@ -23,6 +25,12 @@ export class MySubmissionsComponent implements OnInit {
   renderFileReport() {
         this.renderComponent = "file-report";
     }
+
+  renderEditSub() {
+    this.renderComponent = 'EditSub';
+    //this.Text = text
+
+  }
 
   ngOnInit() {
   }

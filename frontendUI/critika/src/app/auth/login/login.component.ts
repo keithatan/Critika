@@ -12,9 +12,15 @@ export class LoginComponent{
 
     }
 
+    login_failed:boolean;
+
+    getLoginFailed() {
+        return this.login_failed;
+    }
+
     onLogin(form: NgForm){
         console.log(form.value)
-        this.authService.login(form.value.username, form.value.password)
+        this.login_failed = this.authService.login(form.value.username, form.value.password)
     }
 
 }
