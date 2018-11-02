@@ -1,4 +1,4 @@
-<div class="container" >
+<div class="container" *ngIf="userIsAuth">
   <div class="d-flex justify-content-center align-items-center">
     <div class="d-flex flex-column justify-content-center left animated fadeInUp">
       <div class="p-2 profile">
@@ -94,6 +94,6 @@
   </div>
 </div>
 
-<!-- <div class="container" *ngIf="userIsAuth == false">
+<div class="container" *ngIf="userIsAuth == false">
   <app-login></app-login>
-</div> -->
+</div> 
