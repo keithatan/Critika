@@ -1,4 +1,6 @@
+import { CategoriesService } from './categories.service';
 import { Component, OnInit } from '@angular/core';
+import { Community } from './categories.model';
 
 @Component({
   selector: 'app-categories',
@@ -6,8 +8,15 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./categories.component.scss']
 })
 export class CategoriesComponent implements OnInit {
-
-  constructor() { }
+    communities:Community[];
+    renderComponent: string = "";
+  constructor(public subService:CategoriesService) { }
+  getAllCommunitiesPls(){
+    this.communities = this.subService.getAllCommunities();
+  }
+  renderFileReport() {
+        this.renderComponent = "file-report";
+    }
 
   ngOnInit() {
   }
