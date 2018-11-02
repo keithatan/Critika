@@ -18,7 +18,9 @@ var mail = process.env.UNIT_TEST_EMAIL
 describe('Register', () => {
 
     before(function(done){
-        User.findOneAndRemove({username: uname})
+        User.remove({username: uname}, function(err){
+            console.log(err)
+        })
         done();
     })
 

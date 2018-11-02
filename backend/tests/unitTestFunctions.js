@@ -13,7 +13,6 @@ var Community = require('../model/community')
 var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
-var verificationNum;
 
 /*
  * Register function 
