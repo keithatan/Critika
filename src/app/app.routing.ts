@@ -10,8 +10,9 @@ import {LoginComponent} from './auth/login/login.component';
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'login',
+        component: DashboardComponent,
         pathMatch: 'full',
+
     },
     {
         path: 'dashboard',
@@ -20,7 +21,7 @@ export const AppRoutes: Routes = [
     },
     {
         path: 'register',
-        component: SignupComponent,
+        component: SignupComponent
     },
     {
         path: 'login',
