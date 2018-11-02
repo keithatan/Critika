@@ -22,6 +22,10 @@ export class ProfileComponent implements OnInit {
     this.renderComponent = "SpendCoins"
   }
 
+  renderEditSub() {
+    this.renderComponent = "EditSub"
+  }
+
   ngOnInit() {
   }
 
