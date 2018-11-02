@@ -36,18 +36,15 @@ export class DashboardComponent implements OnInit {
 
   }
 
-<<<<<<< HEAD
   renderCategories(){
     this.renderComponent = "categories";
   }
 
-=======
   renderAdmin() {
     this.renderComponent = "Admin";
   }
 
 
->>>>>>> c56d833469ebe98364844de8bb3016ac53f88b7c
   ngOnInit(){
     this.authStatusSub = this.authService.getAuthStatus().subscribe(isAuthenticated =>{
       this.userIsAuth = isAuthenticated;
