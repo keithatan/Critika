@@ -90,6 +90,8 @@ router.post("/register", (req, res) => {
  */
 router.get("/account", authenticate, (req, res) => {
 
+    console.log(req)
+
     if (User.standing == "banned") {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
         return;
