@@ -44,7 +44,7 @@ export class AuthService{
                 this.token = token
                 console.log(this.token)
                 this.authStatusListener.next(true)
-                this.saveAuthData(token);
+                this.saveAuthData(token, username);
             });
 
     }
@@ -54,7 +54,8 @@ export class AuthService{
         
     }
 
-    private saveAuthData(token: string){
+    private saveAuthData(token: string, name:string){
+        localStorage.setItem('user', name)
         localStorage.setItem('token', token)
     }
 

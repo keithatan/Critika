@@ -13,6 +13,19 @@ export class SubmissionService{
         
     }
 
+    addSubmission(submissionname: string, submissiontext: string, category:string, username:string){
+        const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, username : username}
+        var p = new Submission(submission)
+        
+        this.http.post("http://localhost:5000/submission/add", p)
+        .subscribe(response => {
+            console.log(response)
+            
+        });
+
+
+    }
+
     getSubmissions(){
         this.http.get("http://localhost:5000/submission/mine")
             .subscribe((response:string) => {
