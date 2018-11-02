@@ -14,7 +14,7 @@ export class AuthService{
 
     private token:string
     private authStatusListener = new Subject<boolean>();
-    failed:boolean = true;
+    failed:boolean = false;
     incomplete:string;
 
     constructor(private http:HttpClient){
