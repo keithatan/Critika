@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
+  renderComponent: string = "";
 
   renderComponent: string;
   Text: string
@@ -22,6 +23,9 @@ export class MySubmissionsComponent implements OnInit {
   getSubmissionsPls(){
     this.mySubmissions = this.subService.getSubmissions();
   }
+  renderFileReport() {
+        this.renderComponent = "file-report";
+    }
 
   renderEditSub() {
     this.renderComponent = 'EditSub';

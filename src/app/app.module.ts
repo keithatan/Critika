@@ -46,7 +46,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
     LoginComponent,
     SignupComponent,
     AdminComponent,
-    CritiqueFormComponent
+    CritiqueFormComponent,
     
   ],
   imports: [
