@@ -22,5 +22,8 @@
         <p>Not a member?
           <a routerLink="/register">Register</a>
         </p>
-      
+
+        <div *ngIf="getLoginFailed() "class="alert alert-danger" role="alert">
+          Username or Password is Incorrect
+        </div>
 </form> 

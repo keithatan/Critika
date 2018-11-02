@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders} from "@angular/common/http";
 import {AuthData} from './auth-data.model'
 import { Subject } from "rxjs";
+import { ThrowStmt } from "@angular/compiler";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -13,6 +14,7 @@ export class AuthService{
 
     private token:string
     private authStatusListener = new Subject<boolean>();
+    failed:boolean = true;
 
     constructor(private http:HttpClient){
 
@@ -45,8 +47,13 @@ export class AuthService{
                 console.log(this.token)
                 this.authStatusListener.next(true)
                 this.saveAuthData(token, username);
-            });
-
+                this.failed = false;
+            },
+            error => {
+                this.failed = true;
+            }
+            );
+            return this.failed
     }
 
     autoAuthUser(){
