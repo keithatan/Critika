@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
+  renderComponent: string = "";
 
 
   constructor(public subService:SubmissionService) { 
@@ -19,6 +20,9 @@ export class MySubmissionsComponent implements OnInit {
   getSubmissionsPls(){
     this.mySubmissions = this.subService.getSubmissions();
   }
+  renderFileReport() {
+        this.renderComponent = "file-report";
+    }
 
   ngOnInit() {
   }

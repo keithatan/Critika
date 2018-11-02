@@ -29,6 +29,7 @@ import { CritiqueFormComponent } from './home/critique-form/critique-form.compon
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
 import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
+import { FileReportComponent } from './my-submissions/file-report/file-report.component';
 
 
 @NgModule({
@@ -46,7 +47,8 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     LoginComponent,
     SignupComponent,
     AdminComponent,
-    CritiqueFormComponent
+    CritiqueFormComponent,
+    FileReportComponent
     
   ],
   imports: [

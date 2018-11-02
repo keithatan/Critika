@@ -6,6 +6,7 @@ import { Submission } from './my-submissions.model';
 @Injectable({providedIn: "root"})
 export class SubmissionService{
 
+    renderComponent: String = "";
     mySubmissions:Submission[];
     data: Object;
 
@@ -44,7 +45,8 @@ export class SubmissionService{
             });    
         
             return this.mySubmissions
-            
     }
+
+  
 
 }
