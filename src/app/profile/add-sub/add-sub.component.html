@@ -4,7 +4,13 @@
   <mdb-card-body>
 
     <!--Title-->
-    <mdb-card-title> <h4>Add Submission</h4> </mdb-card-title>
+    <mdb-card-title> <h2>Add Submission</h2> </mdb-card-title>
+
+    <!--Text-->
+    <div class="md-form">
+      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="Link">
+      <label for="form1" class="">Add Link Here</label>
+    </div>
 
     <!--Text-->
     <div class="md-form">
@@ -17,7 +23,7 @@
 
       <!--Trigger-->
       <button mdbDropdownToggle mdbBtn color="primary" class="dropdown-toggle waves-light" type="button" mdbWavesEffect>
-        Category
+        Categor
       </button>
 
       <!--Menu-->
@@ -34,11 +40,11 @@
     <div class="md-form">
       <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
       <label for="form7">What feedback are you looking for?</label>
-      <p>{{feedback}}</p>
     </div>
 
     <!-- Default unchecked -->
-    <mdb-checkbox [default]="true">Spend Coin on Submission</mdb-checkbox>
+    <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>
+    <p>{{SpendCoin}}</p>
 
     <a href="#" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
 
