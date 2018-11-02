@@ -28,13 +28,18 @@ export class DashboardComponent implements OnInit {
 
   renderProfile(){
     this.renderComponent = "profile";
+  
   }
 
-
-  renderMySubmissions(){
+  renderMySubmissions() {
     this.renderComponent = "my-submissions";
 
   }
+
+  renderAdmin() {
+    this.renderComponent = "Admin";
+  }
+
 
   ngOnInit(){
     this.authStatusSub = this.authService.getAuthStatus().subscribe(isAuthenticated =>{

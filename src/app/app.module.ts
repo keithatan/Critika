@@ -14,6 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
 import {AddSubComponent} from './profile/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component'
 
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
@@ -23,7 +24,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 
 
 
-
+import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
 import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
@@ -41,7 +42,9 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     EditSubComponent,
     MySubmissionsComponent,
     LoginComponent,
-    SignupComponent
+    SignupComponent,
+    AdminComponent,
+    CritiqueFormComponent
     
   ],
   imports: [

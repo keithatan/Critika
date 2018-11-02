@@ -10,7 +10,9 @@ export class CritiqueFormComponent implements OnInit {
   constructor() { 
     this.renderComponent = "";
   }
-  renderComponent: String;
+  renderComponent: string;
+  feedback: string;
+  comment: string;
 
   ngOnInit() {
   }
