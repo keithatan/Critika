@@ -26,6 +26,8 @@
     "nodemailer": "^4.6.8",
     "nodemon": "^1.18.4",
     "pug": "^2.0.3",
+    "request": "^2.88.0",
+    "superagent": "^4.0.0-beta.5",
     "validator": "^10.8.0"
   },
   "devDependencies": {

@@ -52,9 +52,10 @@ function loginFunction(){
     chai.request(server).post('/user/login')
         .set('content-type', 'application/x-www-form-urlencoded')
         .send({username: uname, password: pword})
-        .end(function(err, res){
+        .then(function(err, res){
+            
             res.should.have.status(200);
-    })
+     })
 }
 
 /*

@@ -4,75 +4,112 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
-
-/* USAGE mocha /tests/<file> */
-
+var request = require('request');
+var expect = require('Chai').expect;
 
 chai.use(chaiHttp);
 
 
-describe('Test login', function(){
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
 
-    it('login without username and password', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .end(function(err, res){
-            res.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "Login information is incomplete, missing username or password")
+describe('Login', () => {
+
+    describe('login without username or password', () => {
+        it('Should return 400', (done) => {
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send()
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
-    })
-    it('login without password', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz'})
-        .end(function(err, res){
-            res.body.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "Login information is incomplete, missing username or password")
-        })
-        done();
     })
 
-    it('login without username', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({password: 'kcsodetz'})
-        .end(function(err, res){
-            res.body.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "Login information is incomplete, missing username or password")
+    describe('login without username', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                password: pword,
+            }
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('login with bad username', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'badusername', password: 'badpassword'})
-        .end(function(err, res){
-            res.body.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "Error Loging in, Username or Password is incorrect")
+    describe('login without password', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+            }
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('login with bad password', function(done){
-        chai.request(server).post('/user/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', password: 'badpassword'})
-        .end(function(err, res){
-            res.body.should.be.a('object');
-            res.body.should.have.property('message');
-            res.body.should.have.property('message', "Error Loging in, Username or Password is incorrect")
+    describe('login with invalid username', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: 'invalid',
+                password: pword,
+            }
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(401);
+                done();
+            });
         })
-        done();
     })
 
-    it('login with correct username and password', function(){
-        functions.login();
+    describe('login with invalid password', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                password: 'invalid',
+            }
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(401);
+                done();
+            });
+        })
     })
-})
+
+    describe('/POST book', () => {
+        it('Should return 200 if user exists and is registerd', (done) => {
+            var info = {
+                username: uname,
+                password: pword,
+            }
+            chai.request(server)
+                .post('/user/login')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                done();
+            });
+        });
+    });
+});
 
