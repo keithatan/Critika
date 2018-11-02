@@ -15,6 +15,7 @@ import {AddSubComponent} from './profile/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
+import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
 
 @NgModule({
   declarations: [
@@ -25,7 +26,8 @@ import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component
     MyQueueComponent,
     ProfileComponent,
     MySubmissionsComponent,
-    SpendCoinsComponent
+    SpendCoinsComponent,
+    EditSubComponent
   ],
   imports: [
     BrowserModule,
