@@ -95,8 +95,8 @@ describe('Login', () => {
         })
     })
 
-    describe('/POST book', () => {
-        it('Should return 200 if user exists and is registerd', (done) => {
+    describe('Correct login', () => {
+        it('Should return 200', (done) => {
             var info = {
                 username: uname,
                 password: pword,

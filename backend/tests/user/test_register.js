@@ -8,92 +8,190 @@ var functions = require('../unitTestFunctions.js')
 chai.use(chaiHttp);
 var User = require('../../model/user');
 
-describe('Test register route', function(){
+var express = require('express');
+var chai = require('chai');
+var chaiHttp = require('chai-http');
+var server = require('../../app');
+var should = chai.should();
+var functions = require('../unitTestFunctions.js')
+var request = require('request');
+var expect = require('Chai').expect;
 
-    it('test registering without any information', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .end(function(err, res){
-            res.should.have.status(400)
+chai.use(chaiHttp);
+
+
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
+
+describe('Register', () => {
+
+    describe('Register without any information', () => {
+        it('Should return 400', (done) => {
+            chai.request(server)
+            .post('/user/register')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send()
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+            });
         })
-        done();
     })
 
-    it('test registering without password', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register without username', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-
-    it('test registering without username', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register without password', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+                });
         })
-        done();
     })
 
-    it('test registering without email', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', password: 'password',  securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register without security question', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('test registering without security question', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'kcsodetz', password: 'password', email: 'kcsodetz@gmail.com', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register without security question answer', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('test registering with username that is too short', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'one', password: 'password', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register with username that is too short', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: 'short',
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('test registering with password that is too short', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'username', password: 'two', email: 'kcsodetz@gmail.com', securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register with password that is too short', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                password: 'short',
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('test registering with invalid email', function(done){
-        chai.request(server).post('/user/register')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'username', password: 'password', email: 'INVALID', securityquestion: 'ok', securityquestionanswer: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400)
+    describe('Register with invalid email', () => {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                password: pword,
+                email: 'bad email',
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('test registering with correct information', function(done){
-        functions.register()
-        done();
-    })
-
-})
-
+    describe('Correct register', () => {
+        it('Should return 200', (done) => {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
+            }
+            chai.request(server)
+                .post('/user/register')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(200);
+                done();
+            });
+        });
+    });
+});
