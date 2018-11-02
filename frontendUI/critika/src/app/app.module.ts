@@ -28,8 +28,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
-import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
-import { FileReportComponent } from './my-submissions/file-report/file-report.component';
+import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 
 @NgModule({
@@ -48,7 +47,6 @@ import { FileReportComponent } from './my-submissions/file-report/file-report.co
     SignupComponent,
     AdminComponent,
     CritiqueFormComponent,
-    FileReportComponent
     
   ],
   imports: [
