@@ -15,9 +15,12 @@ export class DashboardComponent implements OnInit {
   renderComponent: String = "";
   private authStatusSub : Subscription;
   userIsAuth = false
+  username:string = localStorage.getItem('user');
 
 
-  constructor(private authService:AuthService){}
+  constructor(private authService:AuthService){
+    this.username = localStorage.getItem('user');
+  }
 
 
   renderHome(){
