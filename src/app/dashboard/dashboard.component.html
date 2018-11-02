@@ -47,9 +47,9 @@
               </mdb-card-title>
               <div class="d-flex align-items-center justify-content-center mb-2">
                   <div class="d-flex flex-column">
-                    <p>                      <button type="button" class="btn btn-secondary">Test</button>
+                    <p>                      <button type="button" (click) = "renderHome()" class="btn btn-secondary">Test</button>
                     </p>
-                    <p>                      <button type="button" class="btn btn-secondary">Test</button>
+                    <p>                      <button type="button" (click) = "renderTest()"class="btn btn-secondary">Test</button>
                     </p>
                     <p>                      <button type="button" class="btn btn-secondary">Test</button>
                     </p>
@@ -84,7 +84,7 @@
 
    <!-- Render the other component stuff -->
     <div class="d-flex flex-column justify-content-center animated fadeInUp">
-      <app-home></app-home>
+      <app-home *ngIf="renderComponent == 'home' "></app-home>
     </div>
 
 
