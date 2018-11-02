@@ -8,9 +8,10 @@ import { Component, OnInit } from '@angular/core';
 export class AddSubComponent implements OnInit {
 
   constructor() { }
-
+  Link: String
   SubName: String
   feedback: String
+  SpendCoin: boolean
 
   setSubName(name) {
     
