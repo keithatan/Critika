@@ -13,7 +13,6 @@ export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
   renderComponent: string = "";
 
-  renderComponent: string;
   Text: string
 
 
