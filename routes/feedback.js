@@ -60,7 +60,7 @@ router.post('/add-feedback', (req, res) => {
  * Rate feedback from 1-5. only the owner of this submission can do this
  */
 router.post('/rate-feedback', authenticate, (req, res) => {
-    if(!req.body || !req.body.username  || !req.body.submissionID || !req.body.feedbackRating){
+    if(!req.body || !req.body.username  || !req.body.submissionName || !req.body.feedbackRating){
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
@@ -71,7 +71,7 @@ router.post('/rate-feedback', authenticate, (req, res) => {
         }
     })
    
-    Feedback.findOneAndUpdate({submissionID:  req.body.submissionID}, 
+    Feedback.findOneAndUpdate({submissionName:  req.body.submissionName}, 
         {
             $set: 
             {
