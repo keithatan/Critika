@@ -11,7 +11,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
-import {AddSubComponent} from './add-sub/add-sub.component';
+import {AddSubComponent} from './profile/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
 
 @NgModule({
