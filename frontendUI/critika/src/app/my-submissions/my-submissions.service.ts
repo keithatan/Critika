@@ -8,6 +8,7 @@ export class SubmissionService{
 
     renderComponent: String = "";
     mySubmissions:Submission[];
+    myAvailable:Submission[];
     data: Object;
 
     constructor(private http:HttpClient){
@@ -41,23 +42,23 @@ export class SubmissionService{
     }
 
     getAvailable(){
-        this.http.get("http://localhost:5000/submission/available")
+        this.http.get("http://localhost:5000/submission/all")
             .subscribe((response:string) => {
 
                 let i:number;
 
-                this.mySubmissions = new Array(response.length)
+                this.myAvailable = new Array(5)
 
-                for(i = 0;i< response.length; i+=1) {
+                for(i = 0;i< 5; i+=1) {
                     let submission = new Submission(response[i])
-                    this.mySubmissions[i] = submission;
+                    this.myAvailable[i] = submission;
                  }
         
-                console.log(this.mySubmissions)
+                console.log(this.myAvailable)
 
             });    
         
-            return this.mySubmissions
+            return this.myAvailable
             
     }
 
