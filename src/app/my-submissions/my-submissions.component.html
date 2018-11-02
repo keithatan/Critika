@@ -1,129 +1,17 @@
 <div class="p-2 profile">
   <mdb-card class="outerCard">
+    <button (click)="getSubmissionsPls()">Get Submissions</button>
 
+    
+            
+                <ul>
+                  <div *ngFor="let submission of mySubmissions">
+                    <li >{{submission.submissionName}}</li>
+                    <li> {{submission.submissionText}}</li>
 
-    <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-      style="overflow-y: auto" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: false}">
-      <div class="modal-dialog modal-fluid" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title w-100" id="myModalLabel">Submission Title</h4>
-          </div>
-          <div class="modal-body">
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="Card image cap"></mdb-card-img>
-          </div>
-          <div class="modal-footer">
-            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
-              mdbWavesEffect>Close</button>
-            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Save!</button>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!--Carousel Wrapper-->
-    <mdb-carousel class="carousel-multi-item multi-animation" [type]="'carousel-multi-item'" [animation]="'slide'">
-      <!--First slide-->
-      <mdb-carousel-item>
-        <div class="col-md-4">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-        <div class="col-md-4 clearfix d-none d-md-block">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(35).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-        <div class="col-md-4 clearfix d-none d-md-block">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(60).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-      </mdb-carousel-item>
-      <!--/First slide-->
-      <!--Second slide-->
-      <mdb-carousel-item>
-        <div class="col-md-4">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(47).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-        <div class="col-md-4 clearfix d-none d-md-block">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(48).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-        <div class="col-md-4 clearfix d-none d-md-block">
-          <mdb-card>
-            <mdb-card-img src="https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(53).jpg" alt="Card image cap"></mdb-card-img>
-            <mdb-card-body>
-              <mdb-card-title>
-                <h4>Card title</h4>
-              </mdb-card-title>
-              <p>Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-              <button type="button" mdbBtn color="primary" class="waves-light" (click)="basicModal.show()"
-                mdbWavesEffect>Button
-              </button>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-      </mdb-carousel-item>
-      <!--/Second slide-->
-
-    </mdb-carousel>
-    <!--/.Carousel Wrapper-->
-
+                  </div>
+                    
+                  </ul>
 
   </mdb-card>
 </div>

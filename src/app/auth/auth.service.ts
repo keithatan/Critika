@@ -44,8 +44,34 @@ export class AuthService{
                 this.token = token
                 console.log(this.token)
                 this.authStatusListener.next(true)
+                this.saveAuthData(token, username);
             });
 
+    }
+
+    autoAuthUser(){
+        const authInformation = this.getAuthData();
+        
+    }
+
+    private saveAuthData(token: string, name:string){
+        localStorage.setItem('user', name)
+        localStorage.setItem('token', token)
+    }
+
+    private clearAuthData(){
+        localStorage.clearItem('token')
+    }
+
+    private getAuthData(){
+        const token = localStorage.getItem('token')
+        if (!token){
+            return;
+        }
+        return {
+            token: token
+        
+        };
     }
 
 }
