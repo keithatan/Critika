@@ -1,6 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders} from "@angular/common/http";
 import {AuthData} from './auth-data.model'
+import { Subject } from "rxjs";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -11,12 +12,18 @@ const httpOptions = {
 export class AuthService{
 
     private token:string
+    private authStatusListener = new Subject<boolean>();
+
     constructor(private http:HttpClient){
 
     }
 
     getToken() {
         return this.token;
+    }
+
+    getAuthStatus(){
+        return this.authStatusListener.asObservable();
     }
 
     registerUser(email: string, username: string, password: string, securityquestion: string, securityanswer: string) {
@@ -36,6 +43,7 @@ export class AuthService{
                 const token = response.headers.get('token');
                 this.token = token
                 console.log(this.token)
+                this.authStatusListener.next(true)
             });
 
     }
