@@ -10,22 +10,21 @@ import {LoginComponent} from './auth/login/login.component';
 export const AppRoutes: Routes = [
     {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'login',
         pathMatch: 'full',
     },
     {
         path: 'dashboard',
-        component: DashboardComponent,
-        outlet: 'Auth'
+        component: DashboardComponent
+    
     },
     {
         path: 'register',
         component: SignupComponent,
-        outlet: 'noAuth'
     },
     {
         path: 'login',
-        component: LoginComponent,
-        outlet: 'noAuth'
+        component: LoginComponent
+        
     },
 ]
