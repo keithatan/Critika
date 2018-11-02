@@ -8,7 +8,7 @@
 * Julien San Diego (Frontend)
 
 ### Technologies Used
-* React
+* Angular
 * Node
 * Express
 * MongoDB

@@ -51,7 +51,7 @@
                     </p>
                     <p>                      <button type="button" (click) = "renderProfile()"class="btn btn-secondary">Profile</button>
                     </p>
-                    <p>                      <button type="button" class="btn btn-secondary">Test</button>
+                    <p>                      <button type="button" (click) = "renderMySubmissions()" class="btn btn-secondary">My Submissions</button>
                     </p>
                     
                   </div>
@@ -86,7 +86,7 @@
     <div class="d-flex flex-column justify-content-center animated fadeInUp">
       <app-home *ngIf="renderComponent == 'home' "></app-home>
       <app-profile *ngIf="renderComponent == 'profile' "></app-profile>
-
+      <app-my-submissions *ngIf="renderComponent == 'my-submissions'"></app-my-submissions>
     </div>
 
 

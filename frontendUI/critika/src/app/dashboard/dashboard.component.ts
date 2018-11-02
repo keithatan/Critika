@@ -19,13 +19,17 @@ export class DashboardComponent implements OnInit {
 
   renderHome(){
     this.renderComponent = "home";
-
   }
   ngOnDestroy() {
 }
 
   renderProfile(){
     this.renderComponent = "profile";
+
+
+  renderMySubmissions(){
+    this.renderComponent = "my-submissions";
+
   }
 
   ngOnInit() {

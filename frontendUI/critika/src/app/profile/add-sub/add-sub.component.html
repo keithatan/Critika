@@ -1,0 +1,51 @@
+<mdb-card>
+  <!--Card image-->
+  <!--Card content-->
+  <mdb-card-body>
+
+    <!--Title-->
+    <mdb-card-title> <h2>Add Submission</h2> </mdb-card-title>
+
+    <!--Text-->
+    <div class="md-form">
+      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="Link">
+      <label for="form1" class="">Add Link Here</label>
+    </div>
+
+    <!--Text-->
+    <div class="md-form">
+      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="SubName">
+      <label for="form1" class="">Submission Name</label>
+    </div>
+
+    <!--Dropdown primary-->
+    <div class="dropdown" mdbDropdown>
+
+      <!--Trigger-->
+      <button mdbDropdownToggle mdbBtn color="primary" class="dropdown-toggle waves-light" type="button" mdbWavesEffect>
+        Category
+      </button>
+
+      <!--Menu-->
+      <div class="dropdown-menu dropdown-primary">
+        <a class="dropdown-item" href="#">Category 1</a>
+        <a class="dropdown-item" href="#">Category 2</a>
+        <a class="dropdown-item" href="#">Category 3</a>
+        <a class="dropdown-item" href="#">Category 4</a>
+      </div>
+    </div>
+    <!--/Dropdown primary-->
+
+    <!--Basic textarea-->
+    <div class="md-form">
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
+      <label for="form7">What feedback are you looking for?</label>
+    </div>
+
+    <!-- Default unchecked -->
+    <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>
+
+    <a href="#" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
+
+  </mdb-card-body>
+</mdb-card>

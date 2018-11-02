@@ -4,43 +4,124 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
+var User = require('../../model/user');
 
 chai.use(chaiHttp);
 
-describe('Test verify email', function(){
-    it('should return 400 if there is no verification num', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', email: 'kcsodetz@gmail.com',})
-        .end(function(err, res){
-            res.should.have.status(400);
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
+
+
+describe('Verify Email', () => {
+
+    describe('Verify email without any info', function() {
+        it('Should return 400', (done) => {
+            chai.request(server)
+            .post('/user/verify-email')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send()
+            .end((err, res) => {
+                res.should.have.status(400);
+            done();
+            });
         })
-        done();
     })
 
-    it('should return 400 if there is no email', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({username: 'unitTestUsername', verificationNum: '9979',})
-        .end(function(err, res){
-            res.should.have.status(400);
+    describe('Verify email without verification num', function() {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                email: mail,
+            }
+            chai.request(server)
+                .post('/user/verify-email')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('should return 400 if there is no username', function(done){
-        chai.request(server).post('/user/verify-email')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send({email: 'connortodd21spam@gmail.com', verificationNum: '9979',})
-        .end(function(err, res){
-            res.should.have.status(400);
+    describe('Verify email without email', function() {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                verificationnum: 'WAIT',
+            }
+            chai.request(server)
+                .post('/user/verify-email')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
         })
-        done();
     })
 
-    it('should return 200 if the email is registerd', function(done){
-        functions.verifyEmail()
-        done();
+    describe('Verify email without username', function() {
+        it('Should return 400', (done) => {
+            var info = {
+                email: mail,
+                verificationnum: 'WAIT',
+            }
+            chai.request(server)
+                .post('/user/verify-email')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
+        })
     })
 
+    describe('Verify email with invalid verification number', function() {
+        it('Should return 400', (done) => {
+            var info = {
+                username: uname,
+                email: mail,
+                verificationnum: 'invalid',
+            }
+            chai.request(server)
+                .post('/user/verify-email')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .send(info)
+                .end((err, res) => {
+                    res.should.have.status(400);
+                done();
+            });
+        })
+    })
+
+    describe('Correct verify', function() {
+        it('Should return 200', (done) => {
+            User.findOne({username: uname}, (err, user) => {
+                if(err){
+                    console.log(err)
+                    return
+                }
+                //console.log(user['verificationNum'])
+                let info = {
+                    username: uname,
+                    email: mail,
+                    verificationNum: user['verificationNum'],
+                }
+
+                chai.request(server)
+                    .post('/user/verify-email')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send(info)
+                    .end((err, res) => {
+                        //console.log(info)
+                        res.should.have.status(200);
+                    done();
+                });
+            })
+    
+        })
+    })
 })
