@@ -5,7 +5,10 @@
                   <div *ngFor="let submission of mySubmissions">
                     <li >{{submission.submissionName}}</li>
                     <li> {{submission.submissionText}}</li>
+                    <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
                   </div>
                   </ul>
+                  <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
+
   </mdb-card>
 </div>

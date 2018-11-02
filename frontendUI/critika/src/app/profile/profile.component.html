@@ -1,13 +1,8 @@
 
 <button type="button" (click) = "renderSpendCoins()" class="btn btn-secondary">Spend Coins</button>
 
-
 <button type="button" (click) = "renderAddSub()" class="btn btn-secondary">Add Submission</button>
 
-<button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
 
-
-
-<app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
 <app-spend-coins *ngIf="renderComponent == 'SpendCoins' "></app-spend-coins>
 <app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>

@@ -28,7 +28,7 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
-import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
+import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 
 @NgModule({
