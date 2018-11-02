@@ -75,7 +75,7 @@ router.post("/edit", authenticate, (req, res) => {
 
     /* Change submission num */
 
-    Submission.findOneAndUpdate({ submissionName: req.body.submissionName , username: req.user.username},
+    Submission.findOneAndUpdate({ submissionName: req.body.submissionName},
         {
             $set: {
                 submissionText: req.body.submissionText
