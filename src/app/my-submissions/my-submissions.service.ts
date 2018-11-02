@@ -27,6 +27,27 @@ export class SubmissionService{
 
     }
 
+    getAvailable(){
+        this.http.get("http://localhost:5000/submission/available")
+            .subscribe((response:string) => {
+
+                let i:number;
+
+                this.mySubmissions = new Array(response.length)
+
+                for(i = 0;i< response.length; i+=1) {
+                    let submission = new Submission(response[i])
+                    this.mySubmissions[i] = submission;
+                 }
+        
+                console.log(this.mySubmissions)
+
+            });    
+        
+            return this.mySubmissions
+            
+    }
+
     getSubmissions(){
         this.http.get("http://localhost:5000/submission/mine")
             .subscribe((response:string) => {
@@ -47,6 +68,16 @@ export class SubmissionService{
             return this.mySubmissions
     }
 
-  
+    spendCoins(username1: string, coins1: string){
+        const submission:Object = {recuser : username1, coins: coins1}
+        var p = new Submission(submission)
+        console.log (p)
+        this.http.post("http://localhost:5000/user/remove-coin", p)
+        .subscribe((response) => {
+            console.log(response)
+        })
+
+        return this.mySubmissions
+    }
 
 }

@@ -1,49 +1,36 @@
 <div class="p-2 profile">
-  <mdb-card>
-      <div class="p-2 profile">
-          <mdb-card>
-  
-            <!--Card content-->
-            <mdb-card-body>
-              <!--Title-->
-              <mdb-card-title>
-                <h2>DashBoard</h2>
-              </mdb-card-title>
-              
-              <table class="table table-striped table-responsive-md btn-table">
-                <thead>
-                  <tr>
-                    <th>#</th>
-                    <th>Queue</th>
-                    <th></th>
-                  </tr>
-                </thead>
-            
-                <tbody>
-                  <tr >
-                    <th scope="row">1</th>
-                    <td>
-                      {{Link}}
-                    </td>
-                    <td>
-                      <button mdbBtn color="indigo" 
-                              size="sm" 
-                               mdbWavesEffect type="button" class="m-0" 
-                               (click) = "renderCritiqueForm()">Button</button>
-                    </td>
-                  </tr>
-                  
-                </tbody>
-              </table>
+    <mdb-card>
 
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-   
-  </mdb-card>
+      <!--Card content-->
+      <mdb-card-body>
+        <!--Title-->
+        <mdb-card-title>
+          <h2>Available Submissions To Critique</h2>
+        </mdb-card-title>
+
+        <ul>
+            <div *ngFor="let submission of possibleSubs">
+              <li>
+                  <mdb-card>
+                      <mdb-card-body>
+                          <h1>{{submission.submissionName}}</h1><button>asdfsadfasdf</button>
+
+                        </mdb-card-body>
+                      </mdb-card>
+
+
+
+              </li>
+            </div>
+              
+            </ul>
+        
+      
+      </mdb-card-body>
+    </mdb-card>
+  </div>
 
   <!-- Render the other component stuff -->
   <div class="d-flex flex-column justify-content-center animated fadeInUp">
     <app-critique-form *ngIf="renderComponent == 'critique-form'"></app-critique-form>
   </div>
-</div>
