@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { renderComponent } from '@angular/core/src/render3';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  constructor() {
+    this.renderComponent = "";
+  }
+  renderComponent: String;
+
+  renderCritiqueForm() {
+    this.renderComponent = "critique-form";
+  }
 
   ngOnInit() {
   }
