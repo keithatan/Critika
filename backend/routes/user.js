@@ -301,7 +301,6 @@ router.get("/all-users", authenticate, (req, res) => {
             res.send(users);
         }).catch((err) => {
             res.status(400).send(err);
-
         })
     }
     else {
