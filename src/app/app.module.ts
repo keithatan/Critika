@@ -1,6 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms'
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router'
 import { AppRoutes } from './app.routing';
@@ -52,16 +51,11 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
 
     MySubmissionsComponent,
     SpendCoinsComponent,
-    EditSubComponent
-  ],
-  imports: [
-    BrowserModule,
-    FormsModule,
-
+    EditSubComponent,
     RouterModule.forRoot(AppRoutes),
     MDBBootstrapModule.forRoot()
-    //AppRoutingModule
   ],
+
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true}],
   bootstrap: [AppComponent]
 })
