@@ -18,6 +18,10 @@ export class ProfileComponent implements OnInit {
     this.renderComponent = "AddSub"
   }
 
+  renderSpendCoins() {
+    this.renderComponent = "SpendCoins"
+  }
+
   ngOnInit() {
   }
 
