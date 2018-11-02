@@ -25,12 +25,13 @@ function mailer(to, subject, body) {
         text: body
     };
 
-    console.log("Sending to: " + to)
+    //console.log("Sending to: " + to)
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            console.error(error);
+            //console.error(error);
         } else {
-            console.log('Email sent: ' + info.response);
+            //console.log('Email sent: ' + info.response);
+            return;
         }
     });
 }

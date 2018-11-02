@@ -82,7 +82,7 @@ describe('Login', () => {
         it('Should return 400', (done) => {
             var info = {
                 username: uname,
-                password: 'invalid',
+                password: '1',
             }
             chai.request(server)
                 .post('/user/login')

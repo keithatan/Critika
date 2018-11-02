@@ -83,13 +83,14 @@ router.post("/register", (req, res) => {
         res.status(400).send(err)
         return;
     })
-
 });
 
 /* 
  * View Account 
  */
 router.get("/account", authenticate, (req, res) => {
+
+    console.log(req)
 
     if (User.standing == "banned") {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
@@ -125,7 +126,7 @@ router.post("/login", (req, res) => {
                 res.header('token', token).send(user);
             });
         }).catch((err) => {
-            console.log(err)
+            //console.log(err)
             res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
@@ -170,7 +171,7 @@ router.post("/verify-email", (req, res) => {
  * Edit a user's email and security question
  */
 router.post("/edit-info", authenticate, (req, res) => {
-    if (!req.body || !req.body.email || !req.body.securityquestion) {
+    if (!req.body || !req.body.email || !req.body.securityquestion || !req.body.securityquestionanswer) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -180,6 +181,7 @@ router.post("/edit-info", authenticate, (req, res) => {
             $set: {
                 email: req.body.email,
                 securityquestion: req.body.securityquestion,
+                securityquestionanswer: req.body.securityquestionanswer
             }
         }).then(() => {
             res.status(200).send({ message: 'User information successfully updated' })

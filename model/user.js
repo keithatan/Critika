@@ -155,7 +155,7 @@ userSchema.statics.findByEmail = function(email) {
 
   return User.findOne({email}).then((user) => {
     // console.log(user)
-    console.log("email is: " + user.email)
+    //console.log("email is: " + user.email)
     if (!user.email) {
       return Promise.reject();
     }
@@ -169,7 +169,7 @@ userSchema.statics.findVerificationNumByEmail = function(email) {
   var User = this;
 
   return User.findOne({email}).then((user) => {
-    console.log(user.verificationNum)
+ //   console.log(user.verificationNum)
     if (!user.verificationNum) {
       return Promise.reject();
     }
