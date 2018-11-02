@@ -9,6 +9,7 @@ import { SubmissionService } from '../../my-submissions/my-submissions.service'
 export class AddSubComponent implements OnInit {
 
   constructor(public subService:SubmissionService) { }
+  
   Link: string
   SubName: string
   feedback: string

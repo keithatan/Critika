@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-
+import { SubmissionService } from '../../my-submissions/my-submissions.service'
 @Component({
   selector: 'app-edit-sub',
   templateUrl: './edit-sub.component.html',
@@ -7,7 +7,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class EditSubComponent implements OnInit {
 
-  constructor() { }
+  constructor(public subService:SubmissionService) { }
+
+  text: string;
+  SubName: string;
+
+  sendEdits() {
+    this.subService.editSubmission(this.SubName, this.text);
+  }
 
   ngOnInit() {
   }
