@@ -14,12 +14,9 @@ import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
 import {AddSubComponent} from './profile/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
-<<<<<<< HEAD
 import {CategoriesComponent} from './categories/categories.component';
-=======
 import { AdminComponent } from './admin/admin.component'
 
->>>>>>> c56d833469ebe98364844de8bb3016ac53f88b7c
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
