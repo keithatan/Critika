@@ -4,46 +4,109 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
+var User = require('../../model/user');
 
-
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
 
 chai.use(chaiHttp);
 
-describe('Test GET user', function(){
 
-    describe('Test GET /user/account', function(){
+describe('GET /user/account', function() {
 
-        it('GET request without auth token should return 401', function(done){
-          chai.request(server).get('/user/account').end(function(err, res){
-            res.should.have.status(401);
-            done();
-          });
+  describe('Check if user is banned', () =>{
+    User.findOneAndUpdate({username: uname}, {$set: {standing: 'banned'}})
+
+    it('Should return 400', (done) => {
+
+      var info = {
+        username: uname,
+        password: pword,
+      }
+
+      User.findOne({username: uname}, (err, user) => {
+        chai.request(server)
+        .post('/user/login')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send(info)
+        .end((err, res) => {
+         // console.log(res.header)
+          //do the get request here 
+          chai.request(server)
+          .get('/user/account')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('token', res.header['token'])
+          .end((err, res) => {
+            res.should.have.status(400)
+           // console.log(res)
+          })
+         })
         });
-    
-        it('GET request without correct auth token should return 401', function(done){
-          chai.request(server).get('/user/account').set('x-auth', 'a bad key').end(function(err, res){
-            res.should.have.status(401);
-            done();
-          });
+      
+      done()
+    })
+  })
+
+  describe('Check if user is not authenticated', () =>{
+    User.findOneAndUpdate({username: uname}, {$set: {standing: 'good'}})
+    it('Should return 400', (done) => {
+      var info = {
+        username: uname,
+        password: pword,
+      }
+      User.findOne({username: uname}, (err, user) => {
+        chai.request(server)
+        .post('/user/login')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send(info)
+        .end((err, res) => {
+          //do the get request here 
+          chai.request(server)
+          .get('/user/account')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('token', 'bad token')
+          .end((err, res) => {
+            res.should.have.status(400)
+           // console.log(res)
+          })
+         })
         });
-    
-        it('GET requset with correct auth token should return 200', function(done){
-          chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
-            res.should.have.status(200);
-            done();
-          });
+      
+      done()
+    })
+  })
+
+  describe('Correct request', () =>{
+    User.findOneAndUpdate({username: uname}, {$set: {standing: 'good'}})
+
+    it('Should return 200', (done) => {
+      var info = {
+        username: uname,
+        password: pword,
+      }
+
+      User.findOne({username: uname}, (err, user) => {
+        chai.request(server)
+        .post('/user/login')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send(info)
+        .end((err, res) => {
+         // console.log(res.header)
+          //do the get request here 
+          chai.request(server)
+          .get('/user/account')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('token', res.header['token'])
+          .end((err, res) => {
+            res.should.have.status(400)
+           // console.log(res)
+          })
+         })
         });
-    
-        it('GET request should return an object with id, username, and email', function(done){
-          chai.request(server).get('/user/account').set('x-auth', testAccountToken).end(function(err, res){
-            res.should.be.json;
-            res.body.should.be.a('object');
-            res.body.should.have.property('_id');
-            res.body.should.have.property('username');
-            res.body.should.have.property('email');
-            done();
-          });
-        })
-        
-     });
+      
+      done()
+    })
+  })
+
 })

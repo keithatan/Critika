@@ -19,7 +19,7 @@ describe('Register', () => {
 
     before(function(done){
         User.deleteOne({username: uname}, function(err){
-            //console.log(err)
+            console.log(err)
         })
         done();
     })
