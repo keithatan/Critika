@@ -57,7 +57,7 @@
                   </div>
   
                   <div class="d-flex flex-column">
-                    <p>                      <button type="button" class="btn btn-secondary">Test</button>
+                    <p>                      <button type="button" (click) = "renderAdmin()" class="btn btn-secondary">Admin</button>
                     </p>
                     <p>                      <button type="button" class="btn btn-secondary">Test</button>
                     </p>
@@ -87,6 +87,7 @@
       <app-home *ngIf="renderComponent == 'home' "></app-home>
       <app-profile *ngIf="renderComponent == 'profile' "></app-profile>
       <app-my-submissions *ngIf="renderComponent == 'my-submissions'"></app-my-submissions>
+      <app-admin *ngIf="renderComponent == 'Admin' "></app-admin>
     </div>
 
 
