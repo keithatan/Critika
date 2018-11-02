@@ -204,22 +204,24 @@ router.post("/rating", authenticate, (req, res) => {
 
     User.findOne({ username: req.body.recuser }).then((foundUser) => {
         recUser = foundUser
+        recUser.rating++;
+        User.findOneAndUpdate({ username: req.body.recuser },
+            {
+                $set: {
+                    ratingNum: recUser.rating,
+                    rating: (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating))),
+                },
+            }).then(() => {
+                res.status(200).send({ message: 'Rating successfully updated' })
+            }).catch((err) => {
+                res.status(400).send({ message: "Error changing rating" });
+                console.log(err)
+            })
     }).catch((err) => {
         res.status(400).send(err);
     })
 
-    User.findOneAndUpdate({ username: req.body.recuser },
-        {
-            $set: {
-                ratingNum: recUser.rating + 1,
-                rating: (parseFloat(JSON.stringify(req.body.rating)) + parseFloat(JSON.stringify(recUser.rating))) / ratingNo,
-            }
-        }).then(() => {
-            res.status(200).send({ message: 'Rating successfully updated' })
-        }).catch((err) => {
-            res.status(400).send({ message: "Error changing rating" });
-            res.send(err);
-        })
+    
 
 });
 
