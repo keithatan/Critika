@@ -17,9 +17,13 @@ var mail = process.env.UNIT_TEST_EMAIL
 
 describe('Register', () => {
 
-    before(function(done){
-        User.deleteOne({username: uname}, function(err){
-            //console.log(err)
+    beforeEach(function(done){
+        User.deleteOne({username: uname}, function(err, obj){
+            if(err){
+                console.log(err)
+                return
+            }
+            //console.log(obj)
         })
         done();
     })
@@ -187,6 +191,9 @@ describe('Register', () => {
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .send(info)
                 .end((err, res) => {
+                    if(err){
+                        console.log(err)
+                    }
                     console.log(res.body)
                     res.should.have.status(200);
                 done();

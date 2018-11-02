@@ -4,44 +4,59 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
-
-
-var testAccountToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmI3MThhNDc4N2RiMjY3MWQ2YmJkM2YiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTM4NzI2MDUyfQ.uEq6an0foYBiskXd4d3Ud6wnm94up07feS-UJxjxSSU'
+var User = require('../../model/user');
 
 chai.use(chaiHttp);
 
-describe('Test GET Submission', function(){
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
 
-  describe('Test GET /submission/mine', function(){
+describe('Submission/mine', function(){
 
-    it('GET request without auth token should return 401', function(done){
-      chai.request(server).get('/submission/mine').end(function(err, res){
-        res.should.have.status(401);
-        done();
+  describe('Test with bad token', function(){
+    it('Should return 401', function(done) {
+      var info = {
+        username: uname,
+        password: pword,
+      }
+
+      User.findOne({username: uname}, (err, user) => {
+        chai.request(server)
+        .post('/sub/login')
+        .set('content-type', 'application/x-www-form-urlencoded')
+        .send(info)
+        .end((err, res) => {
+          secondRequest(res)
+         })
       });
-    });
 
-    it('GET request without correct auth token should return 401', function(done){
-      chai.request(server).get('/submission/mine').set('x-auth', 'bad token').end(function(err, res){
-        res.should.have.status(401);
-        done();
-      });
-    });
-
-    it('GET request without correct auth token should return 401', function(done){
-      chai.request(server).get('/submission/mine').set('x-auth', testAccountToken).end(function(err, res){
-        res.should.have.status(200);
-        done();
-      });
-    });
-
-    it('GET request should return all user submissions with proper response', function(done){
-      chai.request(server).get('/submission/mine').set('x-auth', testAccountToken).end(function(err, res){
-        res.should.be.json;
-        res.should.have.status(200);
-        done();
-      });
+      function secondRequest(res){
+        console.log('here')
+        request(server)
+          .get('/submission/mine')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('token', res.header['token'])
+          .end((err, res) => {
+            console.log('here2')
+            res.should.have.status(401)
+          })
+      }
+      done()
     })
-  });
+  })
 
-});
+  
+  describe('Test with bad token', function(){
+    it('Should return 401', function() {
+      
+    })
+  })
+
+  describe('Should work', function(){
+    it('Should return 200', function() {
+      
+    })
+  })
+
+})

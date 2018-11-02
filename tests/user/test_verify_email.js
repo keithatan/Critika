@@ -104,6 +104,7 @@ describe('Verify Email', () => {
                     console.log(err)
                     return
                 }
+                console.log(err)
                 //console.log(user['verificationNum'])
                 let info = {
                     username: uname,
@@ -116,6 +117,10 @@ describe('Verify Email', () => {
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .send(info)
                     .end((err, res) => {
+                        if(err){
+                            console.log(err)
+                            return
+                        }
                         //console.log(info)
                         res.should.have.status(200);
                     done();
