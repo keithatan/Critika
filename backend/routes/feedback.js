@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
  * Each user can only give one feedback
  */
 router.post('/add-feedback', (req, res) => {
-    if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionID){
+    if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionName){
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
@@ -38,7 +38,7 @@ router.post('/add-feedback', (req, res) => {
       username: req.body.username,
       feedbackMessage: req.body.feedbackMessage,
       feedbackSubject: req.body.feedbackSubject,
-      submissionID: req.body.submissionID,
+      submissionName: req.body.submissionName,
     });
 
     Feedback.find({username: req.body.username}).then((subs) => {
