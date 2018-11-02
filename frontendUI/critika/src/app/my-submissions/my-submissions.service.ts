@@ -47,4 +47,16 @@ export class SubmissionService{
             
     }
 
+    spendCoins(username1: string, coins1: string){
+        const submission:Object = {recuser : username1, coins: coins1}
+        var p = new Submission(submission)
+        console.log (p)
+        this.http.post("http://localhost:5000/user/remove-coin", p)
+        .subscribe((response) => {
+            console.log(response)
+        })
+
+        return this.mySubmissions
+    }
+
 }
