@@ -1,6 +1,6 @@
 <form (submit) = "onSignup(f)" #f="ngForm"  class="text-center border border-light p-5">
 
-        <p class="h4 mb-4">Sign in</p>
+        <p class="h4 mb-4">Register</p>
       
         <!-- Email -->
         <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel #usernameInput="ngModel">
@@ -19,11 +19,18 @@
         </div>
       
         <!-- Sign in button -->
-        <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+        <button mdbBtn color="info" block="true" class="my-4" type="submit">Register</button>
       
         <!-- Register -->
-        <p>Not a member?
-          <a routerLink="/register">Register</a>
+        <p>Already Have an Account?
+          <a routerLink="/login">Login</a>
         </p>
+
+        <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">
+          Form is Incomplete
+        </div>
+        <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
+          Account with that Username / Email Already Exists
+        </div>
       
 </form> 

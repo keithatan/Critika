@@ -15,6 +15,7 @@ export class AuthService{
     private token:string
     private authStatusListener = new Subject<boolean>();
     failed:boolean = true;
+    incomplete:string;
 
     constructor(private http:HttpClient){
 
@@ -33,7 +34,22 @@ export class AuthService{
         this.http.post("http://localhost:5000/user/register", auth)
             .subscribe(response => {
                 console.log(response)
+                this.incomplete = "complete";
+            },
+            error => {
+              console.log(error.error)
+              if (error.error.message == "User data is incomplete") {
+                this.incomplete = "incomplete";  
+              }
+              else if (error.error.name == "MongoError") {
+                this.incomplete = "duplicate"
+              }
+              else {
+                  this.incomplete = "failed"
+              }
+              console.log(this.incomplete)
             });
+            return this.incomplete;
     }
 
     login(username:string, password:string){
