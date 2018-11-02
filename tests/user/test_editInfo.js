@@ -4,44 +4,161 @@ var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
 var functions = require('../unitTestFunctions.js')
-
-var testAccountToken = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YmI3MThhNDc4N2RiMjY3MWQ2YmJkM2YiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTM4NzI2MDUyfQ.uEq6an0foYBiskXd4d3Ud6wnm94up07feS-UJxjxSSU'
+var User = require('../../model/user');
 
 chai.use(chaiHttp);
 
-describe('test POST user/edit-info', function(){
+var uname = process.env.UNIT_TEST_USERNAME
+var pword = process.env.UNIT_TEST_PASSWORD
+var mail = process.env.UNIT_TEST_EMAIL
 
-    it('should return 400 if no email', function(done){
-        chai.request(server).post('/user/edit-info')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .set('x-auth', testAccountToken)
-        .send({securityquetion: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400);
-            done();
-         });
+describe('test edit info', function() {
+
+    describe('Edit info without email', function(done) {
+        it('should return 400', function(done) {
+            var info = {
+                username: uname,
+                password: pword,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok'
+            }
+        
+            User.findOne({username: uname}, (err, user) => {
+            chai.request(server)
+            .post('/user/login')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                //do the get request here 
+                chai.request(server)
+                .get('/user/edit-info')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .set('token', res.header['token'])
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+                })
+            });
+            done()
+        })
     })
 
-    it('should return 400 if no securityquestio', function(done){
-        chai.request(server).post('/user/edit-info')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .set('x-auth', testAccountToken)
-        .send({email: 'connortodd21@gmail.com'})
-        .end(function(err, res){
-            res.should.have.status(400);
-            done();
-        });
+    describe('Edit info without security question', function(done) {
+        it('should return 400', function(done) {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestionanswer: 'ok'
+            }
+        
+            User.findOne({username: uname}, (err, user) => {
+            chai.request(server)
+            .post('/user/login')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                //do the get request here 
+                chai.request(server)
+                .get('/user/edit-info')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .set('token', res.header['token'])
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+                })
+            });
+            done()
+        })
     })
 
-    it('should return 400 if bad email', function(done){
-        chai.request(server).post('/user/edit-info')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .set('x-auth', testAccountToken)
-        .send({email: 'bad email', securityquetion: 'ok'})
-        .end(function(err, res){
-            res.should.have.status(400);
-            done();
-        });
+    describe('Edit info without email', function(done) {
+        it('should return 400', function(done) {
+            var info = {
+                username: uname,
+                password: pword,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok'
+            }
+        
+            User.findOne({username: uname}, (err, user) => {
+            chai.request(server)
+            .post('/user/login')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                //do the get request here 
+                chai.request(server)
+                .get('/user/edit-info')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .set('token', res.header['token'])
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+                })
+            });
+            done()
+        })
+    })
+
+    describe('Edit info with bad auth token', function(done) {
+        it('should return 400', function(done) {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok'
+            }
+        
+            User.findOne({username: uname}, (err, user) => {
+            chai.request(server)
+            .post('/user/login')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                //do the get request here 
+                chai.request(server)
+                .get('/user/edit-info')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .set('token', 'bad token')
+                .end((err, res) => {
+                    res.should.have.status(400)
+                })
+                })
+            });
+            done()
+        })
+    })
+
+    describe('Edit info without email', function(done) {
+        it('should return 200', function(done) {
+            var info = {
+                username: uname,
+                password: pword,
+                email: mail,
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok'
+            }
+        
+            User.findOne({username: uname}, (err, user) => {
+            chai.request(server)
+            .post('/user/login')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info)
+            .end((err, res) => {
+                //do the get request here 
+                chai.request(server)
+                .get('/user/edit-info')
+                .set('content-type', 'application/x-www-form-urlencoded')
+                .set('token', res.header['token'])
+                .end((err, res) => {
+                    res.should.have.status(200)
+                })
+                })
+            });
+            done()
+        })
     })
 
 })
