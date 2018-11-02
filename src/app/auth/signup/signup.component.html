@@ -1,0 +1,29 @@
+<form (submit) = "onSignup(f)" #f="ngForm"  class="text-center border border-light p-5">
+
+        <p class="h4 mb-4">Sign in</p>
+      
+        <!-- Email -->
+        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel #usernameInput="ngModel">
+      
+        <!-- Password -->
+        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel #passwordInput="ngModel">
+        <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Email" ngModel #emailInput="ngModel">
+        <input type="text" id="securityquestion" name="securityquestion" class="form-control mb-4" placeholder="Security Question" ngModel #sqInput="ngModel">
+        <input type="text" id="securityanswer" name="securityanswer" class="form-control mb-4" placeholder="Security Answer" ngModel #saInput="ngModel">
+      
+        <div class="d-flex justify-content-around">
+          <div>
+            <!-- Forgot password -->
+            <!-- <a href="">Forgot password?</a> -->
+          </div>
+        </div>
+      
+        <!-- Sign in button -->
+        <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
+      
+        <!-- Register -->
+        <p>Not a member?
+          <a routerLink="/register">Register</a>
+        </p>
+      
+</form> 
