@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router'
 import { AppRoutes } from './app.routing';
@@ -14,7 +14,7 @@ import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
 import {AddSubComponent} from './profile/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
-
+import {CategoriesComponent} from './categories/categories.component';
 import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
@@ -37,6 +37,7 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     HomeComponent,
     MyQueueComponent,
     ProfileComponent,
+    CategoriesComponent,
     SpendCoinsComponent,
     EditSubComponent,
     MySubmissionsComponent,
@@ -52,9 +53,11 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     ReactiveFormsModule,
     RouterModule.forRoot(AppRoutes),
     MDBBootstrapModule.forRoot()
+    
   ],
 
   providers: [{provide: HTTP_INTERCEPTORS, useClass:AuthInterceptor, multi: true}],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  //schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }
