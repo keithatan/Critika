@@ -15,14 +15,17 @@ export const AppRoutes: Routes = [
     },
     {
         path: 'dashboard',
-        component: DashboardComponent
+        component: DashboardComponent,
+        outlet: 'Auth'
     },
     {
         path: 'register',
-        component: SignupComponent
+        component: SignupComponent,
+        outlet: 'noAuth'
     },
     {
         path: 'login',
-        component: LoginComponent
+        component: LoginComponent,
+        outlet: 'noAuth'
     },
 ]

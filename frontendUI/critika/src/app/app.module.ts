@@ -37,7 +37,9 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     HomeComponent,
     MyQueueComponent,
     ProfileComponent,
-
+    SpendCoinsComponent,
+    EditSubComponent,
+    MySubmissionsComponent,
     LoginComponent,
     SignupComponent
     
@@ -48,10 +50,6 @@ import { EditSubComponent } from './profile/edit-sub/edit-sub.component';
     HttpClientModule,
     FormsModule,                            
     ReactiveFormsModule,
-
-    MySubmissionsComponent,
-    SpendCoinsComponent,
-    EditSubComponent,
     RouterModule.forRoot(AppRoutes),
     MDBBootstrapModule.forRoot()
   ],

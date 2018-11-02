@@ -1,1 +1,10 @@
-<router-outlet></router-outlet>
+<div *ngIf="userAuthed == false">
+    <h1>not logged in</h1>
+    <router-outlet name="noAuth">
+    </router-outlet>
+  </div>
+  <div *ngIf="userAuthed">
+    <h1>logged in</h1>
+    <router-outlet name="Auth">
+    </router-outlet>
+  </div>
