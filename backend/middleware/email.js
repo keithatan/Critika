@@ -25,7 +25,7 @@ function mailer(to, subject, body) {
         text: body
     };
 
-    console.log("Sending to: " + to)
+    //console.log("Sending to: " + to)
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
             //console.error(error);

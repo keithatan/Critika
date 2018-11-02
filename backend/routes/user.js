@@ -124,7 +124,7 @@ router.post("/login", (req, res) => {
                 res.header('token', token).send(user);
             });
         }).catch((err) => {
-            console.log(err)
+            //console.log(err)
             res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
