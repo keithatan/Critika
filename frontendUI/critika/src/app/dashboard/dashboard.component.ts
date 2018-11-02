@@ -18,6 +18,11 @@ export class DashboardComponent implements OnInit {
 
   }
 
+  renderProfile(){
+    this.renderComponent = "profile";
+
+  }
+
   ngOnInit() {
   }
 
