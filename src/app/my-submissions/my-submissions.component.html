@@ -1,17 +1,11 @@
 <div class="p-2 profile">
   <mdb-card class="outerCard">
     <button (click)="getSubmissionsPls()">Get Submissions</button>
-
-    
-            
                 <ul>
                   <div *ngFor="let submission of mySubmissions">
                     <li >{{submission.submissionName}}</li>
                     <li> {{submission.submissionText}}</li>
-
                   </div>
-                    
                   </ul>
-
   </mdb-card>
 </div>
