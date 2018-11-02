@@ -1,4 +1,5 @@
-
+<div class="p-2 profile">
+  <mdb-card>
       <div class="p-2 profile">
           <mdb-card>
   
@@ -25,7 +26,10 @@
                       {{Link}}
                     </td>
                     <td>
-                      <button mdbBtn color="indigo" size="sm" mdbWavesEffect type="button" class="m-0">Button</button>
+                      <button mdbBtn color="indigo" 
+                              size="sm" 
+                               mdbWavesEffect type="button" class="m-0" 
+                               (click) = "renderCritiqueForm()">Button</button>
                     </td>
                   </tr>
                   
@@ -35,3 +39,11 @@
             </mdb-card-body>
           </mdb-card>
         </div>
+   
+  </mdb-card>
+
+  <!-- Render the other component stuff -->
+  <div class="d-flex flex-column justify-content-center animated fadeInUp">
+    <app-critique-form *ngIf="renderComponent == 'critique-form'"></app-critique-form>
+  </div>
+</div>
