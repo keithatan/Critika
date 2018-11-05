@@ -344,7 +344,7 @@ router.post("/restore-user", authenticate, (req, res) => {
     }
 
     else {
-        User.findByRecoveryName(req.body.usernameToBeRestored, req.body.password).then((user) => {
+        User.findByRecoveryName(req.body.usernameToBeRestored).then((user) => {
             User.findOneAndUpdate({ recoveryUsername: req.body.usernameToBeRestored }, { $set: { username: req.body.usernameToBeRestored, standing: "good" } })
                 .then(() => {
                     res.status(200).send({ message: "User is now restored" })
