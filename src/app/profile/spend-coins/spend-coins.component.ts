@@ -10,15 +10,18 @@ import { Submission } from '../../my-submissions/my-submissions.model';
 export class SpendCoinsComponent implements OnInit {
   mySubmissions:Submission[];
   Coins: string;
+  myCoins: number;
 
   constructor(public subService:SubmissionService) {
     this.Coins = "1";
+    this.myCoins = 5;
    }
   
   
 
   spendCoins(){
     this.mySubmissions = this.subService.spendCoins(localStorage.getItem('user'), this.Coins, );
+    this.myCoins -=1;
   }
 
   ngOnInit() {
