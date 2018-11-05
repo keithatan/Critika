@@ -3,8 +3,9 @@
     <button (click)="getSubmissionsPls()">Get Submissions</button>
                 <ul>
                   <div *ngFor="let submission of mySubmissions">
-                    <li >{{submission.submissionName}}</li>
-                    <li> {{submission.submissionText}}</li>
+                    <li >Submission Name: {{submission.submissionName}}</li>
+                    <li>Submission Text: {{submission.submissionText}}</li>
+                    <li>Submission Category: {{submission.category}}</li>
                     <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
                   </div>
                   </ul>
