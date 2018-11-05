@@ -245,7 +245,7 @@ router.post("/add-coin", authenticate, (req, res) => {
     User.findOneAndUpdate({ username: req.body.recuser },
         {
             $set: {
-                coins: recUser.coins + parseInt(req.body.coins),
+                coins: 2,
             }
         }).then(() => {
             res.status(200).send({ message: 'Coins successfully added' })

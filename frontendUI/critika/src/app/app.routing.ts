@@ -28,4 +28,9 @@ export const AppRoutes: Routes = [
         component: LoginComponent
         
     },
+    {
+        //404 error, leave this one as last route check
+        path: '**',
+        component: DashboardComponent,
+    }
 ]
