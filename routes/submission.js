@@ -37,6 +37,7 @@ router.post("/add", authenticate, (req, res) => {
         submissionName: req.body.submissionName,
         submissionText: req.body.submissionText,
         username: req.user.username,
+        available: true,
         /*community: req.body.community,*/
     });
 
@@ -48,7 +49,7 @@ router.post("/add", authenticate, (req, res) => {
                 submissionNum: req.user.submissionNum + 1
             }
         }).then(() => {
-            res.status(200).send({ message: 'User information successfully updated!' })
+            //res.status(200).send({ message: 'Submission Added!' })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
@@ -57,6 +58,7 @@ router.post("/add", authenticate, (req, res) => {
 
     // Add to database 
     newSubmission.save().then(() => {
+        console.log(newSubmission)
         res.status(200).send(newSubmission);
     }).catch((err) => {
         res.status(400);
@@ -198,7 +200,8 @@ router.get("/mine", authenticate, (req, res) => {
  * Route to get available submissions 
  */
 router.get("/available", authenticate, (req, res) => {
-    Submission.find({}).then((subs) => {
+    Submission.find({available : true}).then((subs) => {
+        console.log(subs)
         var userMap = {};
 
         subs.forEach(function(user) {
