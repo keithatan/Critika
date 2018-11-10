@@ -57,7 +57,8 @@ router.post('/add-feedback', (req, res) => {
 })
 
 /*
- * Rate feedback from 1-5. only the owner of this submission can do this
+ * Rate feedback from 1-5 and update number of critiques received for submission
+ * only the owner of this submission can do this
  */
 router.post('/rate-feedback', authenticate, (req, res) => {
     if(!req.body || !req.body.username  || !req.body.submissionName || !req.body.feedbackRating){
@@ -70,6 +71,16 @@ router.post('/rate-feedback', authenticate, (req, res) => {
             return;
         }
     })
+
+    Submission.findOneAndUpdate({submissionName:  req.body.submissionName}, 
+        {
+            $set: 
+            {
+                numberOfCritiquesRecieved: numberOfCritiquesRecieved+1,
+            }
+        }).catch((err) => {
+            console.log(err)
+        })
    
     Feedback.findOneAndUpdate({submissionName:  req.body.submissionName}, 
         {

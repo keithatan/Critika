@@ -18,6 +18,7 @@ let submissionsSchema = new Schema({
       reportedMessage: String,
       reportedReason: String,
   }],
+  avaiable: {type: Boolean},
   dateSubmitted: {type: Date, default: Date.now},
   //receivedCritiqueIDs: {type: [String], required: true}, 
   numberOfCritiquesRecieved: {type: Number, default: 0}
