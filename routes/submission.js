@@ -187,6 +187,27 @@ router.get('/all-reported', authenticate, (req, res) => {
     })
 })
 
+/*
+ * Make a submission unavailable
+ */
+router.post("/make-unavailable", authenticate, (req, res) => {
+
+    if(!req.body || !req.body.submissionID){
+        res.status(400).send({ message: 'Bad information' })
+    }
+
+    Submission.findOneAndUpdate({_id: submissionID, 
+        $set:
+        {
+            available: false,
+        }
+    }).then(() => {
+        res.status(200).send("Submission now unavailable")
+    }).catch((err) => {
+        res.status(400).send(err)
+    })
+})
+
 /**
  * Get user's peronal submissions
  */
