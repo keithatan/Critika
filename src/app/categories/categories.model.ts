@@ -1,11 +1,11 @@
-export class Community{
-    communityName;
-    communityDescription;
+export class Category{
+    categoryName;
+    categoryDescription;
     founder;
 
     constructor(response:any){
-        this.communityName = response.communityName;
-        this.communityDescription = response.communityDescription;
+        this.categoryName = response.communityName;
+        this.categoryDescription = response.communityDescription;
         this.founder = response.founder;
     }
 
