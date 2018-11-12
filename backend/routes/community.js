@@ -58,7 +58,7 @@ router.post("/create-community", authenticate, (req, res) => {
 /**
  * Get all submissions in a community
  */
-router.get("/all-community", authenticate, (req, res) => {
+router.get("/all-subs-in-community", authenticate, (req, res) => {
     Submission.find({ community: req.headers.community }).then((subs) => {
         res.send(subs);
     }).catch((err) => {
@@ -71,7 +71,6 @@ router.get("/all-community", authenticate, (req, res) => {
  */
 
 router.get("/get-all-community", authenticate, (req, res) => {
-
     Community.find({}).then((community) => {
         res.send(community);
     }).catch((err) => {
