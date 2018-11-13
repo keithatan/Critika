@@ -26,10 +26,10 @@ router.get("/", (req, res) => {
 /**
  * Create a new community
  */
-router.post("/create-community", authenticate, (req, res) => {
+router.post("/create-category", authenticate, (req, res) => {
 
     if (!req.body || !req.body.username || !req.body.communityName || !req.body.communityDescription) {
-        res.status(400).json({ message: "Community data is incomplete" });
+        res.status(400).json({ message: "category data is incomplete" });
         return;
     }
 
@@ -58,7 +58,7 @@ router.post("/create-community", authenticate, (req, res) => {
 /**
  * Get all submissions in a community
  */
-router.get("/all-subs-in-community", authenticate, (req, res) => {
+router.get("/all-subs-in-category", authenticate, (req, res) => {
     Submission.find({ community: req.headers.community }).then((subs) => {
         res.send(subs);
     }).catch((err) => {
@@ -70,7 +70,7 @@ router.get("/all-subs-in-community", authenticate, (req, res) => {
  * Get all communities
  */
 
-router.get("/get-all-community", authenticate, (req, res) => {
+router.get("/get-all-category", authenticate, (req, res) => {
     Community.find({}).then((community) => {
         res.send(community);
     }).catch((err) => {
