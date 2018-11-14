@@ -8,7 +8,7 @@
     <mdb-card-body>
         <h4>Coins</h4>
         <!-- <h1> {{profile.coins}}</h1> -->
-        <h1> {{coins}}</h1>
+        <h1 *ngIf="profile"> {{profile.coins}}</h1>
     </mdb-card-body>
 </mdb-card>
 
@@ -18,6 +18,6 @@
     <mdb-card-body>
 
         <h4>Member Since:</h4>
-        <h1> {{profile.memberSince}}</h1>
+        <h1 *ngIf="profile"> {{profile.username}}</h1>
     </mdb-card-body>
 </mdb-card>
