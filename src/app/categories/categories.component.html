@@ -1,7 +1,7 @@
 <input type="text" [(ngModel)]="queryString" id="search" placeholder="Search for categories">
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
-<ul *ngFor="let c of categoriesForFilter | categoriesPipe: queryString">
+<ul *ngFor="let c of categoriesForFilter | searchPipe: queryString">
 <li> {{c.communityName}} </li>
 </ul>
   
