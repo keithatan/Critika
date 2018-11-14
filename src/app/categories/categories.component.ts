@@ -36,18 +36,20 @@ export class CategoriesComponent implements OnInit {
   }
 
   onSearchChange(searchValue: string) {
-    let i: number;
     this.subService.getAllCategories().then((categories) => {
+
       //categories is an array of all categories
       this.categoriesForFilter = categories;
       let i:number;
       for(let x in categories){
-        // console.log(categories[x].communityName)
         var name = categories[x].communityName
         this.categoryNames[i] = name
-
       }
+
+      // this.categoryNames.filter(searchValue => filterFrom.some())
+
     })
   }
+
 
 }
