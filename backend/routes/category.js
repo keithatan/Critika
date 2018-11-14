@@ -13,40 +13,40 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
-var Community = require('../model/community')
+var category = require('../model/category')
 
 
 /**
- * All community related routes
+ * All category related routes
  */
 router.get("/", (req, res) => {
-    res.send('This route is for all community related tasks');
+    res.send('This route is for all category related tasks');
 });
 
 /**
- * Create a new community
+ * Create a new category
  */
 router.post("/create-category", authenticate, (req, res) => {
 
-    if (!req.body || !req.body.username || !req.body.communityName || !req.body.communityDescription) {
+    if (!req.body || !req.body.username || !req.body.categoryName || !req.body.categoryDescription) {
         res.status(400).json({ message: "category data is incomplete" });
         return;
     }
 
-    // New Community Data
-    var newCommunity = new Community({
-        communityName: req.body.communityName,
-        communityDescription: req.body.communityDescription,
+    // New category Data
+    var newcategory = new category({
+        categoryName: req.body.categoryName,
+        categoryDescription: req.body.categoryDescription,
         founder: req.body.username,
     });
     
     // Add to database 
-    newCommunity.save().then(() => {
-        res.status(200).send(newCommunity)
+    newcategory.save().then(() => {
+        res.status(200).send(newcategory)
     }).catch((err) => {
         res.status(400).send(err);
     }).then(() => {
-        Community.findOneAndUpdate({ communityName: req.body.communityName }, { $push: {moderators: req.body.username}}).then(() => {
+        category.findOneAndUpdate({ categoryName: req.body.categoryName }, { $push: {moderators: req.body.username}}).then(() => {
             }).catch((err) => {
                 res.status(400).send({ message: "An error has occoured with adding initial mod" });
                 res.send(err);
@@ -56,10 +56,11 @@ router.post("/create-category", authenticate, (req, res) => {
 });
 
 /**
- * Get all submissions in a community
+ * Get all submissions in a category
  */
 router.get("/all-subs-in-category", authenticate, (req, res) => {
-    Submission.find({ community: req.headers.community }).then((subs) => {
+    Submission.find({ category: req.headers.category }).then((subs) => {
+        console.log(req.headers.category)
         res.send(subs);
     }).catch((err) => {
         res.status(400).send(err)
@@ -71,8 +72,8 @@ router.get("/all-subs-in-category", authenticate, (req, res) => {
  */
 
 router.get("/get-all-category", authenticate, (req, res) => {
-    Community.find({}).then((community) => {
-        res.send(community);
+    category.find({}).then((category) => {
+        res.send(category);
     }).catch((err) => {
         res.status(400).send(err);
     })

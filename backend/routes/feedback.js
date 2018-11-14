@@ -13,7 +13,6 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
-var Community = require('../model/community')
 var Feedback = require('../model/feedback')
 
 /**
@@ -33,7 +32,7 @@ router.post('/add-feedback', (req, res) => {
         return;
     }
 
-  // New Community Data
+  // New category Data
   var newFeedback = new Feedback({
       username: req.body.username,
       feedbackMessage: req.body.feedbackMessage,

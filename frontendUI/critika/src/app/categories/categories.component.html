@@ -2,6 +2,6 @@
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString">
-<li> {{c.communityName}} </li>
+  <li (click)="getSubmissionsInCategory(c.categoryName)"> {{c.categoryName}} </li>
 </ul>
-  
+<p><button type="button" (click)="createCategory()">Create Category</button></p>

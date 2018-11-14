@@ -1,4 +1,5 @@
 var express = require('express');
+// import { Category } from '../../frontendUI/critika/src/app/categories/categories.model';
 var router = express.Router();
 let mongoose = require('mongoose');
 var authenticate = require('../middleware/auth');
@@ -13,6 +14,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
+var Category = require('../model/category')
 
 /**
  * All submission related routes
@@ -31,6 +33,15 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
+    if(req.body.category ){
+        Category.findOne({categoryName: req.body.category}).then((res) => {
+            console.log(res)
+        })
+    }
+    else{
+        console.log(req.body.category)
+    }
+
     // New Submission Data
     var newSubmission = new Submission({
         category: req.body.category,
@@ -38,7 +49,7 @@ router.post("/add", authenticate, (req, res) => {
         submissionText: req.body.submissionText,
         username: req.user.username,
         available: true,
-        /*community: req.body.community,*/
+        /*category: req.body.category,*/
     });
 
     // Change submission num

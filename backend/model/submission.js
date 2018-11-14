@@ -11,7 +11,7 @@ let submissionsSchema = new Schema({
   submissionText: {type: String},
   submissionSkillLevel: {type: String},
   username: {type: String, required: true}, 
-  community: {type: String, unique: true},
+  category: {type: String, unique: true},
   comments:[{
       user: String,
       message: String,
