@@ -19,8 +19,8 @@ export class MySubmissionsComponent implements OnInit {
   constructor(public subService:SubmissionService) { 
   }
 
-  getSubmissionsPls(){
-    this.mySubmissions = this.subService.getSubmissions();
+  getSubmissions(){
+
   }
   renderFileReport() {
         this.renderComponent = "file-report";
@@ -33,6 +33,30 @@ export class MySubmissionsComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.subService.getSubmissions().then((data) =>{
+      let i:number;
+
+      let response = [];
+      response = [
+      {
+        submissionName: '',
+        submissionText: '',
+        username: '',
+        category:'',
+        coins: '',
+        recuser: ''
+      }
+      ];
+
+      response.push(data);
+
+      this.mySubmissions = new Array(response.length)
+
+      for(i = 0;i< response.length; i+=1) {
+          let submission = new Submission(response[i])
+          this.mySubmissions[i] = submission;
+       }
+      });
   }
 
 }
