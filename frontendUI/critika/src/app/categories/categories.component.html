@@ -1,9 +1,8 @@
-<input class="form-control" type="text" ngmodel="search" placeholder="Search" aria-label="Search" (input)="onSearchChange($event.target.value)">
-<button (click)="getAllCategories()">Search Categories</button>
-<div *ngFor="let c of communities"> 
+<input class="form-control" type="text" ngmodel="search" placeholder="Search Categories" aria-label="Search" (input)="onSearchChange($event.target.value)">
 
+<div *ngFor="let c of categoryNames">
 
- <mdb-card>
+  <mdb-card>
     <mdb-card-body>
       <mdb-card-title>
         <h4>{{c.categoryName}}</h4>

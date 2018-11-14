@@ -33,11 +33,11 @@ export class AuthService{
         const auth: AuthData = {email: email, username: username, password: password, securityquestionanswer: securityanswer, securityquestion: securityquestion}
         this.http.post("http://localhost:5000/user/register", auth)
             .subscribe(response => {
-                console.log(response)
+                // console.log(response)
                 this.incomplete = "complete";
             },
             error => {
-              console.log(error.error)
+            //   console.log(error.error)
               if (error.error.message == "User data is incomplete") {
                 this.incomplete = "incomplete";  
               }
@@ -47,7 +47,7 @@ export class AuthService{
               else {
                   this.incomplete = "failed"
               }
-              console.log(this.incomplete)
+            //   console.log(this.incomplete)
             });
             return this.incomplete;
     }
@@ -57,10 +57,10 @@ export class AuthService{
         const auth: AuthData = {username: username, password: password, securityquestionanswer: "", securityquestion: "", email: ""}
         this.http.post("http://localhost:5000/user/login", auth, httpOptions)
             .subscribe(response => {
-                console.log(response)
+                // console.log(response)
                 const token = response.headers.get('token');
                 this.token = token
-                console.log(this.token)
+                // console.log(this.token)
                 this.authStatusListener.next(true)
                 this.saveAuthData(token, username);
                 this.failed = false;

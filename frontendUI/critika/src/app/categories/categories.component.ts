@@ -1,6 +1,8 @@
 import { CategoriesService } from './categories.service';
 import { Component, OnInit } from '@angular/core';
 import { Category } from './categories.model';
+import { HttpClient } from '@angular/common/http';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-categories',
@@ -11,37 +13,41 @@ import { Category } from './categories.model';
 
 export class CategoriesComponent implements OnInit {
   allCategories: Category[];
-  categoriesForFilter: Category[];
+  categoriesForFilter: Object;
   renderComponent: string = "";
   categoryNames: String[];
 
-  constructor(private subService: CategoriesService) { 
-    this.allCategories = subService.getAllCategories();
-    console.log(subService)
-    console.log(subService.allCategoriesInService)
+  constructor(public subService:CategoriesService) { 
+    this.categoryNames = [];
+    this.allCategories = [];
+    this.categoriesForFilter = [];
   }
 
   getAllCategories() {
-    // console.log(3)
-    console.log(this.allCategories)
-    // this.allCategories = this.subService.getAllCategories();
+    return(this.allCategories)
   }
 
   renderFileReport() {
-    console.log(2)
     this.renderComponent = "file-report";
   }
 
   ngOnInit() {
-    console.log(this.subService)
+    
   }
 
   onSearchChange(searchValue: string) {
     let i: number;
-    // for (i = 0; i < this.allCategories.length; i += 1) {
-    //   console.log(this.allCategories[i])
-    // }
-    console.log(this.allCategories)
+    this.subService.getAllCategories().then((categories) => {
+      //categories is an array of all categories
+      this.categoriesForFilter = categories;
+      let i:number;
+      for(let x in categories){
+        // console.log(categories[x].communityName)
+        var name = categories[x].communityName
+        this.categoryNames[i] = name
+
+      }
+    })
   }
 
 }

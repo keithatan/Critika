@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
-import { Subject, Observable } from "rxjs";
+import { Subject, Observable, of } from "rxjs";
 import { Category } from './categories.model';
 import { Submission } from "../my-submissions/my-submissions.model";
 import { PARAMETERS } from "@angular/core/src/util/decorators";
@@ -16,25 +16,29 @@ export class CategoriesService {
 
     }
 
+    getAllCategoriesInService() {
+        return this.allCategoriesInService
+    }
+
     getAllCategories() {
+        return this.http.get<Object>("http://localhost:5000/community/get-all-category").toPromise();
+        /*
         this.http.get("http://localhost:5000/community/get-all-category")
             .subscribe((response: string) => {
                 let i: number;
-                //console.log(response)
                 this.allCategoriesInService = new Array(response.length)
 
                 for (i = 0; i < response.length; i += 1) {
                     let c = new Category(response[i])
-                    // console.log(c)
                     this.allCategoriesInService[i] = c;
                 }
 
                 console.log(this.allCategoriesInService)
 
             })
-        return this.allCategoriesInService
-
-
+            const ret = this.allCategoriesInService
+        return ret;
+        */
     }
 
     getAllSubmissionsInCategory(category) {
