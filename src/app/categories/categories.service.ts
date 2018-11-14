@@ -2,7 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { Subject, Observable, of } from "rxjs";
 import { Category } from './categories.model';
-import { Submission } from "../my-submissions/my-submissions.model";
+import { Submission } from "../models/submissions.model";
 import { PARAMETERS } from "@angular/core/src/util/decorators";
 
 @Injectable({ providedIn: "root" })
