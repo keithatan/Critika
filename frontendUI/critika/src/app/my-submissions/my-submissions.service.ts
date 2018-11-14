@@ -42,24 +42,7 @@ export class SubmissionService{
     }
 
     getAvailable(){
-        this.http.get("http://localhost:5000/submission/all")
-            .subscribe((response:string) => {
-
-                let i:number;
-
-                this.myAvailable = new Array(5)
-
-                for(i = 0;i< 5; i+=1) {
-                    let submission = new Submission(response[i])
-                    this.myAvailable[i] = submission;
-                 }
-        
-                console.log(this.myAvailable)
-
-            });    
-        
-            return this.myAvailable
-            
+        return this.http.get("http://localhost:5000/submission/all").toPromise();
     }
 
     getSubmissions(){
