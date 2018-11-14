@@ -112,24 +112,20 @@
         <!--/.Main wrapper-->
         <div>
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Ban User </button>
-
-
             <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                aria-hidden="true"
-                [config]="{backdrop: false, ignoreBackdropClick: true}"
-                >
+                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
                         <div class="modal-header">
                             <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
                                 <span aria-hidden="true">×</span>
                             </button>
-                            <h4 class="modal-title w-100" id="myModalLabel">Ban User</h4>
+                            <h4 id="myModalLabel1">Ban User</h4>
                         </div>
                         <div class="modal-body">
 
-                                <label for="form1" class="">User:</label>
-                                <input mdbInputDirective type="text" id="form1" class="form-control">
+                            <label for="form1" class="">User:</label>
+                            <input mdbInputDirective type="text" id="form1" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
@@ -142,6 +138,63 @@
             </div>
         </div>
 
+
+        <div>
+            <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Restore User </button>
+            <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 id="myModalLabel2"> Restore User</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <label for="form1" class="">User:</label>
+                            <input mdbInputDirective type="text" id="form1" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                                (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                                changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div>
+            <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Make User an Admin </button>
+            <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+                <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                                <span aria-hidden="true">×</span>
+                            </button>
+                            <h4 id="myModalLabel3">User:</h4>
+                        </div>
+                        <div class="modal-body">
+
+                            <label for="form1" class="">User:</label>
+                            <input mdbInputDirective type="text" id="form1" class="form-control">
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
+                                (click)="basicModal.hide()" mdbWavesEffect>Close</button>
+                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                                changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
     </mdb-card-body>
 </mdb-card>
