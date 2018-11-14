@@ -10,7 +10,6 @@ import {Submission} from '../my-submissions/my-submissions.model'
 export class HomeComponent implements OnInit {
   possibleSubs:Submission[];
 
-
   constructor(public subService:SubmissionService) {
     this.renderComponent = "";
   }
@@ -23,7 +22,20 @@ export class HomeComponent implements OnInit {
   Link: "Submission";
 
   ngOnInit() {
-    this.possibleSubs = this.subService.getAvailable();
+    this.subService.getAvailable().then((submissions)=>{
+
+      let i:number;
+
+      this.possibleSubs = new Array(5)
+
+      for(i = 0;i< 5; i+=1) {
+          let submission = new Submission(submissions[i])
+          this.possibleSubs[i] = submission;
+       }
+
+      //console.log(this.possibleSubs)
+
+    });
   }
 
 }
