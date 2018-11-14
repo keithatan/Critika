@@ -3,12 +3,13 @@ import { Component, OnInit } from '@angular/core';
 import { Category } from './categories.model';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Component({
   selector: 'app-categories',
   templateUrl: './categories.component.html',
   styleUrls: ['./categories.component.scss'],
-  providers: [CategoriesService]
+  providers: [CategoriesService],
 })
 
 export class CategoriesComponent implements OnInit {
@@ -32,10 +33,6 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
-    
-  }
-
-  onSearchChange(searchValue: string) {
     this.subService.getAllCategories().then((categories) => {
 
       //categories is an array of all categories
@@ -45,11 +42,13 @@ export class CategoriesComponent implements OnInit {
         var name = categories[x].communityName
         this.categoryNames[i] = name
       }
-
-      // this.categoryNames.filter(searchValue => filterFrom.some())
-
     })
+  }
+
+  onSearchChange(searchValue: string) {
+    
   }
 
 
 }
+

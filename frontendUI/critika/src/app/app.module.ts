@@ -5,6 +5,7 @@ import { RouterModule } from '@angular/router'
 import { AppRoutes } from './app.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
+import { CategoryPipe } from './filter.pipe'
 
 
 //import { AppRoutingModule } from './app-routing.module';
@@ -22,13 +23,11 @@ import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/auth.interceptor';
 
-
-
-
 import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
 import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
+
 
 
 @NgModule({
@@ -47,7 +46,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
     SignupComponent,
     AdminComponent,
     CritiqueFormComponent,
-    
+    CategoryPipe,
   ],
   imports: [
     BrowserModule,
