@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { renderComponent } from '@angular/core/src/render3';
+import {Profile} from './profile.model';
 
 @Component({
   selector: 'app-profile',
@@ -8,8 +9,12 @@ import { renderComponent } from '@angular/core/src/render3';
 })
 export class ProfileComponent implements OnInit {
 
+  coins:number;
+  profile:Profile;
+
   constructor() { 
     this.renderComponent = "";
+    this.coins = 4;
   }
 
   renderComponent: String;
