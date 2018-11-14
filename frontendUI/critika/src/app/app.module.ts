@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router'
 import { AppRoutes } from './app.routing';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
-import { CategoryPipe } from './filter.pipe'
+import { SearchPipe } from './filter.pipe'
 
 
 //import { AppRoutingModule } from './app-routing.module';
@@ -46,7 +46,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
     SignupComponent,
     AdminComponent,
     CritiqueFormComponent,
-    CategoryPipe,
+    SearchPipe,
   ],
   imports: [
     BrowserModule,
