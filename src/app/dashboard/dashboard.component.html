@@ -1,94 +1,84 @@
 <div class="container" *ngIf="userIsAuth">
-    <div class="d-flex justify-content-center align-items-center">
-      <div class="d-flex flex-column justify-content-center left animated fadeInUp">
-        <div class="p-2 profile">
-          <mdb-card> 
-              &nbsp;
-                            
-            <div class="view rgba-white-slight waves-light" mdbWavesEffect>
-              <!-- Card img -->
-              <div class="avatar mx-auto">
-                <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" class="myImage rounded-circle sm mx-auto d-block">
-              </div>
-              <a>
-                <div class="mask"></div>
-              </a>
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="d-flex flex-column justify-content-center left animated fadeInUp">
+      <div class="p-2 profile">
+        <mdb-card>
+          &nbsp;
+
+          <div class="view rgba-white-slight waves-light" mdbWavesEffect>
+            <!-- Card img -->
+            <div class="avatar mx-auto">
+              <img src="https://assets.pokemon.com/assets/cms2/img/pokedex/full/025.png" class="myImage rounded-circle sm mx-auto d-block">
             </div>
-            <!--Card content-->
-            <mdb-card-body>
-              <!--Title-->
-              <mdb-card-title>
-                <h4>{{username}}</h4>
-              </mdb-card-title>
-  
-              <!--Text-->
-              <mdb-card-text> You have X notifications</mdb-card-text>
-  
-              <div class="social-links">
-                <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i
-                    class="fa github" size="4x"></i></a>&nbsp;&nbsp;&nbsp;
-                <a class="social-link" href="" rel="nofollow noopener noreferrer"
-                  target="_blank"><i class="fa linkedin"></i></a>&nbsp;&nbsp;&nbsp;
-                <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i
-                    class="fa fa-envelope"></i></a>&nbsp;&nbsp;&nbsp;
-              </div>
-            </mdb-card-body>
-          </mdb-card>
-        </div>
-  
-        <!-- The navigation buttons will go here -->
-        <div class="p-2 profile">
-            <mdb-card>
-              <!--Card content-->
-              <mdb-card-body>
-                <!--Title-->
-                <mdb-card-title>
-                  <h3>Navigation</h3>
-                </mdb-card-title>
-                <div class="d-flex align-items-center justify-content-center mb-2">
-                    <div class="d-flex flex-column">
-                      <p>                      <button type="button" (click) = "renderHome()" class="btn btn-secondary">Home</button>
-                      </p>
-                      <p>                      <button type="button" (click) = "renderProfile()"class="btn btn-secondary">Profile</button>
-                      </p>
-                      <p>                      <button type="button" (click) = "renderMySubmissions()" class="btn btn-secondary">Submissions</button>
-                      <p>                      <button type="button" (click) = "renderAdmin()" class="btn btn-secondary">Feedback</button>
-                      </p>
-                      <p>                      <button type="button" (click) = "renderCategories()" class="btn btn-secondary">Categories</button>
-                      </p>
-                      <p>                      <button type="button" (click) = "renderAdmin()" class="btn btn-secondary">Admin</button>
-  
-  
-                    </div>
-  
-  
-  
-                </div>
-                
-  
-                        
-                        
-  
-    
-              </mdb-card-body>
-            </mdb-card>
+            <a>
+              <div class="mask"></div>
+            </a>
           </div>
-  
-  
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Title-->
+            <mdb-card-title>
+              <h4>{{username}}</h4>
+            </mdb-card-title>
+
+            <!--Text-->
+            <mdb-card-text> You have X notifications</mdb-card-text>
+
+            <div class="social-links">
+              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa github"
+                  size="4x"></i></a>&nbsp;&nbsp;&nbsp;
+              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa linkedin"></i></a>&nbsp;&nbsp;&nbsp;
+              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;&nbsp;
+            </div>
+          </mdb-card-body>
+        </mdb-card>
       </div>
-  
-  
-     <!-- Render the other component stuff -->
-      <div class="d-flex flex-column justify-content-center animated fadeInUp">
-        <app-home *ngIf="renderComponent == 'home' "></app-home>
-        <app-profile *ngIf="renderComponent == 'profile' "></app-profile>
-        <app-my-submissions *ngIf="renderComponent == 'my-submissions'"></app-my-submissions>
-        <app-categories *ngIf="renderComponent == 'categories'"></app-categories>
-        <app-admin *ngIf="renderComponent == 'Admin' "></app-admin>
+
+      <!-- The navigation buttons will go here -->
+      <div class="p-2 profile">
+        <mdb-card>
+          <!--Card content-->
+          <mdb-card-body>
+            <!--Title-->
+            <mdb-card-title>
+              <h3>Navigation</h3>
+            </mdb-card-title>
+            <div class="d-flex align-items-center justify-content-center mb-2">
+              <div class="d-flex flex-column">
+                <p> <button type="button" (click)="renderHome()" class="btn btn-secondary">Home</button>
+                </p>
+                <p> <button type="button" (click)="renderProfile()" class="btn btn-secondary">Profile</button>
+                </p>
+                <p> <button type="button" (click)="renderMySubmissions()" class="btn btn-secondary">Submissions</button>
+                  <p> <button type="button" (click)="renderAdmin()" class="btn btn-secondary">Feedback</button>
+                  </p>
+                  <p> <button type="button" (click)="renderCategories()" class="btn btn-secondary">Categories</button>
+                  </p>
+                  <p> <button type="button" (click)="renderAdmin()" class="btn btn-secondary">Admin</button>
+
+
+              </div>
+            </div>
+
+          </mdb-card-body>
+        </mdb-card>
       </div>
+
+
+    </div>
+
+
+    <!-- Render the other component stuff -->
+    <div class="d-flex flex-column justify-content-center animated fadeInUp">
+      <app-home *ngIf="renderComponent == 'home' "></app-home>
+      <app-profile *ngIf="renderComponent == 'profile' "></app-profile>
+      <app-my-submissions *ngIf="renderComponent == 'my-submissions'"></app-my-submissions>
+      <app-categories *ngIf="renderComponent == 'categories'"></app-categories>
+      <app-admin *ngIf="renderComponent == 'Admin' "></app-admin>
     </div>
   </div>
-  
-  <div class="container" *ngIf="userIsAuth == false">
-    <app-login></app-login>
+</div>
+
+<div class="container" *ngIf="userIsAuth == false">
+  <app-login></app-login>
   </div> 
