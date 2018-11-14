@@ -13,7 +13,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 /* Objects */
 var Submission = require('../model/submission');
 var User = require('../model/user');
-var category = require('../model/category')
+var Category = require('../model/category')
 
 
 /**
@@ -34,19 +34,19 @@ router.post("/create-category", authenticate, (req, res) => {
     }
 
     // New category Data
-    var newcategory = new category({
+    var newCategory = new category({
         categoryName: req.body.categoryName,
         categoryDescription: req.body.categoryDescription,
         founder: req.body.username,
     });
     
     // Add to database 
-    newcategory.save().then(() => {
-        res.status(200).send(newcategory)
+    newCategory.save().then(() => {
+        res.status(200).send(newCategory)
     }).catch((err) => {
         res.status(400).send(err);
     }).then(() => {
-        category.findOneAndUpdate({ categoryName: req.body.categoryName }, { $push: {moderators: req.body.username}}).then(() => {
+        Category.findOneAndUpdate({ categoryName: req.body.categoryName }, { $push: {moderators: req.body.username}}).then(() => {
             }).catch((err) => {
                 res.status(400).send({ message: "An error has occoured with adding initial mod" });
                 res.send(err);
@@ -72,7 +72,7 @@ router.get("/all-subs-in-category", authenticate, (req, res) => {
  */
 
 router.get("/get-all-category", authenticate, (req, res) => {
-    category.find({}).then((category) => {
+    Category.find({}).then((category) => {
         res.send(category);
     }).catch((err) => {
         res.status(400).send(err);

@@ -9,6 +9,7 @@ export class SearchPipe implements PipeTransform {
         if (!items) return [];
         if (!value) return [];
         if (value == '' || value == null) return [];
+        // items.filter(e => console.log(e))
         return items.filter(e => e.categoryName.toLowerCase().indexOf(value) > -1);
     }
 
