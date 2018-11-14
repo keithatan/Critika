@@ -60,7 +60,7 @@ router.post("/create-category", authenticate, (req, res) => {
  */
 router.get("/all-subs-in-category", authenticate, (req, res) => {
     Submission.find({ category: req.headers.category }).then((subs) => {
-        console.log(req.headers.category)
+        // console.log(req.headers.category)
         res.send(subs);
     }).catch((err) => {
         res.status(400).send(err)
