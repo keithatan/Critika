@@ -1,5 +1,7 @@
-<input class="form-control" type="text" ngmodel="search" placeholder="Search Categories" aria-label="Search" (input)="onSearchChange($event.target.value)">
+<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search for categories">
 
-<div *ngFor="let c of categoriesForFilter">
-{{c.communityName}}
+<!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
+<ul *ngFor="let c of categoriesForFilter | categoriesPipe: queryString">
+<li> {{c.communityName}} </li>
+</ul>
   
