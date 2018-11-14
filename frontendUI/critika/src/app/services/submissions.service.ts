@@ -1,7 +1,7 @@
 import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders} from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
-import { Submission } from './my-submissions.model';
+import { Submission } from '../models/submissions.model';
 
 @Injectable({providedIn: "root"})
 export class SubmissionService{
