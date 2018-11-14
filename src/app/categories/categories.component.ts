@@ -37,6 +37,7 @@ export class CategoriesComponent implements OnInit {
         var name = categories[x].categoryName
         this.categoryNames[i] = name
       }
+      console.log(categories)
     })
   }
 
