@@ -22,23 +22,6 @@ export class CategoriesService {
 
     getAllCategories() {
         return this.http.get<Object>("http://localhost:5000/community/get-all-category").toPromise();
-        /*
-        this.http.get("http://localhost:5000/community/get-all-category")
-            .subscribe((response: string) => {
-                let i: number;
-                this.allCategoriesInService = new Array(response.length)
-
-                for (i = 0; i < response.length; i += 1) {
-                    let c = new Category(response[i])
-                    this.allCategoriesInService[i] = c;
-                }
-
-                console.log(this.allCategoriesInService)
-
-            })
-            const ret = this.allCategoriesInService
-        return ret;
-        */
     }
 
     getAllSubmissionsInCategory(category) {
