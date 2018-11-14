@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { SubmissionService } from './my-submissions.service';
-import { Submission } from './my-submissions.model';
+import { SubmissionService } from '../services/submissions.service';
+import { Submission } from '../models/submissions.model';
 import { Observable } from 'rxjs';
 
 

@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { renderComponent } from '@angular/core/src/render3';
-import {Profile} from './profile.model';
-import {ProfileService} from './profile.service';
+import {Profile} from '../models/profile.model';
+import {ProfileService} from '../services/profile.service';
 
 @Component({
   selector: 'app-profile',
