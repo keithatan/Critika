@@ -7,7 +7,7 @@ var functions = require('../unitTestFunctions.js')
 
 var Submission = require('../../model/submission');
 var User = require('../../model/user');
-var Community = require('../../model/community')
+var category = require('../../model/category')
 
 var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
