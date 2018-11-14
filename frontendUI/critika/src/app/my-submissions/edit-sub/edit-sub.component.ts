@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SubmissionService } from '../../my-submissions/my-submissions.service'
+import { SubmissionService } from '../../services/submissions.service'
 @Component({
   selector: 'app-edit-sub',
   templateUrl: './edit-sub.component.html',

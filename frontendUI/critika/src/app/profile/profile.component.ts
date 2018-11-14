@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { renderComponent } from '@angular/core/src/render3';
+import {Profile} from '../models/profile.model';
+import {ProfileService} from '../services/profile.service';
 
 @Component({
   selector: 'app-profile',
@@ -8,8 +10,12 @@ import { renderComponent } from '@angular/core/src/render3';
 })
 export class ProfileComponent implements OnInit {
 
-  constructor() { 
+  coins:number;
+  profile:Profile;
+
+  constructor( public profileService:ProfileService) { 
     this.renderComponent = "";
+    this.coins = 4;
   }
 
   renderComponent: String;
@@ -27,6 +33,14 @@ export class ProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+
+
+    this.profileService.getProfile().then((response)=>{
+      this.profile = new Profile(response);
+      console.log(response)
+      console.log(this.profile)
+    })
+
   }
 
 }
