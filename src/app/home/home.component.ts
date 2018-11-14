@@ -32,9 +32,7 @@ export class HomeComponent implements OnInit {
           let submission = new Submission(submissions[i])
           this.possibleSubs[i] = submission;
        }
-
       //console.log(this.possibleSubs)
-
     });
   }
 
