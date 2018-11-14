@@ -71,7 +71,7 @@ router.post("/add", authenticate, (req, res) => {
 
     // Add to database 
     newSubmission.save().then(() => {
-        console.log(newSubmission)
+        // console.log(newSubmission)
         res.status(200).send(newSubmission);
     }).catch((err) => {
         res.status(400);
@@ -236,7 +236,7 @@ router.get("/mine", authenticate, (req, res) => {
  */
 router.get("/available", authenticate, (req, res) => {
     Submission.find({ available: true }).then((subs) => {
-        console.log(subs)
+        // console.log(subs)
         var userMap = {};
 
         subs.forEach(function (user) {
