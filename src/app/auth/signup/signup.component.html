@@ -1,36 +1,71 @@
-<form (submit) = "onSignup(f)" #f="ngForm"  class="text-center border border-light p-5">
+<form (submit)="onSignup(f)" #f="ngForm" class="text-center border border-light p-5" [formGroup]="signUpForm">
+  <mdb-card>
+    <mdb-card-body>
+      <p class="h4 mb-4">Register</p>
 
-        <p class="h4 mb-4">Register</p>
-      
-        <!-- Email -->
-        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel #usernameInput="ngModel">
-      
-        <!-- Password -->
-        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel #passwordInput="ngModel">
-        <input type="email" id="email" name="email" class="form-control mb-4" placeholder="Email" ngModel #emailInput="ngModel">
-        <input type="text" id="securityquestion" name="securityquestion" class="form-control mb-4" placeholder="Security Question" ngModel #sqInput="ngModel">
-        <input type="text" id="securityanswer" name="securityanswer" class="form-control mb-4" placeholder="Security Answer" ngModel #saInput="ngModel">
-      
-        <div class="d-flex justify-content-around">
-          <div>
-            <!-- Forgot password -->
-            <!-- <a href="">Forgot password?</a> -->
-          </div>
+      <!-- Username -->
+      <div class="form-group">
+        <label>Username</label>
+        <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username"
+          [ngClass]="{ 'is-invalid': submitted && form.username.errors }" />
+        <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+          <div *ngIf="form.username.errors.required">Username is required</div>
         </div>
+      </div>
+      <!-- Password -->
+      <div class="form-group">
+        <label>Password</label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password"
+          [ngClass]="{ 'is-invalid': submitted && form.password.errors }" />
+        <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+          <div *ngIf="form.password.errors.required">Password is required</div>
+          <div *ngIf="form.password.errors.minlength">Password must be 8 characters long</div>
+        </div>
+      </div>
+      <!-- Email -->
+      <div class="form-group">
+        <label>Email</label>
+        <input type="text" id="email" formControlName="email" class="form-control" placeholder="Email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }" />
+        <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+          <div *ngIf="form.email.errors.required">Email is required</div>
+          <div *ngIf="form.email.errors.email">Must be a valid email</div>
+        </div>
+      </div>
+      <!-- Security Question -->
+      <!-- <input type="text" id="securityquestion" name="securityquestion" class="form-control mb-4" placeholder="Security Question"> -->
+      <div class="form-group">
+        <label>Security Question</label>
+        <select id="securityquestion" class="form-control" formControlName="securityquestion">
+          <option [value]="question" *ngFor="let question of questions">
+            {{question}}</option>
+        </select>
+      </div>
       
-        <!-- Sign in button -->
-        <button mdbBtn color="info" block="true" class="my-4" type="submit">Register</button>
-      
-        <!-- Register -->
-        <p>Already Have an Account?
-          <a routerLink="/login">Login</a>
-        </p>
+      <!-- Security Question Answer -->
+      <div class="form-group">
+        <label>Security Question Answer</label>
+        <input type="text" formControlName="securityanswer" id="securityanswer" class="form-control" placeholder="Security Quesiton Answer"
+          [ngClass]="{ 'is-invalid': submitted && form.securityanswer.errors }">
+        <div *ngIf="submitted && form.securityanswer.errors" class="invalid-feedback">
+          <div *ngIf="form.securityanswer.errors.required">Security Question Answer is required</div>
+        </div>
+      </div>
 
-        <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">
-          Form is Incomplete
-        </div>
-        <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
-          Account with that Username / Email Already Exists
-        </div>
-      
-</form> 
+      <!-- Sign in button -->
+      <button mdbBtn color="info" block="true" class="my-4" type="submit">Register</button>
+
+      <!-- Login -->
+      <p>Already Have an Account?
+        <a routerLink="/login">Login</a>
+      </p>
+
+      <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">
+        Form is Incomplete
+      </div>
+      <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
+        Account with that Username / Email Already Exists
+      </div>
+    </mdb-card-body>
+  </mdb-card>
+</form>
+ 
