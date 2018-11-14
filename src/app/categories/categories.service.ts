@@ -21,14 +21,23 @@ export class CategoriesService {
     }
 
     getAllCategories() {
-        return this.http.get<Object>("http://localhost:5000/community/get-all-category").toPromise();
+        return this.http.get<Object>("http://localhost:5000/category/get-all-category").toPromise();
     }
 
     getAllSubmissionsInCategory(category) {
-        this.http.get("http://localhost:5000/community/all-subs-in-category", { headers: category })
-            .subscribe((response: string) => {
-                // console.log(response)
+
+        const requestOptions = {
+            headers: new HttpHeaders({
+                'category': category,
             })
+        }
+        console.log(category)
+        return this.http.get<Object>("http://localhost:5000/category/all-subs-in-category", requestOptions).toPromise()
+    }
+
+    createCategory(categoryName, categoryDescription) {
+        //add category with post request
+        //pass username, categoryName, categoryDescription
     }
 
 }

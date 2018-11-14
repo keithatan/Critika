@@ -4,8 +4,8 @@ export class Category {
     founder;
 
     constructor(response: any) {
-        this.categoryName = response.communityName;
-        this.categoryDescription = response.communityDescription;
+        this.categoryName = response.categoryName;
+        this.categoryDescription = response.categoryDescription;
         this.founder = response.founder;
     }
 }
