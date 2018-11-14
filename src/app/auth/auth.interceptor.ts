@@ -18,12 +18,12 @@ export class AuthInterceptor implements HttpInterceptor{
         
 
         });
-        console.log("1")
+        // console.log("1")
         return next.handle(authRequest)
 
         }else{
             const authRequest = req.clone();
-            console.log("2")
+            // console.log("2")
 
             return next.handle(authRequest)
 
