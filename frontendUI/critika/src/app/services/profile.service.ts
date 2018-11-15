@@ -38,4 +38,8 @@ export class ProfileService {
             console.log(response);
         })
     }
+
+    getAllUsers(){
+        return this.http.get("http://localhost:5000/user/all-users").toPromise();
+    }
 }
