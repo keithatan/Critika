@@ -21,12 +21,13 @@ export class ProfileService {
 
     }
 
-    editProfile(username:string, membersince: Date, rating: Number, coins: Number, aboutme: string){
+    editProfile(username:string, membersince: Date, rating: Number, coins: Number, submissionnum: Number, aboutme: string){
         const profile:Object = {
                 username: username,
                 memberSince: membersince,
                 rating: rating,
                 coins: coins,
+                submissionNum: submissionnum,
                 aboutMe: aboutme
         }
 

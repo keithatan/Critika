@@ -3,6 +3,7 @@ export class Profile  {
     memberSince: Date;
     rating: Number;
     coins: Number;
+    submissionNum: Number;
     aboutMe: string;
 
     constructor(response:any) {
@@ -10,6 +11,7 @@ export class Profile  {
         this.memberSince = response.memberSince;
         this.rating = response.memberSince;
         this.coins = response.coins;
+        this.submissionNum = response.submissionNum;
         this.aboutMe = response.aboutMe;
     }
 }
