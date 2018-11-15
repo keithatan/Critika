@@ -4,6 +4,7 @@ import { Category } from './categories.model';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
+import { NgForm, FormGroup,FormBuilder, } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
@@ -13,12 +14,13 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CategoriesComponent implements OnInit {
+  categoriesForm: FormGroup;
   submissions: Object;
   categoriesForFilter: Object;
   renderComponent: string = "";
   categoryNames: String[];
 
-  constructor(public subService:CategoriesService) { 
+  constructor(public subService:CategoriesService,  private formBuilder:FormBuilder) { 
     this.categoryNames = [];
     this.submissions = [];
     this.categoriesForFilter = [];
@@ -29,6 +31,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.categoriesForm = this.formBuilder.group({
+      categoryName: [''],
+      categoryDescription: [''],
+  });
     this.updateCategories()
   }
 
@@ -53,8 +59,11 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
-  createCategory(categoryName, categoryDescription){
-    this.subService.createCategory(categoryName, categoryDescription).then((cats) => {
+  createCategory(form: NgForm){
+
+    console.log(form)
+
+    this.subService.createCategory(form).then((cats) => {
       this.updateCategories()
     })
   }
