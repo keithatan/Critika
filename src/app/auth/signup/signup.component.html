@@ -65,6 +65,14 @@
       <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
         Account with that Username / Email Already Exists
       </div>
+      <div *ngIf="getIncompleteForm() === 'complete'" class="alert alert-success" role="alert">
+        Account Successfully Created
+      </div>
+      <div>
+        <alert>
+          test
+        </alert>
+      </div>
     </mdb-card-body>
   </mdb-card>
 </form>
