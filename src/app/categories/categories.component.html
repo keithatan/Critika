@@ -2,40 +2,65 @@
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString">
-  <li (click)="getSubmissionsInCategory(c.categoryName)"> {{c.categoryName}} </li>
-    
+  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> {{c.categoryName}} </li>
+  <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+              <span aria-hidden="true">×</span>
+            </button>
+            <h4 class="modal-title w-100" id="myModalLabel">{{c.categoryName}}</h4>
+          </div>
+          <div class="modal-body">
+            <ul *ngFor=" let s of submissions">
+              <tr><b>{{s.submissionName}}</b><p>{{s.submissionText}}</p></tr>
+            </ul>
+          </div>
+          <div class="modal-footer">
+
+          </div>
+        </div>
+      </div>
+  </div>
+
 </ul>
 <!-- <p><button type="button" (click)="createCategory()">Create Category</button></p> -->
 
 <p><button type="button" (click)="basicModal.show()">Create Category</button></p>
 
 <form (submit)="createCategory(f)" #f="ngForm">
-<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-          <span aria-hidden="true">×</span>
-        </button>
-        <h4 class="modal-title w-100" id="myModalLabel">Create a Category</h4>
-      </div>
-      <div class="modal-body">
-        <div class="md-form">
-          <input mdbInputDirective type="text" id="categoryName" name="categoryName" [(ngModel)]="categoryName"  class="form-control">
-          <label for="form1" >Category Name</label>
+  <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+    aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">Create a Category</h4>
         </div>
+        <div class="modal-body">
+          <div class="md-form">
+            <input mdbInputDirective type="text" id="categoryName" name="categoryName" [(ngModel)]="categoryName" class="form-control">
+            <label for="form1">Category Name</label>
+          </div>
 
-        <div class="md-form">
-          <input mdbInputDirective type="text" id="categoryDescription" name="categoryDescription" [(ngModel)]="categoryDescription" class="form-control">
-          <label for="form1">Description</label>
+          <div class="md-form">
+            <input mdbInputDirective type="text" id="categoryDescription" name="categoryDescription" [(ngModel)]="categoryDescription"
+              class="form-control">
+            <label for="form1">Description</label>
+          </div>
+
         </div>
-
-      </div>
-      <div class="modal-footer">
-        <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-        <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()" mdbWavesEffect>Create</button>
+        <div class="modal-footer">
+          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
+            mdbWavesEffect>Close</button>
+          <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()"
+            mdbWavesEffect>Create</button>
+        </div>
       </div>
     </div>
   </div>
-</div>
 </form>

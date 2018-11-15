@@ -54,7 +54,7 @@ export class CategoriesComponent implements OnInit {
   getSubmissionsInCategory(category){
     // console.log(category)
     this.subService.getAllSubmissionsInCategory(category).then((subs) => {
-      console.log(subs)
+      // console.log(subs)
       this.submissions = subs;
     })
   }
