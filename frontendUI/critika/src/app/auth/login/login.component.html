@@ -1,35 +1,38 @@
 <div class="p-2 profile animated fadeInUp">
-        <mdb-card> <mdb-card-body>
+  <mdb-card>
+    <mdb-card-body>
 
-<form (submit) = "onLogin(f)" #f="ngForm"  class="text-center border border-light p-5">
+      <form (submit)="onLogin(f)" #f="ngForm" class="text-center border border-light p-5">
 
         <p class="h4 mb-4">Sign in</p>
-      
+
         <!-- Email -->
-        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel #usernameInput="ngModel">
-      
+        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel
+          #usernameInput="ngModel">
+
         <!-- Password -->
-        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel #passwordInput="ngModel">
-      
+        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel
+          #passwordInput="ngModel">
+
         <div class="d-flex justify-content-around">
           <div>
             <!-- Forgot password -->
             <a href="">Forgot password?</a>
           </div>
         </div>
-      
+
         <!-- Sign in button -->
         <button mdbBtn color="info" block="true" class="my-4" type="submit">Sign in</button>
-      
+
         <!-- Register -->
         <p>Not a member?
           <a routerLink="/register">Register</a>
         </p>
 
-        <div *ngIf="getLoginFailed() "class="alert alert-danger" role="alert">
+        <div *ngIf="getLoginFailed() " class="alert alert-danger" role="alert">
           Username or Password is Incorrect
         </div>
-</form> 
-</mdb-card-body>
-</mdb-card>
+      </form>
+    </mdb-card-body>
+  </mdb-card>
 </div>
