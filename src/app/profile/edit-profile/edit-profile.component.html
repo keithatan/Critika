@@ -1,0 +1,26 @@
+<p>
+  edit-profile works!
+</p>
+
+
+<mdb-card *ngIf = "view == false">
+  <!--Card content-->
+  <mdb-card-body>
+
+    <!--Title-->
+    <mdb-card-title>
+      <h4>Edit Profile</h4>
+    </mdb-card-title>
+
+    <div class="md-form">
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3"></textarea>
+      <label> About Me</label>
+    </div>
+
+    <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a> -->
+  </mdb-card-body>
+
+  <app-profile *ngIf="renderComponent == 'Profile' "></app-profile>
+  <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button>
+
+</mdb-card>

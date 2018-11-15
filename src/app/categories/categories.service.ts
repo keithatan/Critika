@@ -53,7 +53,14 @@ export class CategoriesService {
             "submissionName": submissionName
         }
         return this.http.post<Object>("http://localhost:5000/submission/add-comment", options).toPromise();
+    }
 
+    addCoin(username, numCoins){
+        const options = {
+            "recuser": username,
+            "coins": numCoins
+        }
+        return this.http.post<Object>("http://localhost:5000/user/add-coin", options).toPromise();
     }
 
 }
