@@ -200,8 +200,8 @@
             <div *ngFor="let user of allUsers">
                 <li>
                     {{user.username}} 
-                    <button>Unban</button>
-                    <button>Ban</button>
+                    <button *ngIf="user.standing == 'banned'">Unban</button>
+                    <button *ngIf="user.standing == 'good'">Ban</button>
                 </li>
             </div>
         </ul>
