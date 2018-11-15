@@ -2,17 +2,30 @@
   <mdb-card>
     <mdb-card-body>
 
-      <form (submit)="onLogin(f)" #f="ngForm" class="text-center border border-light p-5">
+      <form (submit)="onLogin(f)" #f="ngForm" class="text-center border border-light p-5" [formGroup]="loginForm">
 
         <p class="h4 mb-4">Sign in</p>
 
-        <!-- Email -->
-        <input type="text" id="username" name="username" class="form-control mb-4" placeholder="Username" ngModel
-          #usernameInput="ngModel">
+        <!-- Username -->
+        <div class="form-group">
+          <input type="text" id="username" formControlName="username" class="form-control" placeholder="Username"
+            [ngClass]="{ 'is-invalid': submitted && form.username.errors }">
+          <div *ngIf="submitted && form.username.errors" class="invalid-feedback">
+            <div *ngIf="form.username.errors.required">Please Enter your Username</div>
+          </div>
+        </div>
+
+        <!-- <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel -->
+          <!-- #passwordInput="ngModel"> -->
 
         <!-- Password -->
-        <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel
-          #passwordInput="ngModel">
+        <div class="form-group">
+          <input type="password" id="password" formControlName="password" class="form-control" placeholder="Password"
+            [ngClass]="{ 'is-invalid': submitted && form.password.errors }">
+          <div *ngIf="submitted && form.password.errors" class="invalid-feedback">
+            <div *ngIf="form.password.errors.required">Please Enter your Password</div>
+          </div>
+        </div>
 
         <div class="d-flex justify-content-around">
           <div>
