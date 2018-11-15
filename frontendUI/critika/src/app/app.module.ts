@@ -28,6 +28,7 @@ import { MySubmissionsComponent } from './my-submissions/my-submissions.componen
 import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
 import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
+import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 
 
 @NgModule({
@@ -47,6 +48,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
     AdminComponent,
     CritiqueFormComponent,
     SearchPipe,
+    EditProfileComponent
   ],
   imports: [
     BrowserModule,
