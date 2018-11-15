@@ -1,6 +1,5 @@
 <div class="p-2 profile">
   <mdb-card class="outerCard">
-    <button (click)="getSubmissionsPls()">Get Submissions</button>
                 <ul>
                   <div *ngFor="let submission of mySubmissions">
                     <li >Submission Name: {{submission.submissionName}}</li>
@@ -10,6 +9,5 @@
                   </div>
                   </ul>
                   <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
-
   </mdb-card>
 </div>

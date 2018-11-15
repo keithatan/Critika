@@ -12,7 +12,7 @@ import { AuthService } from '../auth/auth.service';
 })
 export class DashboardComponent implements OnInit {
   
-  renderComponent: String = "";
+  renderComponent: String = "home";
   private authStatusSub : Subscription;
   userIsAuth = false
   username:string = localStorage.getItem('user');
