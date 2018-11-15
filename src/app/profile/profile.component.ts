@@ -18,6 +18,10 @@ export class ProfileComponent implements OnInit {
     this.coins = 4;
   }
 
+  UserName: string;
+  email: string;
+
+
   renderComponent: String;
 
   renderAddSub() {

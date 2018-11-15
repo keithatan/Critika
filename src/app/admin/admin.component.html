@@ -196,5 +196,15 @@
             </div>
         </div>
 
+        <ul>
+            <div *ngFor="let user of allUsers">
+                <li>
+                    {{user.username}} 
+                    <button>Unban</button>
+                    <button>Ban</button>
+                </li>
+            </div>
+        </ul>
+
     </mdb-card-body>
 </mdb-card>
