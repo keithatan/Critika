@@ -4,7 +4,7 @@ import { Category } from './categories.model';
 import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
-import { NgForm, FormGroup,FormBuilder, } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
 
 @Component({
   selector: 'app-categories',
@@ -19,8 +19,9 @@ export class CategoriesComponent implements OnInit {
   categoriesForFilter: Object;
   renderComponent: string = "";
   categoryNames: String[];
+  textAreasList: any = [];
 
-  constructor(public subService:CategoriesService,  private formBuilder:FormBuilder) { 
+  constructor(public subService: CategoriesService, private formBuilder: FormBuilder) {
     this.categoryNames = [];
     this.submissions = [];
     this.categoriesForFilter = [];
@@ -34,16 +35,20 @@ export class CategoriesComponent implements OnInit {
     this.categoriesForm = this.formBuilder.group({
       categoryName: [''],
       categoryDescription: [''],
-  });
+    });
     this.updateCategories()
   }
 
-  updateCategories(){
+  addTextarea() {
+    this.textAreasList.push('text_area' + (this.textAreasList.length + 1));
+  }
+
+  updateCategories() {
     this.subService.getAllCategories().then((categories) => {
       //categories is an array of all categories
       this.categoriesForFilter = categories;
-      let i:number;
-      for(let x in categories){
+      let i: number;
+      for (let x in categories) {
         var name = categories[x].categoryName
         this.categoryNames[i] = name
       }
@@ -51,20 +56,27 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
-  getSubmissionsInCategory(category){
+  getSubmissionsInCategory(category) {
     // console.log(category)
     this.subService.getAllSubmissionsInCategory(category).then((subs) => {
       // console.log(subs)
       this.submissions = subs;
+      console.log(subs)
     })
   }
 
-  createCategory(form: NgForm){
+  createCategory(form: NgForm) {
 
     console.log(form)
 
     this.subService.createCategory(form).then((cats) => {
       this.updateCategories()
+    })
+  }
+
+  addComment(form: NgForm, submissionName){
+    this.subService.addComment(form, submissionName).then((sub) => {
+      console.log(sub)
     })
   }
 
