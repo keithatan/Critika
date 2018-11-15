@@ -6,29 +6,45 @@
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-          <div class="modal-header">
-            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-              <span aria-hidden="true">×</span>
-            </button>
-            <h4 class="modal-title w-100" id="myModalLabel">{{c.categoryName}}</h4>
-          </div>
-          <div class="modal-body">
-            <ul *ngFor=" let s of submissions">
-              <li><b>{{s.submissionName}}</b><p>{{s.submissionText}}</p></li>
-              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
-              mdbWavesEffect>Close</button>            
-            </ul>
-          </div>
-          <div class="modal-footer">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+            <span aria-hidden="true">×</span>
+          </button>
+          <h4 class="modal-title w-100" id="myModalLabel">{{c.categoryName}}</h4>
+        </div>
+        <div class="modal-body">
+          <ul *ngFor=" let s of submissions">
+            <li><b>{{s.submissionName}}</b>
+              <p>{{s.submissionText}}</p>
+              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.show()">Add Comment</button>
+              <form (submit)="addComment(f, s.submissionName)" #f="ngForm">
+                <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+                  <div class="modal-dialog" role="document">
+                    <div class="modal-content">
+                      <div class="modal-header">
+                        <textarea id="comment" name="comment" [(ngModel)]="comment"> Type comment </textarea>
+                        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+                        </button>
+                        <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()"
+                          mdbWavesEffect>Create</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </form>
+            </li>
+          </ul>
+        </div>
+        <div class="modal-footer">
 
-          </div>
         </div>
       </div>
+    </div>
   </div>
 
 </ul>
-<!-- <p><button type="button" (click)="createCategory()">Create Category</button></p> -->
 
 <p><button type="button" (click)="basicModal.show()">Create Category</button></p>
 

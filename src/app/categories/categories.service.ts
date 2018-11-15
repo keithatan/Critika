@@ -37,10 +37,6 @@ export class CategoriesService {
     }
 
     createCategory(form: NgForm) {
-        //add category with post request
-        //pass username, categoryName, categoryDescription
-
-        // console.log(form.value)
 
         const options = {
             "categoryName" : form.value.categoryName,
@@ -49,6 +45,22 @@ export class CategoriesService {
 
         
         return this.http.post<Object>("http://localhost:5000/category/create-category", options).toPromise();
+    }
+
+    addComment(form: NgForm, submissionName){
+        const options = {
+            "comment": form.value.comment,
+            "submissionName": submissionName
+        }
+        return this.http.post<Object>("http://localhost:5000/submission/add-comment", options).toPromise();
+    }
+
+    addCoin(username, numCoins){
+        const options = {
+            "recuser": username,
+            "coins": numCoins
+        }
+        return this.http.post<Object>("http://localhost:5000/user/add-coin", options).toPromise();
     }
 
 }
