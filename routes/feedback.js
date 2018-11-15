@@ -78,7 +78,7 @@ router.post('/rate-feedback', authenticate, (req, res) => {
                 numberOfCritiquesRecieved: numberOfCritiquesRecieved+1,
             }
         }).catch((err) => {
-            console.log(err)
+            // console.log(err)
         })
    
     Feedback.findOneAndUpdate({submissionName:  req.body.submissionName}, 

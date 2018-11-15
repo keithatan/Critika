@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
  */
 router.post("/create-category", authenticate, (req, res) => {
 
-    if (!req.body || !req.body.username || !req.body.categoryName || !req.body.categoryDescription) {
+    if (!req.body|| !req.body.categoryName || !req.body.categoryDescription) {
         res.status(400).json({ message: "category data is incomplete" });
         return;
     }
