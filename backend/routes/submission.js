@@ -37,45 +37,46 @@ router.post("/add", authenticate, (req, res) => {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             if (resp == null) {
                 res.status(400).json({ message: "Category does not exists" });
-                return;
+
+            }
+            else {
+                // New Submission Data
+                var newSubmission = new Submission({
+                    category: req.body.category,
+                    submissionName: req.body.submissionName,
+                    submissionText: req.body.submissionText,
+                    username: req.user.username,
+                    available: true,
+                    /*category: req.body.category,*/
+                });
+
+                // Change submission num
+
+                User.findOneAndUpdate({ username: req.user.username },
+                    {
+                        $set: {
+                            submissionNum: req.user.submissionNum + 1
+                        }
+                    }).then(() => {
+                        //res.status(200).send({ message: 'Submission Added!' })
+                    }).catch((err) => {
+                        res.status(400).send({ message: "Error changing information" });
+                        res.send(err);
+                    })
+
+
+                // Add to database 
+                newSubmission.save().then(() => {
+                    // console.log(newSubmission)
+                    res.status(200).send(newSubmission);
+                }).catch((err) => {
+                    res.status(400);
+                })
             }
         }).catch((err) => {
             console.log(err)
         })
     }
-
-    // New Submission Data
-    var newSubmission = new Submission({
-        category: req.body.category,
-        submissionName: req.body.submissionName,
-        submissionText: req.body.submissionText,
-        username: req.user.username,
-        available: true,
-        /*category: req.body.category,*/
-    });
-
-    // Change submission num
-
-    User.findOneAndUpdate({ username: req.user.username },
-        {
-            $set: {
-                submissionNum: req.user.submissionNum + 1
-            }
-        }).then(() => {
-            //res.status(200).send({ message: 'Submission Added!' })
-        }).catch((err) => {
-            res.status(400).send({ message: "Error changing information" });
-            res.send(err);
-        })
-
-
-    // Add to database 
-    newSubmission.save().then(() => {
-        // console.log(newSubmission)
-        res.status(200).send(newSubmission);
-    }).catch((err) => {
-        res.status(400);
-    })
 })
 
 /**
