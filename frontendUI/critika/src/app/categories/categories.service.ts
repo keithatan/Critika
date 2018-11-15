@@ -31,13 +31,20 @@ export class CategoriesService {
                 'category': category,
             })
         }
-        console.log(category)
+        // console.log(category)
         return this.http.get<Object>("http://localhost:5000/category/all-subs-in-category", requestOptions).toPromise()
     }
 
     createCategory(categoryName, categoryDescription) {
         //add category with post request
         //pass username, categoryName, categoryDescription
+
+        const options = {
+            "categoryName" : categoryName,
+            "categoryDescription": categoryDescription
+        }
+        
+        return this.http.post<Object>("http://localhost:5000/category/create-category", options).toPromise();
     }
 
 }
