@@ -13,14 +13,14 @@ import { Pipe, PipeTransform } from '@angular/core';
 })
 
 export class CategoriesComponent implements OnInit {
-  allCategories: Category[];
+  submissions: Object;
   categoriesForFilter: Object;
   renderComponent: string = "";
   categoryNames: String[];
 
   constructor(public subService:CategoriesService) { 
     this.categoryNames = [];
-    this.allCategories = [];
+    this.submissions = [];
     this.categoriesForFilter = [];
   }
 
@@ -29,6 +29,10 @@ export class CategoriesComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.updateCategories()
+  }
+
+  updateCategories(){
     this.subService.getAllCategories().then((categories) => {
       //categories is an array of all categories
       this.categoriesForFilter = categories;
@@ -42,14 +46,17 @@ export class CategoriesComponent implements OnInit {
   }
 
   getSubmissionsInCategory(category){
-    console.log(category)
+    // console.log(category)
     this.subService.getAllSubmissionsInCategory(category).then((subs) => {
       console.log(subs)
+      this.submissions = subs;
     })
   }
 
-  createCategory(){
-
+  createCategory(categoryName, categoryDescription){
+    this.subService.createCategory(categoryName, categoryDescription).then((cats) => {
+      this.updateCategories()
+    })
   }
 
 
