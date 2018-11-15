@@ -15,7 +15,9 @@
           </div>
           <div class="modal-body">
             <ul *ngFor=" let s of submissions">
-              <tr><b>{{s.submissionName}}</b><p>{{s.submissionText}}</p></tr>
+              <li><b>{{s.submissionName}}</b><p>{{s.submissionText}}</p></li>
+              <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
+              mdbWavesEffect>Close</button>            
             </ul>
           </div>
           <div class="modal-footer">
