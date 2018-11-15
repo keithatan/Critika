@@ -13,10 +13,11 @@ export class AddSubComponent implements OnInit {
   Link: string
   SubName: string
   feedback: string
+  Category: string
   SpendCoin: boolean
 
   sendSubmission() {
-    this.subService.addSubmission(this.SubName, this.Link, "music", localStorage.getItem('user'));
+    this.subService.addSubmission(this.SubName, this.Link, this.Category, localStorage.getItem('user'));
 
   }
 

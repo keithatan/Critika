@@ -11,6 +11,7 @@ export class EditSubComponent implements OnInit {
 
   text: string;
   SubName: string;
+  Category: string
 
   sendEdits() {
     this.subService.editSubmission(this.SubName, this.text);
