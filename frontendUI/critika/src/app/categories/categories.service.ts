@@ -4,6 +4,7 @@ import { Subject, Observable, of } from "rxjs";
 import { Category } from './categories.model';
 import { Submission } from "../models/submissions.model";
 import { PARAMETERS } from "@angular/core/src/util/decorators";
+import { NgForm } from '@angular/forms';
 
 @Injectable({ providedIn: "root" })
 export class CategoriesService {
@@ -35,14 +36,17 @@ export class CategoriesService {
         return this.http.get<Object>("http://localhost:5000/category/all-subs-in-category", requestOptions).toPromise()
     }
 
-    createCategory(categoryName, categoryDescription) {
+    createCategory(form: NgForm) {
         //add category with post request
         //pass username, categoryName, categoryDescription
 
+        // console.log(form.value)
+
         const options = {
-            "categoryName" : categoryName,
-            "categoryDescription": categoryDescription
+            "categoryName" : form.value.categoryName,
+            "categoryDescription": form.value.categoryDescription
         }
+
         
         return this.http.post<Object>("http://localhost:5000/category/create-category", options).toPromise();
     }

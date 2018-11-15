@@ -9,6 +9,7 @@
 
 <p><button type="button" (click)="basicModal.show()">Create Category</button></p>
 
+<form (submit)="createCategory(f)" #f="ngForm">
 <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel" aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
   <div class="modal-dialog" role="document">
     <div class="modal-content">
@@ -20,20 +21,21 @@
       </div>
       <div class="modal-body">
         <div class="md-form">
-          <input mdbInputDirective type="text" id="form1" class="form-control">
+          <input mdbInputDirective type="text" id="categoryName" name="categoryName" [(ngModel)]="categoryName"  class="form-control">
           <label for="form1" >Category Name</label>
         </div>
 
         <div class="md-form">
-          <input mdbInputDirective type="text" class="form-control">
+          <input mdbInputDirective type="text" id="categoryDescription" name="categoryDescription" [(ngModel)]="categoryDescription" class="form-control">
           <label for="form1">Description</label>
         </div>
 
       </div>
       <div class="modal-footer">
         <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-        <button type="button" mdbBtn color="primary" class="relative waves-light" (click)="createCategory()" mdbWavesEffect>Create</button>
+        <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()" mdbWavesEffect>Create</button>
       </div>
     </div>
   </div>
 </div>
+</form>

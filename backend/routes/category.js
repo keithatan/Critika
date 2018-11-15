@@ -34,7 +34,7 @@ router.post("/create-category", authenticate, (req, res) => {
     }
 
     // New category Data
-    var newCategory = new category({
+    var newCategory = new Category({
         categoryName: req.body.categoryName,
         categoryDescription: req.body.categoryDescription,
         founder: User.username,
