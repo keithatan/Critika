@@ -76,7 +76,9 @@ export class CategoriesComponent implements OnInit {
 
   addComment(form: NgForm, submissionName){
     this.subService.addComment(form, submissionName).then((sub) => {
-      console.log(sub)
+      this.subService.addCoin(localStorage.getItem('user'),1).then((sub) => {
+        console.log(sub)
+      })
     })
   }
 
