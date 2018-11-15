@@ -45,8 +45,8 @@ export class SubmissionService{
         return this.http.get("http://localhost:5000/submission/all").toPromise();
     }
 
-    getSubmissions(){
-        return this.http.get("http://localhost:5000/submission/mine").toPromise();
+    getSubmissions():Promise<Submission[]>{
+        return this.http.get<Submission[]>("http://localhost:5000/submission/mine").toPromise()
     }
 
     spendCoins(username1: string, coins1: string){
