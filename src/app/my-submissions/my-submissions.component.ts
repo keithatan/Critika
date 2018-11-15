@@ -37,23 +37,13 @@ export class MySubmissionsComponent implements OnInit {
       let i:number;
 
       let response = [];
-      response = [
-      {
-        submissionName: '',
-        submissionText: '',
-        username: '',
-        category:'',
-        coins: '',
-        recuser: ''
-      }
-      ];
-
       response.push(data);
 
-      this.mySubmissions = new Array(response.length)
 
-      for(i = 0;i< response.length; i+=1) {
-          let submission = new Submission(response[i])
+      this.mySubmissions = new Array(response[0].length)
+
+      for(i = 0;i< response[0].length; i+=1) {
+          let submission = new Submission(response[0][i])
           this.mySubmissions[i] = submission;
        }
       });
