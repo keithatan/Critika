@@ -82,6 +82,12 @@ export class CategoriesComponent implements OnInit {
     })
   }
 
+  getTopCategories(){
+    for(let obj in this.categoriesForFilter){
+      console.log(obj)
+    }
+  }
+
 
 }
 
