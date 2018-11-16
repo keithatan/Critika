@@ -83,4 +83,11 @@
   </div>
 </form>
 
-<button (click)="getTopCategories">Click</button>
+<ul *ngFor="let t of topThreeCategories" >
+  <tr>
+   <b>{{t.categoryName}}</b> 
+    <p></p>
+    {{t.categoryDescription}}
+    <br>
+  </tr>
+</ul>
