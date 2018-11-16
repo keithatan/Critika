@@ -37,7 +37,6 @@ router.post("/add", authenticate, (req, res) => {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             if (resp == null) {
                 res.status(400).json({ message: "Category does not exists" });
-
             }
             else {
                 // New Submission Data
@@ -60,28 +59,28 @@ router.post("/add", authenticate, (req, res) => {
                     }).catch((err) => {
                         res.status(400).send({ message: "Error changing information" });
                         res.send(err);
+                    }).then(() => {
+                        // Add to database 
+                        newSubmission.save().then(() => {
+                            // console.log(newSubmission)
+                            res.status(200).send(newSubmission);
+                        }).catch((err) => {
+                            console.log(err)
+                            res.status(400).send({message: "Error adding submission"});
+                        })
                     })
-                Category.findByIdAndUpdate({ categoryName: req.body.categoryName },
-                    {
-                        $inc: {
-                            numberOfSubmissions: 1
-                        }
-                    }).catch((err) => {
-                        res.status(400).send({ message: "Error changing number of submissions" });
-                        res.send(err);
-                    })
-
-
-                // Add to database 
-                newSubmission.save().then(() => {
-                    // console.log(newSubmission)
-                    res.status(200).send(newSubmission);
-                }).catch((err) => {
-                    res.status(400);
-                })
             }
         }).catch((err) => {
+            res.status(400).send({message: "Error finding category after initial check"});
             console.log(err)
+        }).then(() => {
+            Category.findOneAndUpdate({ categoryName: req.body.category }, {
+                $inc: {
+                    numberOfSubmissions: 1
+                }
+            }).catch((err)=> {
+                res.status(400).send({message: "Error updating numberOfSubmissions"});
+            })
         })
     }
 })

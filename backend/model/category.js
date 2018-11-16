@@ -9,7 +9,7 @@ let categorySchema = new Schema({
     founder: {type: String},
     numberOfSubscribers: {type: Number, default: 1},
     moderators: {type: [String]},
-    numberOfSubmissions: {type: Number, default: 1}
+    numberOfSubmissions: {type: Number, default: 0}
     /* Need to store all the submissions for this category, Array? of what? */
   });
   
