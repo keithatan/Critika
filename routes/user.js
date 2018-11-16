@@ -126,7 +126,7 @@ router.post("/login", (req, res) => {
                 res.header('token', token).send(user);
             });
         }).catch((err) => {
-            //console.log(err)
+            console.log(err)
             res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
@@ -244,8 +244,8 @@ router.post("/add-coin", authenticate, (req, res) => {
 
     User.findOneAndUpdate({ username: req.body.recuser },
         {
-            $set: {
-                coins: recUser.coins + req.body.coins,
+            $inc: {
+                coins: req.body.coins,
             }
         }).then(() => {
             res.status(200).send({ message: 'Coins successfully added' })
@@ -271,8 +271,8 @@ router.post("/remove-coin", authenticate, (req, res) => {
         recUser = foundUser
         User.findOneAndUpdate({ username: req.body.recuser },
             {
-                $set: {
-                    coins: parseInt(recUser.coins - parseInt(req.body.coins)),
+                $int: {
+                    coins: (req.body.coins) * -1,
                 }
             }).then(() => {
                 res.status(200).send({ message: 'Coins successfully removed' })

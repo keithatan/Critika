@@ -54,13 +54,20 @@ router.post("/add", authenticate, (req, res) => {
 
                 User.findOneAndUpdate({ username: req.user.username },
                     {
-                        $set: {
-                            submissionNum: req.user.submissionNum + 1
+                        $inc: {
+                            submissionNum: 1
                         }
-                    }).then(() => {
-                        //res.status(200).send({ message: 'Submission Added!' })
                     }).catch((err) => {
                         res.status(400).send({ message: "Error changing information" });
+                        res.send(err);
+                    })
+                Category.findByIdAndUpdate({ categoryName: req.body.categoryName },
+                    {
+                        $inc: {
+                            numberOfSubmissions: 1
+                        }
+                    }).catch((err) => {
+                        res.status(400).send({ message: "Error changing number of submissions" });
                         res.send(err);
                     })
 
