@@ -3,6 +3,7 @@ import { HttpClient, HttpHeaders } from "@angular/common/http";
 import { AuthData } from './auth-data.model'
 import { Subject } from "rxjs";
 import { ThrowStmt } from "@angular/compiler";
+import { resolve } from "url";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),

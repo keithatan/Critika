@@ -1,4 +1,4 @@
-import { Component, OnInit } from "@angular/core";
+import { Component, OnInit, ViewChild, ElementRef } from "@angular/core";
 import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { AuthService } from "../auth.service";
 
@@ -8,6 +8,7 @@ import { AuthService } from "../auth.service";
 })
 export class SignupComponent implements OnInit {
 
+    @ViewChild('alert') alert: ElementRef;
     signUpForm: FormGroup;
     submitted = false;
     questions = ["What is your mother's maiden name?", 'What is your favorite drink?', 'What elementary school did you attend?']
@@ -28,8 +29,12 @@ export class SignupComponent implements OnInit {
 
     incomplete_form: string;
 
-    getIncompleteForm() {
-        return this.incomplete_form;
+    async getIncompleteForm() {
+        return await this.incomplete_form;
+    }
+
+    closeAlert(){
+        this.alert.nativeElement.classList.remove('show');
     }
 
     onSignup(form: NgForm) {
@@ -38,7 +43,9 @@ export class SignupComponent implements OnInit {
         if (this.signUpForm.invalid) {
             return;
         }
+        // Call to register the user, as well as get the response back from the server back end
         this.incomplete_form = this.authService.registerUser(form.value.email, form.value.username, form.value.password, form.value.securityanswer, form.value.securityquestion)
+        console.log(this.incomplete_form)
     }
 
 }
