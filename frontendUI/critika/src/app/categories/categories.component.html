@@ -46,7 +46,7 @@
 
 </ul>
 
-<p><button type="button" (click)="basicModal.show()">Create Category</button></p>
+<p><button type="button" (click)="basicModal.show()" id="createCategoryButton">Create Category</button></p>
 
 <form (submit)="createCategory(f)" #f="ngForm">
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
@@ -83,11 +83,19 @@
   </div>
 </form>
 
-<ul *ngFor="let t of topThreeCategories" >
-  <tr>
-   <b>{{t.categoryName}}</b> 
-    <p></p>
-    {{t.categoryDescription}}
-    <br>
-  </tr>
+<br>
+<br>
+<h3>Featured Categories</h3>
+<br>
+
+<ul *ngFor="let t of topThreeCategories" id="topThreeUl">
+  <li>
+    <div class="card" id="topThreeCard">
+      <b><div>{{t.categoryName}}</div></b>
+      <p></p>
+      <div>{{t.categoryDescription}}</div>
+      <br>
+      <div>Number of Submissions: {{t.numberOfSubmissions}}</div>
+    </div>
+  </li>
 </ul>
