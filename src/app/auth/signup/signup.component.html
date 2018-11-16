@@ -68,8 +68,17 @@
       <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
         Account with that Username / Email Already Exists
       </div>
-      <div *ngIf="getIncompleteForm() === 'complete'" class="alert alert-success" role="alert">
+      <div *ngIf="getIncompleteForm() === 'failed'" class="alert alert-danger" role="alert">
+        Something went wrong. If this continues, please conatact the support team for assistance.
+      </div>
+      <!-- <div *ngIf="getIncompleteForm() === 'complete'" class="alert alert-success" role="alert">
         Account Successfully Created
+      </div> -->
+      <div *ngIf="getIncompleteForm() === 'complete'" #alert class="alert alert-success alert-dismissible fade show" role="alert">
+        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+          <span aria-hidden="true">&times;</span>
+        </button>
+        Account Successfully Created! <strong>You'll need to verify your account before you can log in. Please check your Email for the verification code.</strong>
       </div>
     </mdb-card-body>
   </mdb-card>
