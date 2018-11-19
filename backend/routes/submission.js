@@ -217,7 +217,7 @@ router.post("/make-unavailable", authenticate, (req, res) => {
     }
 
     Submission.findOneAndUpdate({
-        _id: submissionID,
+        _id: req.body.submissionID,
         $set:
         {
             available: false,
@@ -249,7 +249,7 @@ router.get("/available", authenticate, (req, res) => {
         subs.forEach(function (user) {
             if(user.username != req.body.username){
                 userMap[user._id] = user;
-            }
+            } 
         });
         res.send(userMap);
     }).catch((err) => {

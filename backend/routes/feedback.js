@@ -32,12 +32,12 @@ router.post('/add-feedback', (req, res) => {
         return;
     }
 
-  // New category Data
-  var newFeedback = new Feedback({
-      username: req.body.username,
-      feedbackMessage: req.body.feedbackMessage,
-      feedbackSubject: req.body.feedbackSubject,
-      submissionName: req.body.submissionName,
+    // New category Data
+    var newFeedback = new Feedback({
+        username: req.body.username,
+        feedbackMessage: req.body.feedbackMessage,
+        feedbackSubject: req.body.feedbackSubject,
+        submissionName: req.body.submissionName,
     });
 
     Feedback.find({username: req.body.username}).then((subs) => {
@@ -45,6 +45,9 @@ router.post('/add-feedback', (req, res) => {
             res.status(400).json({ message: "You have already given feedback to this submission" });
             return;
         }
+    }).catch((err) => {
+        res.status(400).json({ message: "Error finding feedback" });
+        return;
     })
 
     // Add to database 
