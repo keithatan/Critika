@@ -229,7 +229,7 @@ router.post("/rating", authenticate, (req, res) => {
  * Add coins to user
  */
 router.post("/add-coin", authenticate, (req, res) => {
-    if (!req.body || !req.body.coins || !req.body.recuser) {
+    if (!req.body || !req.body.recuser) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -245,7 +245,7 @@ router.post("/add-coin", authenticate, (req, res) => {
     User.findOneAndUpdate({ username: req.body.recuser },
         {
             $inc: {
-                coins: req.body.coins,
+                coins: 4,
             }
         }).then(() => {
             res.status(200).send({ message: 'Coins successfully added' })
@@ -271,8 +271,8 @@ router.post("/remove-coin", authenticate, (req, res) => {
         recUser = foundUser
         User.findOneAndUpdate({ username: req.body.recuser },
             {
-                $int: {
-                    coins: (req.body.coins) * -1,
+                $inc: {
+                    coins: -4,
                 }
             }).then(() => {
                 res.status(200).send({ message: 'Coins successfully removed' })

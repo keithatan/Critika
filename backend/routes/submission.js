@@ -247,7 +247,9 @@ router.get("/available", authenticate, (req, res) => {
         var userMap = {};
 
         subs.forEach(function (user) {
-            userMap[user._id] = user;
+            if(user.username != req.body.username){
+                userMap[user._id] = user;
+            }
         });
         res.send(userMap);
     }).catch((err) => {
