@@ -61,6 +61,7 @@ export class SubmissionService{
         return this.mySubmissions
     }
 
+    /*
     setUnavailable(submission){
         console.log(submission)
         //TODO: remove submission when route gets made available
@@ -70,4 +71,5 @@ export class SubmissionService{
         var p = new Submission(sub);
         return this.http.post("http://localhost:5000/submission/make-unavailable", sub).toPromise();
     }
+    */
 }
