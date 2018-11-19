@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders} from "@angular/common/http";
-import { Subject, Observable } from "rxjs";
+import { Subject, Observable, Subscriber } from "rxjs";
 import { Submission } from '../models/submissions.model';
 
 @Injectable({providedIn: "root"})
@@ -56,9 +56,21 @@ export class SubmissionService{
         this.http.post("http://localhost:5000/user/remove-coin", p)
         .subscribe((response) => {
             console.log(response)
-        })
+        }).unsubscribe();
 
         return this.mySubmissions
+    }
+
+    setUnavailable(submission){
+        console.log(submission)
+        //TODO: remove submission when route gets made available
+        const sub:Object = {
+            submissionID: submission.submissionID,
+        }
+        var p = new Submission(sub);
+        this.http.post("http://localhost:5000/submission/make-unavailable", sub).subscribe((res) => {
+            // console.log(res)
+        });
     }
 
 }
