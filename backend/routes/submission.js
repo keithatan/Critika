@@ -223,7 +223,7 @@ router.post("/make-unavailable", authenticate, (req, res) => {
             available: false,
         }
     }).then(() => {
-        res.status(200).send("Submission now unavailable")
+        res.status(200).send()
     }).catch((err) => {
         res.status(400).send(err)
     })
