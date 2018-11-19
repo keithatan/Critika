@@ -68,9 +68,6 @@ export class SubmissionService{
             submissionID: submission.submissionID,
         }
         var p = new Submission(sub);
-        this.http.post("http://localhost:5000/submission/make-unavailable", sub).subscribe((res) => {
-            // console.log(res)
-        });
+        return this.http.post("http://localhost:5000/submission/make-unavailable", sub).toPromise();
     }
-
 }

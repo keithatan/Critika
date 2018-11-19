@@ -66,7 +66,9 @@ export class HomeComponent implements OnInit {
     },10)
     // console.log('done')
     // console.log(this.possibleSubs)
-    this.subService.setUnavailable(submission);
+    this.subService.setUnavailable(submission).then((res) => {
+      this.displayAvailable()
+    })
   }
 
   
