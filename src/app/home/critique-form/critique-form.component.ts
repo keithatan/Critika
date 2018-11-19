@@ -15,6 +15,7 @@ export class CritiqueFormComponent implements OnInit {
   comment: string;
 
   ngOnInit() {
+    
   }
 
 }

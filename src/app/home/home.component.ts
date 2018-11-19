@@ -33,8 +33,26 @@ export class HomeComponent implements OnInit {
           this.possibleSubs[i] = submission;
        }
       //console.log(this.possibleSubs)
-    });
+    }).then(() => {
+      setInterval(this.checkAvailable.bind(this), 1000);
+    })
   }
+
+  checkAvailable(){
+    let i:number;
+    for(i = 0; i < 5; i++){
+      console.log(this.possibleSubs[i])
+      if(this.possibleSubs[i].available == false){
+        setTimeout(this.replaceSubmission.bind(this), 1000)
+      }
+    }
+  }
+
+  replaceSubmission(){
+    console.log("replaceSub")
+  }
+
+  
 
 }
 
