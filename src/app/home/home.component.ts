@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit {
   checkAvailable(){
     let i:number;
     for(i = 0; i < 5; i++){
-      console.log(this.possibleSubs[i])
+      // console.log(this.possibleSubs[i])
       if(this.possibleSubs[i].available == false){
         setTimeout(this.replaceSubmission.bind(this), 1000)
       }
@@ -49,7 +49,7 @@ export class HomeComponent implements OnInit {
   }
 
   replaceSubmission(){
-    console.log("replaceSub")
+    console.log()
   }
 
   
