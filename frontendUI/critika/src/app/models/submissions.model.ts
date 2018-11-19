@@ -5,7 +5,7 @@ export class Submission{
     category:string;
     coins: number;
     recuser: string;
-
+    available; boolean; 
 
     constructor(response:any){
         this.submissionName = response.submissionName;
@@ -14,5 +14,6 @@ export class Submission{
         this.category = response.category;
         this.coins = response.coins;
         this.recuser = response.recuser;
+        this.available = response.available;
     }
 }
