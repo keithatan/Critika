@@ -9,8 +9,8 @@ export class Profile  {
 
     constructor(response:any) {
         this.username = response.username;
-        this.memberSince = response.memberSince;
-        this.rating = response.memberSince;
+        this.memberSince = response.memberSince.$date;
+        this.rating = response.rating.$numberDecimal;
         this.coins = response.coins;
         this.submissionNum = response.submissionNum;
         this.aboutMe = response.aboutMe;

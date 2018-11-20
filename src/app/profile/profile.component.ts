@@ -54,7 +54,11 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
-      console.log(response)
+      /*
+      const v = response["rating"];
+      console.log(v);
+      */
+      console.log(response);
       console.log(this.profile)
     })
 
