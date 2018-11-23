@@ -41,10 +41,12 @@ export class SubmissionService{
 
     }
 
+    //get submission user can critique
     getAvailable(){
         return this.http.get("http://localhost:5000/submission/all").toPromise();
     }
 
+    //get user's submissions
     getSubmissions():Promise<Submission[]>{
         return this.http.get<Submission[]>("http://localhost:5000/submission/mine").toPromise()
     }
