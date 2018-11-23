@@ -26,7 +26,7 @@
     <mdb-card>
         <mdb-card-body>
             <h4>Member Since:</h4>
-            <h1 *ngIf="profile"> {{profile.memberSince}}</h1>
+            <h1 *ngIf="profile"> {{profile.memberSince.substring(0,10)}}</h1>
         </mdb-card-body>
     </mdb-card>
 
@@ -45,4 +45,3 @@
 <button type="button" (click)="renderSpendCoins()" class="btn btn-secondary">Spend Coins</button>
 <button type="button" (click)="renderAddSub()" class="btn btn-secondary">Add Submission</button>
 <button type="button" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>
-<app-spend-coins *ngIf="renderComponent == 'SpendCoins' "></app-spend-coins>
