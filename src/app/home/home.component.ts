@@ -10,7 +10,9 @@ import {Subscription} from "rxjs";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
+  tableElements = ['Title','Link', 'User', 'Category', 'Critiques', 'Give Feedback'];
   possibleSubs:Submission[];
+  chosen:Submission;
   private timer;
 
   constructor(public subService:SubmissionService) {
@@ -19,7 +21,8 @@ export class HomeComponent implements OnInit {
   }
   renderComponent: String;
 
-  renderCritiqueForm() {
+  renderCritiqueForm(sub:Submission) {
+    this.chosen = sub;
     this.renderComponent = "critique-form";
   }
 
@@ -27,6 +30,11 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.displayAvailable();
+  }
+
+  getChildEvent(str:string){
+    this.renderComponent = str;
+
   }
 
   displayAvailable(){
@@ -40,7 +48,7 @@ export class HomeComponent implements OnInit {
           let submission = new Submission(submissions[i])
             this.possibleSubs[i] = submission;
        }
-      //console.log(this.possibleSubs)
+      console.log(this.possibleSubs)
     }).then(() => {
       setInterval(this.checkAvailable.bind(this), 2000);
     })
@@ -49,7 +57,7 @@ export class HomeComponent implements OnInit {
   checkAvailable(){
     let i:number;
     for(i = 0; i < 5; i++){
-      if(this.possibleSubs[i].numberOfCritiquesRecieved >= 3){
+      if(this.possibleSubs[i].numberOfCritiquesReceived >= 3){
         this.replaceSubmission(this.possibleSubs[i])
       }
     }
