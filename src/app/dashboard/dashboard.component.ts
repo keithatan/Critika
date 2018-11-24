@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
+import { ProfileService } from '../services/profile.service';
 
 
 
@@ -16,10 +17,15 @@ export class DashboardComponent implements OnInit {
   private authStatusSub : Subscription;
   userIsAuth = false
   username:string = localStorage.getItem('user');
+  coins:string;
 
 
-  constructor(private authService:AuthService){
+  constructor(private authService:AuthService, private profileService:ProfileService){
     this.username = localStorage.getItem('user');
+    this.profileService.getProfile().then((response) => {  
+      const v = response["coins"];
+      this.coins = v;
+    })
   }
 
 
@@ -27,7 +33,11 @@ export class DashboardComponent implements OnInit {
     this.renderComponent = "home";
   }
   ngOnDestroy() {
-}
+  }
+
+  updateInformation(update:string){
+    // Will use this later to grab events to update profile picture and coins
+  }
 
   renderProfile(){
     this.renderComponent = "profile";
