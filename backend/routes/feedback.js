@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
  * Add new feedback
  * Each user can only give one feedback
  */
-router.post('/add-feedback', (req, res) => {
+router.post('/add-feedback', authenticate, (req, res) => {
     if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionName){
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
@@ -38,13 +38,16 @@ router.post('/add-feedback', (req, res) => {
         feedbackMessage: req.body.feedbackMessage,
         feedbackSubject: req.body.feedbackSubject,
         submissionName: req.body.submissionName,
+        submissionID: req.body.submissionID
     });
 
-    Feedback.find({username: req.body.username}).then((subs) => {
-        if(req.body.username == subs[0].username){
+    Feedback.find({username: req.body.username, submissionID: req.body.submissionID}).then((subs) => {
+        for (fb in subs){
+        if(user.username == fb.username){
             res.status(400).json({ message: "You have already given feedback to this submission" });
             return;
         }
+    }
     }).catch((err) => {
         res.status(400).json({ message: "Error finding feedback" });
         return;
