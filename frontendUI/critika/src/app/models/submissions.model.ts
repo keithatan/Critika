@@ -6,7 +6,7 @@ export class Submission{
     coins: number;
     recuser: string;
     available: boolean; 
-    numberOfCritiquesRecieved: number;
+    numberOfCritiquesReceived: number;
     submissionID: string;
 
     constructor(response:any){
@@ -17,7 +17,7 @@ export class Submission{
         this.coins = response.coins;
         this.recuser = response.recuser;
         this.available = response.available;
-        this.numberOfCritiquesRecieved = response.numberOfCritiquesRecieved;
+        this.numberOfCritiquesReceived = response.numberOfCritiquesRecieved;
         this.submissionID = response._id;
     }
 }
