@@ -29,6 +29,7 @@ import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component
 import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
+import { FeedbackComponent } from './feedback/feedback.component';
 
 
 @NgModule({
@@ -48,7 +49,8 @@ import { EditProfileComponent } from './profile/edit-profile/edit-profile.compon
     AdminComponent,
     CritiqueFormComponent,
     SearchPipe,
-    EditProfileComponent
+    EditProfileComponent,
+    FeedbackComponent
   ],
   imports: [
     BrowserModule,

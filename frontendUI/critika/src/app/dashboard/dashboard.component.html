@@ -50,7 +50,7 @@
                 <p> <button type="button" (click)="renderProfile()" class="btn btn-secondary">Profile</button>
                 </p>
                 <p> <button type="button" (click)="renderMySubmissions()" class="btn btn-secondary">Submissions</button>
-                  <p> <button type="button" (click)="renderAdmin()" class="btn btn-secondary">Feedback</button>
+                  <p> <button type="button" (click)="renderFeedback()" class="btn btn-secondary">Feedback</button>
                   </p>
                   <p> <button type="button" (click)="renderCategories()" class="btn btn-secondary">Categories</button>
                   </p>
@@ -75,6 +75,7 @@
       <app-my-submissions *ngIf="renderComponent == 'my-submissions'"></app-my-submissions>
       <app-categories *ngIf="renderComponent == 'categories'"></app-categories>
       <app-admin *ngIf="renderComponent == 'Admin' "></app-admin>
+      <app-feedback *ngIf="renderComponent == 'feedback'"></app-feedback>
     </div>
   </div>
 </div>
