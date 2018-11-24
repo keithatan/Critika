@@ -28,7 +28,7 @@ router.get("/", (req, res) => {
  */
 router.post('/critique', authenticate, (req, res) => {
     if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionName){
-        res.status(400).json({ message: "Report comment data is incomplete" });
+        res.status(400).json({ message: "Report comment data is incomplete" + req.body.username + req.body.feedbackMessage});
         return;
     }
 
@@ -41,7 +41,7 @@ router.post('/critique', authenticate, (req, res) => {
         submissionID: req.body.submissionID
     });
 
-    Feedback.find({username: req.body.username, submissionID: req.body.submissionID}).then((subs) => {
+    Feedback.find({username: req.body.username, submissionName: req.body.submissionName}).then((subs) => {
         for (fb in subs){
         if(user.username == fb.username){
             res.status(400).json({ message: "You have already given feedback to this submission" });
