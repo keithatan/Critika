@@ -25,7 +25,17 @@ export class FeedbackService {
         });
    }
    
-   giveFeedback()
+   giveFeedback(feedbackmessage: string, feedbacksubject: string, feedbackrating: Number, 
+    username: string, submissionID:string, anonymous:boolean){
+        const feedbackO:Object = {feedbackMessage: feedbackmessage, feedbackSubject: feedbacksubject,
+            feedbackRating: feedbackrating, username: username, anonymous: anonymous, submissionID: submissionID }
+
+            var feedback = new Feedback(feedbackO);
+            this.http.post("http://localhost:5000/feedback/critique", feedback).subscribe(response => {
+                console.log(response);
+            });
+
+   }
 
    getFeedbacks():Promise<Feedback[]> {
        return this.http.get<Feedback[]>("http://localhost:5000/feedback/all-user").toPromise();

@@ -26,7 +26,7 @@ router.get("/", (req, res) => {
  * Add new feedback
  * Each user can only give one feedback
  */
-router.post('/add-feedback', authenticate, (req, res) => {
+router.post('/critique', authenticate, (req, res) => {
     if(!req.body || !req.body.username || !req.body.feedbackSubject || !req.body.feedbackMessage || !req.body.submissionName){
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
