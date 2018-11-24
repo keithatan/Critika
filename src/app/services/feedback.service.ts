@@ -23,7 +23,9 @@ export class FeedbackService {
             console.log(response)
             
         });
-   } 
+   }
+   
+   giveFeedback()
 
    getFeedbacks():Promise<Feedback[]> {
        return this.http.get<Feedback[]>("http://localhost:5000/feedback/all-user").toPromise();
