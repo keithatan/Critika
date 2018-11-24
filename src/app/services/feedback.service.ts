@@ -25,12 +25,13 @@ export class FeedbackService {
         });
    }
    
-   giveFeedback(feedbackmessage: string, feedbacksubject: string, feedbackrating: Number, 
-    username: string, submissionID:string, anonymous:boolean){
-        const feedbackO:Object = {feedbackMessage: feedbackmessage, feedbackSubject: feedbacksubject,
-            feedbackRating: feedbackrating, username: username, anonymous: anonymous, submissionID: submissionID }
+   giveFeedback(feedbackmessage: string, feedbacksubject: string,
+    username: string, submissionName:string, anonymous:boolean){
+        const feedbackO:Object = {feedbackMessage: feedbackmessage, feedbackSubject: feedbacksubject,username: username, submissionName: submissionName, anonymous: anonymous }
 
             var feedback = new Feedback(feedbackO);
+
+            console.log(feedback)
             this.http.post("http://localhost:5000/feedback/critique", feedback).subscribe(response => {
                 console.log(response);
             });
