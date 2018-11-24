@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit,Output, EventEmitter } from '@angular/core';
+import {Submission} from '../../models/submissions.model'
 
 @Component({
   selector: 'app-critique-form',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./critique-form.component.scss']
 })
 export class CritiqueFormComponent implements OnInit {
+  @Input('submission') chosenSubmission: Submission;
+  @Output() returnToParent = new EventEmitter<string>();
 
   constructor() { 
     this.renderComponent = "";
@@ -15,7 +18,12 @@ export class CritiqueFormComponent implements OnInit {
   comment: string;
 
   ngOnInit() {
-    
+
+    console.log(this.chosenSubmission)
+  }
+
+  returnToDashboard(){
+    this.returnToParent.emit("dash");
   }
 
 }
