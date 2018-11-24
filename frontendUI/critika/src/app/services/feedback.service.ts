@@ -9,7 +9,7 @@ export class FeedbackService {
     renderComponent: String = "";
     feedbackReceived: Feedback[];
     data: Object;
-    constructor(private http:Http){ }
+    constructor(private http:HttpClient){ }
 
     //rate feedback received
    rateFeedback (feedbackmessage: string, feedbacksubject: string, feedbackrating: Number, 
@@ -26,6 +26,6 @@ export class FeedbackService {
    } 
 
    getFeedbacks():Promise<Feedback[]> {
-       return this.http.get<Feedback[]>("http://localhost:5000/feedback/mine").toPromise()
+       return this.http.get<Feedback[]>("http://localhost:5000/feedback/all-user").toPromise();
    }
 }

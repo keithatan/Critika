@@ -8,7 +8,7 @@ import { Feedback } from '../models/feedback.model';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
-  feedbackReceived: Feedbacks[];
+  feedbackReceived: Feedback[];
   renderComponent: String = "";
 
   constructor(public subService:FeedbackService) { }
