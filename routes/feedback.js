@@ -38,12 +38,17 @@ router.post('/critique', authenticate, (req, res) => {
         feedbackMessage: req.body.feedbackMessage,
         feedbackSubject: req.body.feedbackSubject,
         submissionName: req.body.submissionName,
-        submissionID: req.body.submissionID
+        submissionID: req.body.submissionID,
+        critiquer: req.user.username
     });
 
     Feedback.find({username: req.body.username, submissionName: req.body.submissionName}).then((subs) => {
-        for (fb in subs){
-        if(user.username == fb.username){
+        console.log(subs)
+        console.log(req.user.username)
+        var i;
+        for (i = 0; i < subs.length; i++){
+        if(req.user.username === subs[i].critiquer){
+            console.log(subs[i].critiquer)
             res.status(400).json({ message: "You have already given feedback to this submission" });
             return;
         }
@@ -52,6 +57,8 @@ router.post('/critique', authenticate, (req, res) => {
         res.status(400).json({ message: "Error finding feedback" });
         return;
     })
+
+    /*we need to update submissions critique number */
 
     // Add to database 
     newFeedback.save().then(() => {

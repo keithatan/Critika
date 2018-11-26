@@ -8,7 +8,9 @@ let feedbackSchema = new Schema({
     feedbackMessage: {type: String, required: true},
     feedbackSubject: {type: String, required: true},
     feedbackRating: {type: Number, default: 0, min: 0, max: 5},
+    submissionName: {type: String},
     submissionID: {type: String},
+    critiquer: {type:String, required: true}
   });
   
   
