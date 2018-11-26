@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import {SubmissionService} from '../services/submissions.service'
 import {Submission} from '../models/submissions.model'
 import { timer } from 'rxjs';
-import {Subscription} from "rxjs";
 
 @Component({
   selector: 'app-home',
@@ -10,7 +9,7 @@ import {Subscription} from "rxjs";
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tableElements = ['Title','Link', 'User', 'Category', 'Critiques', 'Give Feedback'];
+  tableElements = ['Title','Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
   possibleSubs:Submission[];
   chosen:Submission;
   private timer;
@@ -44,18 +43,26 @@ export class HomeComponent implements OnInit {
 
   displayAvailable(){
     this.subService.getAvailable().then((submissions)=>{
-
-      let i:number;
+      let i:number = 0;
 
       this.possibleSubs = new Array(5)
-      let count:number = 0;
-      for(i = 0; i < 5; i++) {
-          let submission = new Submission(submissions[i])
-            this.possibleSubs[i] = submission;
-       }
+      for(let x in submissions){
+        if(i == 5){
+          break;
+        }
+        let sub = new Submission(submissions[x])
+        this.possibleSubs[i++] = sub;
+      }
       console.log(this.possibleSubs)
+      // this.possibleSubs = new Array(5)
+      // let count:number = 0;
+      // for(i = 0; i < 5; i++) {
+      //     let submission = new Submission(submissions[i])
+      //       this.possibleSubs[i] = submission;
+      //  }
+      // console.log(this.possibleSubs)
     }).then(() => {
-      setInterval(this.checkAvailable.bind(this), 2000);
+      setTimeout(this.checkAvailable.bind(this), 1000);
     })
   }
 
@@ -69,9 +76,10 @@ export class HomeComponent implements OnInit {
   }
 
   replaceSubmission(submission){
+    // console.log(submission)
     let ten:number = 10;
     this.timer = timer(1000,1000)
-    this.timer = setInterval(() => {
+    this.timer = setTimeout(() => {
       // console.log(ten--)
       // if(ten < 0){
       //   ten = 10;
@@ -79,11 +87,11 @@ export class HomeComponent implements OnInit {
     },10)
     // console.log('done')
     // console.log(this.possibleSubs)
-    /*
+    
     this.subService.setUnavailable(submission).then((res) => {
-      this.displayAvailable()
+      this.displayAvailable();
     })
-    */
+    
   }
 
   
