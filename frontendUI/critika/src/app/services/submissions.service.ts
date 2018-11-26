@@ -43,7 +43,7 @@ export class SubmissionService{
 
     //get submission user can critique
     getAvailable(){
-        return this.http.get("http://localhost:5000/submission/all").toPromise();
+        return this.http.get("http://localhost:5000/submission/available").toPromise();
     }
 
     //get user's submissions
@@ -63,15 +63,15 @@ export class SubmissionService{
         return this.mySubmissions
     }
 
-    /*
+    
     setUnavailable(submission){
-        console.log(submission)
         //TODO: remove submission when route gets made available
         const sub:Object = {
             submissionID: submission.submissionID,
         }
         var p = new Submission(sub);
+        console.log(sub)
         return this.http.post("http://localhost:5000/submission/make-unavailable", sub).toPromise();
     }
-    */
+    
 }

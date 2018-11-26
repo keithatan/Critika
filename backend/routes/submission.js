@@ -217,8 +217,8 @@ router.post("/make-unavailable", authenticate, (req, res) => {
     }
 
     Submission.findOneAndUpdate({
-        _id: req.body.submissionID,
-        $set:
+        _id: req.body.submissionID},
+        {$set:
         {
             available: false,
         }
