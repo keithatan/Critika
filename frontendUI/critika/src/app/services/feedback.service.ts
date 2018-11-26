@@ -32,10 +32,7 @@ export class FeedbackService {
             var feedback = new Feedback(feedbackO);
 
             console.log(feedback)
-            this.http.post("http://localhost:5000/feedback/critique", feedback).subscribe(response => {
-                console.log(response);
-            });
-
+            return this.http.post("http://localhost:5000/feedback/critique", feedback)
    }
 
    getFeedbacks():Promise<Feedback[]> {
