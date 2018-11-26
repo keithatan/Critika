@@ -26,6 +26,10 @@ export class HomeComponent implements OnInit {
     this.renderComponent = "critique-form";
   }
 
+   ngOnDestroy(){
+     console.log('boooom')
+   }
+
   Link: "Submission";
 
   ngOnInit() {
@@ -34,8 +38,9 @@ export class HomeComponent implements OnInit {
 
   getChildEvent(str:string){
     this.renderComponent = str;
+    this.displayAvailable();
 
-  }
+  }t
 
   displayAvailable(){
     this.subService.getAvailable().then((submissions)=>{

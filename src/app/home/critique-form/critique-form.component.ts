@@ -24,7 +24,15 @@ export class CritiqueFormComponent implements OnInit {
 
   critique(){
     console.log(this.chosenSubmission.submissionName);
-    this.feedbackService.giveFeedback("testmessge", "test", this.chosenSubmission.username,  this.chosenSubmission.submissionName, false);
+    this.feedbackService.giveFeedback("testmessge", "test", this.chosenSubmission.username,  this.chosenSubmission.submissionName, false).subscribe(
+      (response)=>{
+        console.log("Worked")
+
+      },
+      (err) =>{
+        console.log("err")
+      });
+    
   }
 
   ngOnInit() {
