@@ -132,10 +132,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
 
-        <div>
+        
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Restore User </button>
             <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                 aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -161,10 +161,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
 
-        <div>
+        
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Make User an Admin </button>
             <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                 aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -198,12 +198,13 @@
                 <thead>
                   <tr>
                     <th scope="col">User</th>
+                    <th>Standing</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr mdbTableCol *ngFor="let user of allUsers">
-                      <th scope="row">{{user.submissionName}}</th>
                       <td>{{user.username}}</td>
+                      <td>{{user.standing}}</td>
                     </tr>
                 </tbody>
               </table>
