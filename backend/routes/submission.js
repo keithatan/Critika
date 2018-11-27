@@ -234,7 +234,7 @@ router.post("/make-unavailable", authenticate, (req, res) => {
  */
 router.get("/mine", authenticate, (req, res) => {
     Submission.find({ username: req.user.username }).then((subs) => {
-        res.send(subs);
+        res.status(200).send(subs);
     });
 });
 
