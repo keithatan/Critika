@@ -12,6 +12,8 @@ export class HomeComponent implements OnInit {
   tableElements = ['Title','Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
   possibleSubs:Submission[];
   chosen:Submission;
+  TWENTY_FOUR_HOURS = 86400000;
+  ONE_MINUTE = 60000;
   private timer;
 
   constructor(public subService:SubmissionService) {
@@ -62,7 +64,7 @@ export class HomeComponent implements OnInit {
       //  }
       // console.log(this.possibleSubs)
     }).then(() => {
-      setTimeout(this.checkAvailable.bind(this), 1000);
+      setTimeout(this.checkAvailable.bind(this), this.ONE_MINUTE);
     })
   }
 
@@ -78,7 +80,7 @@ export class HomeComponent implements OnInit {
   replaceSubmission(submission){
     // console.log(submission)
     let ten:number = 10;
-    this.timer = timer(1000,1000)
+    this.timer = timer(this.TWENTY_FOUR_HOURS,1000)
     this.timer = setTimeout(() => {
       // console.log(ten--)
       // if(ten < 0){
