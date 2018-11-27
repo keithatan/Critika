@@ -73,5 +73,9 @@ export class SubmissionService{
         console.log(sub)
         return this.http.post("http://localhost:5000/submission/make-unavailable", sub).toPromise();
     }
+
+    getAllReportedComments(){
+        return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
+    }
     
 }
