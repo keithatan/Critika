@@ -3,6 +3,35 @@
     max-height: 50%;
 }
 
+* {
+  box-sizing: border-box;
+}
+
+.left {
+  flex: 35%;
+  padding: 15px 0;
+}
+
+#cats {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+#cats li a:hover {
+  background-color: #eee;
+}
+
+#cats li a {
+  background-color: white;
+  padding: 12px;
+  text-decoration: none;
+  font-size: 18px;
+  color: black;
+  display: block;
+  width: 200px;
+}
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
@@ -20,6 +49,7 @@ ul {
     list-style-type: none;
     display: flex;
     align-items: center;
+    width: 200px;
 }
 
 h3 {
