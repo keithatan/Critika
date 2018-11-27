@@ -1,8 +1,9 @@
-<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search for categories">
+<div class="left"></div>
+<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search for categories" title="Type in a category">
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
-<ul *ngFor="let c of categoriesForFilter | searchPipe: queryString">
-  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> {{c.categoryName}} </li>
+<ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
+  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <a href="#"> {{c.categoryName}} </a> </li>
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
@@ -42,9 +43,10 @@
         </div>
       </div>
     </div>
-  </div>
-
+</div>
 </ul>
+
+<br>
 
 <p><button type="button" (click)="basicModal.show()" id="createCategoryButton">Create Category</button></p>
 
@@ -101,7 +103,7 @@
       <br>
       <button (click)="basicModal.show()" (click)="getSubmissionsInCategory(t.categoryName)">View
         Submissions</button>
-        <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+      <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
         aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -115,7 +117,8 @@
               <ul *ngFor=" let s of submissions">
                 <li><b>{{s.submissionName}}</b>
                   <p>{{s.submissionText}}</p>
-                  <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.show()">Add Comment</button>
+                  <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.show()">Add
+                    Comment</button>
                   <form (submit)="addComment(f, s.submissionName)" #f="ngForm">
                     <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                       aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -136,10 +139,10 @@
               </ul>
             </div>
             <div class="modal-footer">
-              </div>
             </div>
           </div>
         </div>
       </div>
+    </div>
   </li>
 </ul>
