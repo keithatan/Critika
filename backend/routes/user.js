@@ -90,14 +90,14 @@ router.post("/register", (req, res) => {
  */
 router.get("/account", authenticate, (req, res) => {
 
-    console.log(req)
+    // console.log(req)
 
-    if (User.standing == "banned") {
+    if (req.user.standing == "banned") {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
         return;
     }
 
-    res.send(req.user);
+    res.status(200).send(req.user);
 });
 
 router.get("/test", (req, res) => {
@@ -221,7 +221,7 @@ router.post("/rating", authenticate, (req, res) => {
         res.status(400).send(err);
     })
 
-    
+
 
 });
 
@@ -229,7 +229,7 @@ router.post("/rating", authenticate, (req, res) => {
  * Add coins to user
  */
 router.post("/add-coin", authenticate, (req, res) => {
-    if (!req.body || !req.body.recuser) {
+    if (!req.body || !req.body.recuser || !req.body.coins) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -245,7 +245,7 @@ router.post("/add-coin", authenticate, (req, res) => {
     User.findOneAndUpdate({ username: req.body.recuser },
         {
             $inc: {
-                coins: 4,
+                coins: req.body.coins,
             }
         }).then(() => {
             res.status(200).send({ message: 'Coins successfully added' })
@@ -260,7 +260,7 @@ router.post("/add-coin", authenticate, (req, res) => {
  * Remove coins from user
  */
 router.post("/remove-coin", authenticate, (req, res) => {
-    if (!req.body.coins || !req.body.recuser) {
+    if (!req.body || !req.body.recuser) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
@@ -283,12 +283,6 @@ router.post("/remove-coin", authenticate, (req, res) => {
     }).catch((err) => {
         res.status(400).send(err);
     })
-
-    console.log(req.body.coins)
-    console.log(recUser)
-
-   
-
 });
 
 /**
@@ -313,8 +307,15 @@ router.get("/all-users", authenticate, (req, res) => {
  */
 
 router.post("/ban-user", authenticate, (req, res) => {
+
+    if (!req.body || !req.body.usernameToBeBanned) {
+        res.status(400).send({ message: 'Data Incomplete' })
+        return
+    }
+
     if (req.user.status != 'admin') {
         res.status(401).send({ message: '401 ERROR: Access Denied, user is not an admin' })
+        return
     }
 
     else {
@@ -339,21 +340,25 @@ router.post("/ban-user", authenticate, (req, res) => {
  */
 
 router.post("/restore-user", authenticate, (req, res) => {
+
+    if (!req.body || !req.body.usernameToBeRestored) {
+        res.status(400).send({ message: 'Data Incomplete' })
+        return
+    }
     if (req.user.status != 'admin') {
         res.status(401).send({ message: '401 ERROR: Access Denied, user is not an admin' })
     }
 
     else {
-        User.findByRecoveryName(req.body.usernameToBeRestored).then((user) => {
-            User.findOneAndUpdate({ recoveryUsername: req.body.usernameToBeRestored }, { $set: { username: req.body.usernameToBeRestored, standing: "good" } })
-                .then(() => {
-                    res.status(200).send({ message: "User is now restored" })
-                    /* Delete user from database or username to list of banned names? */
-                    /* I think we should just delete the user, and instead store the email in an array of banned emails */
-                })
-        }).catch((err) => {
-            res.status(400).send({ message: "Error Loging in, Username or Password is incorrect" });
-        });
+        User.findOneAndUpdate({ recoveryUsername: req.body.usernameToBeRestored }, { $set: { username: req.body.usernameToBeRestored, standing: "good" } })
+            .then(() => {
+                res.status(200).send({ message: "User is now restored" })
+                /* Delete user from database or username to list of banned names? */
+                /* I think we should just delete the user, and instead store the email in an array of banned emails */
+            }).catch((err) => {
+                res.status(400).send({message: "Error restoring user"})
+            })
+
     }
 })
 
@@ -361,6 +366,12 @@ router.post("/restore-user", authenticate, (req, res) => {
  * Change Password 
  */
 router.post("/change-password", authenticate, (req, res) => {
+
+    if(!req.body || !req.body.password){
+        res.status(400).send({message: "User information incomplete"})
+        return
+    }
+
     var username = req.user.username;
     var newPassword = req.body.password;
 
@@ -378,8 +389,9 @@ router.post("/change-password", authenticate, (req, res) => {
 
 router.post("/become-admin", authenticate, (req, res) => {
 
-    if (!req.body || !req.body.username) {
-        res.status(400).send({ message: "Information incomplete" })
+    if (req.user.status != 'admin') {
+        res.status(401).send({ message: '401 ERROR: Access Denied, user is not an admin' })
+        return
     }
 
     else {

@@ -194,7 +194,7 @@ describe('Register', () => {
                     if(err){
                         console.log(err)
                     }
-                    console.log(res.body)
+                    // console.log(res.body)
                     res.should.have.status(200);
                 done();
             });
