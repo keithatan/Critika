@@ -3,7 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var User = require('../../model/user');
 
 chai.use(chaiHttp);
@@ -105,7 +104,6 @@ describe('Verify Email', () => {
                     return
                 }
                 console.log(err)
-                //console.log(user['verificationNum'])
                 let info = {
                     username: uname,
                     email: mail,
@@ -126,7 +124,6 @@ describe('Verify Email', () => {
                     done();
                 });
             })
-    
         })
     })
 })

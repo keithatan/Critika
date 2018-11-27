@@ -3,7 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var User = require('../../model/user');
 
 chai.use(chaiHttp);
@@ -12,50 +11,46 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('Submission/mine', function(){
+describe('Test get all user submissions', function () {
 
-  describe('Test with bad token', function(){
-    it('Should return 401', function(done) {
-      var info = {
-        username: uname,
-        password: pword,
-      }
+  describe('Test with bad token', function () {
+    it('Should return 401', function (done) {
+      User.findOne({ username: uname }, (err, user) => {
+        //do the get request here 
 
-      User.findOne({username: uname}, (err, user) => {
+        var token = user['tokens'][0]['token'][0]
+
         chai.request(server)
-        .post('/sub/login')
-        .set('content-type', 'application/x-www-form-urlencoded')
-        .send(info)
-        .end((err, res) => {
-          secondRequest(res)
-         })
-      });
-
-      function secondRequest(res){
-        console.log('here')
-        request(server)
           .get('/submission/mine')
           .set('content-type', 'application/x-www-form-urlencoded')
-          .set('token', res.header['token'])
+          .set('token', 'bad token')
+          .send()
           .end((err, res) => {
-            console.log('here2')
             res.should.have.status(401)
+            done()
           })
-      }
-      done()
+      });
     })
   })
 
-  
-  describe('Test with bad token', function(){
-    it('Should return 401', function() {
-      
-    })
-  })
 
-  describe('Should work', function(){
-    it('Should return 200', function() {
-      
+  describe('Test with correct info', function () {
+    it('Should return 200', function () {
+      User.findOne({ username: uname }, (err, user) => {
+        //do the get request here 
+
+        var token = user['tokens'][0]['token'][0]
+
+        chai.request(server)
+          .get('/submission/mine')
+          .set('content-type', 'application/x-www-form-urlencoded')
+          .set('token', token)
+          .send()
+          .end((err, res) => {
+            res.should.have.status(200)
+            done()
+          })
+      });
     })
   })
 

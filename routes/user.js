@@ -25,13 +25,14 @@ router.get("/", function (req, res) {
 
 
 router.post('/add-friend', (req, res) => {
-    if (!req.body.email || !req.body.username || !req.body.friend) {
+
+    if (!req.body.friend) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
     else {
         User.findByLogin({ username: req.body.friend }).then((friend) => {
-            User.findOneAndUpdate({ username: req.body.username }, { $push: { friends: req.body.friend } }).then(() => {
+            User.findOneAndUpdate({ username: req.user.username }, { $push: { friends: req.body.friend } }).then(() => {
                 res.status(200).send({ message: "Friend successfully added!" });
             }).catch((err) => {
                 res.status(400).send({ message: "An error has occoured with adding friend" });
@@ -109,7 +110,7 @@ router.get("/test", (req, res) => {
  */
 router.post("/login", (req, res) => {
     // check for username and password
-    //console.log("&&&&&& " + req.body.username + " " + req.body.password)
+    console.log("&&&&&& " + req.body.username + " " + req.body.password)
     if (req.body.username && req.body.password) {
 
         User.findByLogin(req.body.username, req.body.password).then((user) => {
@@ -126,7 +127,7 @@ router.post("/login", (req, res) => {
                 res.header('token', token).send(user);
             });
         }).catch((err) => {
-            console.log(err)
+            console.log(user)
             res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
