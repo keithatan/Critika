@@ -32,12 +32,23 @@
   width: 200px;
 }
 
+h1 { 
+  display: block;
+  font-size: 2em;
+  margin-top: 0.67em;
+  margin-left: 0;
+  margin-right: 0;
+  font-weight: bold;
+  float: center;
+  padding-left: 7.5em;
+}
+
 .card {
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
     max-width: 300px;
     text-align: center;
     font-family: arial;
-    margin-top: 50px;
+    margin-top: 20px;
     margin-left: 25px;
     display:block;
     border: 1px solid black;

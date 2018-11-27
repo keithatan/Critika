@@ -1,5 +1,5 @@
 <div class="left"></div>
-<input type="text" [(ngModel)]="queryString" id="search" placeholder="Search for categories" title="Type in a category">
+<input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
@@ -48,7 +48,8 @@
 
 <br>
 
-<p><button type="button" (click)="basicModal.show()" id="createCategoryButton">Create Category</button></p>
+<p><button type="button" (click)="basicModal.show()" id="createCategoryButton" class="btn btn-secondary">Create Category</button></p>
+
 
 <form (submit)="createCategory(f)" #f="ngForm">
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
@@ -87,8 +88,7 @@
 
 <br>
 <br>
-<h3>Featured Categories</h3>
-<br>
+<h1 id="feat">Featured Categories</h1>
 
 <ul id="topThreeUl">
   <li *ngFor="let t of topThreeCategories">
