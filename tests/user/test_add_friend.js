@@ -27,7 +27,6 @@ describe('test add friend', function () {
             .post('/user/register')
             .set('content-type', 'application/x-www-form-urlencoded')
             .send(info).then((pls) => {
-                console.log(pls)
             //verify email for user
             User.findOne({username: 'Jeff Brohm'}, (err, user) => {
                 if(err){
@@ -49,7 +48,6 @@ describe('test add friend', function () {
                             console.log(err)
                             return
                         }
-                    done();
                 });
             })
         })
@@ -149,7 +147,6 @@ describe('test add friend', function () {
                     .set('token', token)
                     .send(info)
                     .end((err, res) => {
-                        console.log(res)
                         res.should.have.status(200)
                         done()
                     })

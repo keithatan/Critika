@@ -24,24 +24,26 @@ router.get("/", function (req, res) {
 
 
 
-router.post('/add-friend', (req, res) => {
+router.post('/add-friend', authenticate, (req, res) => {
 
     if (!req.body.friend) {
         res.status(400).send({ message: "User data is incomplete" });
         return;
     }
     else {
-        User.findByLogin({ username: req.body.friend }).then((friend) => {
+        User.findOne({ username: req.body.friend }).then((friend) => {
             User.findOneAndUpdate({ username: req.user.username }, { $push: { friends: req.body.friend } }).then(() => {
                 res.status(200).send({ message: "Friend successfully added!" });
+                return
             }).catch((err) => {
                 res.status(400).send({ message: "An error has occoured with adding friend" });
                 res.send(err);
+                return
             });
         }).catch((err) => {
             res.status(400).send({ message: "Friend does not exist" });
-            res.send(err);
-        })
+            return
+        });
     }
 })
 
