@@ -12,13 +12,34 @@
     <!--Text-->
     <mdb-card-text> {{chosenSubmission.submissionName}}
     </mdb-card-text>
-    <div class="md-form">
+
+      <!--
       <textarea mdbInputDirective type="text" 
                 id="form7" class="md-textarea form-control" 
                 rows="3"
                 [(ngModel)] = "feedback" ></textarea>
       <label for="form7">Feedback</label>
-    </div>
+      -->
+     <form (submit)="critique(f)" #f="ngForm" class="md-form p-5" [formGroup]="critiqueForm">
+        <!-- What went well -->
+        <div class="md-form form-group">
+          <textarea type="text" id="good" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
+            <label for="good">What went well:</label>
+        </div>
+
+        <div class="md-form form-group">
+            <textarea type="text" id="bad" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
+              <label for="bad">What went wrong:</label>
+        </div>
+
+        <div class="md-form form-group">
+            <textarea type="text" id="work" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
+              <label for="improve">What could be improved:</label>
+        </div>
+
+        <button mdbBtn block="true" class="btn btn-primary" type="submit">Sign in</button>
+     </form>
+  
 
     <!--
       <div class="md-form">
@@ -29,10 +50,7 @@
                 [(ngModel)] = "comment"></textarea>
       <label for="form7">Comment</label>
     </div>
-    -->
-
-    <button type="button" class="btn btn-primary" (click)="critique()">Submit</button>
-    
+    -->    
     
     <button type="button" class="btn btn-primary" (click)="returnToDashboard()">Cancel</button>
   

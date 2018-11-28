@@ -25,9 +25,9 @@ export class FeedbackService {
         });
    }
    
-   giveFeedback(feedbackmessage: string, feedbacksubject: string,
+   giveFeedback(feedbackbad: string, feedbackwork: string, feedbackgood: string,
     username: string, submissionName:string, anonymous:boolean){
-        const feedbackO:Object = {feedbackMessage: feedbackmessage, feedbackSubject: feedbacksubject,username: username, submissionName: submissionName, anonymous: anonymous }
+        const feedbackO:Object = {feedbackBad: feedbackbad, feedbackWork: feedbackwork, feedbackGood: feedbackgood, username: username, submissionName: submissionName, anonymous: anonymous }
 
             var feedback = new Feedback(feedbackO);
 

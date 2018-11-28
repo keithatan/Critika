@@ -5,8 +5,9 @@ let Schema = mongoose.Schema;
 let feedbackSchema = new Schema({
     username: {type: String, required: true},
     anonymous: {type: Boolean, default: false},
-    feedbackMessage: {type: String, required: true},
-    feedbackSubject: {type: String, required: true},
+    feedbackGood: {type: String, required: true},
+    feedbackBad: {type: String, required: true},
+    feedbackRecc: {type: String, required: true},
     feedbackRating: {type: Number, default: 0, min: 0, max: 5},
     submissionName: {type: String},
     submissionID: {type: String},
