@@ -26,15 +26,10 @@ export class ProfileService {
                 location: loc,
                 homepage: homepage,
                 occupation: occupation,
-                aboutMe: aboutme
+                aboutme: aboutme
         }
 
-        var parameter = new Profile(profile)
-
-        this.http.post("http://localhost:5000/user/profile", parameter)
-        .subscribe (response => {
-            console.log(response);
-        })
+        return this.http.post("http://localhost:5000/user/profile", profile)
     }
 
     getAllUsers(){

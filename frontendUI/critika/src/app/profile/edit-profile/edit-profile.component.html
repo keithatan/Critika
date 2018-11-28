@@ -1,6 +1,6 @@
-<p>
+<!-- <p>
   edit-profile works!
-</p>
+</p> -->
 
 
 <mdb-card *ngIf = "view == false">
@@ -12,15 +12,31 @@
       <h4>Edit Profile</h4>
     </mdb-card-title>
 
+<div class="md-form" *ngIf="childProfile.aboutMe != ''">
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="aboutMe" ></textarea>
+      <label>About Me</label>
+    </div>
+
     <div class="md-form">
-      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="aboutMe"></textarea>
-      <label> About Me</label>
+        <textarea placeholder="homepage"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="homePage"></textarea>
+         <label>Homepage</label>
+       </div>
+
+    <div class="md-form">
+     <textarea placeholder="{{childProfile.location}}"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="location"></textarea>
+      <label>Location</label>
+    </div>
+
+    <div class="md-form">
+      <textarea placeholder="{{childProfile.occupation}}" mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="occupation"></textarea>
+      <label>Occupation</label>
     </div>
 
     <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a> -->
   </mdb-card-body>
 
   <app-profile *ngIf="renderComponent == 'Profile' "></app-profile>
+  <button type="button" (click)="submitChanges()" class="btn btn-secondary">Submit Changes</button>
   <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button>
 
 </mdb-card>

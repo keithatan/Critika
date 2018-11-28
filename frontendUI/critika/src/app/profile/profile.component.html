@@ -3,7 +3,16 @@
     <mdb-card class="about-me-card">
         <mdb-card-body class="about-me-card">
             <h4>About Me</h4>
-            <h1 *ngIf="profile"> Hi I'm {{profile.username}} </h1>
+            <h2 *ngIf="profile"> {{profile.aboutMe}} </h2>
+
+            <h4>Homepage</h4>
+            <h2 *ngIf="profile"> {{profile.homepage}} </h2>
+
+            <h4>Location</h4>
+            <h2 *ngIf="profile"> {{profile.location}} </h2>
+
+            <h4>Occupation</h4>
+            <h2 *ngIf="profile">  {{profile.occupation}} </h2>
         </mdb-card-body>
     </mdb-card>
 
@@ -11,7 +20,7 @@
     <mdb-card class="card">
         <mdb-card-body>
             <h4>Coins</h4>
-            <h1 *ngIf="profile"> {{profile.coins}}</h1>
+            <h2 *ngIf="profile"> {{profile.coins}}</h2>
         </mdb-card-body>
     </mdb-card>
 
@@ -19,15 +28,15 @@
     <mdb-card class="card">
         <mdb-card-body>
             <h4>Critika Rating</h4>
-            <h1 *ngIf="profile && profile.rating > 0"> {{profile.rating}}/5</h1>
-            <h1 *ngIf="profile && profile.rating == 0"> Not yet rated</h1>
+            <h2 *ngIf="profile && profile.rating > 0"> {{profile.rating}}/5</h2>
+            <h2 *ngIf="profile && profile.rating == 0"> Not yet rated</h2>
         </mdb-card-body>
     </mdb-card>
 
     <mdb-card>
         <mdb-card-body>
             <h4>Member Since:</h4>
-            <h1 *ngIf="profile"> {{profile.memberSince.substring(0,10)}}</h1>
+            <h2 *ngIf="profile"> {{profile.memberSince.substring(0,10)}}</h2>
         </mdb-card-body>
     </mdb-card>
 
@@ -35,14 +44,14 @@
     <mdb-card class="card">
         <mdb-card-body>
             <h4>Total Number of Submissions</h4>
-            <h1 *ngIf="profile"> {{profile.submissionNum}}</h1>
+            <h2 *ngIf="profile"> {{profile.submissionNum}}</h2>
         </mdb-card-body>
     </mdb-card>
 </div>
 
 <app-spend-coins *ngIf="renderComponent == 'SpendCoins' "></app-spend-coins>
 <app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>
-<app-edit-profile *ngIf="renderComponent == 'EditProfile' "></app-edit-profile>
+<app-edit-profile *ngIf="renderComponent == 'EditProfile' " [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
 <button type="button" (click)="renderSpendCoins()" class="btn btn-secondary">Spend Coins</button>
 <button type="button" (click)="renderAddSub()" class="btn btn-secondary">Add Submission</button>
 <button type="button" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>

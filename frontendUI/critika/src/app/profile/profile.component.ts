@@ -39,7 +39,7 @@ export class ProfileComponent implements OnInit {
     if (this.edit == false) {
       this.edit = true;
     }
-    else {
+    if (this.edit == true) {
       this.edit = false;
     }
     if (this.renderComponent == "EditProfile"){
@@ -62,6 +62,18 @@ export class ProfileComponent implements OnInit {
       console.log(this.profile)
     })
 
+  }
+
+  getChildEvent(event:string){
+    this.profileService.getProfile().then((response) => {
+      this.profile = new Profile(response);
+      /*
+      const v = response["rating"];
+      console.log(v);
+      */
+      console.log(response);
+      console.log(this.profile)
+    })
   }
 
 }
