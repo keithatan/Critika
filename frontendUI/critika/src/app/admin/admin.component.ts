@@ -13,7 +13,7 @@ import { Category } from '../categories/categories.model';
 export class AdminComponent implements OnInit {
 
   allUsers:Profile[];
-  allReportedComments:Submission[];
+  allReporteds:Comment[];
   allSuggestedCategories:Category[];
 
   constructor(public proService:ProfileService,
@@ -40,16 +40,16 @@ export class AdminComponent implements OnInit {
 
     this.subService.getAllReportedComments().then((data) =>{
       let i:number;
-      let response = [];
+      let response2 = [];
 
-      response.push(data);
+      response2.push(data);
 
-      this.allReportedComments = new Array(response[0].length);
+      this.allReporteds = new Array(response2[0].length);
 
-      for(i = 0; i < response[0].length;i++){
-        let reportedComment = new Submission(response[0][i]);
+      for(i = 0; i < response2[0].length;i++){
+        let reportedComment = new Comment(response2[0][i]);
         console.log(reportedComment);
-        this.allReportedComments[i] = reportedComment;
+        this.allReporteds[i] = reportedComment;
       }
     })
   }
