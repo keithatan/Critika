@@ -2,12 +2,25 @@
     <mdb-card>
         <mdb-card-body>
             <p class="h4 mb-4">Edit Account Information</p>
-            <form>
+            <form ng-submit="onSubmitUsername(f)" #f=ngForm [formGroup]="changeUsernameForm">
                 <label>Current Username: {{username}}</label>
-                <input type="text" placeholder="New Username" class="form-control">
-                <label>Current Email: {{email}}</label>
-                <input type="text" placeholder="New Email" class="form-control">
+                <input type="text" placeholder="New Username" class="form-control" formControlName="username" [ngClass]="{ 'is-invalid': submitted && form_username.username.errors }" />
+                <div *ngIf="submitted && form_username.username.errors" class="invalid-feedback">
+                    <div *ngIf="form_username.username.errors.required">Please Enter a New Username</div>
+                </div>
+                <button mdbBtn color="info" block="true" class="my-4" ng-click="submitUsername">Change Username</button>
             </form>
+            <div class="form-group">
+                <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
+                    <label>Current Email: {{email}}</label>
+                    <input type="text" placeholder="New Email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form_mail.email.errors }" />
+                    <div *ngIf="submitted && form_mail.email.errors" class="invalid-feedback">
+                        <div *ngIf="form_mail.email.errors.email">Invalid Email</div>
+                        <div *ngIf="form_mail.email.errors.required">Please Enter an Email</div>
+                    </div>
+                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Email</button>
+                </form>
+            </div>
         </mdb-card-body>
     </mdb-card>
 </div>
