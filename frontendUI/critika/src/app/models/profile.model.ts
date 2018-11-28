@@ -6,9 +6,15 @@ export class Profile  {
     submissionNum: Number;
     aboutMe: string;
     standing: string;
+    occupation: string;
+    location: string;
+    homepage: string;
 
     constructor(response:any) {
         this.username = response.username;
+        this.occupation = response.occupation;
+        this.location = response.location;
+        this.homepage = response.homepage
         this.memberSince = response.memberSince;
         this.rating = response.rating.$numberDecimal;
         this.coins = response.coins;

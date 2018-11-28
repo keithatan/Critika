@@ -207,8 +207,8 @@ router.post("/profile", authenticate, (req, res) => {
         {
             $set: {
                 location: req.body.location,
-                aboutMe: req.body.securityquestion,
-                homepage: req.body.securityquestionanswer,
+                aboutMe: req.body.aboutme,
+                homepage: req.body.homepage,
                 occupation: req.body.occupation
             }
         }).then(() => {
