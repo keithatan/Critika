@@ -21,19 +21,17 @@ export class ProfileService {
 
     }
 
-    editProfile(username:string, membersince: Date, rating: Number, coins: Number, submissionnum: Number, aboutme: string){
+    editProfile(homepage:string, loc: string, occupation: string, aboutme: string){
         const profile:Object = {
-                username: username,
-                memberSince: membersince,
-                rating: rating,
-                coins: coins,
-                submissionNum: submissionnum,
+                location: loc,
+                homepage: homepage,
+                occupation: occupation,
                 aboutMe: aboutme
         }
 
         var parameter = new Profile(profile)
 
-        this.http.post("http://localhost:5000/profile/editProfile", parameter)
+        this.http.post("http://localhost:5000/user/profile", parameter)
         .subscribe (response => {
             console.log(response);
         })
