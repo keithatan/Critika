@@ -29,13 +29,10 @@ export class CritiqueFormComponent implements OnInit {
   feedback: string;
   comment: string;
 
-  critique(form: NgForm) {
-    if (this.critiqueForm.invalid) {
-      return;
-    }
+  critique() {
     console.log(this.chosenSubmission.submissionName);
     // tslint:disable-next-line:max-line-length
-    this.feedbackService.giveFeedback(form.value.bad, form.value.work, form.value.good, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false).subscribe(
+    this.feedbackService.giveFeedback(this.wentWell, this.wentWrong, this.improved, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false).subscribe(
       (response) => {
         console.log('Worked');
 
@@ -51,6 +48,10 @@ export class CritiqueFormComponent implements OnInit {
 
   returnToDashboard() {
     this.returnToParent.emit('dash');
+  }
+
+  sendFeedback(){
+    console.log(this.wentWell);
   }
 
 }
