@@ -32,7 +32,7 @@ export class CritiqueFormComponent implements OnInit {
   critique() {
     console.log(this.chosenSubmission.submissionName);
     // tslint:disable-next-line:max-line-length
-    this.feedbackService.giveFeedback(this.wentWell, this.wentWrong, this.improved, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false).subscribe(
+    this.feedbackService.giveFeedback(this.wentWrong, this.improved,this.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe(
       (response) => {
         console.log('Worked');
 
