@@ -26,8 +26,8 @@ export class FeedbackService {
    }
    
    giveFeedback(feedbackbad: string, feedbackwork: string, feedbackgood: string,
-    username: string, submissionName:string, anonymous:boolean){
-        const feedbackO:Object = {feedbackBad: feedbackbad, feedbackWork: feedbackwork, feedbackGood: feedbackgood, username: username, submissionName: submissionName, anonymous: anonymous }
+    username: string, submissionName:string, anonymous:boolean, submissionID: string){
+        const feedbackO:Object = {feedbackBad: feedbackbad, feedbackWork: feedbackwork, feedbackGood: feedbackgood, username: username, submissionName: submissionName, anonymous: anonymous, submissionID: submissionID }
 
             var feedback = new Feedback(feedbackO);
 
