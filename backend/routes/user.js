@@ -195,6 +195,31 @@ router.post("/edit-info", authenticate, (req, res) => {
 })
 
 /**
+ * Edit a user's email and security question
+ */
+router.post("/profile", authenticate, (req, res) => {
+    if (!req.body || !req.body.location || !req.body.aboutme || !req.body.homepage || !req.body.occupation) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                location: req.body.location,
+                aboutMe: req.body.securityquestion,
+                homepage: req.body.securityquestionanswer,
+                occupation: req.body.occupation
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'Profile information successfully updated' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing information" });
+            res.send(err);
+        })
+})
+
+/**
  * Create/Update Rating 
  */
 router.post("/rating", authenticate, (req, res) => {

@@ -187,7 +187,7 @@ userSchema.statics.findVerificationNumByEmail = function(email) {
 
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function () {
-  return ld.pick(this.toObject(), ['_id', 'username', 'email', 'coins', 'rating', 'submissionNum', 'standing', 'memberSince'])
+  return ld.pick(this.toObject(), ['_id', 'username', 'email', 'coins', 'rating', 'submissionNum', 'standing', 'memberSince', 'occupation', 'location', 'aboutMe', 'homepage'])
 };
 
 /* Creating the user model from the schema and giving it to Mongoose */
