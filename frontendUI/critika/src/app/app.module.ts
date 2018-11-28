@@ -30,6 +30,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 
 @NgModule({
@@ -50,7 +51,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
     CritiqueFormComponent,
     SearchPipe,
     EditProfileComponent,
-    FeedbackComponent
+    FeedbackComponent,
+    EditAccountComponent
   ],
   imports: [
     BrowserModule,
