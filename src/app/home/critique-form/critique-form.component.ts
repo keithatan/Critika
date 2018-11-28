@@ -35,7 +35,6 @@ export class CritiqueFormComponent implements OnInit {
     this.feedbackService.giveFeedback(this.wentWrong, this.improved,this.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe(
       (response) => {
         console.log('Worked');
-
       },
       (err) => {
         console.log('err');
