@@ -11,6 +11,9 @@ import { NgForm, FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class CritiqueFormComponent implements OnInit {
   critiqueForm: FormGroup;
+  wentWell: string;
+  wentWrong: string;
+  improved: string;
   // tslint:disable-next-line:no-input-rename
   @Input('submission') chosenSubmission: Submission;
   @Output() returnToParent = new EventEmitter<string>();

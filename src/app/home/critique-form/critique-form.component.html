@@ -20,25 +20,25 @@
                 [(ngModel)] = "feedback" ></textarea>
       <label for="form7">Feedback</label>
       -->
-     <form (submit)="critique(f)" #f="ngForm" class="md-form p-5" [formGroup]="critiqueForm">
+     
         <!-- What went well -->
-        <div class="md-form form-group">
-          <textarea type="text" id="good" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
-            <label for="good">What went well:</label>
+        <div class="md-form">
+          <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWell"></textarea>
+          <label for="form7">What went well?</label>
         </div>
 
-        <div class="md-form form-group">
-            <textarea type="text" id="bad" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
-              <label for="bad">What went wrong:</label>
+        <div class="md-form">
+          <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWrong"></textarea>
+          <label for="form7">What went wrong?</label>
         </div>
 
-        <div class="md-form form-group">
-            <textarea type="text" id="work" class="md-textarea md-textarea-auto form-control" mdbInputDirective></textarea>
-              <label for="improve">What could be improved:</label>
+        <div class="md-form">
+          <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="improved"></textarea>
+          <label for="form7">What could be improved?</label>
         </div>
 
-        <button mdbBtn block="true" class="btn btn-primary" type="submit">Sign in</button>
-     </form>
+        <button mdbBtn block="true" (click)= "critique()" class="btn btn-primary" type="submit">Done</button>
+     
   
 
     <!--
