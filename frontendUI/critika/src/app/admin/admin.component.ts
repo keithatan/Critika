@@ -40,14 +40,14 @@ export class AdminComponent implements OnInit {
 
     this.subService.getAllReportedComments().then((data) =>{
       let i:number;
-      let response2 = [];
+      let response = [];
 
-      response2.push(data);
+      response.push(data);
 
-      this.allReporteds = new Array(response2[0].length);
+      this.allReporteds = new Array(response[0].length);
 
-      for(i = 0; i < response2[0].length;i++){
-        let reportedComment = new Comment(response2[0][i]);
+      for(i = 0; i < response[0].length;i++){
+        let reportedComment = new Comment(response[0][i]);
         console.log(reportedComment);
         this.allReporteds[i] = reportedComment;
       }
