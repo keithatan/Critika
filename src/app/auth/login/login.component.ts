@@ -34,6 +34,7 @@ export class LoginComponent implements OnInit{
         if (this.loginForm.invalid) {
             return;
         }
+        console.log("attempted")
         this.login_failed = this.authService.login(form.value.username, form.value.password)
     }
 

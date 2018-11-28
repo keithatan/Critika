@@ -1,5 +1,5 @@
 <div class="p-2 profile animated fadeInUp" *ngIf="renderComponent != 'critique-form'">
-  <mdb-card class="outerCard">
+  <mdb-card>
 
     <!--Card content-->
     <mdb-card-body>
@@ -9,7 +9,7 @@
       </mdb-card-title>
 
       <table mdbTable>
-        <thead class="black white-text">
+        <thead class="tableColor white-text">
           <tr>
             <th *ngFor="let el of tableElements" scope="col">{{el}} </th>
           </tr>

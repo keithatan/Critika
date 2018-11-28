@@ -1,4 +1,4 @@
-<div class="container" *ngIf="userIsAuth">
+<div class="container" *ngIf="userIsAuth == false">
   <div class="d-flex justify-content-center align-items-center">
     <div class="d-flex flex-column justify-content-center left animated fadeInUp">
       <div class="p-2 profile">
@@ -42,7 +42,7 @@
             </mdb-card-title>
             <div class="d-flex align-items-center justify-content-center mb-2">
               <div class="d-flex flex-column">
-                <p> <button type="button" (click)="renderHome()" class="btn btn-secondary">Home</button>
+                <p> <button type="button" (click)="renderHome()" routerLink="/home" class="btn btn-secondary">Home</button>
                 </p>
                 <p> <button type="button" (click)="renderProfile()" class="btn btn-secondary">Profile</button>
                 </p>
@@ -59,7 +59,8 @@
       </div>
     </div>
 
-    <!-- Render the other component stuff -->
+    <!-- Render the other component stuff 
+
     <div class="d-flex flex-column justify-content-center animated fadeInUp">
       <app-home *ngIf="renderComponent == 'home'"></app-home>
       <app-profile *ngIf="renderComponent == 'profile' "></app-profile>
@@ -69,6 +70,8 @@
       <app-feedback *ngIf="renderComponent == 'feedback'"></app-feedback>
       <app-edit-account *ngIf="renderComponent == 'edit-account'"></app-edit-account>
     </div>
+
+  -->
   </div>
 </div>
 
