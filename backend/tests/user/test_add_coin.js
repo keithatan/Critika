@@ -11,24 +11,20 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test edit info', function () {
+describe('test add coin', function () {
 
-    describe('Edit info without email', function (done) {
+    describe('add coins without recuser', function (done) {
         it('should return 400', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                coins: 4,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -40,22 +36,18 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit info without security question', function (done) {
+    describe('add coins without coins', function (done) {
         it('should return 400', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestionanswer: 'ok'
+                recuser: uname,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -67,23 +59,19 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit info with bad auth token', function (done) {
-        it('should return 400', function (done) {
+    describe('add coins with bad auth', function (done) {
+        it('should return 401', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                recuser: uname,
+                coins: 4,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', 'bad token')
                     .send(info)
@@ -95,23 +83,19 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit correct info', function (done) {
+    describe('add coins with correct info', function (done) {
         it('should return 200', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                recuser: uname,
+                coins: 4,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -122,5 +106,4 @@ describe('test edit info', function () {
             });
         })
     })
-
 })

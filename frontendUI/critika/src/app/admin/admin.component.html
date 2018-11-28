@@ -10,7 +10,7 @@
         <!--Main wrapper-->
         <div class="comments-list text-left">
             <div class="section-heading">
-                <h3>Reported Comments<span class="badge blue">3</span></h3>
+                <h3>Reported Comments<span class="badge blue">0</span></h3>
             </div>
             <!--First row-->
             <div class="row">
@@ -20,17 +20,24 @@
                 <!--/.Image column-->
                 <!--Content column-->
                 <div class="col-sm-10 col-12">
-                    <a>
-                        <h3 class="user-name">John Doe</h3>
-                    </a>
-                    <div class="card-data">
-                        <ul class="pl-0 list-unstyled">
-                            <li class="comment-date"><i class="fa fa-clock-o"></i> 05/10/2015</li>
-                        </ul>
-                    </div>
-                    <p class="comment-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    <div class="table-wrapper-scroll-y">
+
+                        <table class="table table-bordered table-striped">
+                          <thead>
+                            <tr>
+                              <th scope="col">Comment</th>
+                              <th scope="col">User</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr mdbTableCol *ngFor="let com of allReportedComments">
+                                <th scope="row">{{com.submissionName}}</th>
+                                <td>{{com.username}}</td>
+                              </tr>
+                          </tbody>
+                        </table>
+                      
+                      </div>
                 </div>
                 <!--/.Content column-->
             </div>
@@ -38,45 +45,6 @@
 
         </div>
         <!--/.Main wrapper-->
-
-
-
-
-
-        <!--Main wrapper-->
-        <div class="comments-list text-left">
-            <div class="section-heading">
-                <h3>Reported Submissions <span class="badge blue">3</span></h3>
-            </div>
-            <!--First row-->
-            <div class="row">
-                <!--Image column-->
-                <div class="col-sm-2 col-12">
-                </div>
-                <!--/.Image column-->
-                <!--Content column-->
-                <div class="col-sm-10 col-12">
-                    <a>
-                        <h3 class="user-name">John Doe</h3>
-                    </a>
-                    <div class="card-data">
-                        <ul class="pl-0 list-unstyled">
-                            <li class="comment-date"><i class="fa fa-clock-o"></i> 05/10/2015</li>
-                        </ul>
-                    </div>
-                    <p class="comment-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
-                </div>
-                <!--/.Content column-->
-            </div>
-            <!--/.First row-->
-
-        </div>
-        <!--/.Main wrapper-->
-
-
-
 
 
         <!--Main wrapper-->
@@ -92,17 +60,16 @@
                 <!--/.Image column-->
                 <!--Content column-->
                 <div class="col-sm-10 col-12">
-                    <a>
-                        <h3 class="user-name">John Doe</h3>
-                    </a>
-                    <div class="card-data">
-                        <ul class="pl-0 list-unstyled">
-                            <li class="comment-date"><i class="fa fa-clock-o"></i> 05/10/2015</li>
-                        </ul>
-                    </div>
-                    <p class="comment-text">Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
-                        aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                        cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident.</p>
+                    <table class="table table-bordered table-striped">
+                        <thead>
+                          <tr>
+                            <th scope="col">Categories</th>
+                          </tr>
+                        </thead>
+                        <tbody>
+                          
+                        </tbody>
+                      </table>
                 </div>
                 <!--/.Content column-->
             </div>
@@ -136,10 +103,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
 
-        <div>
+        
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Restore User </button>
             <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                 aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -165,10 +132,10 @@
                     </div>
                 </div>
             </div>
-        </div>
+        
 
 
-        <div>
+        
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Make User an Admin </button>
             <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
                 aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
@@ -197,13 +164,21 @@
         </div>
 
         <ul>
-            <div *ngFor="let user of allUsers">
-                <li>
-                    {{user.username}} 
-                    <button *ngIf="user.standing == 'banned'">Unban</button>
-                    <button *ngIf="user.standing == 'good'">Ban</button>
-                </li>
-            </div>
+            
+            <table class="table table-bordered table-striped table-wrapper-scroll-y">
+                <thead>
+                  <tr>
+                    <th scope="col">User</th>
+                    <th>Standing</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr mdbTableCol *ngFor="let user of allUsers">
+                      <td>{{user.username}}</td>
+                      <td>{{user.standing}}</td>
+                    </tr>
+                </tbody>
+              </table>
         </ul>
 
     </mdb-card-body>

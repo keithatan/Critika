@@ -1,3 +1,11 @@
 .modal-body{
     margin: 24px;
 }
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 200px;
+    max-width: 270px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    }

@@ -3,7 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var request = require('request');
 var expect = require('Chai').expect;
 

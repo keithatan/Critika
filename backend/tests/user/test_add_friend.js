@@ -11,15 +11,54 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test edit info', function () {
+describe('test add friend', function () {
 
-    describe('Edit info without email', function (done) {
+    this.beforeAll(function() {
+        User.findOneAndDelete({username: 'Jeff Brohm'}).then(() => {
+            //register user to add ads friend
+        var info = {
+            username: 'Jeff Brohm',
+            password: 'Purdue Pete',
+            email: 'purdue@email.com',
+            securityquestion: 'ok',
+            securityquestionanswer: 'ok',
+        }
+        chai.request(server)
+            .post('/user/register')
+            .set('content-type', 'application/x-www-form-urlencoded')
+            .send(info).then((pls) => {
+            //verify email for user
+            User.findOne({username: 'Jeff Brohm'}, (err, user) => {
+                if(err){
+                    console.log(err)
+                    return
+                }
+                let info = {
+                    username: 'Jeff Brohm',
+                    email: 'purdue@email.com',
+                    verificationNum: user['verificationNum'],
+                }
+
+                chai.request(server)
+                    .post('/user/verify-email')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send(info)
+                    .end((err, res) => {
+                        if(err){
+                            console.log(err)
+                            return
+                        }
+                });
+            })
+        })
+        })
+    })
+
+    describe('add friend without friend', function (done) {
         it('should return 400', function (done) {
+            
             var info = {
-                username: uname,
-                password: pword,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                friend: 'Jeff Brohm',
             }
 
             User.findOne({ username: uname }, (err, user) => {
@@ -28,7 +67,32 @@ describe('test edit info', function () {
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-friend')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .set('token', token)
+                    .send()
+                    .end((err, res) => {
+                        res.should.have.status(400)
+                        done()
+                    })
+            });
+        })
+    })
+
+    describe('add friend without security answer', function (done) {
+        it('should return 400', function (done) {
+            var info = {
+                email: mail,
+                securityquestion: 'ok',
+            }
+
+            User.findOne({ username: uname }, (err, user) => {
+                //do the get request here 
+
+                var token = user['tokens'][0]['token'][0]
+
+                chai.request(server)
+                    .post('/user/add-friend')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -40,38 +104,9 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit info without security question', function (done) {
-        it('should return 400', function (done) {
+    describe('add friend with bad auth', function (done) {
+        it('should return 401', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestionanswer: 'ok'
-            }
-
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-
-                var token = user['tokens'][0]['token'][0]
-
-                chai.request(server)
-                    .post('/user/edit-info')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(400)
-                        done()
-                    })
-            });
-        })
-    })
-
-    describe('Edit info with bad auth token', function (done) {
-        it('should return 400', function (done) {
-            var info = {
-                username: uname,
-                password: pword,
                 email: mail,
                 securityquestion: 'ok',
                 securityquestionanswer: 'ok'
@@ -83,7 +118,7 @@ describe('test edit info', function () {
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-friend')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', 'bad token')
                     .send(info)
@@ -95,14 +130,10 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit correct info', function (done) {
+    describe('add friend with correct information', function (done) {
         it('should return 200', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                friend: 'Jeff Brohm'
             }
 
             User.findOne({ username: uname }, (err, user) => {
@@ -111,7 +142,7 @@ describe('test edit info', function () {
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/add-friend')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -122,5 +153,4 @@ describe('test edit info', function () {
             });
         })
     })
-
 })

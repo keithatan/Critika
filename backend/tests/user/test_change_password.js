@@ -11,27 +11,20 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test edit info', function () {
+describe('test change password', function () {
 
-    describe('Edit info without email', function (done) {
+    describe('test change password without new password', function (done) {
         it('should return 400', function (done) {
-            var info = {
-                username: uname,
-                password: pword,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
-            }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/change-password')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
-                    .send(info)
+                    .send()
                     .end((err, res) => {
                         res.should.have.status(400)
                         done()
@@ -40,13 +33,11 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit info without security question', function (done) {
-        it('should return 400', function (done) {
+    describe('test change password with bad token', function (done) {
+        it('should return 401', function (done) {
+
             var info = {
-                username: uname,
                 password: pword,
-                email: mail,
-                securityquestionanswer: 'ok'
             }
 
             User.findOne({ username: uname }, (err, user) => {
@@ -55,35 +46,7 @@ describe('test edit info', function () {
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(400)
-                        done()
-                    })
-            });
-        })
-    })
-
-    describe('Edit info with bad auth token', function (done) {
-        it('should return 400', function (done) {
-            var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
-            }
-
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-
-                var token = user['tokens'][0]['token'][0]
-
-                chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/change-password')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', 'bad token')
                     .send(info)
@@ -95,14 +58,10 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit correct info', function (done) {
+    describe('test change password with correct info', function (done) {
         it('should return 200', function (done) {
             var info = {
-                username: uname,
                 password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
             }
 
             User.findOne({ username: uname }, (err, user) => {
@@ -111,7 +70,7 @@ describe('test edit info', function () {
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/change-password')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
