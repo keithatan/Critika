@@ -24,7 +24,7 @@ export class SignupComponent implements OnInit {
             securityquestion: ["What is your mother's maiden name?"]
         });
     }
-
+    
     get form() { return this.signUpForm.controls }
 
     incomplete_form: string;

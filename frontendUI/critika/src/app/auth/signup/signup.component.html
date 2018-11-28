@@ -1,4 +1,4 @@
-<form (submit)="onSignup(f)" #f="ngForm" class="text-center border border-light p-5" [formGroup]="signUpForm">
+<form (submit)="onSignup(f)" #f="ngForm" class="text-center p-5" [formGroup]="signUpForm">
   <mdb-card>
     <mdb-card-body>
       <p class="h4 mb-4">Register</p>
@@ -61,25 +61,28 @@
         <a routerLink="/login">Login</a>
       </p>
 
-      <!-- Info Toasts -->
+      <!-- Info Toasts 
       <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">
-        Form is Incomplete
-      </div>
-      <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
-        Account with that Username / Email Already Exists
-      </div>
-      <div *ngIf="getIncompleteForm() === 'failed'" class="alert alert-danger" role="alert">
-        Something went wrong. If this continues, please conatact the support team for assistance.
-      </div>
-      <!-- <div *ngIf="getIncompleteForm() === 'complete'" class="alert alert-success" role="alert">
-        Account Successfully Created
-      </div> -->
-      <div *ngIf="getIncompleteForm() === 'complete'" #alert class="alert alert-success alert-dismissible fade show" role="alert">
-        <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
-          <span aria-hidden="true">&times;</span>
-        </button>
-        Account Successfully Created! <strong>You'll need to verify your account before you can log in. Please check your Email for the verification code.</strong>
-      </div>
+          Form is Incomplete
+        </div>
+        <div *ngIf="getIncompleteForm() === 'duplicate'" class="alert alert-danger" role="alert">
+          Account with that Username / Email Already Exists
+        </div>
+        <div *ngIf="getIncompleteForm() === 'failed'" class="alert alert-danger" role="alert">
+          Something went wrong. If this continues, please conatact the support team for assistance.
+        </div>
+         <div *ngIf="getIncompleteForm() === 'complete'" class="alert alert-success" role="alert">
+          Account Successfully Created
+        </div> 
+        <div *ngIf="getIncompleteForm() === 'complete'" #alert class="alert alert-success alert-dismissible fade show" role="alert">
+          <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+          </button>
+          Account Successfully Created! <strong>You'll need to verify your account before you can log in. Please check your Email for the verification code.</strong>
+        </div>
+      -->
+
+
     </mdb-card-body>
   </mdb-card>
 </form>

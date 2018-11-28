@@ -1,0 +1,14 @@
+<table class="table table-bordered table-striped table-wrapper-scroll-y">
+    <thead>
+      <tr>
+        <th scope="col">User</th>
+        <th>Standing</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr mdbTableCol *ngFor="let user of allUsers">
+          <td>{{user.username}}</td>
+          <td>{{user.standing}}</td>
+        </tr>
+    </tbody>
+</table>
