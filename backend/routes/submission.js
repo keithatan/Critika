@@ -265,9 +265,10 @@ router.get("/available", authenticate, (req, res) => {
  */
 router.get("/all", authenticate, (req, res) => {
 
-    if (req.user.status) {
+    if (req.user.status == 'admin') {
         Submission.find({}).then((subs) => {
-            res.send(subs);
+            res.status(200).send(subs);
+            return;
         });
     }
     else {

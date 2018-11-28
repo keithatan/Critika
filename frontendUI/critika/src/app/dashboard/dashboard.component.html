@@ -24,11 +24,8 @@
             <!--Text-->
             <mdb-card-text> You have <span class="badge badge-primary badge-pill">{{coins}}</span>Critika Coins</mdb-card-text>
 
-            <div class="social-links">
-              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa github"
-                  size="4x"></i></a>&nbsp;&nbsp;&nbsp;
-              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa linkedin"></i></a>&nbsp;&nbsp;&nbsp;
-              <a class="social-link" href="" rel="nofollow noopener noreferrer" target="_blank"><i class="fa fa-envelope"></i></a>&nbsp;&nbsp;&nbsp;
+            <div class="Edit Account Information">
+              <button type="button" (click)="renderEditAccount()" class="btn btn-secondary">Edit Account</button>
             </div>
           </mdb-card-body>
         </mdb-card>
@@ -55,18 +52,12 @@
                   <p> <button type="button" (click)="renderCategories()" class="btn btn-secondary">Categories</button>
                   </p>
                   <p> <button type="button" (click)="renderAdmin()" class="btn btn-secondary">Admin</button>
-
-
               </div>
             </div>
-
           </mdb-card-body>
         </mdb-card>
       </div>
-
-
     </div>
-
 
     <!-- Render the other component stuff -->
     <div class="d-flex flex-column justify-content-center animated fadeInUp">
@@ -76,10 +67,11 @@
       <app-categories *ngIf="renderComponent == 'categories'"></app-categories>
       <app-admin *ngIf="renderComponent == 'Admin' "></app-admin>
       <app-feedback *ngIf="renderComponent == 'feedback'"></app-feedback>
+      <app-edit-account *ngIf="renderComponent == 'edit-account'"></app-edit-account>
     </div>
   </div>
 </div>
 
 <div class="container" *ngIf="userIsAuth == false">
   <app-login></app-login>
-  </div> 
+</div> 

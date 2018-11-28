@@ -43,8 +43,10 @@ router.post("/create-category", authenticate, (req, res) => {
     // Add to database 
     newCategory.save().then(() => {
         res.status(200).send(newCategory)
+        return;
     }).catch((err) => {
         res.status(400).send(err);
+        return;
     }).then(() => {
         Category.findOneAndUpdate({ categoryName: req.body.categoryName }, { $push: {moderators: req.body.username}}).then(() => {
             }).catch((err) => {
