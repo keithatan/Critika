@@ -13,33 +13,33 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('Test add submissions', function () {
+describe('Test report comment', function () {
 
     this.beforeAll(function() {
         var info = {
-            categoryName: 'example category',
-            categoryDescription: 'example description'
+            submissionName: 'submission name',
+            comment: 'comment to be reported'
         }
-
         User.findOne({ username: uname }, (err, user) => {
             //do the get request here 
 
             var token = user['tokens'][0]['token'][0]
 
             chai.request(server)
-                .post('/category/create-category')
+                .post('/submission/add-comment')
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .set('token', token)
                 .send(info)
-                .end((err, res)=> {})
+                .end((err, res) => {})
         });
     })
 
-    describe('Test without category', function () {
+    describe('Test without comment', function () {
         it('Should return 400', function (done) {
             var info = {
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                reportedMessage: 'for testing',
+                reportedReason: 'it was necessary'
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -47,7 +47,7 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -57,13 +57,15 @@ describe('Test add submissions', function () {
                     })
             });
         })
+        
     })
 
     describe('Test without submission name', function () {
         it('Should return 400', function (done) {
             var info = {
-                category: 'example category',
-                submissionText: 'submission text'
+                comment: 'comment to be reported',
+                reportedMessage: 'for testing',
+                reportedReason: 'it was necessary'
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -71,7 +73,7 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -83,11 +85,12 @@ describe('Test add submissions', function () {
         })
     })
 
-    describe('Test without submission text', function () {
+    describe('Test without reported message', function () {
         it('Should return 400', function (done) {
             var info = {
-                category: 'example category',
+                comment: 'comment to be reported',
                 submissionName: 'submission name',
+                reportedReason: 'it was necessary'
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -95,7 +98,7 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -107,12 +110,12 @@ describe('Test add submissions', function () {
         })
     })
 
-    describe('Test with invalid category', function () {
+    describe('Test without reported reason', function () {
         it('Should return 400', function (done) {
             var info = {
-                category: 'invalid category',
+                comment: 'comment to be reported',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                reportedMessage: 'for testing',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -120,7 +123,7 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -132,12 +135,13 @@ describe('Test add submissions', function () {
         })
     })
 
-    describe('Test with invalid token', function () {
+    describe('Test with bad auth', function () {
         it('Should return 401', function (done) {
             var info = {
-                category: 'example category',
+                comment: 'comment to be reported',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                reportedMessage: 'for testing',
+                reportedReason: 'it was necessary'
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -145,7 +149,7 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', 'bad token')
                     .send(info)
@@ -160,9 +164,10 @@ describe('Test add submissions', function () {
     describe('Test with correct info', function () {
         it('Should return 200', function (done) {
             var info = {
-                category: 'example category',
+                comment: 'comment to be reported',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                reportedMessage: 'for testing',
+                reportedReason: 'it was necessary'
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -170,17 +175,15 @@ describe('Test add submissions', function () {
                 var token = user['tokens'][0]['token'][0]
     
                 chai.request(server)
-                    .post('/submission/add')
+                    .post('/submission/report-comment')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
                     .end((err, res) => {
-                        // console.log(res)
                         res.should.have.status(200);
                         done()
                     })
             });
         })
     })
-
 })
