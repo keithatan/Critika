@@ -10,10 +10,33 @@ import { Feedback } from '../models/feedback.model';
 export class FeedbackComponent implements OnInit {
   feedbackReceived: Feedback[];
   renderComponent: String = "";
+  toRate: boolean;
 
-  constructor(public subService:FeedbackService) { }
+  constructor(public subService:FeedbackService) { 
+    this.toRate = false;
+  }
 
   getFeedbacks(){}
+
+  renderRateFeedback() {
+    //if showAllFeedbacks is false, then rateFeedback page is shown
+     if (this.toRate == false) { 
+       this.toRate = true;
+     }
+
+     if (this.toRate == true) {
+       this.toRate = false;
+     }
+
+     if ( this.renderComponent == "rate-feedback") {
+       this.renderComponent = "";
+     }
+     else {
+       this.renderComponent = "rate-feedback";
+     }
+    
+   }
+  
 
   ngOnInit() {
     this.subService.getFeedbacks().then((data) => {
