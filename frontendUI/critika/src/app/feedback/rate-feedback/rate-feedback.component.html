@@ -1,0 +1,30 @@
+
+<mdb-card *ngIf = "showAllFeedbacks == false">
+    <!-- <p>
+        rate-feedback works!
+      </p> -->
+    <!--Card content-->
+    <mdb-card-body>
+  
+      <!--Title-->
+      <mdb-card-title>
+        <h4>Rate Your Feedback</h4>
+      </mdb-card-title>
+
+      <p> Feedback for Submission Title by user</p>
+      <p> Feedback here </p>
+
+    
+    </mdb-card-body>
+
+    <app-feedback *ngIf="renderComponent == 'feedback' "></app-feedback>
+    <button type="button" (click) = "renderViewFeedback()" class="btn btn-secondary">Return to my feedback</button> 
+  
+    <!-- <app-profile *ngIf="renderComponent == 'Profile' "></app-profile>
+    <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button> -->
+  
+</mdb-card>
+
+      
+
+

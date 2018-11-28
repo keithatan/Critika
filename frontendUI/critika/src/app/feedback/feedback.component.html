@@ -1,3 +1,19 @@
-<p>
-  feedback works!
-</p>
+
+<mdb-card *ngIf = "toRate == false">
+    <mdb-card-body>
+      <mdb-card-title>
+        <h4>My Feedbacks</h4>
+      </mdb-card-title>
+
+      <p> Feedback 1</p>
+      <p> Feedback 2 </p>
+      <p> Feedback 3 </p>
+    
+    </mdb-card-body>
+
+</mdb-card>
+
+<app-rate-feedback *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
+<button type="button" (click) = "renderRateFeedback()" class="btn btn-secondary">Rate Feedback </button>
+
+
