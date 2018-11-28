@@ -7,7 +7,7 @@ let feedbackSchema = new Schema({
     anonymous: {type: Boolean, default: false},
     feedbackGood: {type: String, required: true},
     feedbackBad: {type: String, required: true},
-    feedbackRecc: {type: String, required: true},
+    feedbackWork: {type: String, required: true},
     feedbackRating: {type: Number, default: 0, min: 0, max: 5},
     submissionName: {type: String},
     submissionID: {type: String},
