@@ -11,24 +11,20 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test edit info', function () {
+describe('test remove coin', function () {
 
-    describe('Edit info without email', function (done) {
+    describe('remove coins without recuser', function (done) {
         it('should return 400', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                coins: 4,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/remove-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -40,50 +36,18 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit info without security question', function (done) {
-        it('should return 400', function (done) {
+    describe('remove coins with bad auth', function (done) {
+        it('should return 401', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestionanswer: 'ok'
+                recuser: uname,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(400)
-                        done()
-                    })
-            });
-        })
-    })
-
-    describe('Edit info with bad auth token', function (done) {
-        it('should return 400', function (done) {
-            var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
-            }
-
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-
-                var token = user['tokens'][0]['token'][0]
-
-                chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/remove-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', 'bad token')
                     .send(info)
@@ -95,23 +59,18 @@ describe('test edit info', function () {
         })
     })
 
-    describe('Edit correct info', function (done) {
+    describe('remove coins with correct info', function (done) {
         it('should return 200', function (done) {
             var info = {
-                username: uname,
-                password: pword,
-                email: mail,
-                securityquestion: 'ok',
-                securityquestionanswer: 'ok'
+                recuser: uname,
             }
-
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
 
                 var token = user['tokens'][0]['token'][0]
 
                 chai.request(server)
-                    .post('/user/edit-info')
+                    .post('/user/remove-coin')
                     .set('content-type', 'application/x-www-form-urlencoded')
                     .set('token', token)
                     .send(info)
@@ -122,5 +81,4 @@ describe('test edit info', function () {
             });
         })
     })
-
 })

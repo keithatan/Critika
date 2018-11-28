@@ -3,7 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var User = require('../../model/user');
 
 chai.use(chaiHttp);
@@ -99,34 +98,32 @@ describe('Verify Email', () => {
 
     describe('Correct verify', function() {
         it('Should return 200', (done) => {
-            // User.findOne({username: uname}, (err, user) => {
-            //     if(err){
-            //         console.log(err)
-            //         return
-            //     }
-            //     console.log(err)
-            //     //console.log(user['verificationNum'])
-            //     let info = {
-            //         username: uname,
-            //         email: mail,
-            //         verificationNum: user['verificationNum'],
-            //     }
+            User.findOne({username: uname}, (err, user) => {
+                if(err){
+                    console.log(err)
+                    return
+                }
+                console.log(err)
+                let info = {
+                    username: uname,
+                    email: mail,
+                    verificationNum: user['verificationNum'],
+                }
 
-            //     chai.request(server)
-            //         .post('/user/verify-email')
-            //         .set('content-type', 'application/x-www-form-urlencoded')
-            //         .send(info)
-            //         .end((err, res) => {
-            //             if(err){
-            //                 console.log(err)
-            //                 return
-            //             }
-            //             //console.log(info)
-            //             res.should.have.status(200);
+                chai.request(server)
+                    .post('/user/verify-email')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .send(info)
+                    .end((err, res) => {
+                        if(err){
+                            console.log(err)
+                            return
+                        }
+                        //console.log(info)
+                        res.should.have.status(200);
                     done();
-            //     });
-            // })
-    
+                });
+            })
         })
     })
 })

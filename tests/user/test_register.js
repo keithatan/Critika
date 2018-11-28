@@ -3,7 +3,6 @@ var chai = require('chai');
 var chaiHttp = require('chai-http');
 var server = require('../../app');
 var should = chai.should();
-var functions = require('../unitTestFunctions.js')
 var request = require('request');
 var expect = require('Chai').expect;
 var User = require('../../model/user');
@@ -194,7 +193,7 @@ describe('Register', () => {
                     if(err){
                         console.log(err)
                     }
-                    console.log(res.body)
+                    // console.log(res.body)
                     res.should.have.status(200);
                 done();
             });
