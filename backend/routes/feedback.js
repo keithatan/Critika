@@ -43,30 +43,52 @@ router.post('/critique', authenticate, (req, res) => {
         critiquer: req.user.username
     });
 
-    Feedback.find({username: req.body.username, submissionName: req.body.submissionName}).then((subs) => {
+    Feedback.find({username: req.body.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID}).then((subs) => {
         console.log(subs)
         console.log(req.user.username)
         var i;
         for (i = 0; i < subs.length; i++){
         if(req.user.username === subs[i].critiquer){
             console.log(subs[i].critiquer)
-            res.status(400).json({ message: "You have already given feedback to this submission" });
-            return;
+            res.status(401).json({ message: "You have already given feedback to this submission" });
         }
     }
     }).catch((err) => {
         res.status(400).json({ message: "Error finding feedback" });
-        return;
     })
 
-    /*we need to update submissions critique number */
+    /*we need to update submissions critique number*/
+    Submission.findOneAndUpdate({ _id: req.body.submissionID },
+        {
+            $inc: {
+                numberOfCritiquesRecieved: 1
+            }
+        }).then(() => {
+
+        }).catch(() => {
+            res.status(400).send({ message: "Error adding coin to the user" });
+            res.send(err);
+        });
+
+    /*The person who critiques needs to get monies*/
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $inc: {
+                coins: 1,
+            }
+        }).then((res) => {
+            console.log ('Found ' + res)
+        }).catch((err) => {
+            res.status(400).send({ message: "Error adding coin to the user" });
+            res.send(err);
+        });
 
     // Add to database 
     newFeedback.save().then(() => {
         res.status(200).send(newFeedback)
     }).catch((err) => {
         res.status(400).send(err);
-    })
+    });
 })
 
 /*
