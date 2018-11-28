@@ -29,7 +29,11 @@ export class DashboardComponent implements OnInit {
   }
 
 
-  renderHome(){
+  renderEditAccount() {
+    this.renderComponent = "edit-account";
+  }
+
+  renderHome() {
     this.renderComponent = "home";
   }
   ngOnDestroy() {
@@ -39,7 +43,7 @@ export class DashboardComponent implements OnInit {
     // Will use this later to grab events to update profile picture and coins
   }
 
-  renderProfile(){
+  renderProfile() {
     this.renderComponent = "profile";
   
   }
