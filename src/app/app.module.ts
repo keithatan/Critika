@@ -31,6 +31,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { EditAccountComponent } from './edit-account/edit-account.component';
+import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 
 
 @NgModule({
@@ -52,7 +53,8 @@ import { EditAccountComponent } from './edit-account/edit-account.component';
     SearchPipe,
     EditProfileComponent,
     FeedbackComponent,
-    EditAccountComponent
+    EditAccountComponent,
+    RateFeedbackComponent
   ],
   imports: [
     BrowserModule,
