@@ -37,6 +37,7 @@ router.post("/add", authenticate, (req, res) => {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             if (resp == null) {
                 res.status(400).json({ message: "Category does not exists" });
+                return;
             }
             else {
                 // New Submission Data
@@ -56,9 +57,6 @@ router.post("/add", authenticate, (req, res) => {
                         $inc: {
                             submissionNum: 1
                         }
-                    }).catch((err) => {
-                        res.status(400).send({ message: "Error changing information" });
-                        res.send(err);
                     }).then(() => {
                         // Add to database 
                         newSubmission.save().then(() => {
@@ -70,9 +68,6 @@ router.post("/add", authenticate, (req, res) => {
                         })
                     })
             }
-        }).catch((err) => {
-            res.status(400).send({message: "Error finding category after initial check"});
-            console.log(err)
         }).then(() => {
             Category.findOneAndUpdate({ categoryName: req.body.category }, {
                 $inc: {
@@ -80,6 +75,14 @@ router.post("/add", authenticate, (req, res) => {
                 }
             }).catch((err)=> {
                 res.status(400).send({message: "Error updating numberOfSubmissions"});
+            })
+        }).then(() => {
+            User.findOneAndUpdate({username: req.user.username}, {
+                $push: {
+                    'categoriesContributed': req.body.category,
+                }
+            }).catch((err)=> {
+                res.status(400).send({message: "Error updating categories contributed"});
             })
         })
     }

@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router'
-import { AppRoutes } from './app.routing';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
 import { SearchPipe } from './filter.pipe'
@@ -31,7 +31,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { EditAccountComponent } from './edit-account/edit-account.component';
+import { AccountComponent } from './account/account.component';
 import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
@@ -55,7 +55,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     SearchPipe,
     EditProfileComponent,
     FeedbackComponent,
-    EditAccountComponent,
+    AccountComponent,
     RateFeedbackComponent,
     SidenavComponent,
     UserSearchPipe
@@ -66,7 +66,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     HttpClientModule,
     FormsModule,                            
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes),
+    AppRoutingModule,
     MDBBootstrapModule.forRoot()
     
   ],

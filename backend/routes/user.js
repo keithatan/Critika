@@ -112,7 +112,7 @@ router.get("/test", (req, res) => {
  */
 router.post("/login", (req, res) => {
     // check for username and password
-    console.log("&&&&&& " + req.body.username + " " + req.body.password)
+    console.log("" + req.body.username + " " + req.body.password)
     if (req.body.username && req.body.password) {
 
         User.findByLogin(req.body.username, req.body.password).then((user) => {
