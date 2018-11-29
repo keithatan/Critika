@@ -44,7 +44,42 @@ export class HomeComponent implements OnInit {
 
   getChildEvent(str: string) {
     this.renderComponent = str;
-    this.displayAvailable();
+    this.subService.getAvailable().then((submissions) => {
+      console.log(submissions)
+      let i: number = 0;
+
+      console.log(Object.keys(submissions).length)
+      let length: number = Object.keys(submissions).length;
+
+      if (length < 5) {
+        this.possibleSubs = new Array(length)
+        for (let x in submissions) {
+          let sub = new Submission(submissions[x])
+          this.possibleSubs[i++] = sub;
+        }
+      }
+      else {
+        this.possibleSubs = new Array(5)
+        for (let x in submissions) {
+          if(i == 5){
+            break;
+          }
+          let sub = new Submission(submissions[x]);
+          this.possibleSubs[i++] = sub;
+        }        
+      }
+
+      console.log(this.possibleSubs)
+      // this.possibleSubs = new Array(5)
+      // let count:number = 0;
+      // for(i = 0; i < 5; i++) {
+      //     let submission = new Submission(submissions[i])
+      //       this.possibleSubs[i] = submission;
+      //  }
+      // console.log(this.possibleSubs)
+    }).then(() => {
+      setTimeout(this.checkAvailable.bind(this), this.ONE_MINUTE);
+    })
   }
 
   
@@ -116,6 +151,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  renderUser(str:string){
+    this.chosenUser = str;
+    this.renderComponent = "user"
+  }
 
 
 }
