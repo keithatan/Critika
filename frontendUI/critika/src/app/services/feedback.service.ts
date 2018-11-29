@@ -25,10 +25,11 @@ export class FeedbackService {
     //         });
     //    }
     
-    rateFeedback (feedbackrating: Number, submissionid: string){
+    rateFeedback (feedbackrating: Number, submissionid: string, feedbackid:string){
         const feedback:Object = {
             feedbackRating: feedbackrating,
-            submissionID: submissionid
+            submissionID: submissionid,
+            feedbackID: feedbackid
         }
         
         return this.http.post("http://localhost:5000/feedback/rate-feedback", feedback)

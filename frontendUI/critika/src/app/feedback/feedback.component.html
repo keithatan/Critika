@@ -16,7 +16,7 @@
       <tbody>
         <tr *ngFor="let f of myFeedbacks">
           <td>{{f.submissionName}}</td>
-          <td *ngIf="f.anonymous == false">{{f.username}}</td>
+          <td *ngIf="f.anonymous == false">{{f.critiquer}}</td>
           <td *ngIf="f.anonymous == true"> Anonymous </td>
           <td>{{f.feedbackGood}}</td>
           <td>{{f.feedbackBad}}</td>

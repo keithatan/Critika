@@ -83,5 +83,15 @@ export class SubmissionService{
     getAllReportedComments(){
         return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
     }
+
+    reportComment(submissionName:string, reportedMessage:string, comment:Object){
+        const sub:Object = {
+            submissionName: submissionName,
+            reportedMessage: reportedMessage,
+            comment: comment
+        }
+        return this.http.post("http://localhost:5000/submission/report-comment",sub).toPromise();
+
+    }
     
 }

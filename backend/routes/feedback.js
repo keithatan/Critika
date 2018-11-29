@@ -117,14 +117,15 @@ router.post('/rate-feedback', authenticate, (req, res) => {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
-    Submission.find({ submissionID: req.body.submissionID }).then((subs) => {
-        if (req.body.username != subs[0].username) {
+    Submission.findOne({ _id: req.body.submissionID }).then((subs) => {
+        console.log(subs)
+        if (req.user.username != subs.username) {
             res.status(400).json({ message: "You are not the owner of this post to rate the feedback" });
             return;
         }
-    })
+    }).catch((err)=>{console.log(err)})
 
-    Submission.findOneAndUpdate({ submissionID: req.body.submissionID },
+    Submission.findOneAndUpdate({ _id: req.body.submissionID },
         {
             $inc: 
             {
@@ -134,35 +135,43 @@ router.post('/rate-feedback', authenticate, (req, res) => {
             // console.log(err)
         })
     
-        var back;
+        let back;
 
-    Feedback.findOneAndUpdate({ submissionID: req.body.submissionID },
+    Feedback.findOneAndUpdate({ _id: req.body.feedbackID },
         {
             $set:
             {
                 feedbackRating: req.body.feedbackRating
             }
         }).then((fb) => {
+            console.log(fb)
             back = fb;
+            console.log(back.critiquer)
 
-            res.status(200).send({ message: "Feedback has been rated!" })
+
+            User.findOneAndUpdate({ username: back.critiquer },
+                {
+                    $inc: {
+                        rating: req.body.feedbackRating,
+                        ratingNum: 1
+                    }
+                }).then((response) => {
+                    res.status(200).send({ message: "Feedback has been rated!" })
+                    return
+                }).catch((err) => {
+                    //res.status(400).send({ message: "Error adding coin to the user" });
+                    console.log(err)
+                    //res.send(err);
+                    return
+                });
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
+            return
         })
 
-        User.findOneAndUpdate({ username: back.critiquer },
-            {
-                $inc: {
-                    rating: req.body.feedbackRating,
-                    ratingNum: 1
-                }
-            }).then((res) => {
-                console.log ('Found ' + res)
-            }).catch((err) => {
-                res.status(400).send({ message: "Error adding coin to the user" });
-                res.send(err);
-            });
+
+        
 
     
 })
@@ -185,7 +194,7 @@ router.get('/all-submission', authenticate, (req, res) => {
 router.get('/all-user', authenticate, (req, res) => {
 
     Feedback.find({ username: req.user.username }).then((subs) => {
-        //console.log(subs)
+        console.log(subs)
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
