@@ -9,7 +9,7 @@
 
     <!--Text-->
     <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="text">
+      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="subName">
       <label for="form1" class="">Name</label>
     </div>
 
@@ -22,20 +22,20 @@
             <button (click)="choseCat(c.categoryName)" type="button" class="btn btn-primary btn-sm">{{c.categoryName}}</button>
         </ul>
       </div>
-      <div class="md-form" *ngIf="CatChosen == true">
+      <div class="md-form" *ngIf="CatChosen == true" [(ngModel)]="category">
         {{C}}
       </div>
 
     <!--Basic textarea-->
     <div class="md-form">
-      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="text"></textarea>
       <label for="form7">Description</label>
     </div>
 
     <!--Basic textarea-->
     <div class="md-form">
         <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
-        <label for="form7">What feedback are you looking for?</label>
+        <label for="form7">What feedback are you looking for</label>
       </div>
 
     <!-- Default unchecked -->

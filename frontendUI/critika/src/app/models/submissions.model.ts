@@ -8,6 +8,8 @@ export class Submission{
     available: boolean; 
     numberOfCritiquesReceived: number;
     submissionID: string;
+    comments: Object[];
+    skillLevel: string;
 
     constructor(response:any){
         this.submissionName = response.submissionName;
@@ -19,5 +21,8 @@ export class Submission{
         this.available = response.available;
         this.numberOfCritiquesReceived = response.numberOfCritiquesRecieved;
         this.submissionID = response._id;
+        this.comments = response.comments;
+        this.skillLevel = response.skillLevel;
+        
     }
 }
