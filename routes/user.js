@@ -378,13 +378,14 @@ router.get("/all-users", authenticate, (req, res) => {
 /**
  * Get specific user
  */
-router.get("/find", (req, res) => {
+router.post("/find", (req, res) => {
+    /*
     if (!req.body || !req.body.username) {
         res.status(400).send({ message: 'Error retrieving user' })
         return
-    }
+    }*/
 
-    User.find({ username: req.body.username}).then((users) => {
+    User.findOne({ username: req.body.username}).then((users) => {
             res.send(users);
         }).catch((err) => {
             res.status(400).send(err);
