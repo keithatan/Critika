@@ -44,6 +44,7 @@ export class CritiqueFormComponent implements OnInit {
   }
 
   returnToDashboard() {
+    this.returnToParent.emit('dash');
   }
 
   sendFeedback(){
