@@ -34,6 +34,17 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
+    if(req.user.coins < 4){
+        res.status(400).json({ message: "You dont have enough coins" });
+        return;
+    }
+
+    User.findOneAndUpdate({username: req.user.username}, {
+        $inc: {
+            coins: -4,
+        }
+    })
+
     if (req.body.category) {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             if (resp == null) {
@@ -123,6 +134,17 @@ router.post("/add-comment", authenticate, (req, res) => {
         res.status(400).json({ message: "Comment data is incomplete" });
         return;
     }
+
+    if(req.user.coins == 0){
+        res.status(400).json({ message: "You dont have enough coins" });
+        return;
+    }
+
+    User.findOneAndUpdate({username: req.user.username}, {
+        $inc: {
+            coins: -1,
+        }
+    })
 
     Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
         {

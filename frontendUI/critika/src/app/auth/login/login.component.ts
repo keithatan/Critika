@@ -21,12 +21,11 @@ export class LoginComponent implements OnInit{
 
     get form() { return this.loginForm.controls }
 
-    login_failed:boolean;
+    response:string;
     submitted = false;
 
-    getLoginFailed() {
-        return this.login_failed;
-    }
+
+    get response_msg() { return this.response; }
 
     onLogin(form: NgForm){
         console.log("Login Info: " + form.value)
@@ -34,8 +33,7 @@ export class LoginComponent implements OnInit{
         if (this.loginForm.invalid) {
             return;
         }
-        console.log("attempted")
-        this.login_failed = this.authService.login(form.value.username, form.value.password)
+        this.response = this.authService.login(form.value.username, form.value.password)
     }
 
 }
