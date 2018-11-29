@@ -7,6 +7,9 @@ import { HomeComponent } from './home/home.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component'
+import { Component } from '@angular/core';
+import { FeedbackComponent } from './feedback/feedback.component';
+import { EditAccountComponent } from './edit-account/edit-account.component';
 
 
 
@@ -16,6 +19,11 @@ export const AppRoutes: Routes = [
         path: '',
         component: DashboardComponent,
         pathMatch: 'full',
+
+    },
+    {   
+        path: 'account',
+        component: EditAccountComponent
 
     },
     {   
@@ -49,6 +57,10 @@ export const AppRoutes: Routes = [
         path: 'admin',
         component: AdminComponent
 
+    },
+    {
+        path: 'feedback',
+        component: FeedbackComponent
     },
     {
         //404 error, leave this one as last route check
