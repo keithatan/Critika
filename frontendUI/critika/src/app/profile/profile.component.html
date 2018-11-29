@@ -35,8 +35,8 @@
                                         <mdb-card class="card">
                                                 <mdb-card-body>
                                                     <h4>Critika Rating</h4>
-                                                    <h2 *ngIf="profile && profile.rating > 0"> {{profile.rating}}/5</h2>
-                                                    <h2 *ngIf="profile && profile.rating == 0"> Not yet rated</h2>
+                                                    <h2 *ngIf="profile && r > 0"> {{r}}/5</h2>
+                                                    <h2 *ngIf="profile && r == 0"> Not yet rated</h2>
                                                 </mdb-card-body>
                                             </mdb-card>
                                 </div>
