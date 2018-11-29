@@ -47,35 +47,7 @@
         <!--/.Main wrapper-->
 
 
-        <!--Main wrapper-->
-        <div class="comments-list text-left">
-            <div class="section-heading">
-                <h3>Suggested Categories<span class="badge blue">3</span></h3>
-            </div>
-            <!--First row-->
-            <div class="row">
-                <!--Image column-->
-                <div class="col-sm-2 col-12">
-                </div>
-                <!--/.Image column-->
-                <!--Content column-->
-                <div class="col-sm-10 col-12">
-                    <table class="table table-bordered table-striped">
-                        <thead>
-                          <tr>
-                            <th scope="col">Categories</th>
-                          </tr>
-                        </thead>
-                        <tbody>
-                          
-                        </tbody>
-                      </table>
-                </div>
-                <!--/.Content column-->
-            </div>
-            <!--/.First row-->
-
-        </div>
+    
         <!--/.Main wrapper-->
         <div>
             <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Ban User </button>
@@ -164,7 +136,8 @@
         </div>
 
         <ul>
-            
+            <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for User" title="Type in a category">
+          
             <table class="table table-bordered table-striped table-wrapper-scroll-y">
                 <thead>
                   <tr>
@@ -173,7 +146,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <tr mdbTableCol *ngFor="let user of allUsers">
+                  <tr mdbTableCol *ngFor="let user of allUsers | UserSearchPipe: queryString" id="cats">
                       <td>{{user.username}}</td>
                       <td>{{user.standing}}</td>
                     </tr>

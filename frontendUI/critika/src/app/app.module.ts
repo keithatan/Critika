@@ -6,6 +6,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
 import { SearchPipe } from './filter.pipe'
+import { UserSearchPipe } from './UserFilter.pipe'
 
 
 //import { AppRoutingModule } from './app-routing.module';
@@ -56,7 +57,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     FeedbackComponent,
     AccountComponent,
     RateFeedbackComponent,
-    SidenavComponent
+    SidenavComponent,
+    UserSearchPipe
   ],
   imports: [
     BrowserModule,

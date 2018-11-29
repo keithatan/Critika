@@ -31,15 +31,18 @@ export class SubmissionService{
 
     }
 
-    editSubmission(submissionname: string, submissiontext: string){
-        const submission:Object = {submissionName: submissionname, submissionText : submissiontext}
+    editSubmission(submissionname: string, submissiontext: string, submissioncategory: string){
+        const submission:Object = {
+            submissionName: submissionname, 
+            submissionText : submissiontext, 
+            submissionCategory: submissioncategory
+        }
         var p = new Submission(submission)
         
-        this.http.post("http://localhost:5000/submission/edit", p)
-        .subscribe(response => {
-            console.log(response)
-            
-        });
+
+
+        return this.http.post("http://localhost:5000/submission/edit", p)
+        
 
 
     }
