@@ -16,6 +16,7 @@ export class AdminComponent implements OnInit {
   allReporteds:Comment[];
   allSuggestedCategories:Category[];
   UserToBeBanned: '';
+  UserToBeRestored: '';
 
   constructor(public proService:ProfileService,
               public subService:SubmissionService) { }
@@ -56,7 +57,15 @@ export class AdminComponent implements OnInit {
   }
 
   BanEm() {
+    console.log('yeet');
+    console.log(this.UserToBeBanned);
     this.proService.banUser(this.UserToBeBanned).subscribe((res)=>{
+      console.log(res)
+    })
+  }
+
+  RestoreEm() {
+    this.proService.restoreUser(this.UserToBeRestored).subscribe((res)=>{
       console.log(res)
     })
   }

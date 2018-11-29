@@ -64,12 +64,12 @@
                         <div class="modal-body">
 
                             <label for="form1" class="">User:</label>
-                            <input mdbInputDirective type="text" id="form1" class="form-control">
+                            <input mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="UserToBeBanned">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                            <button (click)="BanEm()" type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
                     </div>
@@ -93,12 +93,12 @@
                         <div class="modal-body">
 
                             <label for="form1" class="">User:</label>
-                            <input mdbInputDirective type="text" id="form1" class="form-control">
+                            <input mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="UserToBeRestored">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                            <button (click)="RestoreEm()" type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
                     </div>
@@ -120,12 +120,12 @@
                             <h4 id="myModalLabel3">User:</h4>
                         </div>
                         <div class="modal-body">
-                            <input mdbInputDirective type="text" id="form1" placeholder="User" class="form-control" [(ngModel)]="UserToBeBanned">
+                            <input mdbInputDirective type="text" id="form1" placeholder="User" class="form-control">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="BanEm()" type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
                     </div>
