@@ -27,7 +27,7 @@ router.get("/", (req, res) => {
  * Each user can only give one feedback
  */
 router.post('/critique', authenticate, (req, res) => {
-    if(!req.body || !req.body.username || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionName){
+    if(!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID){
         res.status(400).json({ message: "Report comment data is incomplete" + req.body.username + req.body.feedbackMessage});
         return;
     }
@@ -43,7 +43,7 @@ router.post('/critique', authenticate, (req, res) => {
         critiquer: req.user.username
     });
 
-    Feedback.find({username: req.body.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID}).then((subs) => {
+    Feedback.find({username: req.user.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID}).then((subs) => {
         console.log(subs)
         console.log(req.user.username)
         var i;
@@ -96,18 +96,18 @@ router.post('/critique', authenticate, (req, res) => {
  * only the owner of this submission can do this
  */
 router.post('/rate-feedback', authenticate, (req, res) => {
-    if(!req.body || !req.body.username  || !req.body.submissionName || !req.body.feedbackRating){
+    if(!req.body  || !req.body.submissionID || !req.body.feedbackRating){
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
-    Submission.find({submissionName: req.body.submissionName}).then((subs) => {
+    Submission.find({submissionID: req.body.submissionID}).then((subs) => {
         if(req.body.username != subs[0].username){
             res.status(400).json({ message: "You are not the owner of this post to rate the feedback" });
             return;
         }
     })
 
-    Submission.findOneAndUpdate({submissionName:  req.body.submissionName}, 
+    Submission.findOneAndUpdate({submissionID:  req.body.submissionID}, 
         {
             $set: 
             {
@@ -117,7 +117,7 @@ router.post('/rate-feedback', authenticate, (req, res) => {
             // console.log(err)
         })
    
-    Feedback.findOneAndUpdate({submissionName:  req.body.submissionName}, 
+    Feedback.findOneAndUpdate({submissionID:  req.body.submissionID}, 
         {
             $set: 
             {
@@ -135,7 +135,7 @@ router.post('/rate-feedback', authenticate, (req, res) => {
  * Get all feedback for a given submission
  */
 router.get('/all-submission', authenticate, (req, res) => {
-    Feedback.find({submissionID: req.headers.submissionid}).then((subs) => {
+    Feedback.find({submissionID: req.user.submissionid}).then((subs) => {
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
@@ -146,7 +146,9 @@ router.get('/all-submission', authenticate, (req, res) => {
  * Get all feedback for a given submission
  */
 router.get('/all-user', authenticate, (req, res) => {
-    Feedback.find({username: req.headers.username}).then((subs) => {
+    
+    Feedback.find({username: req.user.username}).then((subs) => {
+        //console.log(subs)
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
