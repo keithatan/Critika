@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders, HttpParams} from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
 import { Profile } from '../models/profile.model'; 
+import { NgForm } from "@angular/forms";
 
 @Injectable({
     providedIn: "root"
@@ -41,5 +42,20 @@ export class ProfileService {
             username: user
         }
         return this.http.post("http://localhost:5000/user/find", param);
+    }
+    banUser(user: string) {
+
+        const param:Object = {
+            usernameToBeBanned: user
+        }
+        return this.http.post("http://localhost:5000/user/ban-user", param);
+    }
+
+    restoreUser(user: string) {
+
+        const param:Object = {
+            usernameToBeRestored: user
+        }
+        return this.http.post("http://localhost:5000/user/restore-user", param);
     }
 }
