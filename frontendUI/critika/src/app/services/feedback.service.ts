@@ -39,8 +39,6 @@ export class FeedbackService {
         const feedbackO:Object = {feedbackBad: feedbackbad, feedbackWork: feedbackwork, feedbackGood: feedbackgood, username: username, submissionName: submissionName, anonymous: anonymous, submissionID: submissionID }
 
             var feedback = new Feedback(feedbackO);
-
-            console.log(feedback)
             return this.http.post("http://localhost:5000/feedback/critique", feedback)
    }
 

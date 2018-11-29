@@ -31,12 +31,10 @@ export class CritiqueFormComponent implements OnInit {
 
   critique() {
     console.log(this.chosenSubmission.submissionName);
-    // tslint:disable-next-line:max-line-length
-    this.feedbackService.giveFeedback(this.wentWrong, this.improved,this.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe(
-      (response) => {
+    this.feedbackService.giveFeedback(this.wentWrong, this.improved,this.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe((response) => {
         console.log('Worked');
-      },
-      (err) => {
+        this.returnToParent.emit('dash');
+      }),((err) => {
         console.log('err');
       });
   }
@@ -46,7 +44,6 @@ export class CritiqueFormComponent implements OnInit {
   }
 
   returnToDashboard() {
-    this.returnToParent.emit('dash');
   }
 
   sendFeedback(){
