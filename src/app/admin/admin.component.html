@@ -31,8 +31,8 @@
                           </thead>
                           <tbody>
                             <tr mdbTableCol *ngFor="let com of allReportedComments">
-                                <th scope="row">{{com.submissionName}}</th>
-                                <td>{{com.username}}</td>
+                                <th scope="row" *ngIf="com.reported == true">{{com.submissionName}}</th>
+                                <td *ngIf="com.reported == true">{{com.username}}</td>
                               </tr>
                           </tbody>
                         </table>

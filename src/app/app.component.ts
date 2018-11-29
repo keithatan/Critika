@@ -10,7 +10,7 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent implements OnInit {
     private authListenerSubs: Subscription;
-    userAuthed = false
+    userAuthed = false;
 
     ngOnInit(){
       this.authListenerSubs = this.authService.getAuthStatus().subscribe(isAuthenticated =>{
