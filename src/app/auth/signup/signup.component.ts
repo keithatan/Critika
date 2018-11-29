@@ -37,7 +37,7 @@ export class SignupComponent implements OnInit {
     
     get form() { return this.signUpForm.controls }
 
-    response: string;
+    response: string = "NULL";
 
     get response_msg() { return this.response; }
 
@@ -52,9 +52,9 @@ export class SignupComponent implements OnInit {
             return;
         }
         // Call to register the user, as well as get the response back from the server back end
-        this.authService.registerUser(form.value.email, form.value.username, form.value.password, form.value.securityanswer, form.value.securityquestion).then((res)=> {
+        this.authService.registerUser(form.value.email, form.value.username, form.value.password, form.value.securityquestion, form.value.securityanswer).then((res)=> {
             console.log(res)
-            this.response = "registered"
+            this.response = "complete"
         }).catch((err) => {
             if (err.error.name == "MongoError") {
                 this.response = "duplicate";
@@ -66,7 +66,6 @@ export class SignupComponent implements OnInit {
         })
         // this.response = AuthService.response_register_msg();
         // console.log(this.response)
-        console.log("this: " + this.authService.response_register_msg());
     }
 
 }
