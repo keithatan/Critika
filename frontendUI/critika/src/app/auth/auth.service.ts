@@ -4,6 +4,7 @@ import { AuthData } from './auth-data.model'
 import { Subject } from "rxjs";
 import { ThrowStmt } from "@angular/compiler";
 import { resolve } from "url";
+import { Router } from "@angular/router";
 
 const httpOptions = {
     headers: new HttpHeaders({ 'Content-Type': 'application/json' }),
@@ -15,14 +16,26 @@ const httpOptions = {
 export class AuthService {
 
     private token: string
+    private isAuthenticated = false;
     private authStatusListener = new Subject<boolean>();
     failed: boolean = false;
     incomplete: string;
 
-    constructor(private http: HttpClient) { }
+    constructor(private http: HttpClient, private router:Router) { }
 
     getToken() {
         return this.token;
+    }
+
+    getIsAuth(){
+        return this.isAuthenticated;
+    }
+
+    logout(){
+        this.token = null;
+        this.isAuthenticated = false;
+        this.authStatusListener.next(false)
+        this.router.navigate(['/login']);
     }
 
     getAuthStatus() {
@@ -55,9 +68,12 @@ export class AuthService {
             .subscribe(response => {
                 const token = response.headers.get('token');
                 this.token = token
+                if (token){
                 this.authStatusListener.next(true)
                 this.saveAuthData(token, username);
                 this.failed = false;
+                this.router.navigate(['/home']);
+                }
             },
                 error => {
                     this.failed = true;
