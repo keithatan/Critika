@@ -75,8 +75,7 @@
 </div>
 
 <app-spend-coins *ngIf="renderComponent == 'SpendCoins' "></app-spend-coins>
-<app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>
 <app-edit-profile *ngIf="renderComponent == 'EditProfile' " [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
 <button type="button" (click)="renderSpendCoins()" class="btn btn-secondary">Spend Coins</button>
-<button type="button" (click)="renderAddSub()" class="btn btn-secondary">Add Submission</button>
+
 <button type="button" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>

@@ -35,7 +35,7 @@ export class FeedbackService {
             return this.http.post("http://localhost:5000/feedback/critique", feedback)
    }
 
-   getFeedbacks():Promise<Feedback[]> {
-       return this.http.get<Feedback[]>("http://localhost:5000/feedback/all-user").toPromise();
+   getFeedbacks(){
+       return this.http.get("http://localhost:5000/feedback/all-user").toPromise();
    }
 }

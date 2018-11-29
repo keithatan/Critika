@@ -29,6 +29,22 @@ export class MySubmissionsComponent implements OnInit {
         this.renderComponent = "file-report";
     }
 
+    renderAddSub() {
+      if (this.edit == false) {
+        this.edit = true;
+      }
+      if (this.edit == true) {
+        this.edit = false;
+      }
+      if (this.renderComponent == 'AddSub'){
+        this.renderComponent = "";
+  
+      }
+      else{
+        this.renderComponent = 'AddSub';
+      }
+    }
+
   renderEditSub() {
     if (this.edit == false) {
       this.edit = true;
