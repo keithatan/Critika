@@ -18,6 +18,7 @@
             <!-- Username -->
             <p class="h5 mb-4">Username</p>
             <p class="h7 mb-4">{{username}}</p>
+
             <!-- Change Email -->
             <p class="h5 mb-4">Email</p>
             <p class="h7 mb-4">{{email}}</p>
@@ -32,6 +33,7 @@
                     <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Email</button>
                 </form>
             </div>
+
             <!-- Change Password -->
             <p class="h5 mb-4">Password</p>
             <form (submit)="onSubmitPassword(h)" #h=ngForm [formGroup]="changePasswordForm">
@@ -75,6 +77,23 @@
                     </div>
                     <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Security Question</button>
                 </form>
+            </div>
+
+            <!-- Alert Toasts -->
+            <div *ngIf="response_msg === 'complete_security'" class="alert alert-success" role="alert">
+                Security Question and Answer Successfully Changed
+            </div>
+            <div *ngIf="response_msg === 'incomplete'" class="alert alert-danger" role="alert">
+                User Data is Incomplete
+            </div>
+            <div *ngIf="response_msg === 'fatalError'" class="alert alert-danger" role="alert">
+                Fatal Error. Please Try Again Later
+            </div>
+            <div *ngIf="response_msg === 'complete_email'" class="alert alert-success" role="alert">
+                Email Successfully Changed
+            </div>
+            <div *ngIf="response_msg === 'complete_password'" class="alert alert-success" role="alert">
+                Password Successfully Changed
             </div>
         </mdb-card-body>
     </mdb-card>

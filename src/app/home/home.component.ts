@@ -82,19 +82,12 @@ export class HomeComponent implements OnInit {
     })
   }
 
-<<<<<<< HEAD
-  checkAvailable() {
-    let i: number;
-    for (i = 0; i < 5; i++) {
-      if (this.possibleSubs[i].numberOfCritiquesReceived >= 3) {
-=======
   findUser(user:string){}
 
   checkAvailable(){
     let i:number;
     for(i = 0; i < 5; i++){
       if(this.possibleSubs[i].numberOfCritiquesReceived >= 3){
->>>>>>> 8b09929540e1b19e897ed2d0ec4d976febb1faec
         this.replaceSubmission(this.possibleSubs[i])
       }
     }
