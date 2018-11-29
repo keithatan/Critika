@@ -21,7 +21,7 @@ export class AuthService {
     private isAuthenticated = false;
     private authStatusListener = new Subject<boolean>();
     failed: boolean = false;
-    incomplete: string;
+    response_register: string = "NULL";
 
     constructor(private http: HttpClient, private router:Router) { }
 
@@ -42,28 +42,31 @@ export class AuthService {
         this.router.navigate(['/login']);
     }
 
-    getAuthStatus() {
-        return this.authStatusListener.asObservable();
-    }
+    getAuthStatus() { return this.authStatusListener.asObservable(); }
+
+    response_register_msg() { return this.response_register; }
+    get loging_response() { return this.failed; }
+
+
 
     registerUser(email: string, username: string, password: string, securityquestion: string, securityanswer: string) {
         const auth: AuthData = { email: email, username: username, password: password, securityquestionanswer: securityanswer, securityquestion: securityquestion }
-        this.http.post("http://localhost:5000/user/register", auth)
-            .subscribe(response => {
-                this.incomplete = "complete";
-            },
-                error => {
-                    if (error.error.message == "User data is incomplete") {
-                        this.incomplete = "incomplete";
-                    }
-                    else if (error.error.name == "MongoError") {
-                        this.incomplete = "duplicate";
-                    }
-                    else {
-                        this.incomplete = "failed";
-                    }
-                });
-        return this.incomplete;
+        return this.http.post<Object>("http://localhost:5000/user/register", auth).toPromise()
+            // .subscribe(response => {
+            //     this.response_register = "complete";
+            // },
+            //     error => {
+            //         if (error.error.message == "User data is incomplete") {
+            //             this.response_register = "incomplete";
+            //         }
+            //         else if (error.error.name == "MongoError") {
+            //             this.response_register = "duplicate";
+            //         }
+            //         else {
+            //             this.response_register = "fatalError";
+            //         }
+            //     });
+        // return this.response_register;
     }
 
     login(username: string, password: string) {

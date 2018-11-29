@@ -195,7 +195,52 @@ router.post("/edit-info", authenticate, (req, res) => {
 })
 
 /**
- * Edit a user's email and security question
+ * Edit a user's email
+ */
+router.post("/change-email", authenticate, (req, res) => {
+    if (!req.body || !req.body.email) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                email: req.body.email
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User email successfully updated' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing email" });
+            res.send(err);
+        })
+})
+
+/**
+ * Edit a user's security question and answer
+ */
+router.post("/change-security", authenticate, (req, res) => {
+    if (!req.body || !req.body.securityquestion || !req.body.securityquestionanswer) {
+        res.status(400).send({ message: "User data is incomplete" });
+        return;
+    }
+
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $set: {
+                 securityquestion: req.body.securityquestion,
+                securityquestionanswer: req.body.securityquestionanswer
+            }
+        }).then(() => {
+            res.status(200).send({ message: 'User security question and answer successfully updated' })
+        }).catch((err) => {
+            res.status(400).send({ message: "Error changing security question and answer" });
+            res.send(err);
+        })
+})
+
+/**
+ * Edit a user's profile information
  */
 router.post("/profile", authenticate, (req, res) => {
     if (!req.body || !req.body.location || !req.body.aboutme || !req.body.homepage || !req.body.occupation) {
