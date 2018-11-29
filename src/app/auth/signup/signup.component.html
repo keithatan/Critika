@@ -71,9 +71,16 @@
         <a routerLink="/login">Login</a>
       </p>
 
-      <div *ngIf="response_register_msg === 'duplicate'" class="alert alert-danger" role="alert">
-        Form is Incomplete
+      <div *ngIf="response_msg === 'complete'" class="alert alert-success" role="alert">
+        Account Successfully Created
       </div>
+      <div *ngIf="response_msg === 'duplicate'" class="alert alert-danger" role="alert">
+        Username or Email Already Exists
+      </div>
+      <div *ngIf="response_msg === 'fatalError'" class="alert alert-danger" role="alert">
+        A Fatal Error Has Occoured. PLease Try Again Later.
+      </div>
+
 
       <!-- Info Toasts 
       <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">

@@ -125,9 +125,15 @@ export class HomeComponent implements OnInit {
 
   checkAvailable(){
     let i:number;
+    if(this.possibleSubs == null){
+      return
+    }
     for(i = 0; i < 5; i++){
+      if(this.possibleSubs[i] == null){
+        continue;
+      }
       if(this.possibleSubs[i].numberOfCritiquesReceived >= 3){
-                this.replaceSubmission(this.possibleSubs[i])
+          this.replaceSubmission(this.possibleSubs[i])
       }
     }
   }
