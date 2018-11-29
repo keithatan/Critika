@@ -59,6 +59,7 @@ export class CategoriesComponent implements OnInit {
       this.getTopCategories()
     })
   }
+  
 
   getSubmissionsInCategory(category) {
     // console.log(category)

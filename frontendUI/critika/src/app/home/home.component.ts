@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import {SubmissionService} from '../services/submissions.service'
-import {Submission} from '../models/submissions.model'
+import { SubmissionService } from '../services/submissions.service'
+import { Submission } from '../models/submissions.model'
 import { timer } from 'rxjs';
 import { ProfileService } from '../services/profile.service';
 import { UserSearchPipe } from '../UserFilter.pipe';
@@ -27,14 +27,14 @@ export class HomeComponent implements OnInit {
   }
   renderComponent: String;
 
-  renderCritiqueForm(sub:Submission) {
+  renderCritiqueForm(sub: Submission) {
     this.chosen = sub;
     this.renderComponent = "critique-form";
   }
 
-   ngOnDestroy(){
-     console.log('boooom')
-   }
+  ngOnDestroy() {
+    console.log('boooom')
+  }
 
   Link: "Submission";
 
@@ -42,23 +42,39 @@ export class HomeComponent implements OnInit {
     this.displayAvailable();
   }
 
-  getChildEvent(str:string){
+  getChildEvent(str: string) {
     this.renderComponent = str;
     this.displayAvailable();
   }
 
-  displayAvailable(){
-    this.subService.getAvailable().then((submissions)=>{
-      let i:number = 0;
+  
 
-      this.possibleSubs = new Array(5)
-      for(let x in submissions){
-        if(i == 5){
-          break;
+  displayAvailable() {
+    this.subService.getAvailable().then((submissions) => {
+      console.log(submissions)
+      let i: number = 0;
+
+      console.log(Object.keys(submissions).length)
+      let length: number = Object.keys(submissions).length;
+
+      if (length < 5) {
+        this.possibleSubs = new Array(length)
+        for (let x in submissions) {
+          let sub = new Submission(submissions[x])
+          this.possibleSubs[i++] = sub;
         }
-        let sub = new Submission(submissions[x])
-        this.possibleSubs[i++] = sub;
       }
+      else {
+        this.possibleSubs = new Array(5)
+        for (let x in submissions) {
+          if(i == 5){
+            break;
+          }
+          let sub = new Submission(submissions[x]);
+          this.possibleSubs[i++] = sub;
+        }        
+      }
+
       console.log(this.possibleSubs)
       // this.possibleSubs = new Array(5)
       // let count:number = 0;
@@ -76,31 +92,31 @@ export class HomeComponent implements OnInit {
     let i:number;
     for(i = 0; i < 5; i++){
       if(this.possibleSubs[i].numberOfCritiquesReceived >= 3){
-        this.replaceSubmission(this.possibleSubs[i])
+                this.replaceSubmission(this.possibleSubs[i])
       }
     }
   }
 
-  replaceSubmission(submission){
+  replaceSubmission(submission) {
     // console.log(submission)
-    let ten:number = 10;
-    this.timer = timer(this.TWENTY_FOUR_HOURS,1000)
+    let ten: number = 10;
+    this.timer = timer(3000, 1000)
     this.timer = setTimeout(() => {
       // console.log(ten--)
       // if(ten < 0){
       //   ten = 10;
       // }
-    },10)
+    }, 10)
     // console.log('done')
     // console.log(this.possibleSubs)
-    
+
     this.subService.setUnavailable(submission).then((res) => {
       this.displayAvailable();
     })
-    
+
   }
 
-  
+
 
 }
 
