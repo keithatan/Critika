@@ -34,11 +34,8 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { AccountComponent } from './account/account.component';
 import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-<<<<<<< HEAD
 import { ViewSubComponent } from './my-submissions/view-sub/view-sub.component';
-=======
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
->>>>>>> cc1d8a3f4247e30fc2509631a5dfab89bdc4ecaa
 
 
 @NgModule({
@@ -64,11 +61,8 @@ import { UserProfileComponent } from './home/user-profile/user-profile.component
     RateFeedbackComponent,
     SidenavComponent,
     UserSearchPipe,
-<<<<<<< HEAD
-    ViewSubComponent
-=======
+    ViewSubComponent,
     UserProfileComponent
->>>>>>> cc1d8a3f4247e30fc2509631a5dfab89bdc4ecaa
   ],
   imports: [
     BrowserModule,
