@@ -139,6 +139,7 @@ export class AccountComponent implements OnInit {
     const auth: AuthData = { email: "", username: "", password: "", securityquestionanswer: form.value.securityanswer, securityquestion: form.value.securityquestion }
     this.http.post("http://localhost:5000/user/change-security", auth)
       .subscribe(response => {
+        console.log(response);
         this.response = "complete_security";
       },
         error => {
