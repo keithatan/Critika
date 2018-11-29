@@ -11,6 +11,7 @@ import { Component } from '@angular/core';
 import { FeedbackComponent } from './feedback/feedback.component';
 import { AuthGuard } from './auth/auth-guard';
 import { AccountComponent } from './account/account.component';
+import { CategoriesComponent } from './categories/categories.component';
 
 const AppRoutes: Routes = [
   {
@@ -34,6 +35,11 @@ const AppRoutes: Routes = [
   {
       path:'profile',
       component: ProfileComponent,
+      canActivate: [AuthGuard]
+  },
+  {
+      path:'categories',
+      component: CategoriesComponent,
       canActivate: [AuthGuard]
   },
   {
