@@ -1,13 +1,90 @@
-<div>
+<div class="p-2 profile">
+    <div class="d-flex flex-row">
+        <div class="p-2 no">
+            <div class="d-flex flex-column">
+                    <div class="p-2 no">
     <mdb-card class="outerCard" *ngIf="sub != null">
-          <h1 text-align="center">{{sub.submissionName}}</h1>
-          <p >Category: {{sub.category}}</p>
-          <p >Skill Level: {{sub.submissionSkillLevel}}</p>
-          <p >Description: {{sub.submissionText}}</p>   
-          <p *ngIf="sub.comments.length > 0">Comments: {{sub.comments}}</p>
-          <p *ngIf="sub.comments.length == 0">There are currently no comments on this submission.</p>
+          <h1 class="submissionName">{{sub.submissionName}}</h1>
+          <h1>Category</h1>
+          <p >{{sub.category}}</p>
+          <h1>Skill Level</h1>
+          <p >{{sub.submissionSkillLevel}}</p>
+          <h1>Description</h1>
+          <p>{{sub.submissionText}}</p>   
+          <div *ngIf="sub.comments.length > 0">
+            <h1>Comments</h1>
+            <ul>
+              <table class="table table-bordered table-striped table-wrapper-scroll-y">
+                  <thead>
+                      <tr>
+                        <th scope="col">User</th>
+                        <th>Comment</th>
+                        <th>Report</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr *ngFor="let c of sub.comments">
+                        <td>
+                          <p>{{c.user}}</p>
+                        </td>
+                        <td>
+                          <p>{{c.message}}</p>
+                        </td>
+                        <td>
+                            <button type="button" class="btn btn-secondary">REPORT COMMENT</button>
+                        </td>
+                      </tr>
+                    </tbody>
+              </table>
+            </ul>
+          </div>
+          <div *ngIf="sub.comments.length == 0">
+          <h1>Comments</h1>
+          <p >There are currently no comments on this submission.</p>
+          </div>
+          <div *ngIf="sub.comments.length > 0">
+              <h1>Feedback</h1>
+              <ul>
+                <table class="table table-bordered table-striped table-wrapper-scroll-y">
+                    <thead>
+                        <tr>
+                          <th scope="col">User</th>
+                          <th>Comment</th>
+                          <th>Report</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr *ngFor="let c of sub.comments">
+                          <td>
+                            <p>{{c.user}}</p>
+                          </td>
+                          <td>
+                            <p>{{c.message}}</p>
+                          </td>
+                          <td>
+                              <button type="button" class="btn btn-secondary">REPORT COMMENT</button>
+                          </td>
+                        </tr>
+                      </tbody>
+                </table>
+              </ul>
+            </div>
+            <div *ngIf="sub.comments.length == 0">
+            <h1>Feedback</h1>
+            <p >There is currently no feedback on this submission.</p>
+        </div>
           <button type="button" (click) = "renderEditSub(submission)" class="btn btn-secondary">Edit Submission</button>
-          <app-edit-sub [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
 
     </mdb-card>
+    </div>
   </div>
+</div>
+<div class="p-2 no">
+    <div class="d-flex flex-column">
+            <div class="p-2 no">
+    <app-edit-sub [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
+  </div>
+</div>
+</div>
+  </div>
+</div>

@@ -1,7 +1,7 @@
 .outerCard {
     padding: 30px;
     width: 1000px;
-    height: 1500px;
+    height: 1900px;
 }
 
 .d-flex{
@@ -11,4 +11,17 @@
 .sub-card{
     
     padding: 20px;
+}
+
+.table-wrapper-scroll-y {
+    display: block;
+    max-height: 500px;
+    max-width: 750px;
+    overflow-y: auto;
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+.submissionName{
+    text-align: center;
+    font-size: 100px;
 }

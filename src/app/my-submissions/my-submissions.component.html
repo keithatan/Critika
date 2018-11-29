@@ -4,7 +4,7 @@
             <div class="d-flex flex-column">
                     <div class="p-2 no">
     <mdb-card class="outerCard">
-      <app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>
+      
       <button type="button" (click)="renderAddSub()" class="btn btn-secondary">Add Submission</button>
       <ul>
           <table class="table table-bordered table-striped table-wrapper-scroll-y">
@@ -49,6 +49,13 @@
   </div>
 </div>
 </div>
+<div class="p-2 no">
+    <div class="d-flex flex-column">
+            <div class="p-2 no">
+                <app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>
+              </div>
+            </div>
+            </div>
 </div>
 </div>
 
