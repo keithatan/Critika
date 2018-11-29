@@ -10,26 +10,33 @@
     <!--Text-->
     <div class="md-form">
       <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="text">
-      <label for="form1" class="">Link</label>
+      <label for="form1" class="">Name</label>
     </div>
 
-    <!--Text-->
-    <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="SubName">
-      <label for="form1" class="">Submission Name</label>
-    </div>
+  
 
     <!--Text-->
-    <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="Category">
-      <label for="form1" class="">Category</label>
-    </div>
+    <div class="md-form" *ngIf="CatChosen == false">
+        <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
+        <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
+            <button (click)="choseCat(c.categoryName)" type="button" class="btn btn-primary btn-sm">{{c.categoryName}}</button>
+        </ul>
+      </div>
+      <div class="md-form" *ngIf="CatChosen == true">
+        {{C}}
+      </div>
 
     <!--Basic textarea-->
     <div class="md-form">
       <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
-      <label for="form7">What feedback are you looking for?</label>
+      <label for="form7">Description</label>
     </div>
+
+    <!--Basic textarea-->
+    <div class="md-form">
+        <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
+        <label for="form7">What feedback are you looking for?</label>
+      </div>
 
     <!-- Default unchecked -->
     <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>

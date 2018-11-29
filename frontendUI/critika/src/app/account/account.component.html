@@ -5,7 +5,7 @@
             <!-- Change Username -->
             <div class="form-group">
                 <form (submit)="onSubmitUsername(g)" #g=ngForm [formGroup]="changeUsernameForm">
-                    <label>Current Username: {{username}}</label>
+                    <label>Username: {{username}}</label>
                     <input type="text" class="form-control" placeholder="New Username"
                         formControlName="username" [ngClass]="{ 'is-invalid': submitted_username && form_username.username.errors }" />
                     <div *ngIf="submitted_username && form_username.username.errors" class="invalid-feedback">
@@ -17,7 +17,7 @@
             <!-- Change Email -->
             <div class="form-group">
                 <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
-                    <label>Current Email: {{email}}</label>
+                    <label>Email: {{email}}</label>
                     <input type="text" placeholder="New Email" class="form-control"
                         formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
                     <div *ngIf="submitted_email && form_mail.email.errors" class="invalid-feedback">

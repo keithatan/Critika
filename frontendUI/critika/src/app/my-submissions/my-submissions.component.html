@@ -1,13 +1,52 @@
 <div class="p-2 profile">
-  <div *ngFor="let submission of mySubmissions">
+    <div class="d-flex flex-row">
+        <div class="p-2 no">
+            <div class="d-flex flex-column">
+                    <div class="p-2 no">
     <mdb-card class="outerCard">
-          <h1>{{submission.submissionName}}</h1>
-          <p>Description: {{submission.submissionText}}</p>
-          <p>Category: {{submission.category}}</p>
-          <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
+      <ul>
+          <table class="table table-bordered table-striped table-wrapper-scroll-y">
+              <thead>
+                  <tr>
+                    <th scope="col">Submission Name</th>
+                    <th>Description</th>
+                    <th>Category</th>
+                    <th>Edit</th>
+                  </tr>
+                </thead>
+                <tbody>
+        <tr *ngFor="let submission of mySubmissions">
+          <td><h1>{{submission.submissionName}}</h1>
+          
+        </td>
         
-          <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
-
+        <td>
+          <p>{{submission.category}}</p>
+        </td>
+        <td>
+            <p>{{submission.submissionText}}</p>
+            
+          </td>
+          <td>
+              <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
+             
+            </td>
+        </tr>
+      </tbody>
+          </table>
+        </ul>
+        
     </mdb-card>
   </div>
 </div>
+</div>
+<div class="p-2 no">
+    <div class="d-flex flex-column">
+            <div class="p-2 no">
+    <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
+  </div>
+</div>
+</div>
+</div>
+</div>
+

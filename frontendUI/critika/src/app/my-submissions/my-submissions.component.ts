@@ -11,12 +11,15 @@ import { Observable } from 'rxjs';
 })
 export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
-  renderComponent: string = "";
+  renderComponent: string;
 
-  Text: string
+  edit: boolean;
+  Text: string;
 
 
   constructor(public subService:SubmissionService) { 
+    this.renderComponent = "";
+    this.edit = false;
   }
 
   getSubmissions(){
@@ -27,7 +30,20 @@ export class MySubmissionsComponent implements OnInit {
     }
 
   renderEditSub() {
-    this.renderComponent = 'EditSub';
+    if (this.edit == false) {
+      this.edit = true;
+    }
+    if (this.edit == true) {
+      this.edit = false;
+    }
+    if (this.renderComponent == 'EditSub'){
+      this.renderComponent = "";
+
+    }
+    else{
+      this.renderComponent = 'EditSub';
+  }
+    
     //this.Text = text
 
   }
