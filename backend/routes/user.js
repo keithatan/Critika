@@ -226,11 +226,14 @@ router.post("/change-security", authenticate, (req, res) => {
         return;
     }
 
+    console.log("q: " + req.body.securityquestion)
+    console.log("a: " + req.body.securityquestionanswer)
+
     User.findOneAndUpdate({ username: req.user.username },
         {
             $set: {
-                 securityquestion: req.body.securityquestion,
-                securityquestionanswer: req.body.securityquestionanswer
+                security_question: req.body.securityquestion,
+                security_question_answer: req.body.securityquestionanswer
             }
         }).then(() => {
             res.status(200).send({ message: 'User security question and answer successfully updated' })
@@ -386,11 +389,11 @@ router.post("/find", (req, res) => {
         return
     }*/
 
-    User.findOne({ username: req.body.username}).then((users) => {
-            res.send(users);
-        }).catch((err) => {
-            res.status(400).send(err);
-        })
+    User.findOne({ username: req.body.username }).then((users) => {
+        res.send(users);
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
 })
 
 /*
@@ -413,14 +416,14 @@ router.post("/ban-user", authenticate, (req, res) => {
 
         var randomName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-        
-            User.findOneAndUpdate({ username: req.body.usernameToBeBanned }, { $set: { recoveryUsername: req.body.usernameToBeBanned, username: randomName, standing: "banned" } })
-                .then(() => {
-                    res.status(200).send({ message: "User is now banned" })
-                    /* Delete user from database or username to list of banned names? */
-                    /* I think we should just delete the user, and instead store the email in an array of banned emails */
-                })
-        
+
+        User.findOneAndUpdate({ username: req.body.usernameToBeBanned }, { $set: { recoveryUsername: req.body.usernameToBeBanned, username: randomName, standing: "banned" } })
+            .then(() => {
+                res.status(200).send({ message: "User is now banned" })
+                /* Delete user from database or username to list of banned names? */
+                /* I think we should just delete the user, and instead store the email in an array of banned emails */
+            })
+
     }
 })
 
@@ -445,7 +448,7 @@ router.post("/restore-user", authenticate, (req, res) => {
                 /* Delete user from database or username to list of banned names? */
                 /* I think we should just delete the user, and instead store the email in an array of banned emails */
             }).catch((err) => {
-                res.status(400).send({message: "Error restoring user"})
+                res.status(400).send({ message: "Error restoring user" })
             })
 
     }
@@ -456,19 +459,24 @@ router.post("/restore-user", authenticate, (req, res) => {
  */
 router.post("/change-password", authenticate, (req, res) => {
 
-    if(!req.body || !req.body.password){
-        res.status(400).send({message: "User information incomplete"})
+    if (!req.body || !req.body.password) {
+        res.status(400).send({ message: "User information incomplete" })
         return
     }
 
     var username = req.user.username;
     var newPassword = req.body.password;
 
-    User.findOneAndUpdate({ username: username }, { $set: { password: newPassword } }).then(() => {
-        res.status(200).send({ message: 'Password was successfully changed' });
-    }).catch((err) => {
-        res.status(400).send({ message: "Login information is incomplete" });
-        res.send(err);
+    encryptPassword(newPassword).then(encryptedPassword => {
+        console.log("encrypt: " + encryptedPassword)
+        User.findOneAndUpdate({ username: username }, { $set: { password: encryptedPassword } }).then(() => {
+            console.log("passwd set")
+        }).catch((err) => {
+            res.status(400).send({ message: "New password not set." });
+            res.send(err);
+        });
+    }).catch(err => {
+        console.log("err: " + err)
     });
 })
 

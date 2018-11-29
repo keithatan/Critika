@@ -16,7 +16,7 @@
         </div>
 
         <!-- <input type="password" id="password" name="password" class="form-control mb-4" placeholder="Password" ngModel -->
-          <!-- #passwordInput="ngModel"> -->
+        <!-- #passwordInput="ngModel"> -->
 
         <!-- Password -->
         <div class="form-group">
@@ -42,8 +42,11 @@
           <a routerLink="">Register</a>
         </p>
 
-        <div *ngIf="getLoginFailed() " class="alert alert-danger" role="alert">
+        <div *ngIf="response_msg === 'failed' " class="alert alert-danger" role="alert">
           Username or Password is Incorrect
+        </div>
+        <div *ngIf="response_msg === 'verify' " class="alert alert-info" role="alert">
+          User Account Still Needs to Be Verified. Please Check your Email for your Verification Code.
         </div>
       </form>
     </mdb-card-body>

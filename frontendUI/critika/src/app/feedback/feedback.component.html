@@ -4,8 +4,10 @@
     <mdb-card-title>
       <h4>My Feedbacks</h4>
     </mdb-card-title>
+
+    <h5 *ngIf = "this.isEmpty == true"> You have no feedbacks </h5>
     
-    <table class="table table-bordered table-striped table-wrapper-scroll-y">
+    <table *ngIf = "this.isEmpty == false" class="table table-bordered table-striped table-wrapper-scroll-y">
       <thead>
         <tr>
           <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
@@ -14,7 +16,8 @@
       <tbody>
         <tr *ngFor="let f of myFeedbacks">
           <td>{{f.submissionName}}</td>
-          <td>{{f.critiquer}}</td>
+          <td *ngIf="f.anonymous == false">{{f.critiquer}}</td>
+          <td *ngIf="f.anonymous == true"> Anonymous </td>
           <td>{{f.feedbackGood}}</td>
           <td>{{f.feedbackBad}}</td>
           <td>{{f.feedbackWork}}</td>
