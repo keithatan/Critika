@@ -6,20 +6,26 @@
 
   <div class="list-group list-group-flush">
 
-      <a routerLink="/home" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="userAuthed == false" routerLink="login" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+          <i class="fa fa-table mr-3"></i>Login</a>
+      <a *ngIf="userAuthed == true" routerLink="/home" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-pie-chart mr-3"></i>Critique</a>
-      <a routerLink="/profile" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="userAuthed == true" routerLink="/profile" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-user mr-3"></i>My Profile</a>
-      <a routerLink="login" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-          <i class="fa fa-table mr-3"></i>Tables</a>
-      <a routerLink="register" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="userAuthed == true" routerLink="feedback" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+            <i class="fa fa-table mr-3"></i>Feedback</a>
+      <a *ngIf="userAuthed == false" routerLink="register" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-map mr-3"></i>Register</a>
-      <a routerLink="nonExistingPath" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="userAuthed == true" routerLink="nonExistingPath" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-exclamation mr-3"></i>404</a>
-      <a routerLink="admin" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+      <a *ngIf="userAuthed == true" routerLink="admin" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-exclamation mr-3"></i>Admin</a>
-        <a routerLink="submissions" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
-                <i class="fa fa-archive mr-3"></i>Submission</a>
+        <a *ngIf="userAuthed == true" routerLink="submissions" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+          <i class="fa fa-archive mr-3"></i>Submission</a>
+        <a *ngIf="userAuthed == true" routerLink="account" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+          <i class="fa fa-archive mr-3"></i>My Account</a>
+          <a *ngIf="userAuthed == true" (click)="logout()" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+              <i class="fa fa-archive mr-3"></i>Logout</a>
 
   </div>
 
