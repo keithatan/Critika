@@ -18,7 +18,8 @@ export class AccountComponent implements OnInit {
   changeEmailForm: FormGroup;
   changePasswordForm: FormGroup;
   submitted_username: boolean = false;
-  submitted_email:boolean = false;
+  submitted_email: boolean = false;
+  submitted_password: boolean = false;
   ngOnInit() {
     this.getAccountInfo()
     this.changeUsernameForm = this.formBuilder.group({
@@ -28,12 +29,21 @@ export class AccountComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]]
     });
     this.changePasswordForm = this.formBuilder.group({
-      password: ['', [Validators.required, Validators.minLength(8)]]
-    });
+      password: ['', [Validators.required, Validators.minLength(8)]],
+      confirmPassowrd: ['']
+    }, { validator: this.checkPasswords });
+  }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.confirmPassowrd.value;
+
+    return pass === confirmPass ? null : { notSame: true }
   }
 
   get form_username() { return this.changeUsernameForm.controls }
   get form_mail() { return this.changeEmailForm.controls }
+  get form_password() { return this.changePasswordForm.controls }
 
   getAccountInfo() {
     this.http.get("http://localhost:5000/user/account").subscribe(response => {
@@ -65,7 +75,13 @@ export class AccountComponent implements OnInit {
   }
 
   onSubmitPassword(form: NgForm) {
-    // this.submitted = true;
+    this.submitted_password = true;
+    this.submitted_email = false;
+    this.submitted_username = false;
+    if (this.changePasswordForm.invalid) {
+      return;
+    }
+    console.log(form.value)
   }
 
 }
