@@ -3,7 +3,7 @@
 
 <!-- <div *ngFor="let c of categoriesForFilter | search: queryString"> -->
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
-  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <a href="#"> {{c.categoryName}} </a> </li>
+  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <a > {{c.categoryName}} </a> </li>
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
