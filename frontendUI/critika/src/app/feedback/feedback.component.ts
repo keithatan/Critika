@@ -13,7 +13,7 @@ export class FeedbackComponent implements OnInit {
   renderComponent: String = "";
   chosen: Feedback;
   toRate: boolean;
-  isEmpty: boolean = true;
+  isEmpty: boolean = false;
   // public Id: Number;
   // public rateNum: Number;
 
@@ -45,7 +45,7 @@ export class FeedbackComponent implements OnInit {
   
 
   ngOnInit() {
-    this.getFeeback();
+    this.getFeedback();
   }
 
   getChildEvent(str:string){
@@ -68,21 +68,21 @@ export class FeedbackComponent implements OnInit {
 
   }
 
-  getFeeback(){
+  getFeedback(){
     this.subService.getFeedbacks().then((data) => {
       let i: number;
 
       let response = [];
-     // console.log(data)
+     //console.log(data)
       response.push(data)
 
       this.myFeedbacks = new Array(response[0].length)
 
-      if (response[0].length > 0) {
-        this.isEmpty == false;
+      if (this.myFeedbacks.length > 0) {
+        this.isEmpty =false;
       }
       else {
-        this.isEmpty == true;
+        this.isEmpty = true;
       }
 
       for (i = 0; i < response[0].length; i++) {
