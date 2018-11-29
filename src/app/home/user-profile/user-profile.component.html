@@ -1,0 +1,66 @@
+<div *ngIf="displayUser != null">
+  <div class="d-flex flex-row">
+    <div class="p-2 no">
+            <div class="d-flex flex-column">
+                    <div class="p-2 no"> <mdb-card class="about-me-card">
+                            <mdb-card-body class="about-me-card">
+                                <h4>About Me</h4>
+                                <h2> {{displayUser.aboutMe}} </h2>
+                    
+                                <h4>Homepage</h4>
+                                <h2> {{displayUser.homepage}} </h2>
+                    
+                                <h4>Location</h4>
+                                <h2> {{displayUser.location}} </h2>
+                    
+                                <h4>Occupation</h4>
+                                <h2>  {{displayUser.occupation}} </h2>
+                            </mdb-card-body>
+                        </mdb-card>
+                    </div>
+                    <div class="p-2 no">
+                            <mdb-card class="card">
+                                    <mdb-card-body>
+                                        <h4>Coins</h4>
+                                        <h2> {{displayUser.coins}}</h2>
+                                    </mdb-card-body>
+                            </mdb-card>
+                    </div>  
+        
+                </div>
+    </div>
+    <div class="p-2 no">
+            <div class="d-flex flex-column">
+                    <div class="p-2 no"> 
+                            <mdb-card class="card">
+                                    <mdb-card-body>
+                                        <h4>Critika Rating</h4>
+                                        <h2 *ngIf="displayUser && displayUser.rating.$numberDecimal > 0"> {{displayUser.rating.$numberDecimal}}/5</h2>
+                                        <h2 *ngIf="displayUser && displayUser.rating.$numberDecimal == 0"> Not yet rated</h2>
+                                    </mdb-card-body>
+                                </mdb-card>
+                    </div>
+                    <div class="p-2 no">
+                            <mdb-card>
+                                    <mdb-card-body>
+                                        <h4>Member Since:</h4>
+                                        <h2> {{displayUser.memberSince.substring(0,10)}}</h2>
+                                    </mdb-card-body>
+                                </mdb-card>
+                            
+                    </div>  
+                    <div class="p-2 no">
+                            <mdb-card class="card">
+                                    <mdb-card-body>
+                                        <h4>Total Number of Submissions</h4>
+                                        <h2> {{displayUser.submissionNum}}</h2>
+                                    </mdb-card-body>
+                                </mdb-card>
+                    </div>
+        
+                </div>
+    </div>
+
+</div>
+</div>
+
