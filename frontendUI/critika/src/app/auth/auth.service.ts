@@ -74,7 +74,7 @@ export class AuthService {
                 this.token = token
                 if (token){
 
-                const expiresInDuration = 10;
+                const expiresInDuration = 7200;
                 this.setAuthTimer(expiresInDuration);
                 this.isAuthenticated = true;
                 this.authStatusListener.next(true);
@@ -83,7 +83,7 @@ export class AuthService {
                 this.failed = false;
                 console.log(expirationDate);
                 this.saveAuthData(token, expirationDate);
-                this.router.navigate(["/"]);
+                this.router.navigate(["/home"]);
                 }
             },
                 error => {
