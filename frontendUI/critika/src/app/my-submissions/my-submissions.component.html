@@ -1,13 +1,13 @@
 <div class="p-2 profile">
-  <mdb-card class="outerCard">
-                <ul>
-                  <div *ngFor="let submission of mySubmissions">
-                    <li >Submission Name: {{submission.submissionName}}</li>
-                    <li>Submission Text: {{submission.submissionText}}</li>
-                    <li>Submission Category: {{submission.category}}</li>
-                    <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
-                  </div>
-                  </ul>
-                  <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
-  </mdb-card>
+  <div *ngFor="let submission of mySubmissions">
+    <mdb-card class="outerCard">
+          <h1>{{submission.submissionName}}</h1>
+          <p>Description: {{submission.submissionText}}</p>
+          <p>Category: {{submission.category}}</p>
+          <button type="button" (click) = "renderEditSub()" class="btn btn-secondary">Edit Submission</button>
+        
+          <app-edit-sub *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
+
+    </mdb-card>
+  </div>
 </div>

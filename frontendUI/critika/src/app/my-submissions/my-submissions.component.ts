@@ -46,6 +46,7 @@ export class MySubmissionsComponent implements OnInit {
           let submission = new Submission(response[0][i])
           this.mySubmissions[i] = submission;
        }
+       console.log(response);
       });
   }
 
