@@ -23,7 +23,7 @@ export class RateFeedbackComponent implements OnInit {
 
   submitRate() {
     console.log(this.childFeedback)
-    this.rService.rateFeedback(this.feedbackRating, this.childFeedback.submissionID)
+    this.rService.rateFeedback(this.feedbackRating, this.childFeedback.submissionID, this.childFeedback.feedbackID)
     .subscribe ((response) => {
       console.log(response);
       this.returnToParent.emit('reload')
