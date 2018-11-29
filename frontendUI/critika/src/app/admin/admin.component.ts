@@ -47,7 +47,7 @@ export class AdminComponent implements OnInit {
       this.allReporteds = new Array(response[0].length);
 
       for(i = 0; i < response[0].length;i++){
-        let reportedComment = new Comment(response[0][i]);
+        let reportedComment = new Comment(response[0][i].comments);
         console.log(reportedComment);
         this.allReporteds[i] = reportedComment;
       }
