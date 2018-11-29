@@ -44,4 +44,12 @@ export class ProfileService {
         }
         return this.http.post("http://localhost:5000/user/ban-user", param);
     }
+
+    restoreUser(user: string) {
+
+        const param:Object = {
+            usernameToBeRestored: user
+        }
+        return this.http.post("http://localhost:5000/user/restore-user", param);
+    }
 }
