@@ -2,24 +2,23 @@
     <mdb-card>
         <mdb-card-body>
             <p class="h4 mb-4">Edit Account Information</p>
-            <!-- Change Username -->
+            <!-- Change Username
             <div class="form-group">
                 <form (submit)="onSubmitUsername(g)" #g=ngForm [formGroup]="changeUsernameForm">
                     <label>Username: {{username}}</label>
-                    <input type="text" class="form-control" placeholder="New Username"
-                        formControlName="username" [ngClass]="{ 'is-invalid': submitted_username && form_username.username.errors }" />
+                    <input type="text" class="form-control" placeholder="New Username" formControlName="username"
+                        [ngClass]="{ 'is-invalid': submitted_username && form_username.username.errors }" />
                     <div *ngIf="submitted_username && form_username.username.errors" class="invalid-feedback">
                         <div *ngIf="form_username.username.errors.required">Please Enter a New Username</div>
                     </div>
                     <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Username</button>
                 </form>
-            </div>
+            </div> -->
             <!-- Change Email -->
             <div class="form-group">
                 <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
                     <label>Email: {{email}}</label>
-                    <input type="text" placeholder="New Email" class="form-control"
-                        formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
+                    <input type="text" placeholder="New Email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
                     <div *ngIf="submitted_email && form_mail.email.errors" class="invalid-feedback">
                         <div *ngIf="form_mail.email.errors.email">Invalid Email</div>
                         <div *ngIf="form_mail.email.errors.required">Please Enter an Email</div>
@@ -27,6 +26,27 @@
                     <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Email</button>
                 </form>
             </div>
+            <!-- Change Password -->
+            <form (submit)="onSubmitPassword(h)" #h=ngForm [formGroup]="changePasswordForm">
+                <div class="form-group">
+                    <label>Change My Password</label>
+                    <input type="password" placeholder="New Password" class="form-control" formControlName="password"
+                        [ngClass]="{ 'is-invalid': submitted_password && form_password.password.errors }" />
+                    <div *ngIf="submitted_password && form_password.password.errors" class="invalid-feedback">
+                        <div *ngIf="form_password.password.errors.minlength">Password must be at least 8 characters</div>
+                        <div *ngIf="form_password.password.errors.required">Please Enter a Password</div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>Confirm Password</label>
+                    <input type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassword"
+                        [ngClass]="{ 'is-invalid': submitted_password && changePasswordForm.hasError('notSame') }" />
+                    <div *ngIf="submitted_password && changePasswordForm.hasError('notSame')" class="invalid-feedback">
+                        <div *ngIf="changePasswordForm.hasError('notSame')">Passwords Do Not Match</div>
+                    </div>
+                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Password</button>
+                </div>
+            </form>
         </mdb-card-body>
     </mdb-card>
 </div>

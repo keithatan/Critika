@@ -8,7 +8,8 @@ import { Feedback } from '../models/feedback.model';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
-  feedbackReceived: Feedback[];
+  tableElements = ['Title', 'User', 'What went well', 'What went wrong', 'What could be improved', 'Rate a Feedback'];
+  myFeedbacks: Feedback[];
   renderComponent: String = "";
   toRate: boolean;
 
@@ -39,21 +40,25 @@ export class FeedbackComponent implements OnInit {
   
 
   ngOnInit() {
+    this.getFeeback();
+  }
+
+  getFeeback(){
     this.subService.getFeedbacks().then((data) => {
       let i: number;
 
       let response = [];
+     // console.log(data)
       response.push(data)
 
-      this.feedbackReceived = new Array(response[0].length)
+      this.myFeedbacks = new Array(response[0].length)
 
-      for (i = 0; i < response[0]. length; i++) {
+      for (i = 0; i < response[0].length; i++) {
         let feedback = new Feedback(response[0][i])
-        this.feedbackReceived[i] = feedback;
+        this.myFeedbacks[i] = feedback;
+        // console.log(feedback);
       }
-
+      console.log(this.myFeedbacks);
     });
-
   }
-
 }
