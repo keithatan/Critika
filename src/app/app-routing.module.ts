@@ -12,6 +12,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { AuthGuard } from './auth/auth-guard';
 import { AccountComponent } from './account/account.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { VerifyComponent } from './verify/verify.component'
 
 const AppRoutes: Routes = [
   {
@@ -19,6 +20,10 @@ const AppRoutes: Routes = [
       redirectTo: 'home',
       pathMatch: 'full',
 
+  },
+  {
+      path: 'verify',
+      component: VerifyComponent
   },
   {   
       path: 'account',
