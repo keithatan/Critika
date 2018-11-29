@@ -14,7 +14,7 @@ import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { HomeComponent } from './home/home.component';
 import { MyQueueComponent } from './my-queue/my-queue.component';
-import {AddSubComponent} from './profile/add-sub/add-sub.component';
+import {AddSubComponent} from './my-submissions/add-sub/add-sub.component';
 import { ProfileComponent } from './profile/profile.component';
 import {CategoriesComponent} from './categories/categories.component';
 import { AdminComponent } from './admin/admin.component'
