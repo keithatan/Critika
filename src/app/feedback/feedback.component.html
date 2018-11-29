@@ -6,52 +6,59 @@
     </mdb-card-title>
     
     <table class="table table-bordered table-striped table-wrapper-scroll-y">
-    <thead>
-      <tr>
-        <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let f of myFeedbacks">
-        <td>{{f.submissionName}}</td>
-        <td>{{f.username}}</td>
-        <td>{{f.feedbackGood}}</td>
-        <td>{{f.feedbackBad}}</td>
-        <td>{{f.feedbackWork}}</td>
-
-        <td>
-            <app-rate-feedback *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
-            <button type="button" (click) = "renderRateFeedback()" class="btn btn-secondary">Rate Feedback </button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
-  
-  <!-- <table mdbTable>
-    <thead class="tableColor white-text">
-      <tr>
-        <th *ngFor="let el of tableElements" scope="col">{{el}} </th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr mdbTableCol *ngFor="let f of myFeedbacks">
-        <th scope="row">{{f.submissionName}}</th>
-        <td>{{f.feedbackGood}}</td>
-        <td>{{f.feedbackBad}}</td>
-        <td>{{f.feedbackWork}}</td>
-        <td><span class="badge badge-primary badge-pill">{{sub.numberOfCritiquesReceived}}</span></td>
-        <td><button (click)="renderCritiqueForm(sub)" >Test</button></td>
-      </tr>
-    </tbody>
-  </table> -->
-  
-  <!-- <p> {{feed}}</p>
-    <p> Feedback 2 </p>
-    <p> Feedback 3 </p> -->
+      <thead>
+        <tr>
+          <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let f of myFeedbacks">
+          <td>{{f.submissionName}}</td>
+          <td>{{f.username}}</td>
+          <td>{{f.feedbackGood}}</td>
+          <td>{{f.feedbackBad}}</td>
+          <td>{{f.feedbackWork}}</td>
+          
+          <td *ngIf="f.feedbackRating == 0">
+            <p>Not Yet Rated</p>
+            <app-rate-feedback [childFeedback]="chosen" (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
+            <button type="button" (click) = "renderRateFeedback(f)" class="btn btn-secondary">Rate Feedback </button>
+          </td>
+          
+          <td *ngIf="f.feedbackRating != 0">
+            <p>{{f.feedbackRating}}/5</p>
+          </td>
+          
+          
+        </tr>
+      </tbody>
+    </table>
     
-  </mdb-card-body>
+    <!-- <table mdbTable>
+      <thead class="tableColor white-text">
+        <tr>
+          <th *ngFor="let el of tableElements" scope="col">{{el}} </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr mdbTableCol *ngFor="let f of myFeedbacks">
+          <th scope="row">{{f.submissionName}}</th>
+          <td>{{f.feedbackGood}}</td>
+          <td>{{f.feedbackBad}}</td>
+          <td>{{f.feedbackWork}}</td>
+          <td><span class="badge badge-primary badge-pill">{{sub.numberOfCritiquesReceived}}</span></td>
+          <td><button (click)="renderCritiqueForm(sub)" >Test</button></td>
+        </tr>
+      </tbody>
+    </table> -->
+    
+    <!-- <p> {{feed}}</p>
+      <p> Feedback 2 </p>
+      <p> Feedback 3 </p> -->
+      
+    </mdb-card-body>
+    
+  </mdb-card>
   
-</mdb-card>
-
-
-
+  
+  
