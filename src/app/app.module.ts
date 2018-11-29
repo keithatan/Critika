@@ -30,7 +30,7 @@ import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { EditAccountComponent } from './edit-account/edit-account.component';
+import { AccountComponent } from './account/account.component';
 import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
 
@@ -54,7 +54,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     SearchPipe,
     EditProfileComponent,
     FeedbackComponent,
-    EditAccountComponent,
+    AccountComponent,
     RateFeedbackComponent,
     SidenavComponent
   ],
