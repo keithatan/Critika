@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SubmissionService } from '../services/submissions.service'
 import { Submission } from '../models/submissions.model'
 import { timer } from 'rxjs';
+import { ProfileService } from '../services/profile.service';
+import { UserSearchPipe } from '../UserFilter.pipe';
+import { Profile } from '../models/profile.model';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +12,17 @@ import { timer } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tableElements = ['Title', 'Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
-  possibleSubs: Submission[];
-  chosen: Submission;
+  tableElements = ['Title','Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
+  possibleSubs:Submission[];
+  chosen:Submission;
+  displayUser:Profile;
   TWENTY_FOUR_HOURS = 86400000;
   ONE_MINUTE = 60000;
   private timer;
+  chosenUser:string;
 
-  constructor(public subService: SubmissionService) {
-    this.renderComponent = "";
+  constructor(public subService:SubmissionService, private proService:ProfileService) {
+    this.renderComponent = "dash";
     this.timer;
   }
   renderComponent: String;
@@ -39,9 +44,45 @@ export class HomeComponent implements OnInit {
 
   getChildEvent(str: string) {
     this.renderComponent = str;
-    this.displayAvailable();
+    this.subService.getAvailable().then((submissions) => {
+      console.log(submissions)
+      let i: number = 0;
 
-  } t
+      console.log(Object.keys(submissions).length)
+      let length: number = Object.keys(submissions).length;
+
+      if (length < 5) {
+        this.possibleSubs = new Array(length)
+        for (let x in submissions) {
+          let sub = new Submission(submissions[x])
+          this.possibleSubs[i++] = sub;
+        }
+      }
+      else {
+        this.possibleSubs = new Array(5)
+        for (let x in submissions) {
+          if(i == 5){
+            break;
+          }
+          let sub = new Submission(submissions[x]);
+          this.possibleSubs[i++] = sub;
+        }        
+      }
+
+      console.log(this.possibleSubs)
+      // this.possibleSubs = new Array(5)
+      // let count:number = 0;
+      // for(i = 0; i < 5; i++) {
+      //     let submission = new Submission(submissions[i])
+      //       this.possibleSubs[i] = submission;
+      //  }
+      // console.log(this.possibleSubs)
+    }).then(() => {
+      setTimeout(this.checkAvailable.bind(this), this.ONE_MINUTE);
+    })
+  }
+
+  
 
   displayAvailable() {
     this.subService.getAvailable().then((submissions) => {
@@ -82,8 +123,6 @@ export class HomeComponent implements OnInit {
     })
   }
 
-  findUser(user:string){}
-
   checkAvailable(){
     let i:number;
     for(i = 0; i < 5; i++){
@@ -112,6 +151,10 @@ export class HomeComponent implements OnInit {
 
   }
 
+  renderUser(str:string){
+    this.chosenUser = str;
+    this.renderComponent = "user"
+  }
 
 
 }

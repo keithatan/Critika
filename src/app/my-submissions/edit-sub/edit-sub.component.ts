@@ -11,7 +11,7 @@ import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
   styleUrls: ['./edit-sub.component.scss']
 })
 export class EditSubComponent implements OnInit {
-  @Input('childSubmission') childSubmission: Submission;
+  @Input('childSubmission') sub: Submission;
   @Output() returnToParent = new EventEmitter<string>();
   boop: 'lmao';
   view:boolean;
@@ -127,6 +127,7 @@ export class EditSubComponent implements OnInit {
   }
 
   ngOnInit() {
+    
     this.categoriesForm = this.formBuilder.group({
       categoryName: [''],
       categoryDescription: [''],
