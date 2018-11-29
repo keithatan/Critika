@@ -12,6 +12,7 @@ let userSchema = new mongoose.Schema({
   verified: Boolean,
   aboutMe: {type: String, default: "New User"},
   categoriesContributed: {type:[String]},
+  feedbackContributed: {type:[String]},
   occupation: {type: String, default: ""},
   location: {type: String, default: ""},
   homepage: {type: String, default: ""},

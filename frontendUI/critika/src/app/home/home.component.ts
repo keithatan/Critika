@@ -82,19 +82,10 @@ export class HomeComponent implements OnInit {
     })
   }
 
-<<<<<<< HEAD
   checkAvailable() {
     let i: number;
     for (i = 0; i < 5; i++) {
       if (this.possibleSubs[i].numberOfCritiquesReceived >= 3) {
-=======
-  findUser(user:string){}
-
-  checkAvailable(){
-    let i:number;
-    for(i = 0; i < 5; i++){
-      if(this.possibleSubs[i].numberOfCritiquesReceived >= 3){
->>>>>>> d4b07af819a9ed514841a0b620af72deab387772
         this.replaceSubmission(this.possibleSubs[i])
       }
     }
@@ -103,7 +94,7 @@ export class HomeComponent implements OnInit {
   replaceSubmission(submission) {
     // console.log(submission)
     let ten: number = 10;
-    this.timer = timer(this.TWENTY_FOUR_HOURS, 1000)
+    this.timer = timer(3000, 1000)
     this.timer = setTimeout(() => {
       // console.log(ten--)
       // if(ten < 0){
