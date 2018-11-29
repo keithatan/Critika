@@ -24,6 +24,8 @@
           <i class="fa fa-archive mr-3"></i>Submission</a>
         <a *ngIf="userAuthed == true" routerLink="account" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
           <i class="fa fa-archive mr-3"></i>Edit Account</a>
+          <a *ngIf="userAuthed == true" (click)="logout()" routerLinkActive="active" class="list-group-item list-group-item-action waves-effect">
+              <i class="fa fa-archive mr-3"></i>Logout</a>
 
   </div>
 

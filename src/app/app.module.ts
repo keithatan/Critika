@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { RouterModule } from '@angular/router'
-import { AppRoutes } from './app.routing';
+import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http'; 
 import { HttpModule } from '@angular/http';
 import { SearchPipe } from './filter.pipe'
@@ -64,7 +64,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     HttpClientModule,
     FormsModule,                            
     ReactiveFormsModule,
-    RouterModule.forRoot(AppRoutes),
+    AppRoutingModule,
     MDBBootstrapModule.forRoot()
     
   ],
