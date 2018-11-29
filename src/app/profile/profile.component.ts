@@ -14,6 +14,7 @@ export class ProfileComponent implements OnInit {
 
   coins: number;
   profile: Profile;
+  r:number;
   edit: boolean;
 
   constructor(public profileService: ProfileService) {
@@ -54,6 +55,7 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
+      this.r = this.profile.rating/this.profile.ratingNum;
       /*
       const v = response["rating"];
       console.log(v);
@@ -67,6 +69,7 @@ export class ProfileComponent implements OnInit {
   getChildEvent(event:string){
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
+      this.r = this.profile.rating/this.profile.ratingNum;
       /*
       const v = response["rating"];
       console.log(v);
