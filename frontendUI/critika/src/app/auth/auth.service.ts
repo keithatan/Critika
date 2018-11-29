@@ -20,20 +20,19 @@ export class AuthService {
     private token: string
     private isAuthenticated = false;
     private authStatusListener = new Subject<boolean>();
-    failed: boolean = false;
-    response_register: string = "NULL";
+    response_login: string = "NULL";
 
-    constructor(private http: HttpClient, private router:Router) { }
+    constructor(private http: HttpClient, private router: Router) { }
 
     getToken() {
         return this.token;
     }
 
-    getIsAuth(){
+    getIsAuth() {
         return this.isAuthenticated;
     }
 
-    logout(){
+    logout() {
         this.token = null;
         this.isAuthenticated = false;
         this.authStatusListener.next(false)
@@ -44,29 +43,9 @@ export class AuthService {
 
     getAuthStatus() { return this.authStatusListener.asObservable(); }
 
-    response_register_msg() { return this.response_register; }
-    get loging_response() { return this.failed; }
-
-
-
     registerUser(email: string, username: string, password: string, securityquestion: string, securityanswer: string) {
         const auth: AuthData = { email: email, username: username, password: password, securityquestionanswer: securityanswer, securityquestion: securityquestion }
         return this.http.post<Object>("http://localhost:5000/user/register", auth).toPromise()
-            // .subscribe(response => {
-            //     this.response_register = "complete";
-            // },
-            //     error => {
-            //         if (error.error.message == "User data is incomplete") {
-            //             this.response_register = "incomplete";
-            //         }
-            //         else if (error.error.name == "MongoError") {
-            //             this.response_register = "duplicate";
-            //         }
-            //         else {
-            //             this.response_register = "fatalError";
-            //         }
-            //     });
-        // return this.response_register;
     }
 
     login(username: string, password: string) {
@@ -75,72 +54,77 @@ export class AuthService {
             .subscribe(response => {
                 const token = response.headers.get('token');
                 this.token = token
-                if (token){
-
-                const expiresInDuration = 7200;
-                this.setAuthTimer(expiresInDuration);
-                this.isAuthenticated = true;
-                this.authStatusListener.next(true);
-                const now = new Date();
-                const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
-                this.failed = false;
-                console.log(expirationDate);
-                this.saveAuthData(token, expirationDate);
-                this.router.navigate(["/home"]);
+                if (token) {
+                    const expiresInDuration = 7200;
+                    this.setAuthTimer(expiresInDuration);
+                    this.isAuthenticated = true;
+                    this.authStatusListener.next(true);
+                    const now = new Date();
+                    const expirationDate = new Date(now.getTime() + expiresInDuration * 1000);
+                    this.response_login = "complete";
+                    console.log(expirationDate);
+                    this.saveAuthData(token, expirationDate);
+                    this.router.navigate(["/home"]);
                 }
             },
                 error => {
-                    this.failed = true;
+                    if (error.error.message == "Account has not been verified, please verify your account") {
+                        this.response_login = "verify"
+                    }
+                    else {
+                        this.response_login = "failed";
+                    }
+                    console.log(error);
                 }
             );
-        return this.failed
+        return this.response_login
     }
 
     autoAuthUser() {
         const authInformation = this.getAuthData();
         if (!authInformation) {
             return;
-          }
-          const now = new Date();
-          const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
-          if (expiresIn > 0) {
+        }
+        const now = new Date();
+        const expiresIn = authInformation.expirationDate.getTime() - now.getTime();
+        if (expiresIn > 0) {
             this.token = authInformation.token;
             this.isAuthenticated = true;
             this.setAuthTimer(expiresIn / 1000);
             this.authStatusListener.next(true);
-          }
+        }
     }
 
 
     private setAuthTimer(duration: number) {
         console.log("Setting timer: " + duration);
         this.tokenTimer = setTimeout(() => {
-          this.logout();
+            this.logout();
         }, duration * 1000);
-      }
-    
-      private saveAuthData(token: string, expirationDate: Date) {
+    }
+
+    private saveAuthData(token: string, expirationDate: Date) {
         localStorage.setItem("token", token);
         localStorage.setItem('user', name)
         localStorage.setItem("expiration", expirationDate.toISOString());
-      }
-    
-      private clearAuthData() {
+    }
+
+    private clearAuthData() {
         localStorage.removeItem("token");
         localStorage.removeItem("expiration");
         localStorage.removeItem("user")
-      }
-    
-      private getAuthData() {
+    }
+
+    private getAuthData() {
         const token = localStorage.getItem("token");
         const expirationDate = localStorage.getItem("expiration");
         if (!token || !expirationDate) {
-          return;
+            return;
         }
         return {
-          token: token,
-          expirationDate: new Date(expirationDate)
+            token: token,
+            expirationDate: new Date(expirationDate)
         }
-      }
+    }
 
 }
