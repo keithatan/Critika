@@ -57,8 +57,6 @@ export class AdminComponent implements OnInit {
   }
 
   BanEm() {
-    console.log('yeet');
-    console.log(this.UserToBeBanned);
     this.proService.banUser(this.UserToBeBanned).subscribe((res)=>{
       console.log(res)
     })
