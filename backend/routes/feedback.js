@@ -133,6 +133,8 @@ router.post('/rate-feedback', authenticate, (req, res) => {
         }).catch((err) => {
             // console.log(err)
         })
+    
+        var back;
 
     Feedback.findOneAndUpdate({ submissionID: req.body.submissionID },
         {
@@ -140,12 +142,29 @@ router.post('/rate-feedback', authenticate, (req, res) => {
             {
                 feedbackRating: req.body.feedbackRating
             }
-        }).then(() => {
+        }).then((fb) => {
+            back = fb;
+
             res.status(200).send({ message: "Feedback has been rated!" })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
+
+        User.findOneAndUpdate({ username: back.critiquer },
+            {
+                $inc: {
+                    rating: req.body.feedbackRating,
+                    ratingNum: 1
+                }
+            }).then((res) => {
+                console.log ('Found ' + res)
+            }).catch((err) => {
+                res.status(400).send({ message: "Error adding coin to the user" });
+                res.send(err);
+            });
+
+    
 })
 
 

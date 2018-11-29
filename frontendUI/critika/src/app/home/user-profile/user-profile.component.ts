@@ -9,13 +9,15 @@ import { Profile } from 'src/app/models/profile.model';
 })
 export class UserProfileComponent implements OnInit {
   @Input('chosenUser') chosenUser:string;
-  displayUser:Object
+  displayUser:Profile
+  r:number;
 
   constructor(private proService:ProfileService) { }
 
   ngOnInit() {
     this.proService.getUser(this.chosenUser).subscribe((res) =>{
-      this.displayUser = new Object(res);
+      this.displayUser = new Profile(res);
+      this.r = this.displayUser.rating/this.displayUser.ratingNum;
       console.log(this.displayUser);
     })
   }
