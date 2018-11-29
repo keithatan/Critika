@@ -7,8 +7,12 @@ export class Feedback {
     submissionID: string;
     submissionName: string;
     feedbackRating: Number;
+    critiquer: string;
+    feedbackID:string;
 
     constructor(response: any) {
+        this.feedbackID = response._id;
+        this.critiquer = response.critiquer;
         this.submissionID = response.submissionID;
         this.username = response.username;
         this.submissionName = response.submissionName;
