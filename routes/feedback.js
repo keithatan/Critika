@@ -194,7 +194,7 @@ router.get('/all-submission', authenticate, (req, res) => {
 router.get('/all-user', authenticate, (req, res) => {
 
     Feedback.find({ username: req.user.username }).then((subs) => {
-        //console.log(subs)
+        console.log(subs)
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
