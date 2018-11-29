@@ -1,4 +1,4 @@
-<div class="p-2 profile animated fadeInUp" *ngIf="renderComponent != 'critique-form'">
+<div class="p-2 profile animated fadeInUp" *ngIf="renderComponent == 'dash'">
   <mdb-card>
 
     <!--Card content-->
@@ -18,9 +18,9 @@
           <tr mdbTableCol *ngFor="let sub of possibleSubs">
             <th scope="row">{{sub.submissionName}}</th>
             <td>{{sub.submissionText}}</td>
-            <td>{{sub.username}}</td>
+            <td (click)="renderUser(sub.username)" class="underline">{{sub.username}}</td>
             <td>{{sub.category}}</td>
-            <td><span class="badge badge-primary badge-pill">{{sub.numberOfCritiquesReceived}}</span></td>
+            <td><span class="badge badge-primary badge-pill pill-color">{{sub.numberOfCritiquesReceived}}</span></td>
             <td><button (click)="renderCritiqueForm(sub)" >Test</button></td>
           </tr>
         </tbody>
@@ -34,4 +34,5 @@
 <!-- Render the other component stuff -->
 <div class="d-flex flex-column justify-content-center animated fadeInUp">
   <app-critique-form *ngIf="renderComponent == 'critique-form'" [submission]="chosen"(returnToParent)="getChildEvent($event)" ></app-critique-form>
+  <app-user-profile *ngIf="renderComponent == 'user'" [chosenUser]="chosenUser" ></app-user-profile>
 </div>
