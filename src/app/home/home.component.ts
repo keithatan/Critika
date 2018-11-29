@@ -68,6 +68,8 @@ export class HomeComponent implements OnInit {
     })
   }
 
+  findUser(user:string){}
+
   checkAvailable(){
     let i:number;
     for(i = 0; i < 5; i++){
