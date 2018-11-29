@@ -15,6 +15,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 var Submission = require('../model/submission');
 var User = require('../model/user');
 var Category = require('../model/category')
+var Feedback = require('../model/feedback')
 
 /**
  * All submission related routes
@@ -272,16 +273,30 @@ router.get("/available", authenticate, (req, res) => {
 router.get('/available-with-categories', authenticate, (req, res) => {
     Submission.find({ available: true }).then((subs) => {
         User.find({ username: req.user.username }).then((user) => {
-            var userMap = {};
-            // console.log(subs)
-            var categoriesContributed = user[0]['categoriesContributed']
-            subs.forEach(function (withCat) {
-                if(categoriesContributed.includes(withCat.category) && withCat.username != req.user.username){
-                    userMap[withCat._id] = withCat
-                }
-            });
-            console.log(userMap)
-            res.send(userMap);
+            Feedback.find({ username: req.user.username }).then((feedback) => {
+                // console.log(feedback)
+                var userMap = {};
+                // console.log(subs)
+                var categoriesContributed = user[0]['categoriesContributed']
+                var feedbackContributed = user[0]['feedbackContributed']
+                console.log(feedbackContributed)
+                subs.forEach(function (withCat) {
+                    var tf = false;
+                    var i = 0;
+                    for(i = 0; i < feedbackContributed.length; i++){
+                        if(feedbackContributed[i] == withCat._id){
+                            tf = true;
+                        }
+                    }
+                    if(tf == false){
+                        if (categoriesContributed.includes(withCat.category) && withCat.username != req.user.username) {
+                            userMap[withCat._id] = withCat
+                        }
+                    }                    
+                });
+                console.log(userMap)
+                res.send(userMap);
+            })
         })
 
     }).catch((err) => {
