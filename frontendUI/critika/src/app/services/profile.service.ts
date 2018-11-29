@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { HttpClient , HttpHeaders} from "@angular/common/http";
+import { HttpClient , HttpHeaders, HttpParams} from "@angular/common/http";
 import { Subject, Observable } from "rxjs";
 import { Profile } from '../models/profile.model'; 
 
@@ -34,5 +34,12 @@ export class ProfileService {
 
     getAllUsers(){
         return this.http.get("http://localhost:5000/user/all-users").toPromise();
+    }
+
+    getUser(user:string){
+        const param:Object = {
+            username: user
+        }
+        return this.http.post("http://localhost:5000/user/find", param);
     }
 }
