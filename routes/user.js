@@ -67,7 +67,8 @@ router.post("/register", (req, res) => {
         security_question: req.body.securityquestion,
         security_question_answer: req.body.securityquestionanswer,
         verified: false,
-        verificationNum: verificatonCode
+        verificationNum: verificatonCode,
+        recoveryUsername: req.body.username,
     });
 
     var newMemberEmailBody = "Dear " + req.body.username +
@@ -99,7 +100,7 @@ router.get("/account", authenticate, (req, res) => {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
         return;
     }
-
+    console.log(req.user)
     res.status(200).send(req.user);
 });
 

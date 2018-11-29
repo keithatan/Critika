@@ -17,7 +17,7 @@ let userSchema = new mongoose.Schema({
   location: {type: String, default: ""},
   homepage: {type: String, default: ""},
   memberSince: {type: Date, default: Date.now},
-  rating: {type: mongoose.Schema.Types.Decimal128, default: 0},
+  rating: {type: Number, default: 0},
   verificationNum: {type: Number, default: 0},
   submissionNum: { type: Number, default: 0},
   ratingNum: { type: Number, default: 0},
@@ -188,7 +188,7 @@ userSchema.statics.findVerificationNumByEmail = function(email) {
 
 /* Function to prevent too much information from being returned on request when the response is the object */
 userSchema.methods.toJSON = function () {
-  return ld.pick(this.toObject(), ['_id', 'username', 'email', 'coins', 'rating', 'submissionNum', 'standing', 'memberSince', 'occupation', 'location', 'aboutMe', 'homepage'])
+  return ld.pick(this.toObject(), ['_id', 'username', 'email', 'coins', 'rating', 'ratingNum', 'submissionNum', 'standing', 'memberSince', 'occupation', 'location', 'aboutMe', 'homepage'])
 };
 
 /* Creating the user model from the schema and giving it to Mongoose */
