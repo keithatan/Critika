@@ -6,6 +6,7 @@ import {LoginComponent} from './auth/login/login.component';
 import { HomeComponent } from './home/home.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
 import { ProfileComponent } from './profile/profile.component';
+import { AdminComponent } from './admin/admin.component'
 
 
 
@@ -43,6 +44,11 @@ export const AppRoutes: Routes = [
         path: 'login',
         component: LoginComponent
         
+    },
+    {   
+        path: 'admin',
+        component: AdminComponent
+
     },
     {
         //404 error, leave this one as last route check
