@@ -83,16 +83,21 @@ router.post('/critique', authenticate, (req, res) => {
         User.findOneAndUpdate({ username: req.user.username },
             {
                 $push: {
-                    feedbackContributed: newFeedback._id,
+                    feedbackContributed: req.body.submissionID,
                 }
-            })
+            }).then((res) => {
+                newFeedback.save().then(() => {
+                    res.status(200).send(newFeedback)
+                }).catch((err) => {
+                    res.status(400).send(err);
+                });
+            }).catch((err) => {
+                res.status(400).send({ message: "Error adding feedback id" });
+                res.send(err);
+            });
 
         // Add to database 
-        newFeedback.save().then(() => {
-            res.status(200).send(newFeedback)
-        }).catch((err) => {
-            res.status(400).send(err);
-        });
+       
     })
 })
 /*
