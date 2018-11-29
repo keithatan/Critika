@@ -19,11 +19,21 @@ export class SignupComponent implements OnInit {
         this.signUpForm = this.formBuilder.group({
             username: ['', Validators.required],
             password: ['', [Validators.required, Validators.minLength(8)]],
+            confirmPassword: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
             securityanswer: ['', Validators.required],
             securityquestion: ["What is your mother's maiden name?"]
-        });
+        }, {validator: this.checkPasswords });
     }
+
+  checkPasswords(group: FormGroup) { // here we have the 'passwords' group
+    let pass = group.controls.password.value;
+    let confirmPass = group.controls.confirmPassword.value;
+
+    return pass === confirmPass ? null : { notSame: true }
+  }
+
+
     
     get form() { return this.signUpForm.controls }
 
