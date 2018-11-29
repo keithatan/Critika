@@ -49,7 +49,7 @@ export class SubmissionService{
 
     //get submission user can critique
     getAvailable(){
-        return this.http.get("http://localhost:5000/submission/available").toPromise();
+        return this.http.get("http://localhost:5000/submission/available-with-categories").toPromise();
     }
 
     //get user's submissions
