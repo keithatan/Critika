@@ -135,6 +135,17 @@ router.post("/add-comment", authenticate, (req, res) => {
         return;
     }
 
+    if(req.user.coins == 0){
+        res.status(400).json({ message: "You dont have enough coins" });
+        return;
+    }
+
+    User.findOneAndUpdate({username: req.user.username}, {
+        $inc: {
+            coins: -1,
+        }
+    })
+
     Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
         {
             $push: {
