@@ -22,6 +22,8 @@ export class SidenavComponent implements OnInit {
     
 
   ngOnInit() {
+    this.userAuthed = this.authService.getIsAuth();
+
     this.authListenerSubs = this.authService.getAuthStatus().subscribe(isAuthenticated =>{
       this.userAuthed = isAuthenticated;
     })
