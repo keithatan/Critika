@@ -30,13 +30,13 @@ export class AccountComponent implements OnInit {
     });
     this.changePasswordForm = this.formBuilder.group({
       password: ['', [Validators.required, Validators.minLength(8)]],
-      confirmPassowrd: ['']
+      confirmPassword: ['']
     }, { validator: this.checkPasswords });
   }
 
   checkPasswords(group: FormGroup) { // here we have the 'passwords' group
     let pass = group.controls.password.value;
-    let confirmPass = group.controls.confirmPassowrd.value;
+    let confirmPass = group.controls.confirmPassword.value;
 
     return pass === confirmPass ? null : { notSame: true }
   }
