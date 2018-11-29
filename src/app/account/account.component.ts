@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Account } from '../models/account.model'
 
@@ -17,7 +17,8 @@ export class AccountComponent implements OnInit {
   changeUsernameForm: FormGroup;
   changeEmailForm: FormGroup;
   changePasswordForm: FormGroup;
-  submitted: boolean = false;
+  submitted_username: boolean = false;
+  submitted_email:boolean = false;
   ngOnInit() {
     this.getAccountInfo()
     this.changeUsernameForm = this.formBuilder.group({
@@ -46,17 +47,25 @@ export class AccountComponent implements OnInit {
   }
 
   onSubmitEmail(form: NgForm) {
-    this.submitted = true;
-    console.log(form)
+    this.submitted_email = true;
+    this.submitted_username = false;
+    if (this.changeEmailForm.invalid) {
+      return;
+    }
+    console.log(form.value)
   }
 
   onSubmitUsername(form: NgForm) {
-    this.submitted = true;
-    console.log(form)
+    this.submitted_username = true;
+    this.submitted_email = false;
+    if (this.changeUsernameForm.invalid) {
+      return;
+    }
+    console.log(form.value)
   }
 
   onSubmitPassword(form: NgForm) {
-    this.submitted = true;
+    // this.submitted = true;
   }
 
 }
