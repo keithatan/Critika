@@ -35,8 +35,21 @@ export class ViewSubComponent implements OnInit {
   }
 }
 
+getChildEvent(event:string){
+  this.subService.getSubmissions().then((response) => {
+    this.sub= new Submission(response);
+    /*
+    const v = response["rating"];
+    console.log(v);
+    */
+    console.log(response);
+    console.log(this.sub)
+  })
+}
+
   ngOnInit() {
     
   }
+
 
 }

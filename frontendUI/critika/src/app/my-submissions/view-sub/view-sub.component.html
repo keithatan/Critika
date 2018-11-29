@@ -7,7 +7,7 @@
           <p *ngIf="sub.comments.length > 0">Comments: {{sub.comments}}</p>
           <p *ngIf="sub.comments.length == 0">There are currently no comments on this submission.</p>
           <button type="button" (click) = "renderEditSub(submission)" class="btn btn-secondary">Edit Submission</button>
-          <app-edit-sub [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'EditSub' "></app-edit-sub>
+          <app-edit-sub [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
 
     </mdb-card>
   </div>
