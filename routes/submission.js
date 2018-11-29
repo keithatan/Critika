@@ -273,12 +273,14 @@ router.get('/available-with-categories', authenticate, (req, res) => {
     Submission.find({ available: true }).then((subs) => {
         User.find({ username: req.user.username }).then((user) => {
             var userMap = {};
+            // console.log(subs)
             var categoriesContributed = user[0]['categoriesContributed']
             subs.forEach(function (withCat) {
-                if(categoriesContributed.includes(withCat.category)){
+                if(categoriesContributed.includes(withCat.category) && withCat.username != req.user.username){
                     userMap[withCat._id] = withCat
                 }
             });
+            console.log(userMap)
             res.send(userMap);
         })
 

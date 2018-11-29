@@ -27,8 +27,8 @@ router.get("/", (req, res) => {
  * Each user can only give one feedback
  */
 router.post('/critique', authenticate, (req, res) => {
-    if(!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID){
-        res.status(400).json({ message: "Report comment data is incomplete" + req.body.username + req.body.feedbackMessage});
+    if (!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID) {
+        res.status(400).json({ message: "Report comment data is incomplete" + req.body.username + req.body.feedbackMessage });
         return;
     }
 
@@ -43,99 +43,104 @@ router.post('/critique', authenticate, (req, res) => {
         critiquer: req.user.username
     });
 
-    Feedback.find({username: req.user.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID}).then((subs) => {
-        console.log(subs)
-        console.log(req.user.username)
+    Feedback.find({ username: req.user.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID }).then((subs) => {
+        // console.log(subs)
+        // console.log(req.user.username)
         var i;
-        for (i = 0; i < subs.length; i++){
-        if(req.user.username === subs[i].critiquer){
-            console.log(subs[i].critiquer)
-            res.status(401).json({ message: "You have already given feedback to this submission" });
+        for (i = 0; i < subs.length; i++) {
+            if (req.user.username === subs[i].critiquer) {
+                console.log(subs[i].critiquer)
+                res.status(401).json({ message: "You have already given feedback to this submission" });
+                return;
+            }
         }
-    }
-    }).catch((err) => {
-        res.status(400).json({ message: "Error finding feedback" });
-    })
+        /*we need to update submissions critique number*/
+        Submission.findOneAndUpdate({ _id: req.body.submissionID },
+            {
+                $inc: {
+                    numberOfCritiquesRecieved: 1
+                }
+            }).then(() => {
 
-    /*we need to update submissions critique number*/
-    Submission.findOneAndUpdate({ _id: req.body.submissionID },
-        {
-            $inc: {
-                numberOfCritiquesRecieved: 1
-            }
-        }).then(() => {
+            }).catch(() => {
+                res.status(400).send({ message: "Error adding coin to the user" });
+                res.send(err);
+            });
 
-        }).catch(() => {
-            res.status(400).send({ message: "Error adding coin to the user" });
-            res.send(err);
-        });
+        /*The person who critiques needs to get monies*/
+        User.findOneAndUpdate({ username: req.user.username },
+            {
+                $inc: {
+                    coins: 4,
+                }
+            }).then((res) => {
+                console.log('Found ' + res)
+            }).catch((err) => {
+                res.status(400).send({ message: "Error adding coin to the user" });
+                res.send(err);
+            });
+        console.log(subs)
+        User.findOneAndUpdate({ username: req.user.username },
+            {
+                $push: {
+                    feedbackContributed: newFeedback._id,
+                }
+            })
 
-    /*The person who critiques needs to get monies*/
-    User.findOneAndUpdate({ username: req.user.username },
-        {
-            $inc: {
-                coins: 1,
-            }
-        }).then((res) => {
-            console.log ('Found ' + res)
+        // Add to database 
+        newFeedback.save().then(() => {
+            res.status(200).send(newFeedback)
         }).catch((err) => {
-            res.status(400).send({ message: "Error adding coin to the user" });
-            res.send(err);
+            res.status(400).send(err);
         });
-
-    // Add to database 
-    newFeedback.save().then(() => {
-        res.status(200).send(newFeedback)
-    }).catch((err) => {
-        res.status(400).send(err);
-    });
+    })
 })
-
 /*
  * Rate feedback from 1-5 and update number of critiques received for submission
  * only the owner of this submission can do this
  */
 router.post('/rate-feedback', authenticate, (req, res) => {
-    if(!req.body  || !req.body.submissionID || !req.body.feedbackRating){
+    if (!req.body || !req.body.submissionID || !req.body.feedbackRating) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
-    Submission.find({submissionID: req.body.submissionID}).then((subs) => {
-        if(req.body.username != subs[0].username){
+    Submission.find({ submissionID: req.body.submissionID }).then((subs) => {
+        if (req.body.username != subs[0].username) {
             res.status(400).json({ message: "You are not the owner of this post to rate the feedback" });
             return;
         }
     })
 
-    Submission.findOneAndUpdate({submissionID:  req.body.submissionID}, 
+    Submission.findOneAndUpdate({ submissionID: req.body.submissionID },
         {
-            $set: 
+            $set:
             {
-                numberOfCritiquesRecieved: numberOfCritiquesRecieved+1,
+                numberOfCritiquesRecieved: numberOfCritiquesRecieved + 1,
             }
         }).catch((err) => {
             // console.log(err)
         })
-   
-    Feedback.findOneAndUpdate({submissionID:  req.body.submissionID}, 
+
+    Feedback.findOneAndUpdate({ submissionID: req.body.submissionID },
         {
-            $set: 
+            $set:
             {
                 feedbackRating: req.body.feedbackRating
             }
         }).then(() => {
-            res.status(200).send({message: "Feedback has been rated!"})
+            res.status(200).send({ message: "Feedback has been rated!" })
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
 })
 
+
 /*
  * Get all feedback for a given submission
  */
 router.get('/all-submission', authenticate, (req, res) => {
-    Feedback.find({submissionID: req.user.submissionid}).then((subs) => {
+    Feedback.find({ submissionID: req.user.submissionid }).then((subs) => {
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
@@ -146,8 +151,8 @@ router.get('/all-submission', authenticate, (req, res) => {
  * Get all feedback for a given submission
  */
 router.get('/all-user', authenticate, (req, res) => {
-    
-    Feedback.find({username: req.user.username}).then((subs) => {
+
+    Feedback.find({ username: req.user.username }).then((subs) => {
         //console.log(subs)
         res.send(subs)
     }).catch((err) => {
