@@ -40,12 +40,11 @@ export class EditProfileComponent implements OnInit {
       console.log(response);
       this.view = true;
       this.returnToParent.emit('reload')
-  },
-  (err) =>{
-    console.log(err)
-    // put a errror notify
-  })
-
+    },
+    (err) =>{
+      console.log(err)
+      // put a errror notify
+    })
   }
 
   ngOnInit() {

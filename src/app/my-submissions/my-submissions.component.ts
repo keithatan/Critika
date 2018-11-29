@@ -11,6 +11,7 @@ import { Observable } from 'rxjs';
 })
 export class MySubmissionsComponent implements OnInit {
   mySubmissions:Submission[];
+  chosenSubmission: Submission;
   renderComponent: string;
 
   edit: boolean;
@@ -59,10 +60,21 @@ export class MySubmissionsComponent implements OnInit {
     else{
       this.renderComponent = 'EditSub';
   }
+
     
     //this.Text = text
 
   }
+
+  renderViewSub(sub:Submission) {
+      this.chosenSubmission = sub;
+      this.renderComponent = 'ViewSub';
+  }
+  
+    
+    //this.Text = text
+
+
 
   ngOnInit() {
     this.subService.getSubmissions().then((data) =>{
