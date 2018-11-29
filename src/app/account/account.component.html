@@ -36,7 +36,7 @@
                         <div *ngIf="form_password.password.errors.minlength">Password must be at least 8 characters</div>
                         <div *ngIf="form_password.password.errors.required">Please Enter a Password</div>
                     </div>
-                    <input type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassowrd"
+                    <input type="password" placeholder="Confirm Password" class="form-control" formControlName="confirmPassword"
                         [ngClass]="{ 'is-invalid': submitted_password && changePasswordForm.hasError('notSame') }" />
                     <div *ngIf="submitted_password && changePasswordForm.hasError('notSame')" class="invalid-feedback">
                         <div *ngIf="changePasswordForm.hasError('notSame')">Passwords Do Not Match</div>
