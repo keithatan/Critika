@@ -1,0 +1,32 @@
+<div class="p-2 profile animated fadeInUp">
+    <mdb-card>
+        <mdb-card-body>
+            <p class="h4 mb-4">Edit Account Information</p>
+            <!-- Change Username -->
+            <div class="form-group">
+                <form (submit)="onSubmitUsername(g)" #g=ngForm [formGroup]="changeUsernameForm">
+                    <label>Current Username: {{username}}</label>
+                    <input type="text" class="form-control" placeholder="New Username"
+                        formControlName="username" [ngClass]="{ 'is-invalid': submitted_username && form_username.username.errors }" />
+                    <div *ngIf="submitted_username && form_username.username.errors" class="invalid-feedback">
+                        <div *ngIf="form_username.username.errors.required">Please Enter a New Username</div>
+                    </div>
+                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Username</button>
+                </form>
+            </div>
+            <!-- Change Email -->
+            <div class="form-group">
+                <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
+                    <label>Current Email: {{email}}</label>
+                    <input type="text" placeholder="New Email" class="form-control"
+                        formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
+                    <div *ngIf="submitted_email && form_mail.email.errors" class="invalid-feedback">
+                        <div *ngIf="form_mail.email.errors.email">Invalid Email</div>
+                        <div *ngIf="form_mail.email.errors.required">Please Enter an Email</div>
+                    </div>
+                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Email</button>
+                </form>
+            </div>
+        </mdb-card-body>
+    </mdb-card>
+</div>

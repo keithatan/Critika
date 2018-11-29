@@ -8,7 +8,7 @@ export class AuthInterceptor implements HttpInterceptor {
 
     }
     intercept(req: HttpRequest<any>, next: HttpHandler) {
-        const authToken = localStorage.getItem('token')
+        const authToken = this.authService.getToken();
         //this.authService.getToken();
         // console.log("Intercept")
         if (authToken) {
