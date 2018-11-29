@@ -39,7 +39,7 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
-    User.findOneAndUpdate({username: req.user}, {
+    User.findOneAndUpdate({username: req.user.username}, {
         $inc: {
             coins: -4,
         }
