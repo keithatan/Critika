@@ -109,9 +109,9 @@ router.post('/rate-feedback', authenticate, (req, res) => {
 
     Submission.findOneAndUpdate({submissionID:  req.body.submissionID}, 
         {
-            $set: 
+            $inc: 
             {
-                numberOfCritiquesRecieved: numberOfCritiquesRecieved+1,
+                numberOfCritiquesRecieved: 1,
             }
         }).catch((err) => {
             // console.log(err)
