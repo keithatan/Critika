@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpClient } from "@angular/common/http";
 import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Account } from '../models/account.model'
+import { AuthData } from '../auth/auth-data.model'
 
 @Component({
   selector: 'app-edit-account',
@@ -22,6 +23,7 @@ export class AccountComponent implements OnInit {
   submitted_email: boolean = false;
   submitted_password: boolean = false;
   submitted_security_question: boolean = false;
+  response: string = "NULL";
   questions = ["What is your mother's maiden name?", 'What is your favorite drink?', 'What elementary school did you attend?']
   ngOnInit() {
     this.getAccountInfo()
@@ -54,6 +56,8 @@ export class AccountComponent implements OnInit {
   get form_password() { return this.changePasswordForm.controls }
   get form_security_question() { return this.changeSecurityQuestionForm.controls }
 
+  get response_msg() { return this.response }
+
   getAccountInfo() {
     this.http.get("http://localhost:5000/user/account").subscribe(response => {
       this.account = new Account(response);
@@ -73,6 +77,22 @@ export class AccountComponent implements OnInit {
       return;
     }
     console.log(form.value)
+
+    // Post New Changes
+    const auth: AuthData = { email: form.value.email, username: "", password: "", securityquestionanswer: "", securityquestion: "" }
+    this.http.post("http://localhost:5000/user/change-email", auth)
+      .subscribe(response => {
+        this.response = "complete_email";
+      },
+        error => {
+          console.log(error)
+          if (error.error.message == "User data is incomplete") {
+            this.response = "incomplete";
+          }
+          else {
+            this.response = "fatalError";
+          }
+        });
   }
 
   // onSubmitUsername(form: NgForm) {
@@ -92,16 +112,47 @@ export class AccountComponent implements OnInit {
       return;
     }
     console.log(form.value)
+
+    // Post New Changes
+    const auth: AuthData = { email: "", username: "", password: form.value.password, securityquestionanswer: "", securityquestion: "" }
+    this.http.post("http://localhost:5000/user/change-password", auth)
+      .subscribe(response => {
+        this.response = "complete_password";
+      },
+        error => {
+          console.log(error)
+          this.response = "fatalError";
+        });
   }
 
- onSubmitSecurityQuestion(form: NgForm) {
+  onSubmitSecurityQuestion(form: NgForm) {
     this.submitted_security_question = true;
     this.submitted_email = false;
     this.submitted_password = false;
     if (this.changeSecurityQuestionForm.invalid) {
       return;
     }
-    console.log(form.value)
+    console.log(form.value.securityanswer)
+    console.log(form.value.securityquestion)
+
+    // Post New Changes
+    const auth: AuthData = { email: "", username: "", password: "", securityquestionanswer: form.value.securityanswer, securityquestion: form.value.securityquestion }
+    this.http.post("http://localhost:5000/user/change-security", auth)
+      .subscribe(response => {
+        this.response = "complete_security";
+      },
+        error => {
+          console.log(error)
+          if (error.error.message == "User data is incomplete") {
+            this.response = "incomplete";
+          }
+          else if (error.error.message == "Error changing security question and answer") {
+            this.response = "fatalError";
+          }
+          else {
+            this.response = "fatalError";
+          }
+        });
   }
 
 }

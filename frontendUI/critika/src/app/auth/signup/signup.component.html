@@ -71,6 +71,10 @@
         <a routerLink="/login">Login</a>
       </p>
 
+      <div *ngIf="response_register_msg === 'duplicate'" class="alert alert-danger" role="alert">
+        Form is Incomplete
+      </div>
+
       <!-- Info Toasts 
       <div *ngIf="getIncompleteForm() === 'incomplete'" class="alert alert-danger" role="alert">
           Form is Incomplete
@@ -96,4 +100,3 @@
     </mdb-card-body>
   </mdb-card>
 </form>
- 
