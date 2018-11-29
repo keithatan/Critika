@@ -52,4 +52,12 @@ export class ProfileService {
         }
         return this.http.post("http://localhost:5000/user/restore-user", param);
     }
+
+    AdminUser(user: string) {
+
+        const param:Object = {
+            username: user
+        }
+        return this.http.post("http://localhost:5000/user/become-admin", param);
+    }
 }

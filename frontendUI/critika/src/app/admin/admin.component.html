@@ -62,9 +62,7 @@
                             <h4 id="myModalLabel1">Ban User</h4>
                         </div>
                         <div class="modal-body">
-
-                            <label for="form1" class="">User:</label>
-                            <input mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="UserToBeBanned">
+                            <input mdbInputDirective type="text" placeholder="User" id="form1" class="form-control" [(ngModel)]="UserToBeBanned">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
@@ -92,8 +90,7 @@
                         </div>
                         <div class="modal-body">
 
-                            <label for="form1" class="">User:</label>
-                            <input mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="UserToBeRestored">
+                            <input mdbInputDirective placeholder="User" type="text" id="form1" class="form-control" [(ngModel)]="UserToBeRestored">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
@@ -120,12 +117,12 @@
                             <h4 id="myModalLabel3">User:</h4>
                         </div>
                         <div class="modal-body">
-                            <input mdbInputDirective type="text" id="form1" placeholder="what" class="form-control">
+                            <input mdbInputDirective type="text" id="form1" placeholder="User" class="form-control" [(ngModel)]="UserToBeAdmin">
                         </div>
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
+                            <button (click)="AdminEm()" (click)="basicModal.hide()" type="button" mdbBtn color="primary" class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
                     </div>
