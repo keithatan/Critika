@@ -33,7 +33,6 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { AccountComponent } from './account/account.component';
 import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import {EditAccountComponent} from './edit-account/edit-account.component'
 
 
 @NgModule({
@@ -54,7 +53,6 @@ import {EditAccountComponent} from './edit-account/edit-account.component'
     CritiqueFormComponent,
     SearchPipe,
     EditProfileComponent,
-    EditAccountComponent,
     FeedbackComponent,
     AccountComponent,
     RateFeedbackComponent,
