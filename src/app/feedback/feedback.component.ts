@@ -8,11 +8,12 @@ import { Feedback } from '../models/feedback.model';
   styleUrls: ['./feedback.component.scss']
 })
 export class FeedbackComponent implements OnInit {
-  tableElements = ['Title', 'User', 'What went well', 'What went wrong', 'What could be improved', 'Rate a Feedback'];
+  tableElements = ['Submission Title', 'User', 'What went well', 'What went wrong', 'What could be improved', 'Rate a Feedback'];
   myFeedbacks: Feedback[];
   renderComponent: String = "";
   chosen: Feedback;
   toRate: boolean;
+  isEmpty: boolean = true;
   // public Id: Number;
   // public rateNum: Number;
 
@@ -77,11 +78,19 @@ export class FeedbackComponent implements OnInit {
 
       this.myFeedbacks = new Array(response[0].length)
 
+      if (response[0].length > 0) {
+        this.isEmpty == false;
+      }
+      else {
+        this.isEmpty == true;
+      }
+
       for (i = 0; i < response[0].length; i++) {
         let feedback = new Feedback(response[0][i])
         this.myFeedbacks[i] = feedback;
         // console.log(feedback);
       }
+    
       console.log(this.myFeedbacks);
     });
   }
