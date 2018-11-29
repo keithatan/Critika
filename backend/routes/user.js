@@ -100,7 +100,7 @@ router.get("/account", authenticate, (req, res) => {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
         return;
     }
-
+    console.log(req.user)
     res.status(200).send(req.user);
 });
 
