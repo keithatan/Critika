@@ -18,6 +18,10 @@ export class ViewSubComponent implements OnInit {
     this.edit = false;
   }
 
+  sendReport(sub:Submission, commentMessage:string, comment:Object){
+    this.subService.reportComment(sub.submissionName, commentMessage, comment);
+  }
+
   renderEditSub(sub:Submission) {
     if (this.edit == false) {
       this.edit = true;

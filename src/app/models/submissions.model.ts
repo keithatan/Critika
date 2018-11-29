@@ -10,7 +10,6 @@ export class Submission{
     submissionID: string;
     comments: Object[];
     skillLevel: string;
-
     constructor(response:any){
         this.submissionName = response.submissionName;
         this.submissionText = response.submissionText;

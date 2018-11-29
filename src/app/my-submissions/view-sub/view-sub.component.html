@@ -31,7 +31,7 @@
                           <p>{{c.message}}</p>
                         </td>
                         <td>
-                            <button type="button" class="btn btn-secondary">REPORT COMMENT</button>
+                            <button type="button" (click) = "sendReport(sub, c.message,c)" class="btn btn-secondary">REPORT COMMENT</button>
                         </td>
                       </tr>
                     </tbody>
@@ -42,37 +42,7 @@
           <h1>Comments</h1>
           <p >There are currently no comments on this submission.</p>
           </div>
-          <div *ngIf="sub.comments.length > 0">
-              <h1>Feedback</h1>
-              <ul>
-                <table class="table table-bordered table-striped table-wrapper-scroll-y">
-                    <thead>
-                        <tr>
-                          <th scope="col">User</th>
-                          <th>Comment</th>
-                          <th>Report</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr *ngFor="let c of sub.comments">
-                          <td>
-                            <p>{{c.user}}</p>
-                          </td>
-                          <td>
-                            <p>{{c.message}}</p>
-                          </td>
-                          <td>
-                              <button type="button" class="btn btn-secondary">REPORT COMMENT</button>
-                          </td>
-                        </tr>
-                      </tbody>
-                </table>
-              </ul>
-            </div>
-            <div *ngIf="sub.comments.length == 0">
-            <h1>Feedback</h1>
-            <p >There is currently no feedback on this submission.</p>
-        </div>
+         
           <button type="button" (click) = "renderEditSub(submission)" class="btn btn-secondary">Edit Submission</button>
 
     </mdb-card>
