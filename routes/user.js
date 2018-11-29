@@ -350,16 +350,14 @@ router.post("/ban-user", authenticate, (req, res) => {
 
         var randomName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 
-        User.findByLogin(req.body.username, req.body.password).then((user) => {
+        
             User.findOneAndUpdate({ username: req.body.usernameToBeBanned }, { $set: { recoveryUsername: req.body.usernameToBeBanned, username: randomName, standing: "banned" } })
                 .then(() => {
                     res.status(200).send({ message: "User is now banned" })
                     /* Delete user from database or username to list of banned names? */
                     /* I think we should just delete the user, and instead store the email in an array of banned emails */
                 })
-        }).catch((err) => {
-            res.status(400).send({ message: "Error Banning, Username or Password is incorrect" });
-        });
+        
     }
 })
 
