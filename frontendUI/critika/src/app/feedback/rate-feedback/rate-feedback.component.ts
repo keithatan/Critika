@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Feedback } from '../../models/feedback.model';
+import { FeedbackService } from '../../services/feedback.service';
 
 @Component({
   selector: 'app-rate-feedback',
@@ -6,12 +8,32 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./rate-feedback.component.scss']
 })
 export class RateFeedbackComponent implements OnInit {
+   @Input('childFeedback') childFeedback: Feedback;
+   @Output() returnToParent = new EventEmitter<string>();
 
+  ratings = [ 1, 2, 3, 4, 5 ];
   showAllFeedbacks: boolean;
   renderComponent:String = "";
+  feedbackRating: Number = 0;
+  // submissionId = this.childFeedback.submissionID;
 
-  constructor() { 
+  constructor(private rService:FeedbackService) { 
     this.showAllFeedbacks = false;
+  }
+
+  submitRate() {
+    console.log(this.childFeedback)
+    this.rService.rateFeedback(this.feedbackRating, this.childFeedback.submissionID)
+    .subscribe ((response) => {
+      console.log(response);
+      this.returnToParent.emit('reload')
+      
+  },
+  (err) =>{
+    console.log(err)
+    // put a errror notify
+  })
+
   }
 
   renderViewFeedback() {
@@ -29,6 +51,7 @@ export class RateFeedbackComponent implements OnInit {
   
   
   ngOnInit() {
+    
   }
 
 }
