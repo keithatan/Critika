@@ -67,7 +67,8 @@ router.post("/register", (req, res) => {
         security_question: req.body.securityquestion,
         security_question_answer: req.body.securityquestionanswer,
         verified: false,
-        verificationNum: verificatonCode
+        verificationNum: verificatonCode,
+        recoveryUsername: req.body.username,
     });
 
     var newMemberEmailBody = "Dear " + req.body.username +
