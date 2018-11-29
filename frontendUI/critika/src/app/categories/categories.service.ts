@@ -25,6 +25,7 @@ export class CategoriesService {
         return this.http.get<Object>("http://localhost:5000/category/get-all-category").toPromise();
     }
 
+    
     getAllSubmissionsInCategory(category) {
 
         const requestOptions = {

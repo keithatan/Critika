@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { SubmissionService } from '../services/submissions.service'
 import { Submission } from '../models/submissions.model'
 import { timer } from 'rxjs';
+import { ProfileService } from '../services/profile.service';
+import { UserSearchPipe } from '../UserFilter.pipe';
+import { Profile } from '../models/profile.model';
 
 @Component({
   selector: 'app-home',
@@ -9,15 +12,17 @@ import { timer } from 'rxjs';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tableElements = ['Title', 'Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
-  possibleSubs: Submission[];
-  chosen: Submission;
+  tableElements = ['Title','Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
+  possibleSubs:Submission[];
+  chosen:Submission;
+  displayUser:Profile;
   TWENTY_FOUR_HOURS = 86400000;
   ONE_MINUTE = 60000;
   private timer;
+  chosenUser:string;
 
-  constructor(public subService: SubmissionService) {
-    this.renderComponent = "";
+  constructor(public subService:SubmissionService, private proService:ProfileService) {
+    this.renderComponent = "dash";
     this.timer;
   }
   renderComponent: String;
@@ -40,8 +45,9 @@ export class HomeComponent implements OnInit {
   getChildEvent(str: string) {
     this.renderComponent = str;
     this.displayAvailable();
+  }
 
-  } t
+  
 
   displayAvailable() {
     this.subService.getAvailable().then((submissions) => {
@@ -81,8 +87,6 @@ export class HomeComponent implements OnInit {
       setTimeout(this.checkAvailable.bind(this), this.ONE_MINUTE);
     })
   }
-
-  findUser(user:string){}
 
   checkAvailable(){
     let i:number;

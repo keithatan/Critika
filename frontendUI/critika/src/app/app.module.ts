@@ -34,6 +34,7 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { AccountComponent } from './account/account.component';
 import { RateFeedbackComponent } from './feedback/rate-feedback/rate-feedback.component';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { UserProfileComponent } from './home/user-profile/user-profile.component';
 
 
 @NgModule({
@@ -58,7 +59,8 @@ import { SidenavComponent } from './sidenav/sidenav.component';
     AccountComponent,
     RateFeedbackComponent,
     SidenavComponent,
-    UserSearchPipe
+    UserSearchPipe,
+    UserProfileComponent
   ],
   imports: [
     BrowserModule,
