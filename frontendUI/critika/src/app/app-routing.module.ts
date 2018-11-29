@@ -9,8 +9,8 @@ import { ProfileComponent } from './profile/profile.component';
 import { AdminComponent } from './admin/admin.component'
 import { Component } from '@angular/core';
 import { FeedbackComponent } from './feedback/feedback.component';
-import { EditAccountComponent } from './edit-account/edit-account.component';
 import { AuthGuard } from './auth/auth-guard';
+import { AccountComponent } from './account/account.component';
 
 const AppRoutes: Routes = [
   {
@@ -21,7 +21,7 @@ const AppRoutes: Routes = [
   },
   {   
       path: 'account',
-      component: EditAccountComponent,
+      component: AccountComponent,
       canActivate: [AuthGuard]
 
   },
