@@ -22,7 +22,7 @@
           <td *ngIf="f.feedbackRating == 0">
             <p>Not Yet Rated</p>
             <app-rate-feedback [childFeedback]="chosen" (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
-            <button type="button" (click) = "renderRateFeedback(f)" class="btn btn-secondary">Rate Feedback </button>
+            <button type="button" (click) = "renderRateFeedback(f)" class="btn btn-secondary">Rate</button>
           </td>
           
           <td *ngIf="f.feedbackRating != 0">
