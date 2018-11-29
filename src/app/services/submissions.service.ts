@@ -23,6 +23,9 @@ export class SubmissionService{
         .subscribe(response => {
             console.log(response)
             
+        },
+        (err)=>{
+            console.log(err);
         });
 
 

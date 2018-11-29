@@ -1,15 +1,15 @@
 import { Component, OnInit } from '@angular/core';
-import { HttpClient, HttpHeaders } from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import { NgForm, FormGroup, FormBuilder, Validators } from "@angular/forms";
 import { Account } from '../models/account.model'
 
 @Component({
   selector: 'app-edit-account',
-  templateUrl: './edit-account.component.html',
-  styleUrls: ['./edit-account.component.scss']
+  templateUrl: './account.component.html',
+  styleUrls: ['./account.component.scss']
 })
 
-export class EditAccountComponent implements OnInit {
+export class AccountComponent implements OnInit {
   constructor(private http: HttpClient, private formBuilder: FormBuilder) { }
   username: string;
   email: string;
@@ -17,7 +17,8 @@ export class EditAccountComponent implements OnInit {
   changeUsernameForm: FormGroup;
   changeEmailForm: FormGroup;
   changePasswordForm: FormGroup;
-  submitted: boolean = false;
+  submitted_username: boolean = false;
+  submitted_email:boolean = false;
   ngOnInit() {
     this.getAccountInfo()
     this.changeUsernameForm = this.formBuilder.group({
@@ -46,17 +47,25 @@ export class EditAccountComponent implements OnInit {
   }
 
   onSubmitEmail(form: NgForm) {
-    this.submitted = true;
-    console.log(form)
+    this.submitted_email = true;
+    this.submitted_username = false;
+    if (this.changeEmailForm.invalid) {
+      return;
+    }
+    console.log(form.value)
   }
 
   onSubmitUsername(form: NgForm) {
-    this.submitted = true;
-    console.log(form)
+    this.submitted_username = true;
+    this.submitted_email = false;
+    if (this.changeUsernameForm.invalid) {
+      return;
+    }
+    console.log(form.value)
   }
 
   onSubmitPassword(form: NgForm) {
-    this.submitted = true;
+    // this.submitted = true;
   }
 
 }
