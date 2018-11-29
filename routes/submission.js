@@ -34,6 +34,17 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
+    if(req.user.coins < 4){
+        res.status(400).json({ message: "You dont have enough coins" });
+        return;
+    }
+
+    User.findOneAndUpdate({username: req.user}, {
+        $inc: {
+            coins: -4,
+        }
+    })
+
     if (req.body.category) {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             if (resp == null) {
