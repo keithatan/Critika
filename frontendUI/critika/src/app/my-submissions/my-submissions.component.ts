@@ -95,6 +95,7 @@ export class MySubmissionsComponent implements OnInit {
   }
 
   getChildEvent(event:string){
+    this.renderComponent = '';
     this.subService.getSubmissions().then((data) =>{
       let i:number;
 
