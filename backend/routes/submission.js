@@ -139,7 +139,7 @@ router.post("/edit", authenticate, (req, res) => {
  */
 router.post("/add-comment", authenticate, (req, res) => {
 
-    if (!req.body.comment || !req.body.submissionName) {
+    if (!req.body.comment || !req.body.submissionID) {
         res.status(400).json({ message: "Comment data is incomplete" });
         return;
     }
@@ -149,28 +149,29 @@ router.post("/add-comment", authenticate, (req, res) => {
         return;
     }
 
-    User.findOneAndUpdate({ username: req.user.username }, {
-        $inc: {
-            coins: 1,
-        }
-    })
 
-    Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
+    Submission.findOneAndUpdate({_id: req.body.submissionID },
         {
             $push: {
-                'comments': {
+                comments: {
                     user: req.user.username,
                     message: req.body.comment,
                     reported: false,
                     reportedMessage: '',
                 }
             }
-        }).then(() => {
-            res.status(200).send({ message: 'Comment successfully added!' })
+        }).then((sub) => {
+           
         }).catch((err) => {
             res.status(400).send({ message: "Error changing information" });
             res.send(err);
         })
+        User.findOneAndUpdate({ username: req.user.username }, {
+            $inc: {
+                coins: 1,
+            }
+        })
+        res.status(200).send({ message: 'Comment successfully added!' })
 })
 
 /**
@@ -205,26 +206,43 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
-    if (!req.body.commentID || !req.body.submissionName || !req.body.reportedMessage) {
+    if (!req.body.commentID || !req.body.submissionID || !req.body.reportedMessage) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
 
-    Submission.findOneAndUpdate({ comments: req.body.commentID },
-        {
-            $push: {
-                'comments': {
-                    reportedMessage: req.body.reportedMessage,
-                    reported: true,
-                }
-            },
-        }).then(() => {
-            res.status(200).send({ message: 'Comment successfully reported' })
-        }).catch((err) => {
-            res.status(400).send({ message: "Error reporting comment" });
-            console.log(err)
-            res.send(err);
-        })
+    //get old comment array
+    //loop through and find the one that matches
+    //update the total array
+    //set comments to new comments
+    Submission.findOne({_id: req.body.submissionID }).then((com) => {
+        var i  = 0;
+        // console.log(com.comments)
+        for(i = 0; i < com.comments.length; i++){
+            // console.log(com.comments[i])
+            if(com.comments[i]._id == req.body.commentID){
+                com.comments[i].reported = true
+                com.comments[i].reportedMessage = req.body.reportedMessage
+                break;
+                // console.log(com.comments[i])
+            }
+        }
+        console.log(com.comments)
+        var temp = com.comments
+        console.log(temp)
+        Submission.findOneAndUpdate({ _id: req.body.submissionID },
+            {
+                $set: {
+                    'comments': temp
+                },
+            }).then(() => {
+                res.status(200).send({ message: 'Comment successfully reported' })
+            }).catch((err) => {
+                res.status(400).send({ message: "Error reporting comment" });
+                console.log(err)
+                res.send(err);
+            })
+    })
 })
 
 /*
