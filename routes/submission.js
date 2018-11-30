@@ -254,7 +254,8 @@ router.get('/all-reported', authenticate, (req, res) => {
         return
     }
 
-    Submission.find({ comments: { reported: true } }).then((subs) => {
+    Submission.find({ 'comments': { reported: true } }).then((subs) => {
+        console.log(subs)
         res.status(200).send(subs)
         return;
     }).catch((err) => {
