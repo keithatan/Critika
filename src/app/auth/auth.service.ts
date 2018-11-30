@@ -45,12 +45,12 @@ export class AuthService {
 
     registerUser(email: string, username: string, password: string, securityquestion: string, securityanswer: string) {
         const auth: AuthData = { email: email, username: username, password: password, securityquestionanswer: securityanswer, securityquestion: securityquestion }
-        return this.http.post<Object>("http://localhost:5000/user/register", auth).toPromise()
+        return this.http.post<Object>("https://critika-backend.herokuapp.com/user/register", auth).toPromise()
     }
 
     login(username: string, password: string) {
         const auth: AuthData = { username: username, password: password, securityquestionanswer: "", securityquestion: "", email: "" }
-        this.http.post("http://localhost:5000/user/login", auth, httpOptions)
+        this.http.post("https://critika-backend.herokuapp.com/user/login", auth, httpOptions)
             .subscribe(response => {
                 const token = response.headers.get('token');
                 this.token = token
