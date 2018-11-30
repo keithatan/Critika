@@ -100,7 +100,7 @@ router.get("/account", authenticate, (req, res) => {
         res.status(400).send({ message: "This account has been banned due to violation of conduct" })
         return;
     }
-    console.log(req.user)
+    // console.log(req.user)
     res.status(200).send(req.user);
 });
 
@@ -113,7 +113,7 @@ router.get("/test", (req, res) => {
  */
 router.post("/login", (req, res) => {
     // check for username and password
-    console.log("" + req.body.username + " " + req.body.password)
+    // console.log("" + req.body.username + " " + req.body.password)
     if (req.body.username && req.body.password) {
 
         User.findByLogin(req.body.username, req.body.password).then((user) => {
@@ -130,7 +130,7 @@ router.post("/login", (req, res) => {
                 res.header('token', token).send(user);
             });
         }).catch((err) => {
-            console.log(user)
+            // console.log(err)
             res.status(401).send({ message: "Error Loging in, Username or Password is incorrect" });
         });
     }
@@ -269,8 +269,9 @@ router.post("/profile", authenticate, (req, res) => {
 })
 
 /**
+ * DEPRECIATED. ROUTE NOT IN USE
  * Create/Update Rating 
- */
+ *
 router.post("/rating", authenticate, (req, res) => {
     if (!req.body || !req.body.rating || !req.body.recuser) {
         res.status(400).send({ message: "User data is incomplete" });
@@ -291,16 +292,15 @@ router.post("/rating", authenticate, (req, res) => {
             }).then(() => {
                 res.status(200).send({ message: 'Rating successfully updated' })
             }).catch((err) => {
-                res.status(400).send({ message: "Error changing rating" });
                 console.log(err)
+                res.status(400).send({ message: "Error changing rating" });
             })
     }).catch((err) => {
         res.status(400).send(err);
-    })
-
-
+        })
 
 });
+*/
 
 /**
  * Add coins to user
@@ -468,9 +468,10 @@ router.post("/change-password", authenticate, (req, res) => {
     var newPassword = req.body.password;
 
     encryptPassword(newPassword).then(encryptedPassword => {
-        console.log("encrypt: " + encryptedPassword)
+        // console.log("encrypt: " + encryptedPassword)
         User.findOneAndUpdate({ username: username }, { $set: { password: encryptedPassword } }).then(() => {
-            console.log("passwd set")
+            // console.log("passwd set")
+            res.status(200).send({message: "Password changed!"})
         }).catch((err) => {
             res.status(400).send({ message: "New password not set." });
             res.send(err);
@@ -506,7 +507,7 @@ router.post("/become-admin", authenticate, (req, res) => {
  */
 router.post("/reset-password-email", (req, res) => {
 
-    if (!req.body || !req.body.email || !req.body.security_question || !req.body.security_question_answer) {
+    if (!req.body || !req.body.email || !req.body.securityquestion || !req.body.securityquestionanswer) {
         res.status(400).send({ message: "Reset information is incomplete" });
         return;
     }
@@ -519,8 +520,8 @@ router.post("/reset-password-email", (req, res) => {
             var email_body = "Dear " + usr.email + ", \n\nOur records indicate that you have requested a password " +
                 "reset. Your new temporary password is:\n\n" +
                 tempPassword + "\n\nSincerely, \n\nThe Critika Team";
-            if (usr.security_question == req.body.security_question) {
-                if (usr.security_question_answer.toUpperCase() !== req.body.security_question_answer.toUpperCase()) {
+            if (usr.security_question == req.body.securityquestion) {
+                if (usr.security_question_answer.toUpperCase() !== req.body.securityquestionanswer.toUpperCase()) {
                     res.status(400).send({ message: "Security question answer does not match." });
                     return;
                 }

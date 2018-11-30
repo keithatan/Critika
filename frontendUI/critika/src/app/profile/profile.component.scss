@@ -1,9 +1,21 @@
 .card {
     //max-width: 50%;
     margin: 20px;
+    
 }
 
-.about-me-card {
+.title {
+    background:  rgb(242, 168, 166);
+    padding: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+.content {
+    font-size: 20px;
+    text-align: center;
+    padding: 5px 15px;
+  
 }
 
 .all-cards {
@@ -13,3 +25,4 @@
 .no{
     padding: 0rem !important
 }
+

@@ -1,0 +1,40 @@
+<div class="p-2 profile animated fadeInUp">
+    <mdb-card>
+        <mdb-card-body>
+            <p class="h3 mb-4">Verify Email</p>
+            <!-- Verify Account -->
+            <div class="form-group">
+                <form (submit)="onVerifyAccount(f)" #f=ngForm [formGroup]="verifyAccountForm">
+                    <label>Email</label>
+                    <input type="text" placeholder="Email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted && form.email.errors }" />
+                    <div *ngIf="submitted && form.email.errors" class="invalid-feedback">
+                        <div *ngIf="form.email.errors.email">Invalid Email</div>
+                        <div *ngIf="form.email.errors.required">Please Enter an Email</div>
+                    </div>
+                    <label>Verification Number</label>
+                    <input type="text" placeholder="Verification Number" class="form-control" formControlName="number"
+                        [ngClass]="{ 'is-invalid': submitted && form.number.errors }" />
+                    <div *ngIf="submitted && form.number.errors" class="invalid-feedback">
+                        <div *ngIf="form.number.errors.required">Please Enter the Verification Number Found in your
+                            Email</div>
+                    </div>
+                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Verify Account</button>
+                </form>
+            </div>
+            <!-- Alert Toasts -->
+            <div *ngIf="response_msg === 'complete'" class="alert alert-success" role="alert">
+                Account Successfully Verified!
+            </div>
+            <div *ngIf="response_msg === 'noMatch'" class="alert alert-danger" role="alert">
+                Verification Number Does Not Match
+            </div>
+            <div *ngIf="response_msg === 'noEmail'" class="alert alert-danger" role="alert">
+                Email Does Not Match Our Records
+            </div>
+            <div *ngIf="response_msg === 'fatalError'" class="alert alert-danger" role="alert">
+                Fatal Error. Please Try Again Later
+            </div>
+
+        </mdb-card-body>
+    </mdb-card>
+</div>

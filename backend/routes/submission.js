@@ -29,7 +29,7 @@ router.get("/", (req, res) => {
  */
 router.post("/add", authenticate, (req, res) => {
 
-    if (!req.body.category || !req.body.submissionName || !req.body.submissionText) {
+    if (!req.body.category || !req.body.submissionName || !req.body.submissionText || !req.body.submissionDescription || !req.body.submissionLink || !req.body.submissionSkillLevel) {
         res.status(400).json({ message: "Submission data is incomplete" });
         return;
     }
@@ -57,6 +57,9 @@ router.post("/add", authenticate, (req, res) => {
                     category: req.body.category,
                     submissionName: req.body.submissionName,
                     submissionText: req.body.submissionText,
+                    submissionDescription: req.body.submissionDescription,
+                    submissionLink: req.body.submissionLink,
+                    submissionSkillLevel: req.body.submissionSkillLevel,
                     username: req.user.username,
                     available: true,
                     /*category: req.body.category,*/
@@ -115,7 +118,9 @@ router.post("/edit", authenticate, (req, res) => {
     Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
         {
             $set: {
-                submissionText: req.body.submissionText
+                submissionText: req.body.submissionText,
+                submissionDescription: req.body.submissionDescription,
+                submissionLink: req.body.submissionLink
             }
         }).then(() => {
             res.status(200).send({ message: 'Submission information successfully updated!' })
@@ -142,7 +147,7 @@ router.post("/add-comment", authenticate, (req, res) => {
 
     User.findOneAndUpdate({username: req.user.username}, {
         $inc: {
-            coins: -1,
+            coins: 1,
         }
     })
 
@@ -151,7 +156,9 @@ router.post("/add-comment", authenticate, (req, res) => {
             $push: {
                 'comments': {
                     user: req.user.username,
-                    message: req.body.comment
+                    message: req.body.comment,
+                    reported: false,
+                    reportedMessage: '',
                 }
             }
         }).then(() => {
@@ -167,19 +174,19 @@ router.post("/add-comment", authenticate, (req, res) => {
  */
 router.post("/remove", authenticate, (req, res) => {
 
-    if (!req.body.submissionName) {
+    if (!req.body.submissionID) {
         res.status(400).json({ message: "No submission data" });
         return;
     }
 
     User.findOneAndUpdate({ username: req.user.username },
         {
-            $set: {
-                submissionNum: req.user.submissionNum - 1
+            $inc: {
+                submissionNum: -1,
             }
         }).then(() => {
             Submission.remove({
-                submissionName: req.body.submissionName
+                _id: req.body.submissionID
             }).then(() =>
                 res.status(200).send({ message: 'User information successfully updated!' })
             )
@@ -194,14 +201,18 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
+<<<<<<< HEAD
     if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage) {
+=======
+    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage ) {
+>>>>>>> 06e94f819b67a8db49e2eab0491ea93e5007ddfc
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
 
     Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
         {
-            $set: {
+            $push: {
                 'comments': {
                     reportedMessage: req.body.reportedMessage,
                     reported: true,

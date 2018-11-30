@@ -30,7 +30,7 @@
         <div class="d-flex justify-content-around">
           <div>
             <!-- Forgot password -->
-            <a href="">Forgot password?</a>
+            <a href="/forgot">Forgot password?</a>
           </div>
         </div>
 
@@ -39,13 +39,21 @@
 
         <!-- Register -->
         <p>Not a member?
-          <a routerLink="">Register</a>
+          <a routerLink="/register">Register</a>
         </p>
 
         <div *ngIf="response_msg === 'failed' " class="alert alert-danger" role="alert">
           Username or Password is Incorrect
         </div>
-        <div *ngIf="response_msg === 'verify' " class="alert alert-info" role="alert">
+        <!-- <div *ngIf="response_msg === 'verify' " class="alert alert-info" role="alert">
+          User Account Still Needs to Be Verified. Please Check your Email for your Verification Code.
+        </div> -->
+
+
+        <div *ngIf="response_msg === 'verify'" #alert class="alert alert-info alert-dismissible fade show" role="alert">
+          <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+            <span aria-hidden="true">&times;</span>
+          </button>
           User Account Still Needs to Be Verified. Please Check your Email for your Verification Code.
         </div>
       </form>

@@ -1,81 +1,142 @@
-<div *ngIf = "edit == false" class="all-cards">
-        <div class="d-flex flex-row">
-                <div class="p-2 no">
-                        <div class="d-flex flex-column">
-                                <div class="p-2 no"> <mdb-card class="about-me-card">
-                                        <mdb-card-body class="about-me-card">
-                                            <h4>About Me</h4>
-                                            <h2 *ngIf="profile"> {{profile.aboutMe}} </h2>
-                                
-                                            <h4>Homepage</h4>
-                                            <h2 *ngIf="profile"> {{profile.homepage}} </h2>
-                                
-                                            <h4>Location</h4>
-                                            <h2 *ngIf="profile"> {{profile.location}} </h2>
-                                
-                                            <h4>Occupation</h4>
-                                            <h2 *ngIf="profile">  {{profile.occupation}} </h2>
-                                        </mdb-card-body>
-                                    </mdb-card>
-                                </div>
-                                <div class="p-2 no">
-                                        <mdb-card class="card">
-                                                <mdb-card-body>
-                                                    <h4>Coins</h4>
-                                                    <h2 *ngIf="profile"> {{profile.coins}}</h2>
-                                                </mdb-card-body>
-                                        </mdb-card>
-                                </div>  
-                    
-                            </div>
-                </div>
-                <div class="p-2 no">
-                        <div class="d-flex flex-column">
-                                <div class="p-2 no"> 
-                                        <mdb-card class="card">
-                                                <mdb-card-body>
-                                                    <h4>Critika Rating</h4>
-                                                    <h2 *ngIf="profile && r > 0"> {{r}}/5</h2>
-                                                    <h2 *ngIf="profile && r == 0"> Not yet rated</h2>
-                                                </mdb-card-body>
-                                            </mdb-card>
-                                </div>
-                                <div class="p-2 no">
-                                        <mdb-card>
-                                                <mdb-card-body>
-                                                    <h4>Member Since:</h4>
-                                                    <h2 *ngIf="profile"> {{profile.memberSince.substring(0,10)}}</h2>
-                                                </mdb-card-body>
-                                            </mdb-card>
-                                        
-                                </div>  
-                                <div class="p-2 no">
-                                        <mdb-card class="card">
-                                                <mdb-card-body>
-                                                    <h4>Total Number of Submissions</h4>
-                                                    <h2 *ngIf="profile"> {{profile.submissionNum}}</h2>
-                                                </mdb-card-body>
-                                            </mdb-card>
-                                </div>
-                    
-                            </div>
-                </div>
-
+<div class="page">
+  <div class="p-2 no">
+    <mdb-card class="card">
+      <mdb-card-body>
+        
+        <div class="card">
+          <p class="title">About Me</p>
+          <div>
+            <p class="content" *ngIf="profile"> {{profile.aboutMe}} </p>
+          </div>
         </div>
         
+        <div class="d-flex flex-row">
+          <div class="p-2">
+            <!-- Left Column-->
+            <div class="d-flex flex-column">
+              <div class="p-2"> 
+                <div class="card">
+                  <p class="title"> Homepage</p>
+                  <div>
+                    <p class="content" *ngIf="profile"> {{profile.homepage}} </p>
+                  </div>
+                </div>
+              </div>
+              
+              <div class="p-2">
+                <div class="card">
+                  <p class="title"> Occupation</p>
+                  <div>
+                    <p class="content" *ngIf="profile"> {{profile.occupation}} </p>
+                  </div>
+                </div>
+              </div>  
+              
+            </div>
+          </div>
+          <div class="p-2">
+            <!-- Right column-->
+            <div class="d-flex flex-column">
+              <div class="p-2"> 
+                <div class="card">
+                  <p class="title"> Location</p>
+                  <div>
+                    <p class="content" *ngIf="profile"> {{profile.location}} </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div class="p-2">
+              <div class="card">
+                <p class="title"> Member Since</p>
+                <div>
+                  <p class="content" *ngIf="profile"> {{profile.memberSince.substring(0,10)}} </p>
+                </div>
+              </div>
+            </div>  
+            
+          </div> 
+        </div>
+        
+        
+        
+        
+        
+        <!-- THIS IS FOR TWO COLUMNS + TWO ROWS -->
+        <div class="d-flex flex-row">
+          <div class="p-2">
+            <!-- Left Column-->
+            <div class="d-flex flex-column">
+              
+              <div class="p-2"> 
+                <div class="card">
+                  <p class="title">Number of Submissions</p>
+                  <div>
+                    <p  class="content" *ngIf="profile"> {{profile.submissionNum}}</p>
+                  </div>
+                </div>
+                
+                
+                
+              </div>
+              
+              <div class="p-2">
+                <div class="card">
+                  <p class="title">Critika Rating</p>
+                  <div>
+                    <p class="content"  *ngIf="profile && r > 0"> {{r}}/5</p>
+                    <p class="content"  *ngIf="profile && r == 0"> Not yet rated</p>
+                  </div>
+                </div>
+              </div>  
+              
+              
+              
+            </div>
+          </div>
+          
+          <div class="p-2">
+            <!-- Right column-->
+            <div class="d-flex flex-column">
+              
+              <div class="p-2">
+                <div class="card">
+                  <p class="title">Critika Coins</p>
+                  <div>
+                    <p  class="content" *ngIf="profile"> {{profile.coins}}</p>
+                  </div>
+                </div>
+              </div>  
+              
+              
+            </div>
+          </div> 
+        </div>
+        
+        
+        
+        
+        
+        
+        
+      </mdb-card-body>
+      <app-edit-profile *ngIf="renderComponent == 'EditProfile' " [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
+      <button type="button" block="true" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>
+    </mdb-card>
     
-
-
     
-
-    
-
-
-    
+  </div>  
+  
+  
 </div>
 
-<app-spend-coins *ngIf="renderComponent == 'SpendCoins' "></app-spend-coins>
-<app-edit-profile *ngIf="renderComponent == 'EditProfile' " [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
-<button type="button" (click)="renderSpendCoins()" class="btn btn-secondary">Spend Coins</button>
 
-<button type="button" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>
+
+
+
+
+
+
+
+
