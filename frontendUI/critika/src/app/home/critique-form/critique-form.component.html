@@ -1,4 +1,4 @@
-<mdb-card class="animated fadeInUp">
+<mdb-card class="animated fadeInUp size">
   <!--Card content-->
   <mdb-card-body>
 
@@ -37,23 +37,9 @@
           <label for="form7">What could be improved?</label>
         </div>
 
-        <button mdbBtn block="true" (click)= "critique()" class="btn btn-primary" type="submit">Done</button>
-     
-  
-
-    <!--
-      <div class="md-form">
-      <textarea mdbInputDirective type="text" 
-                id="form7" 
-                class="md-textarea form-control" 
-                rows="3" 
-                [(ngModel)] = "comment"></textarea>
-      <label for="form7">Comment</label>
-    </div>
-    -->    
-    
-    <button type="button" class="btn btn-primary" (click)="returnToDashboard()">Cancel</button>
-  
+        <button mdbBtn block="true" (click)= "critique()" class="btn tableColor" type="submit">Done</button>
+        <br>
+        <button mdbBtn block="true" class="btn pill-color" (click)="returnToDashboard()">Cancel</button>
 
   </mdb-card-body>
 </mdb-card>

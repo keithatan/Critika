@@ -26,7 +26,6 @@ import { AuthInterceptor } from './auth/auth.interceptor';
 
 import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
-import { SpendCoinsComponent } from './profile/spend-coins/spend-coins.component';
 import { EditSubComponent } from './my-submissions/edit-sub/edit-sub.component';
 
 import { EditProfileComponent } from './profile/edit-profile/edit-profile.component';
@@ -49,7 +48,6 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     MyQueueComponent,
     ProfileComponent,
     CategoriesComponent,
-    SpendCoinsComponent,
     EditSubComponent,
     MySubmissionsComponent,
     LoginComponent,
