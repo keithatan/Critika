@@ -50,7 +50,6 @@ export class AddSubComponent implements OnInit {
     (err) =>{
       console.log(err)
     })
-    this.renderComponent = '';
     
   }
 
@@ -127,6 +126,10 @@ export class AddSubComponent implements OnInit {
     this.topThreeCategories[1]=second
     this.topThreeCategories[2]=third
     console.log(this.topThreeCategories)
+  }
+
+  updateTable() {
+    
   }
 
   choseCat(c) {

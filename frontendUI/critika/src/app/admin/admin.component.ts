@@ -57,6 +57,22 @@ export class AdminComponent implements OnInit {
     })
   }
 
+  updateUsers() {
+    this.proService.getAllUsers().then((data) =>{
+      let i:number;
+      let response = [];
+
+      response.push(data);
+
+      this.allUsers = new Array(response[0].length);
+
+      for(i = 0; i < response[0].length;i++){
+        let user = new Profile(response[0][i]);
+        this.allUsers[i] = user;
+      }
+    })
+  }
+
   BanEm() {
     this.proService.banUser(this.UserToBeBanned).subscribe((res)=>{
       console.log(res)
