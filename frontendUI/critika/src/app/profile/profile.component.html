@@ -65,7 +65,7 @@
                                                         <p class="title">Critika Rating</p>
                                                         <div>
                                                           <p class="content"  *ngIf="profile && r > 0"> {{r}}/5</p>
-                                                          <p class="content"  *ngIf="profile && r == 0"> Not yet rated</p>
+                                                          <p class="content"  *ngIf="profile && profile.rating == 0"> Not yet rated</p>
                                                         </div>
                                                 </div>
                                         </div>
