@@ -156,9 +156,11 @@
 
 <div class="left"></div>
 <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
+<mdb-card class="outerCard" *ngIf="queryString != null" >
 
+    <mdb-card-body >
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
-  <li (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <a > {{c.categoryName}} </a> </li>
+  <p (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <b > {{c.categoryName}} </b> </p>
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
     <div class="modal-dialog" role="document">
@@ -184,7 +186,8 @@
     </div>
 </div>
 </ul>
-
+</mdb-card-body>
+</mdb-card>
 <br>
 
 
@@ -215,9 +218,9 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
+          <button type="button" mdbBtn color="light" class="waves-light" aria-label="Close" (click)="basicModal.hide()"
             mdbWavesEffect>Close</button>
-          <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()"
+          <button type="submit" mdbBtn class="softblue" (click)="basicModal.hide()"
             mdbWavesEffect>Create</button>
         </div>
       </div>
