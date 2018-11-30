@@ -86,26 +86,30 @@ describe('Test add comment', function () {
     })
 
     describe('Test with correct info', function () {
+    
         it('Should return 200', function (done) {
-            var info = {
-                comment: 'example comment',
-                submissionName: 'submission name'
-            }
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-    
-                var token = user['tokens'][0]['token'][0]
-    
-                chai.request(server)
-                    .post('/submission/add-comment')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        done()
-                    })
-            });
+            Submission.findOne({submissionName: 'submission name'}).then((sub) => {
+                console.log(sub)
+                var info = {
+                    comment: 'example comment',
+                    submissionID: sub._id.toString()
+                }
+                User.findOne({ username: uname }, (err, user) => {
+                    //do the get request here 
+        
+                    var token = user['tokens'][0]['token'][0]
+        
+                    chai.request(server)
+                        .post('/submission/add-comment')
+                        .set('content-type', 'application/x-www-form-urlencoded')
+                        .set('token', token)
+                        .send(info)
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            done()
+                        })
+                });
+            })  
         })
     })
 

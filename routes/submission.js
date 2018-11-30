@@ -39,11 +39,10 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
-    console.log(req)
+    // console.log(req)
 
     if (req.body.category) {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
-            console.log(resp)
             if (resp == null) {
                 res.status(400).json({ message: "Category does not exists" });
                 return;
@@ -63,15 +62,15 @@ router.post("/add", authenticate, (req, res) => {
 
                     /*category: req.body.category,*/
                 });
-                console.log(req.body.submissionDescription)
+                // console.log(req.body.submissionDescription)
 
-                console.log(newSubmission)
+                // console.log(newSubmission)
 
                 // Change submission num
 
                 // Add to database 
                 newSubmission.save().then(() => {
-                    console.log(newSubmission)
+                    // console.log(newSubmission)
                     User.findOneAndUpdate({ username: req.user.username }, {
                         $inc: {
                             coins: -4,
