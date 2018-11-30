@@ -1,4 +1,16 @@
-<mdb-card>
+<mdb-card *ngIf="admin == false">
+
+        <!--Card content-->
+        <mdb-card-body>
+          <!--Title-->
+          <mdb-card-title>
+                <p class="alert">       You are not an admin      </p>
+          </mdb-card-title>
+
+        </mdb-card-body>
+      </mdb-card>
+
+<mdb-card *ngIf="admin == true">
 	<mdb-card-body>
 		<mdb-card-title>
 			<h2 class="adminTitle">Admin</h2>
