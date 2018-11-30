@@ -39,14 +39,19 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
+    console.log(req)
+
     User.findOneAndUpdate({username: req.user.username}, {
         $inc: {
             coins: -4,
         }
+    }).then((obj) => {
+        
     })
 
     if (req.body.category) {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
+            console.log(resp)
             if (resp == null) {
                 res.status(400).json({ message: "Category does not exists" });
                 return;
@@ -62,8 +67,13 @@ router.post("/add", authenticate, (req, res) => {
                     submissionSkillLevel: req.body.submissionSkillLevel,
                     username: req.user.username,
                     available: true,
+
+                    
                     /*category: req.body.category,*/
                 });
+                console.log(req.body.submissionDescription)
+
+                console.log(newSubmission)
 
                 // Change submission num
 
@@ -75,7 +85,7 @@ router.post("/add", authenticate, (req, res) => {
                     }).then(() => {
                         // Add to database 
                         newSubmission.save().then(() => {
-                            // console.log(newSubmission)
+                            console.log(newSubmission)
                             res.status(200).send(newSubmission);
                         }).catch((err) => {
                             console.log(err)
