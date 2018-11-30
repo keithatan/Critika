@@ -37,6 +37,11 @@ getChildEvent(event:string){
   this.returnToParent.emit('reload');
 }
 
+close(){
+  this.returnToParent.emit('reload');
+
+}
+
   ngOnInit() {
     console.log(this.sub)
   }

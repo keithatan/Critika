@@ -53,6 +53,10 @@ export class AddSubComponent implements OnInit {
     
   }
 
+  cancelSubmission(){
+    this.returnToParent.emit('dash');
+  }
+
   ngOnInit() {
     this.categoriesForm = this.formBuilder.group({
       categoryName: [''],

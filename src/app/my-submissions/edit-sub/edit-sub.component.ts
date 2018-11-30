@@ -39,6 +39,10 @@ export class EditSubComponent implements OnInit {
     sub.submissionText = this.feedback
   }
 
+  cancelEdits(){
+    this.returnToParent.emit('dash');
+  }
+
   
 
   ngOnInit() {
