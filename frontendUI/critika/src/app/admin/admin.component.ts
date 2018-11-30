@@ -11,6 +11,7 @@ import { Category } from '../categories/categories.model';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
+  tableElements = ['User', 'Standing'];
 
   allUsers:Profile[];
   allReportedComments:Submission[];
