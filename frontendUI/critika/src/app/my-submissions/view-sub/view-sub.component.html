@@ -15,8 +15,16 @@
           <p>{{sub.submissionDescription}}</p>   
           <h1>Desired Feedback</h1>
           <p>{{sub.submissionText}}</p>
+
+          <h1>Comments</h1>
+          <div class="md-form">
+          <button (click)="addComment(sub)" class="btn btn-secondary btn-sm">Submit comment</button>
+              <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
+          </div>
+
           <div *ngIf="sub.comments.length > 0">
-            <h1>Comments</h1>
+            
+
             <ul>
               <table class="table table-bordered table-striped table-wrapper-scroll-y">
                   <thead>
