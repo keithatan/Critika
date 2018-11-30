@@ -8,8 +8,14 @@
     width:150%;
 }
 
+.userTitle {
+    text-align: center;
+    margin-bottom: 30px;
+
+}
+
 .title {
-    background:  rgb(242, 168, 166);
+    background: #78A7DE;
     padding: 14px;
     text-align: center;
     color: #fff;
@@ -28,6 +34,6 @@
 	flex-wrap: wrap;
 }
 
-.btn.btn-light-blue {
+.btn.tableColor {
     margin-top: 50px;
 }
