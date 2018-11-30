@@ -173,23 +173,7 @@
           <ul *ngFor=" let s of submissions">
             <li><b>{{s.submissionName}}</b>
               <p>{{s.submissionText}}</p>
-              <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.show()">Add Comment</button>
-              <form (submit)="addComment(f, s)" #f="ngForm">
-                <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                  aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-                  <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                      <div class="modal-header">
-                        <textarea id="comment" name="comment" [(ngModel)]="comment"> Type comment </textarea>
-                        <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                        </button>
-                        <button type="submit" mdbBtn color="primary" class="relative waves-light" (click)="basicModal.hide()"
-                          mdbWavesEffect>Create</button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </form>
+             
             </li>
           </ul>
         </div>
@@ -283,7 +267,7 @@
                 <p class="cardBody"> {{t.numberOfSubmissions}} Submission(s)</p>
                 <button class="btn-outline-danger" mdbBtn type="button"   mdbWavesEffect block="true" (click)="basicModal.show()" (click)="getSubmissionsInCategory(t.categoryName)">View
                     Submissions</button>
-                    <div mdbModal #basicModal="mdbModal" class="padding" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+                    <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
         aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
