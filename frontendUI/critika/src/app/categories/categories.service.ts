@@ -22,11 +22,11 @@ export class CategoriesService {
     }
 
     getAllCategories() {
-        return this.http.get<Object>("http://localhost:5000/category/get-all-category").toPromise();
+        return this.http.get<Object>("https://critika-backend.herokuapp.com/category/get-all-category").toPromise();
     }
 
     getTopCategories() {
-        return this.http.get<Object>("http://localhost:5000/category/topCategories").toPromise();
+        return this.http.get<Object>("https://critika-backend.herokuapp.com/category/topCategories").toPromise();
     }
 
     
@@ -38,7 +38,7 @@ export class CategoriesService {
             })
         }
         // console.log(category)
-        return this.http.get<Object>("http://localhost:5000/category/all-subs-in-category", requestOptions).toPromise()
+        return this.http.get<Object>("https://critika-backend.herokuapp.com/category/all-subs-in-category", requestOptions).toPromise()
     }
 
     createCategory(form: NgForm) {
@@ -49,7 +49,7 @@ export class CategoriesService {
         }
 
         
-        return this.http.post<Object>("http://localhost:5000/category/create-category", options).toPromise();
+        return this.http.post<Object>("https://critika-backend.herokuapp.com/category/create-category", options).toPromise();
     }
 
     addComment(form: NgForm, submissionID){
@@ -58,7 +58,7 @@ export class CategoriesService {
             "submissionID": submissionID
         }
         console.log(submissionID)
-        return this.http.post<Object>("http://localhost:5000/submission/add-comment", options).toPromise();
+        return this.http.post<Object>("https://critika-backend.herokuapp.com/submission/add-comment", options).toPromise();
     }
 
     addCoin(username, numCoins){
@@ -66,7 +66,7 @@ export class CategoriesService {
             "recuser": username,
             "coins": numCoins
         }
-        return this.http.post<Object>("http://localhost:5000/user/add-coin", options).toPromise();
+        return this.http.post<Object>("https://critika-backend.herokuapp.com/user/add-coin", options).toPromise();
     }
 
 }
