@@ -14,6 +14,7 @@ export class EditSubComponent implements OnInit {
   @Input('childSubmission') sub: Submission;
   @Output() returnToParent = new EventEmitter<string>();
   boop: 'lmao';
+  chosenSubmission: Submission
   view:boolean;
   constructor(public catService: CategoriesService, private formBuilder: FormBuilder, private subService:SubmissionService) { 
     this.view = false;

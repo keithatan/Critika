@@ -194,7 +194,7 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
-    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage || !req.body.reportedReason) {
+    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
@@ -204,7 +204,6 @@ router.post("/report-comment", authenticate, (req, res) => {
             $set: {
                 'comments': {
                     reportedMessage: req.body.reportedMessage,
-                    reportedReason: req.body.reportedReason,
                     reported: true,
                 }
             },
