@@ -54,7 +54,7 @@ export class AccountComponent implements OnInit {
   get response_msg() { return this.response }
 
   getAccountInfo() {
-    this.http.get("http://localhost:5000/user/account").subscribe(response => {
+    this.http.get("https://critika-backend.herokuapp.com/user/account").subscribe(response => {
       this.account = new Account(response);
       this.username = this.account.username;
       this.email = this.account.email;
@@ -75,7 +75,7 @@ export class AccountComponent implements OnInit {
 
     // Post New Changes
     const auth: AuthData = { email: form.value.email, username: "", password: "", securityquestionanswer: "", securityquestion: "" }
-    this.http.post("http://localhost:5000/user/change-email", auth)
+    this.http.post("https://critika-backend.herokuapp.com/user/change-email", auth)
       .subscribe(response => {
         this.response = "complete_email";
       },
@@ -101,7 +101,7 @@ export class AccountComponent implements OnInit {
 
     // Post New Changes
     const auth: AuthData = { email: "", username: "", password: form.value.password, securityquestionanswer: "", securityquestion: "" }
-    this.http.post("http://localhost:5000/user/change-password", auth)
+    this.http.post("https://critika-backend.herokuapp.com/user/change-password", auth)
       .subscribe(response => {
         this.response = "complete_password";
       },
@@ -123,7 +123,7 @@ export class AccountComponent implements OnInit {
 
     // Post New Changes
     const auth: AuthData = { email: "", username: "", password: "", securityquestionanswer: form.value.securityanswer, securityquestion: form.value.securityquestion }
-    this.http.post("http://localhost:5000/user/change-security", auth)
+    this.http.post("https://critika-backend.herokuapp.com/user/change-security", auth)
       .subscribe(response => {
         console.log(response);
         this.response = "complete_security";
