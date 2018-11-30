@@ -15,23 +15,18 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-Feedback.deleteMany({}).then(() => {
-    Feedback.deleteMany({}).then(() => {
-        Submission.deleteMany({}).then(() => {
-            Category.deleteMany({}).then(() => {
-                User.deleteMany({}).then(() => {
-                    console.log('PURGE')
-                    return;
-                })
-                console.log('PURGE')
-                return
+Feedback.deleteMany({username: uname}).then(() => {
+    Submission.deleteMany({username: uname}).then(() => {
+        Category.deleteMany({username: uname}).then(() => {
+            User.deleteMany({username: uname}).then(() => {
             })
-            console.log('PURGE')
-            return
         })
-        console.log('PURGE')
-        return
     })
 })
-console.log('PURGE')
+
+User.deleteMany({username: 'Jeff Brohm'}).then(()=>{
+    Category.deleteMany({categoryName: 'example category'}).then(() => {
+        Category.deleteMany({categoryName: 'category name'}).then()
+    })
+})
 

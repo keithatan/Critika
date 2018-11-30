@@ -13,6 +13,10 @@ var mail = process.env.UNIT_TEST_EMAIL
 
 describe('test add coin', function () {
 
+    this.beforeAll(function() {
+        User.findOneAndUpdate({username: uname}, {coins: 1000}).then()
+    })
+
     describe('add coins without recuser', function (done) {
         it('should return 400', function (done) {
             var info = {
