@@ -38,7 +38,7 @@ export class ViewSubComponent implements OnInit {
 }
 
 addComment(sub){
-  console.log(sub.submissionID)
+  console.log(sub)
   if (this.comment == "") {
     return;
   }
