@@ -34,7 +34,7 @@ export class ForgotPasswordComponent implements OnInit {
     }
 
     const auth: AuthData = { email: form.value.email, username: "", password: "", securityquestionanswer: form.value.securityanswer, securityquestion: form.value.securityquestion }
-    this.http.post("http://localhost:5000/user/reset-password-email", auth)
+    this.http.post("https://critika-backend.herokuapp.com/user/reset-password-email", auth)
       .subscribe(response => {
         console.log(response)
         this.response = "complete";
