@@ -1,21 +1,22 @@
-<div class="p-2 profile animated fadeInUp">
+<div class="p-2 profile animated fadeInUp" *ngIf="renderComponent == 'dash'">
   <mdb-card>
     <!--Card content-->
     <mdb-card-body>
       <!--Title-->
       <mdb-card-title>
-        <h2 class="center ">Top Contributors</h2>
+          <h2 class="header">Top Contributors</h2>
       </mdb-card-title>
 
       <table mdbTable>
         <thead class="tableColor white-text">
           <tr>
             <th *ngFor="let el of tableElements" scope="col">{{el}} </th>
+            <th (click)="getLeaderBoardReverse()">Rating <i class="fa fa-filter" aria-hidden="true"></i></th>
           </tr>
         </thead>
         <tbody>
           <tr mdbTableCol *ngFor="let usr of usersForward">
-            <th scope="row">{{usr.username}}</th>
+            <th scope="row" (click)="renderUser(usr.username)" class="underline">{{usr.username}}</th>
             <th scope="row">{{usr.submissionNum}}</th>
             <th scope="row">{{usr.critiqueNum}}</th>
             <th scope="row">{{usr.userRating}}/5</th>
@@ -30,6 +31,9 @@
     </mdb-card-body>
   </mdb-card>
 </div>
+
+<app-user-profile *ngIf="renderComponent == 'user'" (returnToParent)="getChildEvent($event)"[chosenUser]="chosenUser" ></app-user-profile>
+
 
 <!-- Render the other component stuff -->
 <!-- <div class="d-flex flex-column justify-content-center animated fadeInUp">
