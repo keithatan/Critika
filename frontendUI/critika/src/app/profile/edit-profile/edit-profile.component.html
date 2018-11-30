@@ -1,37 +1,54 @@
 <mdb-card class="size animated fadeInUp">
   <!--Card content-->
   <mdb-card-body>
-    
+
     <!--Title-->
     <mdb-card-title>
       <h4>Edit Profile</h4>
     </mdb-card-title>
-    
-    <div class="md-form" *ngIf="childProfile.aboutMe != ''">
-      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="aboutMe" ></textarea>
-      <label for="form7">About Me</label>
-    </div>
-    
-    <div class="md-form">
-      <textarea placeholder="homepage"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="homePage"></textarea>
-      <label for="form7">Homepage</label>
-    </div>
-    
-    <div class="md-form">
-      <textarea placeholder="{{childProfile.location}}"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="location"></textarea>
-      <label for="form7">Location</label>
-    </div>
-    
-    <div class="md-form">
-      <textarea placeholder="{{childProfile.occupation}}" mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="occupation"></textarea>
-      <label for="form7">Occupation</label>
-    </div>
-    
-    <button mdbBtn block="true" (click)= "submitChanges()" class="btn tableColor" type="submit">Submit Changes</button>
-    <br>
-    <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="renderProfile()">Cancel</button>
+    <form (submit)="submitChanges(f)" #f="ngForm" [formGroup]="editProfileForm">
+
+      <div class="md-form" *ngIf="childProfile.aboutMe != ''">
+        <textarea ngModel formControlName="aboutMe" type="text" id="form7" class="md-textarea form-control" rows="3"
+          [(ngModel)]="aboutMe" placeholder="Change About Me" [ngClass]="{ 'is-invalid': submitted && form.aboutMe.errors }"></textarea>
+        <div *ngIf="submitted && form.aboutMe.errors" class="invalid-feedback">
+          <div *ngIf="form.aboutMe.errors.required">About Me is required</div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <textarea ngModel formControlName="homePage" type="text" id="form7" class="md-textarea form-control" rows="3"
+          placeholder="Change My Homepage" [ngClass]="{ 'is-invalid': submitted && form.homePage.errors }" [(ngModel)]="homePage"></textarea>
+        <div *ngIf="submitted && form.homePage.errors" class="invalid-feedback">
+          <div *ngIf="form.homePage.errors.required">Homepage is required</div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <textarea ngModel formControlName="location" type="text" id="form7" class="md-textarea form-control"
+          placeholder="Change My Location" [ngClass]="{ 'is-invalid': submitted && form.location.errors }" rows="3"
+          [(ngModel)]="location"></textarea>
+        <div *ngIf="submitted && form.location.errors" class="invalid-feedback">
+          <div *ngIf="form.location.errors.required">Location is required</div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <textarea ngModel formControlName="occupation" type="text" id="form7" class="md-textarea form-control"
+          placeholder="Change My Occupation" [ngClass]="{ 'is-invalid': submitted && form.occupation.errors }" rows="3"
+          [(ngModel)]="occupation"></textarea>
+        <div *ngIf="submitted && form.occupation.errors" class="invalid-feedback">
+          <div *ngIf="form.occupation.errors.required">Occupation is required</div>
+        </div>
+      </div>
+
+      <button mdbBtn block="true" (click)="submitChanges()" class="btn tableColor" type="submit">Submit Changes</button>
+      <br>
+      <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="renderProfile()">Cancel</button>
+
+    </form>
   </mdb-card-body>
 </mdb-card>
 
-  <!-- <button type="button" (click)="submitChanges()" class="btn btn-secondary">Submit Changes</button> -->
-  <!-- <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button> -->
+<!-- <button type="button" (click)="submitChanges()" class="btn btn-secondary">Submit Changes</button> -->
+<!-- <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button> -->

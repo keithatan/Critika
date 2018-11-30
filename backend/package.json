@@ -3,6 +3,11 @@
   "version": "1.0.0",
   "description": "",
   "main": "app.js",
+  "start": "node app.js",
+  "engines": {
+    "node": "10.14.1",
+    "npm": "6.4.1"
+  },
   "scripts": {
     "test": "mocha --exit"
   },
@@ -15,20 +20,20 @@
     "chai": "^4.2.0",
     "chai-http": "^4.2.0",
     "cookie-parser": "^1.4.3",
-    "cors": "^2.8.4",
+    "cors": "^2.8.5",
     "crypto": "^1.0.1",
     "dotenv": "^6.1.0",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.3.0",
+    "jsonwebtoken": "^8.4.0",
     "lodash": "^4.17.11",
     "mongodb": "^3.1.8",
     "mongoose": "^5.3.6",
-    "nodemailer": "^4.6.8",
-    "nodemon": "^1.18.4",
+    "nodemailer": "^4.7.0",
+    "nodemon": "^1.18.7",
     "pug": "^2.0.3",
     "request": "^2.88.0",
     "superagent": "^4.0.0-beta.5",
-    "validator": "^10.8.0"
+    "validator": "^10.9.0"
   },
   "devDependencies": {
     "mocha": "^5.2.0"

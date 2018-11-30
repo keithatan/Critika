@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { Profile } from '../../models/profile.model';
 import { ProfileService } from '../../services/profile.service';
+import { FormGroup, FormBuilder, Validators, NgForm } from '@angular/forms';
 
 
 @Component({
@@ -15,7 +16,9 @@ export class EditProfileComponent implements OnInit {
   @Output() returnToParent = new EventEmitter<string>();
   boop: 'lmao';
   view:boolean;
-  constructor(private proService:ProfileService) { 
+  submitted:boolean = false;
+  editProfileForm: FormGroup;
+  constructor(private proService:ProfileService, private formBuilder: FormBuilder) { 
     this.view = false;
   }
   aboutMe: '';
@@ -29,7 +32,13 @@ export class EditProfileComponent implements OnInit {
     this.returnToParent.emit('goback');
   }
 
-  submitChanges(){
+  get form() { return this.editProfileForm.controls; }
+
+  submitChanges(form: NgForm) {
+    this.submitted = true;
+    if (this.editProfileForm.invalid) {
+      return;
+    }
     this.proService.editProfile(this.homePage, this.location, this.occupation, this.aboutMe)
     .subscribe ((response) => {
       console.log(response);
@@ -44,6 +53,12 @@ export class EditProfileComponent implements OnInit {
 
   ngOnInit() {
     console.log("rendered edit");
+    this.editProfileForm = this.formBuilder.group({
+      aboutMe: ['', Validators.required], 
+      homePage: ['', Validators.required], 
+      location: ['', Validators.required],
+      occupation: ['', Validators.required]
+    })
   }
 
 }
