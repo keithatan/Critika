@@ -3,7 +3,7 @@ let Schema = mongoose.Schema;
 
 /* Make the schema */
 let categorySchema = new Schema({
-    categoryName: {type: String, required: true},
+    categoryName: {type: String, required: true, unique: true},
     categoryDescription: {type: String, required: true},
     dateCreated: {type: Date, default: Date.now},
     founder: {type: String},
