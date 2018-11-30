@@ -15,7 +15,7 @@ var mail = process.env.UNIT_TEST_EMAIL
 
 describe('Test remove submissions', function () {
 
-    this.beforeAll(function() {
+    this.beforeAll(function(done) {
         var info = {
             category: 'example category',
             submissionName: 'submission to remove',
@@ -35,15 +35,15 @@ describe('Test remove submissions', function () {
                 .set('content-type', 'application/x-www-form-urlencoded')
                 .set('token', token)
                 .send(info)
-                .end((err, res) => {})
+                .end((err, res) => {
+                    done()
+                })
         });
     })
 
     describe('Test without submission', function () {
         it('Should return 400', function (done) {
-            var info = {
-                submissionName: 'submission to remove'
-            }
+
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
     
@@ -91,7 +91,7 @@ describe('Test remove submissions', function () {
             Submission.findOne({submissionName: 'submission to remove'}).then((sub) => {
 
                 var info = {
-                    submissionID: sub._id.toString()
+                    submissionID: sub['_id'].toString()
                 }
 
                 User.findOne({ username: uname }, (err, user) => {

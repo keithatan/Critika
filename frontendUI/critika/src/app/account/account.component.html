@@ -1,28 +1,37 @@
 <div class="p-2 profile animated fadeInUp">
     <mdb-card>
         <mdb-card-body>
-            <p class="h3 mb-4">Edit Account Information</p>
+                <p class="h5 mb-4">Edit Account Information - Username: {{username}}</p>
 
-            <!-- Username -->
-            <p class="h5 mb-4">Username</p>
-            <p class="h7 mb-4">{{username}}</p>
+                <div class="d-flex flex-row">
+                        <div class="p-2">
+                            
 
-            <!-- Change Email -->
-            <p class="h5 mb-4">Email</p>
-            <p class="h7 mb-4">{{email}}</p>
-            <div class="form-group">
-                <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
-                    <label>Change My Email</label>
-                    <input type="text" placeholder="New Email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
-                    <div *ngIf="submitted_email && form_mail.email.errors" class="invalid-feedback">
-                        <div *ngIf="form_mail.email.errors.email">Invalid Email</div>
-                        <div *ngIf="form_mail.email.errors.required">Please Enter an Email</div>
-                    </div>
-                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Email</button>
-                </form>
-            </div>
-
-            <!-- Change Password -->
+                            <!-- Username -->
+                           
+                
+                            <!-- Change Email -->
+                            
+                            <p class="h5 mb-4">Email</p>
+                            <br>
+                        
+                            <p class="h7 mb-4 p">{{email}}</p>
+                            
+                            <div class="form-group">
+                                <form (submit)="onSubmitEmail(f)" #f=ngForm [formGroup]="changeEmailForm">
+                                        
+                                        
+                                    <label>Change My Email</label>
+                                    <input type="text" placeholder="New Email" class="form-control" formControlName="email" [ngClass]="{ 'is-invalid': submitted_email && form_mail.email.errors }" />
+                                    <div *ngIf="submitted_email && form_mail.email.errors" class="invalid-feedback">
+                                        <div *ngIf="form_mail.email.errors.email">Invalid Email</div>
+                                        <div *ngIf="form_mail.email.errors.required">Please Enter an Email</div>
+                                    </div>
+                                    <button mdbBtn class="softblue my-4" block="true"  type="submit">Change Email</button>
+                                </form>
+                            </div></div>
+                        <div class="p-2">
+                            <!-- Change Password -->
             <p class="h5 mb-4">Password</p>
             <form (submit)="onSubmitPassword(h)" #h=ngForm [formGroup]="changePasswordForm">
                 <div class="form-group">
@@ -41,31 +50,33 @@
                     <div *ngIf="submitted_password && changePasswordForm.hasError('notSame')" class="invalid-feedback">
                         <div *ngIf="changePasswordForm.hasError('notSame')">Passwords Do Not Match</div>
                     </div>
-                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Password</button>
+                    <button mdbBtn class="softblue my-4" block="true" type="submit">Change Password</button>
                 </div>
             </form>
+                        </div>
+                        <div class="p-2"><!-- Security Question and Answer -->
+                            <p class="h5 mb-4">Security Question and Answer</p>
+                            <div class="form-group">
+                                <form (submit)="onSubmitSecurityQuestion(g)" #g=ngForm [formGroup]="changeSecurityQuestionForm">
+                                    <div class="form-group">
+                                        <label>Change My Security Question</label>
+                                        <select id="securityquestion" class="form-control" formControlName="securityquestion">
+                                            <option [value]="question" *ngFor="let question of questions">
+                                                {{question}}</option>
+                                        </select>
+                                    </div>
+                                    <label>New Security Question Answer</label>
+                                    <input type="text" formControlName="securityanswer" id="securityanswer" class="form-control"
+                                        placeholder="Security Quesiton Answer" [ngClass]="{ 'is-invalid': submitted_security_question && form_security_question.securityanswer.errors }">
+                                    <div *ngIf="submitted_security_question && form_security_question.securityanswer.errors" class="invalid-feedback">
+                                        <div *ngIf="form_security_question.securityanswer.errors.required">Security Question Answer is
+                                            required</div>
+                                    </div>
+                                    <button mdbBtn class="softblue my-4" block="true" type="submit">Change Security Question</button>
+                                </form>
+                            </div></div>
+                    </div>
 
-            <!-- Security Question and Answer -->
-            <p class="h5 mb-4">Security Question and Answer</p>
-            <div class="form-group">
-                <form (submit)="onSubmitSecurityQuestion(g)" #g=ngForm [formGroup]="changeSecurityQuestionForm">
-                    <div class="form-group">
-                        <label>Change My Security Question</label>
-                        <select id="securityquestion" class="form-control" formControlName="securityquestion">
-                            <option [value]="question" *ngFor="let question of questions">
-                                {{question}}</option>
-                        </select>
-                    </div>
-                    <label>New Security Question Answer</label>
-                    <input type="text" formControlName="securityanswer" id="securityanswer" class="form-control"
-                        placeholder="Security Quesiton Answer" [ngClass]="{ 'is-invalid': submitted_security_question && form_security_question.securityanswer.errors }">
-                    <div *ngIf="submitted_security_question && form_security_question.securityanswer.errors" class="invalid-feedback">
-                        <div *ngIf="form_security_question.securityanswer.errors.required">Security Question Answer is
-                            required</div>
-                    </div>
-                    <button mdbBtn color="info" block="true" class="my-4" type="submit">Change Security Question</button>
-                </form>
-            </div>
 
             <!-- Alert Toasts -->
             <div *ngIf="response_msg === 'complete_security'" class="alert alert-success" role="alert">

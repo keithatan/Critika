@@ -40,7 +40,7 @@ router.post('/critique', authenticate, (req, res) => {
         submissionName: req.body.submissionName,
         submissionID: req.body.submissionID,
         critiquer: req.user.username,
-        username: req.body.username
+        username: req.user.username
     });
 
     var tf = true;
@@ -60,10 +60,11 @@ router.post('/critique', authenticate, (req, res) => {
         }
     }).catch((err) => {
         // res.status(400).send({ message: "Error finding feedback" });
+        console.log(err)
         return
     })
 
-    // console.log(tf)
+    console.log(tf)
 
     /*we need to update submissions critique number*/
     Submission.findOneAndUpdate({ _id: req.body.submissionID },
@@ -114,6 +115,7 @@ router.post('/critique', authenticate, (req, res) => {
         return;
     }).catch((err) => {
         // res.send(err)
+        console.log(err)
     });
 })
 

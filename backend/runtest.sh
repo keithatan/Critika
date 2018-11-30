@@ -65,8 +65,6 @@ mocha tests/submission/test_make_unavailable.js --exit
 sleep 1.5
 mocha tests/submission/test_remove_submission.js --exit
 sleep 1.5
-mocha tests/submission/test_report_comment.js --exit
-sleep 1.5
 mocha tests/submission/test_submission_mine.js --exit
 sleep 1.5
 
@@ -90,6 +88,8 @@ echo FEEDBACK TESTS
 echo ------------------------------------------------------------------------
 
 mocha tests/feedback/test_all_user_feedback.js --exit
+sleep 1.5
+mocha tests/feedback/test_rate_feedback.js --exit
 sleep 1.5
 mocha tests/feedback/test_critique.js --exit
 sleep 1.5
