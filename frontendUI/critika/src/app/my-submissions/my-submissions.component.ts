@@ -10,6 +10,7 @@ import { Observable } from 'rxjs';
   styleUrls: ['./my-submissions.component.scss']
 })
 export class MySubmissionsComponent implements OnInit {
+  tableElements = ['Submission Name', 'Description', 'Category', 'Edit'];
   mySubmissions:Submission[];
   chosenSubmission: Submission;
   renderComponent: string;
