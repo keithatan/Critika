@@ -27,35 +27,43 @@ router.get("/", (req, res) => {
  * Each user can only give one feedback
  */
 router.post('/critique', authenticate, (req, res) => {
-    if(!req.body || !req.body.username || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionName){
-        res.status(400).json({ message: "Report comment data is incomplete" + req.body.username + req.body.feedbackMessage});
+    if (!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID) {
+        res.status(400).json({ message: "Report comment data is incomplete" + req.body.submissionID });
         return;
     }
 
     // New category Data
     var newFeedback = new Feedback({
-        username: req.body.username,
         feedbackGood: req.body.feedbackGood,
         feedbackBad: req.body.feedbackBad,
         feedbackWork: req.body.feedbackWork,
         submissionName: req.body.submissionName,
         submissionID: req.body.submissionID,
-        critiquer: req.user.username
+        critiquer: req.user.username,
+        username: req.user.username,
     });
 
-    Feedback.find({username: req.body.username, submissionName: req.body.submissionName, submissionID: req.body.submissionID}).then((subs) => {
+    var tf = true;
+
+    Feedback.find({ submissionID: req.body.submissionID }).then((subs) => {
         console.log(subs)
-        console.log(req.user.username)
         var i;
-        for (i = 0; i < subs.length; i++){
-        if(req.user.username === subs[i].critiquer){
-            console.log(subs[i].critiquer)
-            res.status(401).json({ message: "You have already given feedback to this submission" });
+        for (i = 0; i < subs.length; i++) {
+            console.log(subs.length)
+            console.log(subs[i])
+            if (req.user.username === subs[i].critiquer) {
+                console.log("401401401")
+                res.status(401).send({ message: "You have already given feedback to this submission" });
+                tf = false;
+                return;
+            }
         }
-    }
     }).catch((err) => {
-        res.status(400).json({ message: "Error finding feedback" });
+        // res.status(400).send({ message: "Error finding feedback" });
+        return
     })
+
+    console.log(tf)
 
     /*we need to update submissions critique number*/
     Submission.findOneAndUpdate({ _id: req.body.submissionID },
@@ -77,34 +85,34 @@ router.post('/critique', authenticate, (req, res) => {
                 coins: 4,
             }
         }).then((res) => {
-            console.log ('Found ' + res)
+            // console.log ('Found ' + res)
         }).catch((err) => {
             res.status(400).send({ message: "Error adding coin to the user" });
             res.send(err);
         });
 
-        User.findOneAndUpdate({ username: req.user.username },
-            {
-                $push: {
-                    feedbackContributed: req.body.submissionID,
-                }
-            }).then((res) => {
-                newFeedback.save().then((res) => {
-                    console.log(newFeedback)
-
-                    res.status(200).send({message : "Okay"})
-                }).catch((err) => {
-                });
+    User.findOneAndUpdate({ username: req.user.username },
+        {
+            $push: {
+                feedbackContributed: req.body.submissionID,
+            }
+        }).then((res) => {
+            newFeedback.save().then((res) => {
+                // console.log(newFeedback)
+                // res.status(200).send({message : "Okay"})
             }).catch((err) => {
-                res.status(400).send({ message: "Error adding feedback id" });
-                res.send(err);
             });
+        }).catch((err) => {
+            res.status(400).send({ message: "Error adding feedback id" });
+            res.send(err);
+        });
 
     // Add to database 
     newFeedback.save().then(() => {
         res.status(200).send(newFeedback)
+        return;
     }).catch((err) => {
-        res.status(400).send(err);
+        // res.send(err)
     });
 })
 
@@ -118,24 +126,24 @@ router.post('/rate-feedback', authenticate, (req, res) => {
         return;
     }
     Submission.findOne({ _id: req.body.submissionID }).then((subs) => {
-        console.log(subs)
+        // console.log(subs)
         if (req.user.username != subs.username) {
             res.status(400).json({ message: "You are not the owner of this post to rate the feedback" });
             return;
         }
-    }).catch((err)=>{console.log(err)})
+    }).catch((err) => { console.log(err) })
 
     Submission.findOneAndUpdate({ _id: req.body.submissionID },
         {
-            $inc: 
+            $inc:
             {
                 numberOfCritiquesRecieved: 1,
             }
         }).catch((err) => {
             // console.log(err)
         })
-    
-        let back;
+
+    let back;
 
     Feedback.findOneAndUpdate({ _id: req.body.feedbackID },
         {
@@ -144,9 +152,9 @@ router.post('/rate-feedback', authenticate, (req, res) => {
                 feedbackRating: req.body.feedbackRating
             }
         }).then((fb) => {
-            console.log(fb)
+            // console.log(fb)
             back = fb;
-            console.log(back.critiquer)
+            // console.log(back.critiquer)
 
 
             User.findOneAndUpdate({ username: back.critiquer },
@@ -191,7 +199,7 @@ router.get('/all-submission', authenticate, (req, res) => {
 router.get('/all-user', authenticate, (req, res) => {
 
     Feedback.find({ username: req.user.username }).then((subs) => {
-        console.log(subs)
+        // console.log(subs)
         res.send(subs)
     }).catch((err) => {
         res.status(400).send(err)
