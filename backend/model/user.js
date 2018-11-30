@@ -25,6 +25,7 @@ let userSchema = new mongoose.Schema({
   friends: {type: [String]},
   standing: {type: String, default: 'good'},
   coins: { type: Number, default: 5},
+  critiqueNum: {type: Number, default: 0},
   recoveryUsername: {type: String, unique: true, minlength: 6, trim: true },
   email:{  
     type: String,
