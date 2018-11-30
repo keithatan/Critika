@@ -13,7 +13,7 @@ import { Category } from '../categories/categories.model';
 export class AdminComponent implements OnInit {
 
   allUsers:Profile[];
-  allReporteds:Comment[];
+  allReportedComments:Submission[];
   allSuggestedCategories:Category[];
   UserToBeBanned: '';
   UserToBeRestored: '';
@@ -47,12 +47,12 @@ export class AdminComponent implements OnInit {
 
       response.push(data);
 
-      this.allReporteds = new Array(response[0].length);
+      this.allReportedComments = new Array(response[0].length);
 
       for(i = 0; i < response[0].length;i++){
-        let reportedComment = new Comment(response[0][i].comments);
-        console.log(reportedComment);
-        this.allReporteds[i] = reportedComment;
+        let reportedCommentSub = new Submission(response[0][i]);
+        console.log(reportedCommentSub);
+        this.allReportedComments[i] = reportedCommentSub;
       }
     })
   }

@@ -11,6 +11,7 @@ import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
 export class AddSubComponent implements OnInit {
 
   categoriesForm: FormGroup;
+  addSubForm: FormGroup;
   submissions: Object;
   categoriesForFilter: Object;
   renderComponent: string = "";
@@ -18,10 +19,13 @@ export class AddSubComponent implements OnInit {
   textAreasList: any = [];
   topThreeCategories: Object;
   SubName: '';
-  Link: '';
+  Link: string;
   Category: '';
+  des: '';
   CatChosen: boolean;
+  skill: string;
   C: 'yee';
+  skills = ["Beginner", "Intermediate", "Expert"]
 
   constructor(public catService: CategoriesService, private formBuilder: FormBuilder, public subService: SubmissionService) {
     this.categoryNames = [];
@@ -31,8 +35,11 @@ export class AddSubComponent implements OnInit {
     this.CatChosen = false;
   }
 
-  sendSubmission() {
-    this.subService.addSubmission(this.SubName, this.Link, this.C, localStorage.getItem('user'));
+  sendSubmission(form:NgForm) {
+    console.log(form)
+    console.log(form.value.Description)
+    console.log(form.value.skill)
+    this.subService.addSubmission(form.value.SubName, form.value.feedback, this.C, form.value.Link, form.value.skill,  form.value.Description);
   }
 
   ngOnInit() {
@@ -40,6 +47,13 @@ export class AddSubComponent implements OnInit {
       categoryName: [''],
       categoryDescription: [''],
     });
+    this.addSubForm = this.formBuilder.group({
+      Link: [''],
+      feedback: [''],
+      skill: [''],
+      Description: [''],
+      SubName: ['']
+    })
     this.updateCategories()
   }
 
@@ -106,5 +120,9 @@ export class AddSubComponent implements OnInit {
   choseCat(c) {
     this.CatChosen = true;
     this.C = c;
+  }
+
+  get form() {
+    return this.addSubForm.controls;
   }
 }
