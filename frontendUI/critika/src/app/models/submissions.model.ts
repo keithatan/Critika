@@ -8,7 +8,7 @@ export class Submission{
     numberOfCritiquesReceived: number;
     submissionID: string;
     comments: Object[];
-    skillLevel: string;
+    submissionSkillLevel: string;
     submissionDescription: string;
     submissionLink: string;
     submissionName: string;
@@ -26,7 +26,7 @@ export class Submission{
         this.numberOfCritiquesReceived = response.numberOfCritiquesRecieved;
         this.submissionID = response._id;
         this.comments = response.comments;
-        this.skillLevel = response.submissionSkillLevel;
+        this.submissionSkillLevel = response.submissionSkillLevel;
         
     }
 }

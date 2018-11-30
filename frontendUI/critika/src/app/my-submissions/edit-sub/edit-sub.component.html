@@ -1,47 +1,27 @@
 
-<mdb-card class="outerCard">
-  <!--Card image-->
-  <!--Card content-->
+<mdb-card *ngIf="sub != null" class="outerCard">
+
   <mdb-card-body >
 
-    <!--Title-->
     <mdb-card-title> <h1 class="header">Edit Submission</h1> </mdb-card-title>
 
-    <!--Text-->
     <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="subName">
-      <label for="form1" class="">Name</label>
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="link"></textarea>
+      <label for="form7">Link</label>
     </div>
 
-  
-
-    <!--Text-->
-    <div class="md-form" *ngIf="CatChosen == false">
-        <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
-        <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
-            <button (click)="choseCat(c.categoryName)" type="button" class="btn btn-primary btn-sm">{{c.categoryName}}</button>
-        </ul>
-      </div>
-      <div class="md-form" *ngIf="CatChosen == true" [(ngModel)]="category">
-        {{C}}
-      </div>
-
-    <!--Basic textarea-->
     <div class="md-form">
-      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="text"></textarea>
+      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="description"></textarea>
       <label for="form7">Description</label>
     </div>
 
-    <!--Basic textarea-->
     <div class="md-form">
         <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
-        <label for="form7">What feedback are you looking for</label>
+        <label for="form7">What feedback are you looking for?</label>
       </div>
 
-    <!-- Default unchecked -->
-    <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>
 
-    <a href="#" (click) = "sendEdits()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
+    <a  (click) = "sendEdits(sub)" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
 
   </mdb-card-body>
 </mdb-card>

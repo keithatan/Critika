@@ -32,7 +32,7 @@ export class AddSubComponent implements OnInit {
   }
 
   sendSubmission() {
-    this.subService.addSubmission(this.SubName, this.Link, this.C, localStorage.getItem('user'));
+    //this.subService.addSubmission(this.SubName, this.Link, this.C, localStorage.getItem('user'));
   }
 
   ngOnInit() {

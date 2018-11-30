@@ -27,20 +27,10 @@ export class ViewSubComponent implements OnInit {
   }
 
   renderEditSub(sub:Submission) {
-    if (this.edit == false) {
-      this.edit = true;
-    }
-    if (this.edit == true) {
-      this.edit = false;
-    }
-    if (this.renderComponent == 'EditSub'){
-      this.renderComponent = "";
-
-    }
-    else{
+   
       this.renderComponent = 'EditSub';
       this.chosenSubmission = sub;
-  }
+  
 }
 
 getChildEvent(event:string){
