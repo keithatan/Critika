@@ -21,7 +21,7 @@
             <td (click)="renderUser(sub.username)" class="underline">{{sub.username}}</td>
             <td>{{sub.category}}</td>
             <td><span class="badge badge-primary badge-pill softblue">{{sub.numberOfCritiquesReceived}}</span></td>
-            <td><button (click)="renderCritiqueForm(sub)" >Test</button></td>
+            <td class= "align"><button type="button" mdbBtn color="light" mdbWavesEffect size="sm" (click)="renderCritiqueForm(sub)" >Critique</button></td>
           </tr>
         </tbody>
       </table>
