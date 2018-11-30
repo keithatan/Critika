@@ -89,8 +89,6 @@ sleep 2
 echo FEEDBACK TESTS
 echo ------------------------------------------------------------------------
 
-mocha tests/feedback/test_rate_feedback.js --exit
-sleep 1.5
 mocha tests/feedback/test_all_user_feedback.js --exit
 sleep 1.5
 mocha tests/feedback/test_critique.js --exit
