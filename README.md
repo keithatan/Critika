@@ -20,3 +20,4 @@
 * The Complete Node.js Developer Course (2nd Edition)
 * [MDB Angular Guide](https://mdbootstrap.com/docs/angular/)
 * [Angular Docs](https://angular.io/docs)
+* [Mongo DB Documentation](https://docs.mongodb.com/manual/)
