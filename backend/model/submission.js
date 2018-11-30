@@ -9,9 +9,12 @@ let submissionsSchema = new Schema({
   available: {type: Boolean},
   submissionName: {type: String, required: true},
   submissionText: {type: String},
+  submissionDescription: {text: String},
+  submissionsLink: {type: String},
   submissionSkillLevel: {type: String},
   username: {type: String, required: true}, 
   category: {type: String, unique: true},
+
   comments:[{
       user: String,
       message: String,
