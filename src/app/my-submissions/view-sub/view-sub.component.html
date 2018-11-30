@@ -1,10 +1,9 @@
-
 <mdb-card>
   <mdb-card-body>
     <mdb-card-title>
       <h5 class="cardTitle">My Submission</h5>
     </mdb-card-title>
-    
+
     <div class="stuff">
       <p class="submissionName">{{sub.submissionName}}</p>
       <p class="subContent">Link: {{sub.submissionLink}} </p>
@@ -12,15 +11,15 @@
       <p class="subContent">Skill Level: {{sub.submissionSkillLevel}}</p>
       <p class="subContent">Description: {{sub.submissionDescription}}</p>
       <p class="subContent">Desired Feedback: {{sub.submissionText}}</p>
-      
-      
+
+
       <p id="comments">Comments</p>
       <div *ngIf="sub.comments.length == 0">
-        <p >There are currently no comments on this submission.</p>
+        <p>There are currently no comments on this submission.</p>
       </div>
-      
+
       <div *ngIf="sub.comments.length > 0">
-        <table  mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
+        <table mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
           <thead class="tableColor white-text">
             <tr>
               <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
@@ -31,30 +30,36 @@
               <td>{{c.user}}</td>
               <td>{{c.message}}</td>
               <td>
-                <button type="button" (click) = "sendReport(sub, c.message,c)" class="btn btn-danger btn-sm">REPORT COMMENT</button>
+                <button type="button" (click)="sendReport(sub, c.message,c)" class="btn btn-danger btn-sm">REPORT
+                  COMMENT</button>
               </td>
             </tr>
           </tbody>
         </table>
-         <div *ngIf="response_msg === 'Comment successfully reported'" class="alert alert-info" role="alert">
-        Comment Reported
+        <div *ngIf="response_msg === 'Comment successfully reported'" class="alert alert-info" role="alert">
+          Comment Reported
+        </div>
       </div>
-      </div>
-      
-      
-      
+
+
+
       <div class="md-form">
-        <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
-        <button mdbBtn  (click)="addComment(sub)" class="softblue" block="true">Submit Comment</button>
+        <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment"
+          [(ngModel)]="comment"></textarea>
+        <button mdbBtn (click)="addComment(sub)" class="softblue" block="true">Submit Comment</button>
       </div>
-      
+      <div *ngIf="is_comment_blank" class="alert alert-danger" role="alert">
+        Please submit a comment, or close the window.
+      </div>
+
     </div>
-    
+
     <app-edit-sub [childSubmission]='sub' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
-    <button mdbBtn type="submit" (click) = "renderEditSub(submission)" class="btn tableColor" block="true">Edit Submission</button>
+    <button mdbBtn type="submit" (click)="renderEditSub(submission)" class="btn tableColor" block="true">Edit
+      Submission</button>
     <br>
-    <button mdbBtn type="button" (click) = "close()" color="danger" outline="true" mdbWavesEffect block="true">Close</button>
-    
+    <button mdbBtn type="button" (click)="close()" color="danger" outline="true" mdbWavesEffect block="true">Close</button>
+
   </mdb-card-body>
 </mdb-card>
 
