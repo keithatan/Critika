@@ -82,7 +82,7 @@ const AppRoutes: Routes = [
   {
       //404 error, leave this one as last route check
       path: '**',
-      component: DashboardComponent,
+      redirectTo: 'home',
   }
 ]
 
