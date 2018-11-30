@@ -18,6 +18,5 @@
 
 ### Code and Guides Used
 * The Complete Node.js Developer Course (2nd Edition)
-* [Ant Design](https://ant.design/)
-* [Create React App](https://github.com/facebookincubator/create-react-app)
-
+* [MDB Angular Guide](https://mdbootstrap.com/docs/angular/)
+* [Angular Docs](https://angular.io/docs)
