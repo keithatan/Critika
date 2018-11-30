@@ -1,5 +1,5 @@
 .outerCard {
-    width: 80%;
+    width: 100%;
     height: 100%;
 }
 
@@ -14,8 +14,8 @@
 
 .table-wrapper-scroll-y {
     display: block;
-    max-height: 500px;
-    max-width: 750px;
+    max-height: 100%;
+    max-width: 100%;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }

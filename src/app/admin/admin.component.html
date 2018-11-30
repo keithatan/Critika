@@ -31,7 +31,7 @@
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal1.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="BanEm()" (click)="basicModal1.hide()" type="button" mdbBtn color="primary"
+                            <button (click)="BanEm()" (click)="basicModal1.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
                                 class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
@@ -61,7 +61,7 @@
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal2.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="RestoreEm()" (click)="basicModal2.hide()" type="button" mdbBtn color="primary"
+                            <button (click)="RestoreEm()" (click)="basicModal2.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
                                 class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
@@ -90,7 +90,7 @@
                         <div class="modal-footer">
                             <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
                                 (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="AdminEm()" (click)="basicModal.hide()" type="button" mdbBtn color="primary"
+                            <button (click)="AdminEm()" (click)="basicModal.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
                                 class="relative waves-light" mdbWavesEffect>Submit
                                 changes</button>
                         </div>
