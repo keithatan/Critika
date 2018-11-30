@@ -1,32 +1,32 @@
 <mdb-card *ngIf = "toRate == false" class="animated fadeInUp">
   <mdb-card-body>
     <mdb-card-title>
-      <h4 class="title">My Feedbacks</h4>
+      <h2 class="cardTitle">My Received Feedback</h2>
     </mdb-card-title>
     
    
-    <p class="alert" *ngIf = "this.isEmpty == true"> You have no feedbacks </p>
+    <p class="alert" *ngIf = "this.isEmpty == true"> You have no feedback </p>
     <table  mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
       <thead class="tableColor white-text">
         <tr>
-          <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
+          <th *ngFor="let el of tableElements" scope="col"><h1 class="header">{{el}}</h1> </th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let f of myFeedbacks">
-          <td>{{f.submissionName}}</td>
-          <td *ngIf="f.anonymous == false">{{f.critiquer}}</td>
-          <td *ngIf="f.anonymous == true"> Anonymous </td>
-          <td>{{f.feedbackGood}}</td>
-          <td>{{f.feedbackBad}}</td>
-          <td>{{f.feedbackWork}}</td>
+          <td class="cardBody">{{f.submissionName}}</td>
+          <td class="cardBody"*ngIf="f.anonymous == false">{{f.critiquer}}</td>
+          <td class="cardBody"*ngIf="f.anonymous == true"> Anonymous </td>
+          <td class="cardBody">{{f.feedbackGood}}</td>
+          <td class="cardBody">{{f.feedbackBad}}</td>
+          <td class="cardBody">{{f.feedbackWork}}</td>
           
-          <td *ngIf="f.feedbackRating == 0">
+          <td class="cardBody" *ngIf="f.feedbackRating == 0">
             <app-rate-feedback [childFeedback]="chosen" (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
             <button *ngIf="renderComponent !='rate-feedback'"  mdbWavesEffect mdbBtn (click) = "renderRateFeedback(f)" class="softblue btn-sm">Rate</button>
           </td>
           
-          <td *ngIf="f.feedbackRating != 0">
+          <td class="cardBody" *ngIf="f.feedbackRating != 0">
             <p>{{f.feedbackRating}}/5</p>
           </td>
         </tr>

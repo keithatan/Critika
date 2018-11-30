@@ -1,22 +1,23 @@
 
 <mdb-card>
   <mdb-card-body>
+
     <mdb-card-title>
-      <h4 class="title">My Submissions</h4>
+      <h2 class="cardTitle">My Submissions</h2>
     </mdb-card-title>
     
-    <table  mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
+    <table  mdbTable >
       <thead class="tableColor white-text">
         <tr>
-          <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
+          <th *ngFor="let el of tableElements" scope="col"><h1 class="header">{{el}}</h1></th>
         </tr>
       </thead>
       <tbody>
         <tr *ngFor="let submission of mySubmissions">
-          <td>{{submission.submissionName}}</td>
-          <td>{{submission.submissionText}}</td>
-          <td>{{submission.category}}</td>
-          <td>
+          <td class= "cardBody">{{submission.submissionName}}</td>
+          <td class= "cardBody">{{submission.submissionText}}</td>
+          <td class= "cardBody">{{submission.category}}</td>
+          <td class= "cardBody">
             <button type="button" (click) = "renderViewSub(submission)" class="btn btn-light-blue btn-sm">View Submission</button>
           </td>
         </tr>
