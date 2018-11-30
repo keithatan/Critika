@@ -3,6 +3,9 @@
         <div class="p-2 no">
           <mdb-card class="card main" >
             <mdb-card-body>
+                <mdb-card-title>
+                    <h4 class="userTitle">{{displayUser.username}}</h4>
+                  </mdb-card-title>
               
               <div class="card">
                 <p class="title">About Me</p>
@@ -81,7 +84,7 @@
                   <p class="content" *ngIf="displayUser"> {{displayUser.memberSince.substring(0,10)}} </p>
                 </div>
               </div> 
-              <button mdbBtn block="true" (click)="returnToDashboard()" class="btn btn-light-blue" type="button">Return</button>
+              <button mdbBtn block="true" (click)="returnToDashboard()" class="btn tableColor" type="button">Return</button>
               
               
               
