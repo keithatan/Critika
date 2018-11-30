@@ -1,61 +1,32 @@
-<div class="p-2 profile">
-    <div class="d-flex flex-row">
-        <div class="p-2 no">
-            <div class="d-flex flex-column">
-                    <div class="p-2 no">
-    <mdb-card class="outerCard">
-      
-      <button type="button" (click)="renderAddSub()" class="btn btn-secondary">Add Submission</button>
-      <ul>
-          <table class="table table-bordered table-striped table-wrapper-scroll-y">
-              <thead>
-                  <tr>
-                    <th scope="col">Submission Name</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Edit</th>
-                  </tr>
-                </thead>
-                <tbody>
+
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title>
+      <h4 class="title">My Submissions</h4>
+    </mdb-card-title>
+    
+    <table  mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
+      <thead class="tableColor white-text">
+        <tr>
+          <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
+        </tr>
+      </thead>
+      <tbody>
         <tr *ngFor="let submission of mySubmissions">
-          <td><h1>{{submission.submissionName}}</h1>
-          
-        </td>
-        
-        <td>
-          <p>{{submission.submissionText}}</p>
-        </td>
-        <td>
-            <p>{{submission.category}}</p>
-            
-          </td>
+          <td>{{submission.submissionName}}</td>
+          <td>{{submission.submissionText}}</td>
+          <td>{{submission.category}}</td>
           <td>
-              <button type="button" (click) = "renderViewSub(submission)" class="btn btn-secondary">View Submission</button>
-             
-            </td>
+            <button type="button" (click) = "renderViewSub(submission)" class="btn btn-light-blue btn-sm">View Submission</button>
+          </td>
         </tr>
       </tbody>
-          </table>
-        </ul>
-        
-    </mdb-card>
-  </div>
-</div>
-</div>
-<div class="p-2 no">
-    <div class="d-flex flex-column">
-            <div class="p-2 no">
-    <app-view-sub (returnToParent)="getChildEvent($event)" [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'ViewSub' "></app-view-sub>
-  </div>
-</div>
-</div>
-<div class="p-2 no">
-    <div class="d-flex flex-column">
-            <div class="p-2 no">
-                <app-add-sub (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'AddSub' "></app-add-sub>
-              </div>
-            </div>
-            </div>
-</div>
-</div>
+    </table>
 
+  </mdb-card-body>
+  <button type="button" (click)="renderAddSub()" class="btn tableColor">Add Submission</button>
+  
+  <app-view-sub (returnToParent)="getChildEvent($event)" [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'ViewSub' "></app-view-sub>
+  <app-add-sub (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'AddSub' "></app-add-sub>
+
+</mdb-card>
