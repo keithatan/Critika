@@ -20,10 +20,10 @@ export class ViewSubComponent implements OnInit {
     this.edit = false;
   }
 
-  sendReport(submission:Submission, commentMessage:string, comment:Object){
+  sendReport(submission:Submission, commentMessage:string, comment){
     // console.log(sub)
-    this.subService.reportComment(submission.submissionName, commentMessage, comment).then((res) => {
-      console.log(this.sub)
+    this.subService.reportComment(comment._id, submission.submissionID, commentMessage).then((res) => {
+      console.log(res)
     });
   }
 
