@@ -8,11 +8,7 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod",
-    "engines": {
-      "node": "10.14.1",
-      "npm": "6.4.1"
-    }
+    "postinstall": "ng build --prod"
   },
   "private": true,
   "dependencies": {
@@ -65,5 +61,9 @@
     "ts-node": "~7.0.0",
     "tslint": "~5.11.0",
     "typescript": "~3.1.1"
+  },
+  "engines": {
+    "node": "10.14.1",
+    "npm": "6.4.1"
   }
 }
