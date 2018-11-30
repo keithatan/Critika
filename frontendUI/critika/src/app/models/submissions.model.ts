@@ -1,6 +1,5 @@
 export class Submission{
-    submissionName: string;
-    submissionText: string;
+    
     username: string;
     category:string;
     coins: number;
@@ -10,7 +9,13 @@ export class Submission{
     submissionID: string;
     comments: Object[];
     skillLevel: string;
+    submissionDescription: string;
+    submissionLink: string;
+    submissionName: string;
+    submissionText: string;
     constructor(response:any){
+        this.submissionDescription = response.submissionDescription;
+        this.submissionLink = response.submissionLink;
         this.submissionName = response.submissionName;
         this.submissionText = response.submissionText;
         this.username = response.username;
@@ -21,7 +26,7 @@ export class Submission{
         this.numberOfCritiquesReceived = response.numberOfCritiquesRecieved;
         this.submissionID = response._id;
         this.comments = response.comments;
-        this.skillLevel = response.skillLevel;
+        this.skillLevel = response.submissionSkillLevel;
         
     }
 }
