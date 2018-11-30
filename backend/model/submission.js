@@ -10,7 +10,7 @@ let submissionsSchema = new Schema({
   submissionName: {type: String, required: true},
   submissionText: {type: String},
   submissionDescription: {text: String},
-  submissionsLink: {type: String},
+  submissionLink: {type: String},
   submissionSkillLevel: {type: String},
   username: {type: String, required: true}, 
   category: {type: String, unique: true},
