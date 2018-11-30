@@ -1,45 +1,55 @@
 <mdb-card class="animated fadeInUp size">
-    <!--Card content-->
-    <mdb-card-body>
-  
-      <!--Title-->
-      <mdb-card-title>
-        <h4>Title: {{chosenSubmission.submissionName}}</h4>
-      </mdb-card-title>
-  
-      <!--Card image-->
-      <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
-      <!--Text-->
-      <mdb-card-text> {{chosenSubmission.submissionText}}
-      </mdb-card-text>
-  
-        <!--
+  <!--Card content-->
+  <mdb-card-body>
+
+    <!--Title-->
+    <mdb-card-title>
+      <h4>Title: {{chosenSubmission.submissionName}}</h4>
+    </mdb-card-title>
+
+    <!--Card image-->
+    <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
+    <!--Text-->
+    <mdb-card-text> {{chosenSubmission.submissionText}}
+    </mdb-card-text>
+
+    <!--
         <textarea mdbInputDirective type="text" 
                   id="form7" class="md-textarea form-control" 
                   rows="3"
                   [(ngModel)] = "feedback" ></textarea>
         <label for="form7">Feedback</label>
         -->
-       
-          <!-- What went well -->
-          <div class="md-form">
-            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWell"></textarea>
-            <label for="form7">What went well?</label>
-          </div>
-  
-          <div class="md-form">
-            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWrong"></textarea>
-            <label for="form7">What went wrong?</label>
-          </div>
-  
-          <div class="md-form">
-            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="improved"></textarea>
-            <label for="form7">What could be improved?</label>
-          </div>
-  
-          <button mdbBtn block="true" (click)= "critique()" class="btn tableColor" type="submit">Done</button>
-          <br>
-          <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="returnToDashboard()">Cancel</button>
-  
-    </mdb-card-body>
-  </mdb-card>
+    <form (submit)="critique(f)" #f="ngForm" [formGroup]="critiqueForm">
+      <!-- What went well -->
+      <div class="md-form">
+        <textarea ngModel formControlName="wentWell" type="text" id="form7" class="md-textarea form-control" rows="3"
+          placeholder="What went well?" [ngClass]="{ 'is-invalid': submitted && form.wentWell.errors }"></textarea>
+        <div *ngIf="submitted && form.wentWell.errors" class="invalid-feedback">
+          <div *ngIf="form.wentWell.errors.required">What went well is Required</div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <textarea ngModel formControlName="wentWrong" type="text" id="form7" class="md-textarea form-control" rows="3" placeholder="What went wrong?"
+          [ngClass]="{ 'is-invalid': submitted && form.wentWrong.errors }"></textarea>
+        <div *ngIf="submitted && form.wentWrong.errors" class="invalid-feedback">
+          <div *ngIf="form.wentWrong.errors.required">What went wrong is Required</div>
+        </div>
+      </div>
+
+      <div class="md-form">
+        <textarea ngModel formControlName="improved" type="text" id="form7" class="md-textarea form-control" rows="3" placeholder="What could be improved?"
+          [ngClass]="{ 'is-invalid': submitted && form.improved.errors }"></textarea>
+        <div *ngIf="submitted && form.improved.errors" class="invalid-feedback">
+          <div *ngIf="form.improved.errors.required">What can be improved is Required</div>
+        </div>
+      </div>
+
+      <button mdbBtn block="true" (click)="critique()" class="btn tableColor" type="submit">Done</button>
+      <br>
+      <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="returnToDashboard()">Cancel</button>
+
+    </form>
+  </mdb-card-body>
+</mdb-card>
