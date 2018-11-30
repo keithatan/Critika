@@ -16,16 +16,6 @@ var mail = process.env.UNIT_TEST_EMAIL
 
 describe('Register', () => {
 
-    beforeEach(function(done){
-        User.deleteOne({username: uname}, function(err, obj){
-            if(err){
-                console.log(err)
-                return
-            }
-            //console.log(obj)
-        })
-        done();
-    })
 
     describe('Register without any information', () => {
         it('Should return 400', (done) => {
@@ -193,7 +183,6 @@ describe('Register', () => {
                     if(err){
                         console.log(err)
                     }
-                    // console.log(res.body)
                     res.should.have.status(200);
                 done();
             });

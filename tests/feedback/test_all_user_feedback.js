@@ -14,7 +14,7 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test get all feedback for a usre', function () {
+describe('test get all feedback for a user', function () {
 
     describe('Get all feedback with bad auth', function (done) {
         it('should return 401', function (done) {

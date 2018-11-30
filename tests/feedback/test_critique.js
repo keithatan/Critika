@@ -24,7 +24,11 @@ describe('test make a critique', function () {
             var info = {
                 category: 'example category',
                 submissionName: 'submission to be critiqued',
-                submissionText: 'submission text to be critiqued'
+                submissionText: 'submission text to be critiqued',
+                submissionDescription: 'submission description',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level'
+
             }
 
             chai.request(server)
@@ -35,9 +39,7 @@ describe('test make a critique', function () {
                 .end((err, res) => {
                     //give feedback to that submission
 
-                    console.log("asdjasoids "+ res.res.text)
                     var obj = JSON.parse(res.res.text)
-                    console.log(obj._id)
                     var critique_info = {
                         feedbackGood: 'good',
                         feedbackBad: 'bad',
@@ -56,13 +58,10 @@ describe('test make a critique', function () {
     })
 
     this.afterAll(function(){
-        console.log("AFTER ALL")
-        Submission.deleteOne({submissionName: 'submission to be critiqued'}).then((sub) => {
-            console.log(sub)
+        Submission.deleteMany({username: uname}).then((sub) => {
+
         }).then(() => {
-            Feedback.deleteMany({critiquer: uname}).then((feed) => {
-                console.log(feed)
-            })
+            Feedback.deleteMany({critiquer: uname}).then((feed) => {})
         })
     })
 

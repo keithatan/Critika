@@ -99,6 +99,7 @@ describe('Verify Email', () => {
     describe('Correct verify', function() {
         it('Should return 200', (done) => {
             User.findOne({username: uname}, (err, user) => {
+                
                 if(err){
                     console.log(err)
                     return
@@ -119,7 +120,6 @@ describe('Verify Email', () => {
                             console.log(err)
                             return
                         }
-                        //console.log(info)
                         res.should.have.status(200);
                     done();
                 });
