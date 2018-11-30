@@ -76,12 +76,11 @@
         <!-- </form> -->
       </div>
 
-      <button class="btn btn-primary waves-light" mdbWavesEffect type="submit">Submit</button>
-      <button (click)="cancelSubmission()" class="btn btn-primary waves-light" mdbWavesEffect type="cancel">Cancel</button>
+    <button mdbBtn (click) = "sendSubmission()" block="true" class="btn tableColor" type="submit" mdbWavesEffect type="submit">Submit</button>
+    <br>
+    <button mdbBtn (click)="cancelSubmission()" color="danger" outline="true" block="true"mdbWavesEffect type="cancel">Cancel</button>
 
     </form>
-
-
 
   </mdb-card-body>
 </mdb-card>
