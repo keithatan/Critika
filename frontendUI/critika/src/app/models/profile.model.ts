@@ -10,9 +10,11 @@ export class Profile  {
     occupation: string;
     location: string;
     homepage: string;
+    critiqueNum: number;
 
     constructor(response:any) {
         this.ratingNum = response.ratingNum;
+        this.critiqueNum = response.critiqueNum;
         this.username = response.username;
         this.occupation = response.occupation;
         this.location = response.location;

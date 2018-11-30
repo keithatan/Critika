@@ -4,6 +4,7 @@ export class User {
     submissionNum: number;
     userRating: number;
     rating: number;
+    critiqueNum: number;
 
 
     constructor(response: any) {
@@ -11,6 +12,7 @@ export class User {
         this.ratingNum = response.ratingNum;
         this.rating = response.rating;
         this.submissionNum = response.submissionNum;
+        this.critiqueNum = response.critiqueNum;
 
         if (response.ratingNum == 0) {
             this.userRating = 0
