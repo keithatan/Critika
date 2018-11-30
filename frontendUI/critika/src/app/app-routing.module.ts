@@ -14,6 +14,7 @@ import { AccountComponent } from './account/account.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { VerifyComponent } from './verify/verify.component'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { TopContributorsComponent } from './top-contributors/top-contributors.component'
 
 const AppRoutes: Routes = [
   {
@@ -35,6 +36,11 @@ const AppRoutes: Routes = [
       component: AccountComponent,
       canActivate: [AuthGuard]
 
+  },
+  {
+      path: 'top-contributors',
+      component: TopContributorsComponent,
+      canActivate: [AuthGuard]
   },
   {   
       path: 'home',

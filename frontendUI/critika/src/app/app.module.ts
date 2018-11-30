@@ -37,6 +37,7 @@ import { ViewSubComponent } from './my-submissions/view-sub/view-sub.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { VerifyComponent } from './verify/verify.component'
 import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { TopContributorsComponent } from './top-contributors/top-contributors.component'
 
 
 @NgModule({
@@ -64,7 +65,8 @@ import { ForgotPasswordComponent } from './forgot-password/forgot-password.compo
     ViewSubComponent,
     UserProfileComponent,
     VerifyComponent,
-    ForgotPasswordComponent
+    ForgotPasswordComponent,
+    TopContributorsComponent
   ],
   imports: [
     BrowserModule,

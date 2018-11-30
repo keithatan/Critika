@@ -15,11 +15,9 @@ export class AccountComponent implements OnInit {
   username: string;
   email: string;
   account: Account;
-  // changeUsernameForm: FormGroup;
   changeEmailForm: FormGroup;
   changePasswordForm: FormGroup;
   changeSecurityQuestionForm: FormGroup;
-  // submitted_username: boolean = false;
   submitted_email: boolean = false;
   submitted_password: boolean = false;
   submitted_security_question: boolean = false;
@@ -27,9 +25,6 @@ export class AccountComponent implements OnInit {
   questions = ["What is your mother's maiden name?", 'What is your favorite drink?', 'What elementary school did you attend?']
   ngOnInit() {
     this.getAccountInfo()
-    // this.changeUsernameForm = this.formBuilder.group({
-    //   username: ['', Validators.required]
-    // });
     this.changeEmailForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]]
     });
@@ -94,15 +89,6 @@ export class AccountComponent implements OnInit {
           }
         });
   }
-
-  // onSubmitUsername(form: NgForm) {
-  //   this.submitted_username = true;
-  //   this.submitted_email = false;
-  //   if (this.changeUsernameForm.invalid) {
-  //     return;
-  //   }
-  //   console.log(form.value)
-  // }
 
   onSubmitPassword(form: NgForm) {
     this.submitted_password = true;
