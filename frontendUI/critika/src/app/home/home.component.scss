@@ -6,6 +6,8 @@
 .underline {
     text-decoration: underline;
     color: #78A7DE;
+ 
+
 }
 
 .align{
@@ -24,9 +26,27 @@
 
 }
 
+.cardTitle{
+    text-align: center;
+    font-size: 40pt;
+    margin-left: 380px;
+    margin-right: 380px;
+  
+  }
+
+  .header{
+    font-size: 20pt;
+      color: #fff;
+  }
+
 .container{
     height: 100%;
 }
+
+.cardBody{
+    font-size: 20px;
+  
+  }
 
 .d-flex{
 
