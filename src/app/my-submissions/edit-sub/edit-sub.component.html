@@ -3,7 +3,7 @@
 
   <mdb-card-body >
 
-    <mdb-card-title> <h1 class="header">Edit Submission</h1> </mdb-card-title>
+    <mdb-card-title> <h5 class="header">Edit Submission</h5> </mdb-card-title>
 
     <div class="md-form">
       <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="link"></textarea>
@@ -21,8 +21,10 @@
       </div>
 
 
-    <a  (click) = "sendEdits(sub)" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
-    <a  (click) = "cancelEdits()" class="btn btn-primary waves-light" mdbWavesEffect>Cancel</a>
+    <button mdbBtn (click) = "sendEdits(sub)" class="btn tableColor" mdbWavesEffect block="true">Submit</button>
+    <button  mdbBtn (click) = "cancelEdits()"  color="danger" outline="true" mdbWavesEffect block="true">Cancel</button>
+
+    
     
   </mdb-card-body>
 </mdb-card>
