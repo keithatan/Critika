@@ -1,11 +1,14 @@
-const express = require('express')
-const app = express()
+const express = require('express');
+const path = require('path');
 
-app.use(express.static(__dirname +'/dist'));
+const app = express();
 
-app.all('*',(req,res) =>{
+// Serve only the static files form the dist directory
+app.use(express.static('./dist/critika'));
 
-    res.status(200).sendFile(__dirname + '/dist/index.html')
-})
+app.get('/*', function(req,res) {
+    
+res.sendFile(path.join(__dirname,'/dist/critika/index.html'));
+});
 
 app.listen(process.env.PORT || 8080)
