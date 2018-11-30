@@ -20,14 +20,8 @@ export class SubmissionService{
         ){
         const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
         
-        this.http.post("http://localhost:5000/submission/add", submission)
-        .subscribe(response => {
-            console.log(response)
-            
-        },
-        (err)=>{
-            console.log(err);
-        });
+        return this.http.post("http://localhost:5000/submission/add", submission)
+        
 
 
     }

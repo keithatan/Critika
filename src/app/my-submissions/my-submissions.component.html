@@ -52,7 +52,7 @@
 <div class="p-2 no">
     <div class="d-flex flex-column">
             <div class="p-2 no">
-                <app-add-sub *ngIf="renderComponent == 'AddSub' "></app-add-sub>
+                <app-add-sub (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'AddSub' "></app-add-sub>
               </div>
             </div>
             </div>

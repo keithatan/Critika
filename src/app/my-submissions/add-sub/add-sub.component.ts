@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SubmissionService } from '../../services/submissions.service'
 import { CategoriesService } from '../../categories/categories.service';
 import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
@@ -9,6 +9,8 @@ import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
   styleUrls: ['./add-sub.component.scss']
 })
 export class AddSubComponent implements OnInit {
+
+  @Output() returnToParent = new EventEmitter<string>();
 
   categoriesForm: FormGroup;
   addSubForm: FormGroup;
@@ -39,7 +41,17 @@ export class AddSubComponent implements OnInit {
     console.log(form)
     console.log(form.value.Description)
     console.log(form.value.skill)
-    this.subService.addSubmission(form.value.SubName, form.value.feedback, this.C, form.value.Link, form.value.skill,  form.value.Description);
+    this.subService.addSubmission(form.value.SubName, form.value.feedback, this.C, form.value.Link, form.value.skill,  form.value.Description)
+    .subscribe ((response) => {
+      console.log(response);
+      console.log('Worked');
+      this.returnToParent.emit('dash');
+    },
+    (err) =>{
+      console.log(err)
+    })
+    this.renderComponent = '';
+    
   }
 
   ngOnInit() {
