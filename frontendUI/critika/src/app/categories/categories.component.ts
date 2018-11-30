@@ -5,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 import { Subscription } from 'rxjs';
 import { Pipe, PipeTransform } from '@angular/core';
 import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
+import { Submission } from '../models/submissions.model';
 
 @Component({
   selector: 'app-categories',
@@ -14,6 +15,7 @@ import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
 })
 
 export class CategoriesComponent implements OnInit {
+  chosenSubmission: Submission;
   categoriesForm: FormGroup;
   submissions: Object;
   categoriesForFilter: Object;
@@ -39,11 +41,16 @@ export class CategoriesComponent implements OnInit {
       categoryDescription: [''],
     });
     this.updateCategories()
+    this.renderComponent = "reload";
   }
 
   addTextarea() {
     this.textAreasList.push('text_area' + (this.textAreasList.length + 1));
   }
+  renderViewSub(sub:Submission) {
+    this.chosenSubmission = sub;
+    this.renderComponent = 'ViewSub';
+}
 
   updateCategories() {
     this.subService.getAllCategories().then((categories) => {
@@ -68,6 +75,22 @@ export class CategoriesComponent implements OnInit {
       this.submissions = subs;
       console.log(subs)
     })
+  }
+
+  getChildEvent(event:string){
+    this.renderComponent = 'reload';
+    this.subService.getAllCategories().then((categories) => {
+      //categories is an array of all categories
+      this.categoriesForFilter = categories;
+      let i: number;
+      for (let x in categories) {
+        var name = categories[x].categoryName
+        this.categoryNames[i] = name
+      }
+      console.log(categories)
+    }).then(()=>{
+      this.getTopCategories()
+    });
   }
 
   createCategory(form: NgForm) {
