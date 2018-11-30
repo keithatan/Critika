@@ -86,6 +86,14 @@ export class SubmissionService{
         return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
     }
 
+    getLeaderboard() {
+        return this.http.get("http://localhost:5000/user/leaderboard").toPromise();
+    }
+
+    getLeaderboardReverse() {
+        return this.http.get("http://localhost:5000/user/leaderboard-reverse").toPromise();
+    }
+
     reportComment(submissionName:string, reportedMessage:string, comment:Object){
         const sub:Object = {
             submissionName: submissionName,
