@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { SubmissionService } from '../../services/submissions.service'
 import { CategoriesService } from '../../categories/categories.service';
-import { NgForm, FormGroup, FormBuilder, } from '@angular/forms';
+import { NgForm, FormGroup, FormBuilder, Validators, } from '@angular/forms';
 
 @Component({
   selector: 'app-add-sub',
@@ -27,7 +27,8 @@ export class AddSubComponent implements OnInit {
   CatChosen: boolean;
   skill: string;
   C: 'yee';
-  skills = ["Beginner", "Intermediate", "Expert"]
+  skills = ["Beginner", "Intermediate", "Expert"];
+  submitted:boolean = false;
 
   constructor(public catService: CategoriesService, private formBuilder: FormBuilder, public subService: SubmissionService) {
     this.categoryNames = [];
@@ -41,6 +42,10 @@ export class AddSubComponent implements OnInit {
     console.log(form)
     console.log(form.value.Description)
     console.log(form.value.skill)
+    this.submitted = true;
+    if (this.addSubForm.invalid) {
+      return;
+    }
     this.subService.addSubmission(form.value.SubName, form.value.feedback, this.C, form.value.Link, form.value.skill,  form.value.Description)
     .subscribe ((response) => {
       console.log(response);
@@ -63,11 +68,11 @@ export class AddSubComponent implements OnInit {
       categoryDescription: [''],
     });
     this.addSubForm = this.formBuilder.group({
-      Link: [''],
-      feedback: [''],
-      skill: [''],
-      Description: [''],
-      SubName: ['']
+      Link: ['', Validators.required],
+      feedback: ['', Validators.required],
+      skill: ['Beginner'],
+      Description: ['', Validators.required],
+      SubName: ['', Validators.required]
     })
     this.updateCategories()
   }
