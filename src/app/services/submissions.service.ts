@@ -81,6 +81,7 @@ export class SubmissionService{
             "comment": comment,
             "submissionID": submissionID
         }
+        console.log("data: " + comment + " " + submissionID)
         console.log(submissionID)
         return this.http.post<Object>("http://critika-backend.herokuapp.com/submission/add-comment", options).toPromise();
     }

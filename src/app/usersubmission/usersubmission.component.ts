@@ -1,6 +1,7 @@
 import { Component, OnInit, Output, Input, EventEmitter } from '@angular/core';
 import { Submission } from '../models/submissions.model';
 import { SubmissionService } from '../services/submissions.service';
+import { stringify } from '@angular/core/src/render3/util';
 
 @Component({
   selector: 'app-usersubmission',
@@ -34,14 +35,22 @@ export class UsersubmissionComponent implements OnInit {
   get is_comment_blank() { return this.commentBlank; }
 
   addComment(sub) {
-    console.log("id: " + sub._id)
+    var submissionID;
+    if (sub._id) {
+      submissionID = sub._id;
+    }
+    else {
+      submissionID = sub.submissionID;
+    }
+    console.log(sub)
+    console.log("id: " + submissionID)
     console.log("comment: " + this.comment)
     if (this.comment == "") {
       this.commentBlank = true;
       return;
     }
     this.commentBlank = false;
-    this.subService.addComment(this.comment, sub._id).then((sub) => {
+    this.subService.addComment(this.comment, submissionID).then((sub) => {
       console.log(sub)
     })
     this.returnToParent.emit('reload');
