@@ -81,5 +81,14 @@ router.get("/get-all-category", authenticate, (req, res) => {
     })
 })
 
+router.get("/topCategories", authenticate, (req, res) => {
+    Category.find({}).sort({numberOfSubmissions: -1}).then((response) => {
+        res.status(200).send(response);
+        return;
+    }).catch((err) => {
+        res.status(400).send(err);
+    })
+})
+
 
 module.exports = router;
