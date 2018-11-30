@@ -1,0 +1,33 @@
+.card {
+    //max-width: 50%;
+    margin: 10px;
+    
+}
+
+.main{
+    width:150%;
+}
+
+.title {
+    background:  rgb(242, 168, 166);
+    padding: 14px;
+    text-align: center;
+    color: #fff;
+}
+
+
+.content {
+    font-size: 20px;
+    text-align: center;
+    padding: 5px 15px;
+  
+}
+
+.page {
+    justify-content: space-between;
+	flex-wrap: wrap;
+}
+
+.btn.btn-light-blue {
+    margin-top: 50px;
+}

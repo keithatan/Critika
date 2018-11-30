@@ -34,5 +34,5 @@
 <!-- Render the other component stuff -->
 <div class="d-flex flex-column justify-content-center animated fadeInUp">
   <app-critique-form *ngIf="renderComponent == 'critique-form'" [submission]="chosen"(returnToParent)="getChildEvent($event)" ></app-critique-form>
-  <app-user-profile *ngIf="renderComponent == 'user'" [chosenUser]="chosenUser" ></app-user-profile>
+  <app-user-profile *ngIf="renderComponent == 'user'" (returnToParent)="getChildEvent($event)"[chosenUser]="chosenUser" ></app-user-profile>
 </div>
