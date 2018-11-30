@@ -3,9 +3,7 @@
     height: 100%;
 }
 
-.d-flex{
-    width:100% !important
-}
+
 
 .sub-card{
 
@@ -15,7 +13,25 @@
 .table-wrapper-scroll-y {
     display: block;
     max-height: 100%;
-    max-width: 100%;
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
+
+.header{
+    font-size: 20pt;
+      color: #fff;
+      text-align: center;
+  }
+.cardTitle{
+    text-align: center;
+    font-size: 40pt;
+    margin-left: 550px;
+    margin-right: 550px;
+  }
+  
+  .cardBody{
+    font-size: 20px;
+      text-align: center;
+      padding: 5px 15px;
+  
+  }
