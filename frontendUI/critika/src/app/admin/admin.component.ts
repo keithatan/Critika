@@ -15,6 +15,7 @@ import { Comment } from '../models/comment.model';
 export class AdminComponent implements OnInit {
   tableElements2 = ["Reported Comments", "User"];
   tableElements = ["User", "Status"];
+  admin:boolean;
 
   allUsers:Profile[];
   allReportedComments:Submission[];
@@ -25,7 +26,7 @@ export class AdminComponent implements OnInit {
   foundReportedComments: Comment[];
 
   constructor(public proService:ProfileService,
-              public subService:SubmissionService) { }
+              public subService:SubmissionService) { this.admin = true;}
 
 
   getUsers(){
@@ -45,6 +46,9 @@ export class AdminComponent implements OnInit {
         this.allUsers[i] = user;
       }
       
+    }).catch((err)=>{
+      this.admin = false;
+
     })
 
     this.subService.getAllReportedComments().then((data) =>{
