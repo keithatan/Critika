@@ -22,9 +22,10 @@
         </tr>
       </tbody>
     </table>
+    <button type="button" (click)="renderAddSub()" class="btn tableColor">Add Submission</button>
 
   </mdb-card-body>
-  <button type="button" (click)="renderAddSub()" class="btn tableColor">Add Submission</button>
+  
   
   <app-view-sub (returnToParent)="getChildEvent($event)" [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'ViewSub' "></app-view-sub>
   <app-add-sub (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'AddSub' "></app-add-sub>
