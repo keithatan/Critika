@@ -25,6 +25,10 @@ export class CategoriesService {
         return this.http.get<Object>("http://localhost:5000/category/get-all-category").toPromise();
     }
 
+    getTopCategories() {
+        return this.http.get<Object>("http://localhost:5000/category/topCategories").toPromise();
+    }
+
     
     getAllSubmissionsInCategory(category) {
 

@@ -88,48 +88,20 @@ export class CategoriesComponent implements OnInit {
   }
 
   getTopCategories(){
-    let max:number=0
-    let count:number=0
-    let first:object;
-    let second:object;
-    let third:object;
-    //get most number of subscribers
-    for(let obj in this.categoriesForFilter){
-      if(this.categoriesForFilter[obj].numberOfSubmissions > max){
-        max = this.categoriesForFilter[obj].numberOfSubmissions
-        first = this.categoriesForFilter[obj];
-      }
-    }
-    //get second most
-    max=0;
-    for(let obj in this.categoriesForFilter){
-      if(this.categoriesForFilter[obj].numberOfSubmissions > max){
-        if(this.categoriesForFilter[obj] == first){
-          continue
+      this.subService.getTopCategories().then((cat) => {
+        let i:number = 0;
+        let length = Object.keys(cat).length;
+        if(length < 3){
+          for(i = 0; i < length; i++){
+            this.topThreeCategories[i] = cat[i]
+          }
         }
         else{
-          second = this.categoriesForFilter[obj];
-          max = this.categoriesForFilter[obj].numberOfSubmissions
+          this.topThreeCategories[0] = cat[0];
+          this.topThreeCategories[1] = cat[1];
+          this.topThreeCategories[2] = cat[2];
         }
-      }
-    }
-    //get third most
-    max=0;
-    for(let obj in this.categoriesForFilter){
-      if(this.categoriesForFilter[obj].numberOfSubmissions > max){
-        if(this.categoriesForFilter[obj] == first || this.categoriesForFilter[obj] == second){
-          continue
-        }
-        else{
-          third = this.categoriesForFilter[obj];
-          max = this.categoriesForFilter[obj].numberOfSubmissions
-        }
-      }
-    }
-    this.topThreeCategories[0]=first
-    this.topThreeCategories[1]=second
-    this.topThreeCategories[2]=third
-    console.log(this.topThreeCategories)
+      })
   }
 
 
