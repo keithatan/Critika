@@ -32,7 +32,7 @@ export class VerifyComponent implements OnInit {
 
     const data: VerifyData = { email: form.value.email, verificationNum: form.value.number }
     // Post New Changes
-    this.http.post("http://localhost:5000/user/verify-email", data)
+    this.http.post("https://critika-backend.herokuapp.com/user/verify-email", data)
       .subscribe(response => {
         console.log(response);
         this.response = "complete";
