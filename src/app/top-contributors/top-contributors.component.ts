@@ -36,7 +36,6 @@ export class TopContributorsComponent implements OnInit {
   ngOnInit() {
     this.renderComponent = 'dash';
     this.getLeaderBoard();
-    this.getLeaderBoardReverse();
   }
 
   renderUser(str:string){
