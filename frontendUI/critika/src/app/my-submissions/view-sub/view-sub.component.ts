@@ -12,8 +12,8 @@ export class ViewSubComponent implements OnInit {
   @Output() returnToParent = new EventEmitter<string>();
   chosenSubmission: Submission;
   renderComponent: string;
-  comment: string;
-
+  comment: string = "";
+  response: string = "NULL";
   edit: boolean;
 
   constructor(public subService:SubmissionService) { 
@@ -21,10 +21,12 @@ export class ViewSubComponent implements OnInit {
     this.edit = false;
   }
 
+  get response_msg() { return this.response; }
+
   sendReport(submission:Submission, commentMessage:string, comment){
     // console.log(sub)
     this.subService.reportComment(comment._id, submission.submissionID, commentMessage).then((res) => {
-      console.log(res)
+      this.response = res["message"];
     });
   }
 
@@ -37,6 +39,9 @@ export class ViewSubComponent implements OnInit {
 
 addComment(sub){
   console.log(sub.submissionID)
+  if (this.comment == "") {
+    return;
+  }
   this.subService.addComment(this.comment, sub.submissionID).then((sub) => {
     console.log(sub)
   })
