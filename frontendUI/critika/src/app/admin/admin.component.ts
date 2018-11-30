@@ -5,6 +5,7 @@ import { Submission } from '../models/submissions.model';
 import { SubmissionService } from '../services/submissions.service';
 import { Category } from '../categories/categories.model';
 import { CommentStmt } from '@angular/compiler';
+import { Comment } from '../models/comment.model';
 
 @Component({
   selector: 'app-admin',
@@ -21,6 +22,7 @@ export class AdminComponent implements OnInit {
   UserToBeBanned: '';
   UserToBeRestored: '';
   UserToBeAdmin: '';
+  foundReportedComments: Comment[];
 
   constructor(public proService:ProfileService,
               public subService:SubmissionService) { }
@@ -42,6 +44,7 @@ export class AdminComponent implements OnInit {
         let user = new Profile(response[0][i]);
         this.allUsers[i] = user;
       }
+      
     })
 
     this.subService.getAllReportedComments().then((data) =>{
@@ -54,10 +57,39 @@ export class AdminComponent implements OnInit {
 
       for(i = 0; i < response[0].length;i++){
         let reportedCommentSub = new Submission(response[0][i]);
-        console.log(reportedCommentSub);
+        // console.log(reportedCommentSub);
         this.allReportedComments[i] = reportedCommentSub;
       }
+      // console.log(this.allReportedComments)
+
+      this.findReportedComments();
     })
+
+    
+    
+  }
+
+  findReportedComments() {
+    let i:number;
+    let j:number;
+    let k:number;
+    k = 0;
+
+    this.foundReportedComments = new Array(this.allReportedComments.length)
+    for(i = 0;i<this.allReportedComments.length;i++){
+      for(j=0;j<this.allReportedComments[i].comments.length;j++){
+        if(this.allReportedComments[i].comments[j].reported == true){
+          let c = new Comment();
+          c.username = this.allReportedComments[i].comments[j].user;
+          c.reportedMessage = this.allReportedComments[i].comments[j].message
+          console.log(this.allReportedComments[i].comments[j].user)
+          this.foundReportedComments[k] = c;
+          k = k + 1;
+        }
+      }
+    }
+
+    console.log(this.foundReportedComments)
   }
 
   updateUsers() {

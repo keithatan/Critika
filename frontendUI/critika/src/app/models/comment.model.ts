@@ -5,12 +5,12 @@ export class Comment {
     reportedMessage: string;
     reportedReason: string;
 
-    constructor(response: any){
-        this.username = response.username;
-        this.message = response.message;
-        this.reported = response.reported;
-        this.reportedMessage = response.reportedMessage;
-        this.reportedReason = response.reportedReason;
+    constructor(){
+        this.username = '';
+        this.message = '';
+        this.reported = true;
+        this.reportedMessage = '';
+        this.reportedReason = '';
     }
 
 }

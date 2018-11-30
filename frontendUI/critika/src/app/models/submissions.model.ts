@@ -7,7 +7,13 @@ export class Submission{
     available: boolean; 
     numberOfCritiquesReceived: number;
     submissionID: string;
-    comments: Object[];
+    comments: [{ 
+        user: string,
+        message: string,
+        reported: Boolean,
+        reportedMessage: string,
+        reportedReason: string,
+    }];
     submissionSkillLevel: string;
     submissionDescription: string;
     submissionLink: string;
