@@ -130,7 +130,7 @@
 
 
 
-<mdb-card class="outerCard">
+<mdb-card class="outerCard" *ngIf="renderComponent == 'reload'" >
 
   <mdb-card-body >
 
@@ -279,8 +279,8 @@
             </div>
             <div class="modal-body">
               <ul *ngFor=" let s of submissions">
-                <li><b>{{s.submissionName}}</b>
-                  <p>{{s.submissionText}}</p>
+                <li><b (click)="renderViewSub(s)" class="underline">{{s.submissionName}}</b>
+                  <p>Creator: {{s.username}}</p>
                 </li>
               </ul>
             </div>
@@ -302,3 +302,5 @@
 
   </mdb-card-body>
 </mdb-card>
+
+<app-usersubmission (returnToParent)="getChildEvent($event)" [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'ViewSub' "></app-usersubmission>
