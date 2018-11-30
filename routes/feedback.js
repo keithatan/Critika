@@ -113,7 +113,7 @@ router.post('/critique', authenticate, (req, res) => {
  * only the owner of this submission can do this
  */
 router.post('/rate-feedback', authenticate, (req, res) => {
-    if (!req.body || !req.body.submissionID || !req.body.feedbackRating) {
+    if (!req.body || !req.body.submissionID || !req.body.feedbackRating || !req.body.feedbackID) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
