@@ -8,7 +8,11 @@
     "test": "ng test",
     "lint": "ng lint",
     "e2e": "ng e2e",
-    "postinstall": "ng build --prod"
+    "postinstall": "ng build --prod",
+    "engines": {
+      "node": "10.14.1",
+      "npm": "6.4.1"
+    }
   },
   "private": true,
   "dependencies": {
