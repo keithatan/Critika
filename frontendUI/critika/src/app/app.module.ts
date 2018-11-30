@@ -23,6 +23,7 @@ import { LoginComponent } from './auth/login/login.component';
 import { SignupComponent } from './auth/signup/signup.component';
 import { FormsModule, FormGroup, ReactiveFormsModule } from '@angular/forms';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { FeedbackViewComponent } from './feedback/feedback-view/feedback-view.component'
 
 import { CritiqueFormComponent } from './home/critique-form/critique-form.component';
 import { MySubmissionsComponent } from './my-submissions/my-submissions.component';
@@ -59,6 +60,7 @@ import { UsersubmissionComponent } from './usersubmission/usersubmission.compone
     SearchPipe,
     EditProfileComponent,
     FeedbackComponent,
+    FeedbackViewComponent,
     AccountComponent,
     RateFeedbackComponent,
     SidenavComponent,
