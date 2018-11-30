@@ -52,11 +52,12 @@ export class CategoriesService {
         return this.http.post<Object>("http://localhost:5000/category/create-category", options).toPromise();
     }
 
-    addComment(form: NgForm, submissionName){
+    addComment(form: NgForm, submissionID){
         const options = {
             "comment": form.value.comment,
-            "submissionName": submissionName
+            "submissionID": submissionID
         }
+        console.log(submissionID)
         return this.http.post<Object>("http://localhost:5000/submission/add-comment", options).toPromise();
     }
 
