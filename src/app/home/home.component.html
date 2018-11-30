@@ -17,8 +17,7 @@
         </thead>
         <tbody>
           <tr mdbTableCol *ngFor="let sub of possibleSubs">
-            <th scope="row">{{sub.submissionName}}</th>
-            <td>{{sub.submissionText}}</td>
+            <th (click)="renderViewSub(sub)" class="underline" scope="row">{{sub.submissionName}}</th>
             <td (click)="renderUser(sub.username)" class="underline">{{sub.username}}</td>
             <td>{{sub.category}}</td>
             <td><span class="badge badge-primary badge-pill softblue">{{sub.numberOfCritiquesReceived}}</span></td>
@@ -36,4 +35,5 @@
 <div class="d-flex flex-column justify-content-center animated fadeInUp">
   <app-critique-form *ngIf="renderComponent == 'critique-form'" [submission]="chosen"(returnToParent)="getChildEvent($event)" ></app-critique-form>
   <app-user-profile *ngIf="renderComponent == 'user'" (returnToParent)="getChildEvent($event)"[chosenUser]="chosenUser" ></app-user-profile>
+  <app-usersubmission (returnToParent)="getChildEvent($event)" [childSubmission]='chosenSubmission' *ngIf="renderComponent == 'ViewSub' "></app-usersubmission>
 </div>
