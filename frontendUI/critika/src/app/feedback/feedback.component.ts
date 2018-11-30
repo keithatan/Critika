@@ -79,7 +79,7 @@ export class FeedbackComponent implements OnInit {
       this.myFeedbacks = new Array(response[0].length)
 
       if (this.myFeedbacks.length > 0) {
-        this.isEmpty =false;
+        this.isEmpty = false;
       }
       else {
         this.isEmpty = true;
