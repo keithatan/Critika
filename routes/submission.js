@@ -34,7 +34,7 @@ router.post("/add", authenticate, (req, res) => {
         return;
     }
 
-    if(req.user.coins < 4){
+    if (req.user.coins < 4) {
         res.status(400).json({ message: "You dont have enough coins" });
         return;
     }
@@ -60,7 +60,7 @@ router.post("/add", authenticate, (req, res) => {
                     username: req.user.username,
                     available: true,
 
-                    
+
                     /*category: req.body.category,*/
                 });
                 console.log(req.body.submissionDescription)
@@ -69,28 +69,23 @@ router.post("/add", authenticate, (req, res) => {
 
                 // Change submission num
 
-                User.findOneAndUpdate({ username: req.user.username },
-                    {
+                // Add to database 
+                newSubmission.save().then(() => {
+                    console.log(newSubmission)
+                    User.findOneAndUpdate({ username: req.user.username }, {
                         $inc: {
+                            coins: -4,
                             submissionNum: 1
                         }
-                    }).then(() => {
-                        // Add to database 
-                        newSubmission.save().then(() => {
-                            console.log(newSubmission)
-                            User.findOneAndUpdate({username: req.user.username}, {
-                                $inc: {
-                                    coins: -4,
-                                }
-                            }).then((obj) => {
-                                
-                            })
-                            res.status(200).send(newSubmission);
-                        }).catch((err) => {
-                            console.log(err)
-                            res.status(400).send({ message: "Error adding submission" });
-                        })
+                    }).then((obj) => {
+
                     })
+                    res.status(200).send(newSubmission);
+                }).catch((err) => {
+                    console.log(err)
+                    res.status(400).send({ message: "Error adding submission" });
+                })
+
             }
         }).then(() => {
             Category.findOneAndUpdate({ categoryName: req.body.category }, {
@@ -149,12 +144,12 @@ router.post("/add-comment", authenticate, (req, res) => {
         return;
     }
 
-    if(req.user.coins == 0){
+    if (req.user.coins == 0) {
         res.status(400).json({ message: "You dont have enough coins" });
         return;
     }
 
-    User.findOneAndUpdate({username: req.user.username}, {
+    User.findOneAndUpdate({ username: req.user.username }, {
         $inc: {
             coins: 1,
         }
@@ -210,7 +205,7 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
-    if (!req.body.commentID || !req.body.submissionName || !req.body.reportedMessage ) {
+    if (!req.body.commentID || !req.body.submissionName || !req.body.reportedMessage) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
@@ -320,16 +315,16 @@ router.get('/available-with-categories', authenticate, (req, res) => {
                 subs.forEach(function (withCat) {
                     var tf = false;
                     var i = 0;
-                    for(i = 0; i < feedbackContributed.length; i++){
-                        if(feedbackContributed[i] == withCat._id){
+                    for (i = 0; i < feedbackContributed.length; i++) {
+                        if (feedbackContributed[i] == withCat._id) {
                             tf = true;
                         }
                     }
-                    if(tf == false){
+                    if (tf == false) {
                         if (categoriesContributed.includes(withCat.category) && withCat.username != req.user.username) {
                             userMap[withCat._id] = withCat
                         }
-                    }                    
+                    }
                 });
                 console.log(userMap)
                 res.send(userMap);
