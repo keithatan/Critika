@@ -15,7 +15,7 @@ var uname = process.env.UNIT_TEST_USERNAME
 var pword = process.env.UNIT_TEST_PASSWORD
 var mail = process.env.UNIT_TEST_EMAIL
 
-describe('test get all feedback for a user', function () {
+describe('Rate feedback', function () {
 
     this.beforeAll(function (done) {
         var tempUser = {
@@ -31,6 +31,7 @@ describe('test get all feedback for a user', function () {
             .send(tempUser)
             .end((err, res) => {
 
+
                 var verifyInfo = {
                     verificationNum: res.header['verificationnum'],
                     email: 'tempemail@email.com',
@@ -45,7 +46,7 @@ describe('test get all feedback for a user', function () {
                             username: 'tempUser',
                             password: 'tempPassword',
                         }
-
+                        
                         chai.request(server)
                             .post('/user/login')
                             .set('content-type', 'application/x-www-form-urlencoded')
@@ -62,7 +63,7 @@ describe('test get all feedback for a user', function () {
                                 }
                                 User.findOne({ username: 'tempUser' }, (err, user) => {
                                     //do the get request here 
-
+                                    
                                     var tempToken = user['tokens'][0]['token'][0]
 
                                     chai.request(server)
@@ -82,6 +83,7 @@ describe('test get all feedback for a user', function () {
                                             User.findOne({ username: uname }, (err, user) => {
                                                 //do the get request here 
 
+
                                                 var token = user['tokens'][0]['token'][0]
 
                                                 chai.request(server)
@@ -91,6 +93,7 @@ describe('test get all feedback for a user', function () {
                                                     .send(info)
                                                     .end((err, res) => {
 
+
                                                         Submission.findOne({ submissionName: 'submission name critique' }).then((sub) => {
                                                             var info = {
                                                                 feedbackGood: 'good feedback given',
@@ -98,20 +101,28 @@ describe('test get all feedback for a user', function () {
                                                                 feedbackWork: 'work',
                                                                 submissionID: sub._id.toString()
                                                             }
+
                                                             chai.request(server)
                                                                 .post('/feedback/critique')
                                                                 .set('content-type', 'application/x-www-form-urlencoded')
                                                                 .set('token', tempToken)
                                                                 .send(info)
                                                                 .end((err, res) => {
+
                                                                     done()
-                                                                    // console.log(res)
                                                                 })
+                                                                
+                                                        }).catch((err) => {
+                                                            console.log(err)
                                                         })
                                                     })
+                                            }).catch((err) => {
+                                                console.log(err)
                                             })
                                         })
-                                });
+                                }).catch((err) => {
+                                    console.log(err)
+                                })
                             })
                     })
             })
@@ -205,37 +216,29 @@ describe('test get all feedback for a user', function () {
 
     describe('Rate feedback with bath auth', function (done) {
         it('should return 401', function (done) {
-            Submission.findOne({ submissionName: 'submission name critique' }).then((sub) => {
-                Feedback.findOne({ feedbackGood: 'good feedback given' }).then((feed) => {
-                    var info = {
-                        feedbackRating: '3',
-                        submissionID: sub._id.toString(),
-                        feedbackID: feed._id.toString()
-                    }
-                    User.findOne({ username: uname }, (err, user) => {
-                        //do the get request here 
+            User.findOne({ username: uname }, (err, user) => {
+                //do the get request here 
 
-                        var token = user['tokens'][0]['token'][0]
+                var token = user['tokens'][0]['token'][0]
 
-                        chai.request(server)
-                            .post('/feedback/rate-feedback')
-                            .set('content-type', 'application/x-www-form-urlencoded')
-                            .set('token', 'bad token')
-                            .send(info)
-                            .end((err, res) => {
-                                res.should.have.status(401)
-                                done()
-                            })
-                    });
-                })
-            })
+                chai.request(server)
+                    .post('/feedback/rate-feedback')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .set('token', 'bad token')
+                    .send()
+                    .end((err, res) => {
+                        res.should.have.status(401)
+                        done()
+                    })
+            });
         })
     })
 
     describe('Rate feedback with correct info', function (done) {
         it('should return 200', function (done) {
             Submission.findOne({ submissionName: 'submission name critique' }).then((sub) => {
-                Feedback.findOne({ feedbackGood: 'good feedback given' }).then((feed) => {
+                Feedback.findOne({ username: 'tempUser' }).then((feed) => {
+                    console.log(feed)
                     var info = {
                         feedbackRating: '3',
                         submissionID: sub._id.toString(),
@@ -262,3 +265,4 @@ describe('test get all feedback for a user', function () {
     })
 
 })
+
