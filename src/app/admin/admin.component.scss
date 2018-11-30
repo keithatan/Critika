@@ -9,6 +9,13 @@
     overflow-y: auto;
     -ms-overflow-style: -ms-autohiding-scrollbar;
     }
+.table-wrapper-scroll-yx {
+        display: block;
+        max-height: 200px;
+        max-width: 270px;
+        overflow-y: auto;
+        -ms-overflow-style: -ms-autohiding-scrollbar;
+        }
 
 .button{
     background-color:  rgb(242, 168, 166);

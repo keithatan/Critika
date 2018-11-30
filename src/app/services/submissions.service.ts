@@ -87,7 +87,7 @@ export class SubmissionService{
 
 
     getAllReportedComments(){
-        return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
+        return this.http.get("http://localhost:5000/submission/all").toPromise();
     }
 
     getLeaderboard() {
