@@ -32,7 +32,7 @@ export class FeedbackService {
             feedbackID: feedbackid
         }
         
-        return this.http.post("http://critika-backend.herokuapp.com/feedback/rate-feedback", feedback)
+        return this.http.post("https://critika-backend.herokuapp.com/feedback/rate-feedback", feedback)
     }
    
    giveFeedback(feedbackbad: string, feedbackwork: string, feedbackgood: string,
@@ -40,10 +40,10 @@ export class FeedbackService {
         const feedbackO:Object = {feedbackBad: feedbackbad, feedbackWork: feedbackwork, feedbackGood: feedbackgood, username: username, submissionName: submissionName, anonymous: anonymous, submissionID: submissionID }
 
             var feedback = new Feedback(feedbackO);
-            return this.http.post("http://critika-backend.herokuapp.com/feedback/critique", feedback)
+            return this.http.post("https://critika-backend.herokuapp.com/feedback/critique", feedback)
    }
 
    getFeedbacks(){
-       return this.http.get("http://critika-backend.herokuapp.com/feedback/all-user").toPromise();
+       return this.http.get("https://critika-backend.herokuapp.com/feedback/all-user").toPromise();
    }
 }

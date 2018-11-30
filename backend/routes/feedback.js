@@ -27,10 +27,12 @@ router.get("/", (req, res) => {
  * Each user can only give one feedback
  */
 router.post('/critique', authenticate, (req, res) => {
-    if (!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID) {
+    if (!req.body || !req.body.feedbackGood || !req.body.feedbackWork || !req.body.feedbackBad || !req.body.submissionID || !req.body.username) {
         res.status(400).json({ message: "Report comment data is incomplete" + req.body.submissionID });
         return;
     }
+
+    console.log(req.body.username)
 
     // New category Data
     var newFeedback = new Feedback({
@@ -42,6 +44,8 @@ router.post('/critique', authenticate, (req, res) => {
         critiquer: req.user.username,
         username: req.body.username
     });
+
+    console.log(newFeedback)
 
     var tf = true;
 
