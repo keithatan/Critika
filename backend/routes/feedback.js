@@ -40,7 +40,7 @@ router.post('/critique', authenticate, (req, res) => {
         submissionName: req.body.submissionName,
         submissionID: req.body.submissionID,
         critiquer: req.user.username,
-        username: req.user.username
+        username: req.body.username
     });
 
     var tf = true;

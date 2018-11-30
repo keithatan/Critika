@@ -49,6 +49,11 @@ export class FeedbackComponent implements OnInit {
   }
 
   getChildEvent(str:string){
+    if (str == 'close'){
+      this.renderComponent = ''
+    }
+    else
+    {
     this.subService.getFeedbacks().then((data) => {
       let i: number;
 
@@ -65,6 +70,8 @@ export class FeedbackComponent implements OnInit {
       }
       console.log(this.myFeedbacks);
     });
+
+  }
 
   }
 

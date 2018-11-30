@@ -11,6 +11,7 @@ export class ViewSubComponent implements OnInit {
   @Output() returnToParent = new EventEmitter<string>();
   chosenSubmission: Submission;
   renderComponent: string;
+  comment: string;
 
   edit: boolean;
 
@@ -31,6 +32,14 @@ export class ViewSubComponent implements OnInit {
       this.renderComponent = 'EditSub';
       this.chosenSubmission = sub;
   
+}
+
+addComment(sub){
+  console.log(sub.submissionID)
+  this.subService.addComment(this.comment, sub.submissionID).then((sub) => {
+    console.log(sub)
+  })
+  this.returnToParent.emit('reload');
 }
 
 getChildEvent(event:string){
