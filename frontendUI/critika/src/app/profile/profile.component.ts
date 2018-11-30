@@ -32,7 +32,8 @@ export class ProfileComponent implements OnInit {
   ngOnInit() {
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
-      this.r = this.profile.rating/this.profile.ratingNum;
+      let p:number = this.profile.ratingNum - 1;
+      this.r = this.profile.rating/p;
       /*
       const v = response["rating"];
       console.log(v);
@@ -48,7 +49,8 @@ export class ProfileComponent implements OnInit {
     this.renderComponent = "";
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
-      this.r = this.profile.rating/this.profile.ratingNum;
+      let p:number = this.profile.ratingNum - 1;
+      this.r = this.profile.rating/p;
       /*
       const v = response["rating"];
       console.log(v);
