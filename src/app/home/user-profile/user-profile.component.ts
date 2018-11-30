@@ -17,7 +17,8 @@ export class UserProfileComponent implements OnInit {
   ngOnInit() {
     this.proService.getUser(this.chosenUser).subscribe((res) =>{
       this.displayUser = new Profile(res);
-      this.r = this.displayUser.rating/this.displayUser.ratingNum;
+      let p:number = this.displayUser.ratingNum - 1;
+      this.r = this.displayUser.rating/p;
       console.log(this.displayUser);
     })
   }
