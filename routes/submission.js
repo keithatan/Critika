@@ -41,14 +41,6 @@ router.post("/add", authenticate, (req, res) => {
 
     console.log(req)
 
-    User.findOneAndUpdate({username: req.user.username}, {
-        $inc: {
-            coins: -4,
-        }
-    }).then((obj) => {
-        
-    })
-
     if (req.body.category) {
         Category.findOne({ categoryName: req.body.category }).then((resp) => {
             console.log(resp)
@@ -86,6 +78,13 @@ router.post("/add", authenticate, (req, res) => {
                         // Add to database 
                         newSubmission.save().then(() => {
                             console.log(newSubmission)
+                            User.findOneAndUpdate({username: req.user.username}, {
+                                $inc: {
+                                    coins: -4,
+                                }
+                            }).then((obj) => {
+                                
+                            })
                             res.status(200).send(newSubmission);
                         }).catch((err) => {
                             console.log(err)
@@ -211,12 +210,12 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
-    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage ) {
+    if (!req.body.commentID || !req.body.submissionName || !req.body.reportedMessage ) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
 
-    Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
+    Submission.findOneAndUpdate({ comments: req.body.commentID },
         {
             $push: {
                 'comments': {
