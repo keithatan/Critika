@@ -507,7 +507,7 @@ router.post("/become-admin", authenticate, (req, res) => {
  */
 router.post("/reset-password-email", (req, res) => {
 
-    if (!req.body || !req.body.email || !req.body.security_question || !req.body.security_question_answer) {
+    if (!req.body || !req.body.email || !req.body.securityquestion || !req.body.securityquestionanswer) {
         res.status(400).send({ message: "Reset information is incomplete" });
         return;
     }
@@ -520,8 +520,8 @@ router.post("/reset-password-email", (req, res) => {
             var email_body = "Dear " + usr.email + ", \n\nOur records indicate that you have requested a password " +
                 "reset. Your new temporary password is:\n\n" +
                 tempPassword + "\n\nSincerely, \n\nThe Critika Team";
-            if (usr.security_question == req.body.security_question) {
-                if (usr.security_question_answer.toUpperCase() !== req.body.security_question_answer.toUpperCase()) {
+            if (usr.security_question == req.body.securityquestion) {
+                if (usr.security_question_answer.toUpperCase() !== req.body.securityquestionanswer.toUpperCase()) {
                     res.status(400).send({ message: "Security question answer does not match." });
                     return;
                 }

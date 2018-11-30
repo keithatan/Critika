@@ -110,31 +110,6 @@ describe('Test report comment', function () {
         })
     })
 
-    describe('Test without reported reason', function () {
-        it('Should return 400', function (done) {
-            var info = {
-                comment: 'comment to be reported',
-                submissionName: 'submission name',
-                reportedMessage: 'for testing',
-            }
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-    
-                var token = user['tokens'][0]['token'][0]
-    
-                chai.request(server)
-                    .post('/submission/report-comment')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(400);
-                        done()
-                    })
-            });
-        })
-    })
-
     describe('Test with bad auth', function () {
         it('Should return 401', function (done) {
             var info = {

@@ -36,6 +36,7 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ViewSubComponent } from './my-submissions/view-sub/view-sub.component';
 import { UserProfileComponent } from './home/user-profile/user-profile.component';
 import { VerifyComponent } from './verify/verify.component'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 
 
 @NgModule({
@@ -62,7 +63,8 @@ import { VerifyComponent } from './verify/verify.component'
     UserSearchPipe,
     ViewSubComponent,
     UserProfileComponent,
-    VerifyComponent
+    VerifyComponent,
+    ForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
