@@ -32,7 +32,7 @@ describe('Test add submissions', function () {
                 .set('token', token)
                 .send(info)
                 .end((err, res)=> {})
-        });
+        })
     })
 
     describe('Test without category', function () {

@@ -28,7 +28,6 @@ describe('test make a critique', function () {
                 submissionDescription: 'submission description',
                 submissionLink: 'submission link',
                 submissionSkillLevel: 'submission skill level'
-
             }
 
             chai.request(server)
@@ -54,14 +53,36 @@ describe('test make a critique', function () {
                         .send(critique_info)
                         .end((err, res) => { })
                 })
+                User.findOne({ username: uname }, (err, user) => {
+                    //do the get request here 
+
+                    var subInfo = {
+                        submissionName: 'submission name',
+                        submissionText: 'submission text',
+                        submissionLink: 'submission link',
+                        submissionSkillLevel: 'submission skill level',
+                        submissionDescription: 'submission description',
+                        category: 'example category'
+                    }
+        
+                    var token = user['tokens'][0]['token'][0]
+        
+                    chai.request(server)
+                        .post('/submission/add')
+                        .set('content-type', 'application/x-www-form-urlencoded')
+                        .set('token', token)
+                        .send(subInfo)
+                        .end((err, res)=> {
+                        })
+                });
         })
     })
 
-    this.afterAll(function(){
-        Submission.deleteMany({username: uname}).then((sub) => {
+    this.afterAll(function () {
+        Submission.deleteMany({ username: uname }).then((sub) => {
 
         }).then(() => {
-            Feedback.deleteMany({critiquer: uname}).then((feed) => {})
+            Feedback.deleteMany({ critiquer: uname }).then((feed) => { })
         })
     })
 
@@ -71,7 +92,8 @@ describe('test make a critique', function () {
                 var info = {
                     feedbackBad: 'bad',
                     feedbackWork: 'work',
-                    submissionID: sub._id
+
+                    // submissionID: sub._id
                 }
                 User.findOne({ username: uname }, (err, user) => {
                     //do the get request here 
@@ -99,7 +121,7 @@ describe('test make a critique', function () {
                 var info = {
                     feedbackGood: 'good',
                     feedbackWork: 'work',
-                    submissionID: sub._id
+                    // submissionID: sub._id
                 }
                 User.findOne({ username: uname }, (err, user) => {
                     //do the get request here 
@@ -126,7 +148,7 @@ describe('test make a critique', function () {
                 var info = {
                     feedbackGood: 'good',
                     feedbackBad: 'bad',
-                    submissionID: sub._id
+                    // submissionID: sub._id
                 }
                 User.findOne({ username: uname }, (err, user) => {
                     //do the get request here 
@@ -181,7 +203,7 @@ describe('test make a critique', function () {
                     feedbackGood: 'good',
                     feedbackBad: 'bad',
                     feedbackWork: 'work',
-                    submissionID: sub._id
+                    // submissionID: sub._id
                 }
                 User.findOne({ username: uname }, (err, user) => {
                     //do the get request here 
@@ -205,11 +227,13 @@ describe('test make a critique', function () {
     describe('Critique with correct info', function (done) {
         it('should return 200', function (done) {
             Submission.findOne({ submissionName: 'submission name' }).then((sub) => {
+                console.log(sub)
                 var info = {
                     feedbackGood: 'good',
                     feedbackBad: 'bad',
                     feedbackWork: 'work',
-                    submissionID: sub._id.toString()
+                    submissionID: sub['_id'].toString(),
+                    username: uname,
                 }
                 User.findOne({ username: uname }, (err, user) => {
                     //do the get request here 

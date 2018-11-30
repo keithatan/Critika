@@ -89,7 +89,6 @@ describe('Test add comment', function () {
     
         it('Should return 200', function (done) {
             Submission.findOne({submissionName: 'submission name'}).then((sub) => {
-                console.log(sub)
                 var info = {
                     comment: 'example comment',
                     submissionID: sub._id.toString()
