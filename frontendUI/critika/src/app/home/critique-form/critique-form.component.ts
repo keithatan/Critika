@@ -14,6 +14,7 @@ export class CritiqueFormComponent implements OnInit {
   wentWell: string;
   wentWrong: string;
   improved: string;
+  submitted:boolean = false;
   // tslint:disable-next-line:no-input-rename
   @Input('submission') chosenSubmission: Submission;
   @Output() returnToParent = new EventEmitter<string>();
@@ -22,16 +23,20 @@ export class CritiqueFormComponent implements OnInit {
 
 
 
-  constructor(public feedbackService: FeedbackService) {
+  constructor(public feedbackService: FeedbackService, private formBuilder: FormBuilder) {
     this.renderComponent = '';
   }
   renderComponent: string;
   feedback: string;
   comment: string;
 
-  critique() {
+  critique(form: NgForm) {
     console.log(this.chosenSubmission.submissionName);
-    this.feedbackService.giveFeedback(this.wentWrong, this.improved,this.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe((response) => {
+    this.submitted = true;
+    if (this.critiqueForm.invalid) {
+      return;
+    }
+    this.feedbackService.giveFeedback(form.value.wentWrong, form.value.improved, form.value.wentWell, this.chosenSubmission.username,  this.chosenSubmission.submissionName, false, this.chosenSubmission.submissionID).subscribe((response) => {
         console.log('Worked');
         this.returnToParent.emit('dash');
       }),((err) => {
@@ -41,7 +46,14 @@ export class CritiqueFormComponent implements OnInit {
 
   ngOnInit() {
     console.log(this.chosenSubmission);
+    this.critiqueForm = this.formBuilder.group({
+      wentWell: ['', Validators.required],
+      wentWrong: ['', Validators.required],
+      improved: ['', Validators.required]
+    })
   }
+
+  get form() { return this.critiqueForm.controls; }
 
   returnToDashboard() {
     this.returnToParent.emit('dash');
