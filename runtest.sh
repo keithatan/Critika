@@ -42,6 +42,8 @@ mocha tests/user/test_restore_user.js --exit
 sleep 1
 
 #submission tests
+clear
+sleep 2
 echo SUBMISSION TESTS
 echo ------------------------------------------------------------------------
 
@@ -69,6 +71,8 @@ mocha tests/submission/test_submission_mine.js --exit
 sleep 1
 
 #categories tests
+clear
+sleep 2
 echo CATEGORIES TESTS
 echo ------------------------------------------------------------------------
 
@@ -80,6 +84,8 @@ mocha tests/category/test_get_all_submissions_in_category.js --exit
 sleep 1
 
 #feedback tests
+clear
+sleep 2
 echo FEEDBACK TESTS
 echo ------------------------------------------------------------------------
 
