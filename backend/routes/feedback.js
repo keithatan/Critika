@@ -46,13 +46,13 @@ router.post('/critique', authenticate, (req, res) => {
     var tf = true;
 
     Feedback.find({ submissionID: req.body.submissionID }).then((subs) => {
-        console.log(subs)
+        // console.log(subs)
         var i;
         for (i = 0; i < subs.length; i++) {
-            console.log(subs.length)
-            console.log(subs[i])
+            // console.log(subs.length)
+            // console.log(subs[i])
             if (req.user.username === subs[i].critiquer) {
-                console.log("401401401")
+                // console.log("401401401")
                 res.status(401).send({ message: "You have already given feedback to this submission" });
                 tf = false;
                 return;
@@ -63,7 +63,7 @@ router.post('/critique', authenticate, (req, res) => {
         return
     })
 
-    console.log(tf)
+    // console.log(tf)
 
     /*we need to update submissions critique number*/
     Submission.findOneAndUpdate({ _id: req.body.submissionID },

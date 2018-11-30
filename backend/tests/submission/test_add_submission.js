@@ -39,7 +39,64 @@ describe('Test add submissions', function () {
         it('Should return 400', function (done) {
             var info = {
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
+            }
+            User.findOne({ username: uname }, (err, user) => {
+                //do the get request here 
+    
+                var token = user['tokens'][0]['token'][0]
+    
+                chai.request(server)
+                    .post('/submission/add')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .set('token', token)
+                    .send(info)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        done()
+                    })
+            });
+        })
+    })
+
+    describe('Test without submission link', function () {
+        it('Should return 400', function (done) {
+            var info = {
+                category: 'example category',
+                submissionName: 'submission name',
+                submissionText: 'submission text',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
+            }
+            User.findOne({ username: uname }, (err, user) => {
+                //do the get request here 
+    
+                var token = user['tokens'][0]['token'][0]
+    
+                chai.request(server)
+                    .post('/submission/add')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .set('token', token)
+                    .send(info)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        done()
+                    })
+            });
+        })
+    })
+
+    describe('Test without submission skill level', function () {
+        it('Should return 400', function (done) {
+            var info = {
+                category: 'example category',
+                submissionName: 'submission name',
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionDescription: 'submission description',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -63,7 +120,10 @@ describe('Test add submissions', function () {
         it('Should return 400', function (done) {
             var info = {
                 category: 'example category',
-                submissionText: 'submission text'
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -88,6 +148,35 @@ describe('Test add submissions', function () {
             var info = {
                 category: 'example category',
                 submissionName: 'submission name',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
+            }
+            User.findOne({ username: uname }, (err, user) => {
+                //do the get request here 
+    
+                var token = user['tokens'][0]['token'][0]
+    
+                chai.request(server)
+                    .post('/submission/add')
+                    .set('content-type', 'application/x-www-form-urlencoded')
+                    .set('token', token)
+                    .send(info)
+                    .end((err, res) => {
+                        res.should.have.status(400);
+                        done()
+                    })
+            });
+        })
+    })
+
+    describe('Test without submission description', function () {
+        it('Should return 400', function (done) {
+            var info = {
+                category: 'example category',
+                submissionName: 'submission name',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -112,7 +201,10 @@ describe('Test add submissions', function () {
             var info = {
                 category: 'invalid category',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -137,7 +229,10 @@ describe('Test add submissions', function () {
             var info = {
                 category: 'example category',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -162,7 +257,10 @@ describe('Test add submissions', function () {
             var info = {
                 category: 'example category',
                 submissionName: 'submission name',
-                submissionText: 'submission text'
+                submissionText: 'submission text',
+                submissionLink: 'submission link',
+                submissionSkillLevel: 'submission skill level',
+                submissionDescription: 'submission description',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -175,7 +273,6 @@ describe('Test add submissions', function () {
                     .set('token', token)
                     .send(info)
                     .end((err, res) => {
-                        // console.log(res)
                         res.should.have.status(200);
                         done()
                     })
