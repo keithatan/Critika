@@ -45,6 +45,9 @@
           <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
           <button mdbBtn  (click)="addComment(sub)" class="softblue" block="true">Submit Comment</button>
         </div>
+       <div *ngIf="is_comment_blank" class="alert alert-danger" role="alert">
+        Please submit a comment, or close the window.
+      </div>
         
       </div>
       <button mdbBtn type="button" (click) = "close()" color="danger" outline="true" mdbWavesEffect block="true">Close</button>
