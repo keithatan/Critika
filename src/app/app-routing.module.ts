@@ -13,6 +13,7 @@ import { AuthGuard } from './auth/auth-guard';
 import { AccountComponent } from './account/account.component';
 import { CategoriesComponent } from './categories/categories.component';
 import { VerifyComponent } from './verify/verify.component'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
 
 const AppRoutes: Routes = [
   {
@@ -24,6 +25,10 @@ const AppRoutes: Routes = [
   {
       path: 'verify',
       component: VerifyComponent
+  },
+  {
+      path: 'forgot',
+      component: ForgotPasswordComponent
   },
   {   
       path: 'account',
