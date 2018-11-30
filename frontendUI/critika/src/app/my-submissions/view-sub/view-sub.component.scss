@@ -14,6 +14,12 @@
     -ms-overflow-style: -ms-autohiding-scrollbar;
 }
 
+.btn-outline-danger {
+    border: 2px solid rgb(242, 168, 166) !important;
+    background-color: transparent !important;
+    color: rgb(242, 168, 166) !important;
+}
+
 .cardTitle {
     text-align: center;
 }
