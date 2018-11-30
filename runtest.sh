@@ -2,7 +2,9 @@
 
 clear
 
-ls tests/user
+# user tests
+echo USER TESTS
+echo ------------------------------------------------------------------------
 
 mocha tests/user/test_register.js --exit
 sleep 1
@@ -38,3 +40,53 @@ mocha tests/user/test_remove_coin.js --exit
 sleep 1
 mocha tests/user/test_restore_user.js --exit
 sleep 1
+
+#submission tests
+clear
+sleep 2
+echo SUBMISSION TESTS
+echo ------------------------------------------------------------------------
+
+mocha tests/submission/test_add_submission.js --exit
+sleep 1
+mocha tests/submission/test_add_comment.js --exit
+sleep 1
+mocha tests/submission/test_edit_submission.js --exit
+sleep 1
+mocha tests/submission/test_get_all_reported.js --exit
+sleep 1
+mocha tests/submission/test_get_all_submissions.js --exit
+sleep 1
+mocha tests/submission/test_get_available.js --exit
+sleep 1
+mocha tests/submission/test_get_mine.js --exit
+sleep 1
+mocha tests/submission/test_make_unavailable.js --exit
+sleep 1
+mocha tests/submission/test_remove_submission.js --exit
+sleep 1
+mocha tests/submission/test_report_comment.js --exit
+sleep 1
+mocha tests/submission/test_submission_mine.js --exit
+sleep 1
+
+#categories tests
+clear
+sleep 2
+echo CATEGORIES TESTS
+echo ------------------------------------------------------------------------
+
+mocha tests/category/test_create_category.js --exit
+sleep 1
+mocha tests/category/test_get_all_categories.js --exit
+sleep 1
+mocha tests/category/test_get_all_submissions_in_category.js --exit
+sleep 1
+
+#feedback tests
+clear
+sleep 2
+echo FEEDBACK TESTS
+echo ------------------------------------------------------------------------
+
+echo "All tests finished"
