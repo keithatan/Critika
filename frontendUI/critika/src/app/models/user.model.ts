@@ -14,7 +14,7 @@ export class User {
         this.submissionNum = response.submissionNum;
         this.critiqueNum = response.critiqueNum;
 
-        if (response.ratingNum == 0) {
+        if (response.rating == 0) {
             this.userRating = 0
         }
         else {
