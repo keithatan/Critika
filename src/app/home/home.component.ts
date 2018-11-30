@@ -12,9 +12,10 @@ import { Profile } from '../models/profile.model';
   styleUrls: ['./home.component.scss']
 })
 export class HomeComponent implements OnInit {
-  tableElements = ['Title','Description', 'User', 'Category', 'Critiques', 'Give Feedback'];
+  tableElements = ['Title','User', 'Category', 'Critiques', 'Give Feedback'];
   possibleSubs:Submission[];
   chosen:Submission;
+  chosenSubmission:Submission;
   displayUser:Profile;
   TWENTY_FOUR_HOURS = 86400000;
   ONE_MINUTE = 60000;
@@ -26,6 +27,11 @@ export class HomeComponent implements OnInit {
     this.timer;
   }
   renderComponent: String;
+
+  renderViewSub(sub:Submission) {
+    this.chosenSubmission = sub;
+    this.renderComponent = 'ViewSub';
+}
 
   renderCritiqueForm(sub: Submission) {
     this.chosen = sub;
@@ -43,7 +49,13 @@ export class HomeComponent implements OnInit {
   }
 
   getChildEvent(str: string) {
+
+    if (str == 'reload'){
+      this.renderComponent = 'dash'
+
+    }else{
     this.renderComponent = str;
+    }
     this.subService.getAvailable().then((submissions) => {
       console.log(submissions)
       let i: number = 0;
