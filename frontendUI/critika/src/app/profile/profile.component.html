@@ -1,6 +1,6 @@
-<div class="page">
-  <div class="p-2 no">
-    <mdb-card class="card">
+<div class="page" >
+  <div class="p-2 no" *ngIf="renderComponent != 'EditProfile'" >
+    <mdb-card class="card" >
       <mdb-card-body>
         
         <div class="card">
@@ -34,9 +34,12 @@
               
             </div>
           </div>
+          
+          
           <div class="p-2">
-            <!-- Right column-->
+            <!-- RIGHT COLUMN-->
             <div class="d-flex flex-column">
+              
               <div class="p-2"> 
                 <div class="card">
                   <p class="title"> Location</p>
@@ -45,6 +48,7 @@
                   </div>
                 </div>
               </div>
+              
             </div>
             
             <div class="p-2">
@@ -90,9 +94,6 @@
                   </div>
                 </div>
               </div>  
-              
-              
-              
             </div>
           </div>
           
@@ -105,31 +106,28 @@
                   <p class="title">Critika Coins</p>
                   <div>
                     <p  class="content" *ngIf="profile"> {{profile.coins}}</p>
+                    
                   </div>
                 </div>
               </div>  
-              
-              
             </div>
           </div> 
         </div>
         
-        
-        
-        
-        
-        
-        
       </mdb-card-body>
-      <app-edit-profile *ngIf="renderComponent == 'EditProfile' " [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
-      <button type="button" block="true" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button>
+      <!-- <app-edit-profile *ngIf="renderComponent == 'EditProfile' "  [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile> -->
+      <!-- <button mdbBtn block="true" (click)="renderEditProfile()" class="btn tableColor" type="button">Edit Profile</button> -->
+      <!-- <button type="button" block="true" (click)="renderEditProfile()" class="btn btn-secondary">Edit Profile</button> -->
     </mdb-card>
-    
-    
-  </div>  
+    <button mdbBtn block="true" (click)="renderEditProfile()" class="btn tableColor" type="button">Edit Profile</button>
+
   
+  </div>  
+  <app-edit-profile *ngIf="renderComponent == 'EditProfile' "  [childProfile]="profile" (returnToParent)="getChildEvent($event)"></app-edit-profile>
+
   
 </div>
+
 
 
 

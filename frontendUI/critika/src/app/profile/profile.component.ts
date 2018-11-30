@@ -11,47 +11,24 @@ import { THIS_EXPR } from '@angular/compiler/src/output/output_ast';
   styleUrls: ['./profile.component.scss']
 })
 export class ProfileComponent implements OnInit {
-
+  
   coins: number;
   profile: Profile;
   r:number;
-  edit: boolean;
-
+  
+  
   constructor(public profileService: ProfileService) {
     this.renderComponent = "";
     this.coins = 4;
-    this.edit = false;
+  
   }
-
-  renderComponent: String;
-
-  renderAddSub() {
-    this.renderComponent = "AddSub"
-  }
-
-  renderSpendCoins() {
-    this.renderComponent = "SpendCoins"
-  }
-
-  renderEditSub() {
-    this.renderComponent = "EditSub"
-  }
+  
+  renderComponent: string;
+  
   renderEditProfile() {
-    if (this.edit == false) {
-      this.edit = true;
-    }
-    if (this.edit == true) {
-      this.edit = false;
-    }
-    if (this.renderComponent == "EditProfile"){
-      this.renderComponent = "";
-
-    }
-    else{
-    this.renderComponent = "EditProfile"
+      this.renderComponent = "EditProfile";
   }
-  }
-
+  
   ngOnInit() {
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
@@ -61,12 +38,14 @@ export class ProfileComponent implements OnInit {
       console.log(v);
       */
       console.log(response);
-      console.log(this.profile)
+      console.log(this.profile);
+     
     })
-
+    
   }
-
+  
   getChildEvent(event:string){
+    this.renderComponent = "";
     this.profileService.getProfile().then((response) => {
       this.profile = new Profile(response);
       this.r = this.profile.rating/this.profile.ratingNum;
@@ -75,8 +54,9 @@ export class ProfileComponent implements OnInit {
       console.log(v);
       */
       console.log(response);
-      console.log(this.profile)
+      console.log(this.profile);
+     
     })
   }
-
+  
 }
