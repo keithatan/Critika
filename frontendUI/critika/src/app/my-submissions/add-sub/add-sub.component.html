@@ -4,25 +4,16 @@
   <mdb-card-body>
 
     <!--Title-->
-    <mdb-card-title> <h1 class="header">Add Submission</h1> </mdb-card-title>
-
-    <!--Text-->
-    <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="Link">
-      <label for="form1" class="">Add Link Here</label>
-    </div>
-
-    <!--Text-->
-    <div class="md-form">
-      <input ngModel mdbInputDirective type="text" id="form1" class="form-control" [(ngModel)]="SubName">
-      <label for="form1" class="">Submission Name</label>
-    </div>
+    <mdb-card-title>
+      <h1 class="header">Add Submission</h1>
+    </mdb-card-title>
 
     <!--Text-->
     <div class="md-form" *ngIf="CatChosen == false">
-      <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
+      <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories"
+        title="Type in a category">
       <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
-          <button (click)="choseCat(c.categoryName)" type="button" class="btn btn-primary btn-sm">{{c.categoryName}}</button>
+        <button (click)="choseCat(c.categoryName)" type="button" class="btn btn-primary btn-sm">{{c.categoryName}}</button>
       </ul>
     </div>
     <div class="md-form" *ngIf="CatChosen == true">
@@ -30,16 +21,53 @@
     </div>
 
 
-    <!--Basic textarea-->
-    <div class="md-form">
-      <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="feedback"></textarea>
-      <label for="form7">What feedback are you looking for?</label>
-    </div>
+    
 
-    <!-- Default unchecked -->
-    <mdb-checkbox [default]="true" [(ngModel)]="SpendCoin">Spend Coin on Submission</mdb-checkbox>
+    <form (submit)="sendSubmission(f)" #f="ngForm" [formGroup]="addSubForm">
 
-    <a (click) = "sendSubmission()" class="btn btn-primary waves-light" mdbWavesEffect>Submit</a>
+
+
+      <!--Text-->
+      <div class="md-form">
+        <input ngModel formControlName="Link" type="text" id="form1" class="form-control" placeholder="Add Link Here">
+      </div>
+
+      <!--Text-->
+      <div class="md-form">
+        <input ngModel formControlName="SubName" type="text" id="form1" class="form-control" placeholder="Submission Name">
+      </div>
+
+      <!--Text-->
+      <div class="md-form">
+        <input ngModel formControlName="Description" type="text" id="form1" class="form-control" placeholder="Description">
+      </div>
+
+
+
+
+      <!--Basic textarea-->
+      <div class="md-form">
+        <textarea formControlName="feedback" type="text" id="form7" class="md-textarea form-control" rows="3"></textarea>
+        <label for="form7">What feedback are you looking for?</label>
+      </div>
+
+      <div class="form-group">
+        <!-- <form [formGroup]="addSubForm"> -->
+          <div class="form-group">
+            <label>Skill Level</label>
+            <select class="form-control" formControlName="skill">
+                <option [value]="s" *ngFor="let s of skills">
+                    {{s}}</option>
+            </select>
+          </div>
+        <!-- </form> -->
+      </div>
+
+      <button class="btn btn-primary waves-light" mdbWavesEffect type="submit">Submit</button>
+
+    </form>
+
+
 
   </mdb-card-body>
 </mdb-card>
