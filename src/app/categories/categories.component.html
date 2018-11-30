@@ -163,7 +163,7 @@
   <p (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <b > {{c.categoryName}} </b> </p>
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
@@ -196,7 +196,7 @@
 <form (submit)="createCategory(f)" #f="ngForm">
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
     aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-dialog-centered" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
@@ -272,7 +272,7 @@
                     Submissions</button>
                     <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
         aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-        <div class="modal-dialog" role="document">
+        <div class="modal-dialog modal-dialog-centered" role="document">
           <div class="modal-content">
             <div class="modal-header">
               <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
