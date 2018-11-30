@@ -18,7 +18,7 @@ export class ProfileService {
     getProfile(){
         //make API call, then call toPromise
         // calling the api and then letting X know that im done and heres the information
-        return this.http.get("http://secure-peak-43679.herokuapp.com/user/account").toPromise()
+        return this.http.get("http://critika-backend.herokuapp.com/user/account").toPromise()
         
     }
     
@@ -30,25 +30,25 @@ export class ProfileService {
             aboutme: aboutme
         }
         
-        return this.http.post("http://secure-peak-43679.herokuapp.com/user/profile", profile)
+        return this.http.post("http://critika-backend.herokuapp.com/user/profile", profile)
     }
     
     getAllUsers(){
-        return this.http.get("http://secure-peak-43679.herokuapp.com/user/all-users").toPromise();
+        return this.http.get("http://critika-backend.herokuapp.com/user/all-users").toPromise();
     }
 
     getUser(user:string){
         const param:Object = {
             username: user
         }
-        return this.http.post("http://secure-peak-43679.herokuapp.com/user/find", param);
+        return this.http.post("http://critika-backend.herokuapp.com/user/find", param);
     }
     banUser(user: string) {
 
         const param:Object = {
             usernameToBeBanned: user
         }
-        return this.http.post("http://secure-peak-43679.herokuapp.com/user/ban-user", param);
+        return this.http.post("http://critika-backend.herokuapp.com/user/ban-user", param);
     }
 
     restoreUser(user: string) {
@@ -56,7 +56,7 @@ export class ProfileService {
         const param:Object = {
             usernameToBeRestored: user
         }
-        return this.http.post("http://secure-peak-43679.herokuapp.com/user/restore-user", param);
+        return this.http.post("http://critika-backend.herokuapp.com/user/restore-user", param);
     }
 
     AdminUser(user: string) {
@@ -64,6 +64,6 @@ export class ProfileService {
         const param:Object = {
             username: user
         }
-        return this.http.post("http://secure-peak-43679.herokuapp.com/user/become-admin", param);
+        return this.http.post("http://critika-backend.herokuapp.com/user/become-admin", param);
     }
 }
