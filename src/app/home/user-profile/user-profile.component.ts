@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { ProfileService } from 'src/app/services/profile.service';
 import { Profile } from 'src/app/models/profile.model';
 
@@ -9,6 +9,7 @@ import { Profile } from 'src/app/models/profile.model';
 })
 export class UserProfileComponent implements OnInit {
   @Input('chosenUser') chosenUser:string;
+  @Output() returnToParent = new EventEmitter<string>();
   displayUser:Profile
   r:number;
 
@@ -21,6 +22,10 @@ export class UserProfileComponent implements OnInit {
       this.r = this.displayUser.rating/p;
       console.log(this.displayUser);
     })
+  }
+
+  returnToDashboard() {
+    this.returnToParent.emit('dash');
   }
 
 }
