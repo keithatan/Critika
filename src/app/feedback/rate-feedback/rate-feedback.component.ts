@@ -41,12 +41,13 @@ export class RateFeedbackComponent implements OnInit {
      if (this.showAllFeedbacks == false) { 
        this.showAllFeedbacks = true;
      }
-
      else if (this.showAllFeedbacks == true) {
        this.showAllFeedbacks = false;
      }
 
      this.renderComponent = "feedback";
+     this.returnToParent.emit('close')
+
    }
   
   
