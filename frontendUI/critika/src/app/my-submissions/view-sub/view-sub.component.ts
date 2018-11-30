@@ -7,6 +7,7 @@ import { SubmissionService } from '../../services/submissions.service';
   styleUrls: ['./view-sub.component.scss']
 })
 export class ViewSubComponent implements OnInit {
+  
   @Input('childSubmission') sub:Submission;
   @Output() returnToParent = new EventEmitter<string>();
   chosenSubmission: Submission;

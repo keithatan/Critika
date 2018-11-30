@@ -1,73 +1,114 @@
-<div class="p-2 profile">
-    <div class="d-flex flex-row">
-        <div class="p-2 no">
-            <div class="d-flex flex-column">
-                    <div class="p-2 no">
-    <mdb-card class="outerCard" *ngIf="sub != null">
-          <h1 class="submissionName">{{sub.submissionName}}</h1>
-          <h1>Link</h1>
-          <p >{{sub.submissionLink}}</p>
-          <h1>Category</h1>
-          <p >{{sub.category}}</p>
-          <h1>Skill Level</h1>
-          <p >{{sub.submissionSkillLevel}}</p>
-          <h1>Description</h1>
-          <p>{{sub.submissionDescription}}</p>   
-          <h1>Desired Feedback</h1>
-          <p>{{sub.submissionText}}</p>
 
-          <h1>Comments</h1>
-          <div class="md-form">
+<mdb-card>
+  <mdb-card-body>
+    <mdb-card-title>
+      <h4 class="title">My Submissions</h4>
+    </mdb-card-title>
+    
+    <div>
+      <p class="submissionName">{{sub.submissionName}}</p>
+      <p>Link</p>
+      <p >{{sub.submissionLink}}</p>
+      <p>Category</p>
+      <p >{{sub.category}}</p>
+      <p>Skill Level</p>
+      <p >{{sub.submissionSkillLevel}}</p>
+      <p>Description</p>
+      <p>{{sub.submissionDescription}}</p>   
+      <p>Desired Feedback</p>
+      <p>{{sub.submissionText}}</p>
+
+      <br>
+      <p>Comments</p>
+      <div class="md-form">
           <button href="#" (click)="addComment(sub)" class="btn btn-secondary btn-sm">Submit comment</button>
-              <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
-          </div>
-
-          <div *ngIf="sub.comments.length > 0">
-            
-
-            <ul>
-              <table class="table table-bordered table-striped table-wrapper-scroll-y">
-                  <thead>
-                      <tr>
-                        <th scope="col">User</th>
-                        <th>Comment</th>
-                        <th>Report</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr *ngFor="let c of sub.comments">
-                        <td>
-                          <p>{{c.user}}</p>
-                        </td>
-                        <td>
-                          <p>{{c.message}}</p>
-                        </td>
-                        <td>
-                            <button type="button" (click) = "sendReport(sub, c.message,c)" class="btn btn-secondary">REPORT COMMENT</button>
-                        </td>
-                      </tr>
-                    </tbody>
-              </table>
-            </ul>
-          </div>
-          <div *ngIf="sub.comments.length == 0">
-          <h1>Comments</h1>
-          <p >There are currently no comments on this submission.</p>
-          </div>
-         
-          <button type="button" (click) = "renderEditSub(submission)" class="btn btn-secondary">Edit Submission</button>
-          <button type="button" (click) = "close()" class="btn btn-secondary">Close</button>
-
-    </mdb-card>
+          <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
+      </div>
+      
     </div>
-  </div>
-</div>
-<div class="p-2 no">
-    <div class="d-flex flex-column">
-            <div class="p-2 no">
-    <app-edit-sub [childSubmission]='sub' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
-  </div>
-</div>
-</div>
+    
+    
+  </mdb-card-body>
+  
+  
+</mdb-card>
+
+
+
+
+
+
+
+<div class="p-2 profile">
+  <div class="d-flex flex-row">
+    <div class="p-2 no">
+      <div class="d-flex flex-column">
+        <div class="p-2 no">
+          <mdb-card class="outerCard" *ngIf="sub != null">
+            <h1 class="submissionName">{{sub.submissionName}}</h1>
+            <h1>Link</h1>
+            <p >{{sub.submissionLink}}</p>
+            <h1>Category</h1>
+            <p >{{sub.category}}</p>
+            <h1>Skill Level</h1>
+            <p >{{sub.submissionSkillLevel}}</p>
+            <h1>Description</h1>
+            <p>{{sub.submissionDescription}}</p>   
+            <h1>Desired Feedback</h1>
+            <p>{{sub.submissionText}}</p>
+            
+            <h1>Comments</h1>
+            <div class="md-form">
+              <button href="#" (click)="addComment(sub)" class="btn btn-secondary btn-sm">Submit comment</button>
+              <textarea id="textarea-char-counter" class="form-control md-textarea" length="120" rows="3" placeholder="Leave a Comment" [(ngModel)]="comment"></textarea>
+            </div>
+            
+            <div *ngIf="sub.comments.length > 0">
+              
+              
+              <ul>
+                <table class="table table-bordered table-striped table-wrapper-scroll-y">
+                  <thead>
+                    <tr>
+                      <th scope="col">User</th>
+                      <th>Comment</th>
+                      <th>Report</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let c of sub.comments">
+                      <td>
+                        <p>{{c.user}}</p>
+                      </td>
+                      <td>
+                        <p>{{c.message}}</p>
+                      </td>
+                      <td>
+                        <button type="button" (click) = "sendReport(sub, c.message,c)" class="btn btn-secondary">REPORT COMMENT</button>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </ul>
+            </div>
+            <div *ngIf="sub.comments.length == 0">
+              <h1>Comments</h1>
+              <p >There are currently no comments on this submission.</p>
+            </div>
+            
+            <button type="button" (click) = "renderEditSub(submission)" class="btn btn-secondary">Edit Submission</button>
+            <button type="button" (click) = "close()" class="btn btn-secondary">Close</button>
+            
+          </mdb-card>
+        </div>
+      </div>
+    </div>
+    <div class="p-2 no">
+      <div class="d-flex flex-column">
+        <div class="p-2 no">
+          <app-edit-sub [childSubmission]='sub' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
