@@ -1,44 +1,45 @@
 <mdb-card class="animated fadeInUp size">
-	<!--Card content-->
-	<mdb-card-body>
-		
-		<!--Title-->
-		<mdb-card-title>
-			<h4>Title: {{chosenSubmission.submissionName}}</h4>
-		</mdb-card-title>
-		
-		<!--Card image-->
-		<!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
-		<!--Text-->
-		<mdb-card-text> {{chosenSubmission.submissionText}}
-		</mdb-card-text>
-		
-		<!--
-			<textarea mdbInputDirective type="text" 
-			id="form7" class="md-textarea form-control" 
-			rows="3"
-			[(ngModel)] = "feedback" ></textarea>
-			<label for="form7">Feedback</label>
-		-->
-		
-		<!-- What went well -->
-		<div class="md-form">
-			<textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWell"></textarea>
-			<label for="form7">What went well?</label>
-		</div>
-		
-		<div class="md-form">
-			<textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWrong"></textarea>
-			<label for="form7">What went wrong?</label>
-		</div>
-		
-		<div class="md-form">
-			<textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="improved"></textarea>
-			<label for="form7">What could be improved?</label>
-		</div>
-		
-	</mdb-card-body>
-	<button mdbBtn block="true" (click)= "critique()" class="btn tableColor" type="submit">Done</button>
-	<br>
-	<button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="returnToDashboard()">Cancel</button>
-</mdb-card>
+    <!--Card content-->
+    <mdb-card-body>
+  
+      <!--Title-->
+      <mdb-card-title>
+        <h4>Title: {{chosenSubmission.submissionName}}</h4>
+      </mdb-card-title>
+  
+      <!--Card image-->
+      <!-- <mdb-card-img src="https://mdbootstrap.com/img/Photos/Lightbox/Thumbnail/img%20(97).jpg" alt="Card image cap"></mdb-card-img> -->
+      <!--Text-->
+      <mdb-card-text> {{chosenSubmission.submissionText}}
+      </mdb-card-text>
+  
+        <!--
+        <textarea mdbInputDirective type="text" 
+                  id="form7" class="md-textarea form-control" 
+                  rows="3"
+                  [(ngModel)] = "feedback" ></textarea>
+        <label for="form7">Feedback</label>
+        -->
+       
+          <!-- What went well -->
+          <div class="md-form">
+            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWell"></textarea>
+            <label for="form7">What went well?</label>
+          </div>
+  
+          <div class="md-form">
+            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="wentWrong"></textarea>
+            <label for="form7">What went wrong?</label>
+          </div>
+  
+          <div class="md-form">
+            <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="improved"></textarea>
+            <label for="form7">What could be improved?</label>
+          </div>
+  
+          <button mdbBtn block="true" (click)= "critique()" class="btn tableColor" type="submit">Done</button>
+          <br>
+          <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="returnToDashboard()">Cancel</button>
+  
+    </mdb-card-body>
+  </mdb-card>
