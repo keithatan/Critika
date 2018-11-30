@@ -83,6 +83,7 @@ router.post('/critique', authenticate, (req, res) => {
         {
             $inc: {
                 coins: 4,
+                critiqueNum: 1
             }
         }).then((res) => {
             // console.log ('Found ' + res)
