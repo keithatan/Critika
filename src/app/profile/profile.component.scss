@@ -1,12 +1,7 @@
 .card {
     //max-width: 50%;
     margin: 20px;
-}
-
-#about-me-card {
-    min-width: 70%;
-    margin: 40px;
-    background: #fff;
+    
 }
 
 .title {
@@ -17,9 +12,10 @@
 }
 
 .content {
-    font-size: 24px;
+    font-size: 20px;
     text-align: center;
-    font: medium;
+    padding: 5px 15px;
+  
 }
 
 .all-cards {
