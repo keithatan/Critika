@@ -130,7 +130,7 @@
 
 
 
-<mdb-card class="outerCard" *ngIf="renderComponent == 'reload'" >
+<mdb-card class="outerCard animated fadeInUp" *ngIf="renderComponent == 'reload'" >
 
   <mdb-card-body >
 
@@ -158,7 +158,7 @@
 <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for categories" title="Type in a category">
 <mdb-card class="outerCard" *ngIf="queryString != null" >
 
-    <mdb-card-body >
+    <mdb-card-body>
 <ul *ngFor="let c of categoriesForFilter | searchPipe: queryString" id="cats">
   <p (click)="getSubmissionsInCategory(c.categoryName)" (click)="basicModal.show()"> <b > {{c.categoryName}} </b> </p>
   <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
