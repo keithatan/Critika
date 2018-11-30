@@ -12,6 +12,9 @@ import { FeedbackComponent } from './feedback/feedback.component';
 import { AuthGuard } from './auth/auth-guard';
 import { AccountComponent } from './account/account.component';
 import { CategoriesComponent } from './categories/categories.component';
+import { VerifyComponent } from './verify/verify.component'
+import { ForgotPasswordComponent } from './forgot-password/forgot-password.component'
+import { TopContributorsComponent } from './top-contributors/top-contributors.component'
 
 const AppRoutes: Routes = [
   {
@@ -20,11 +23,24 @@ const AppRoutes: Routes = [
       pathMatch: 'full',
 
   },
+  {
+      path: 'verify',
+      component: VerifyComponent
+  },
+  {
+      path: 'forgot',
+      component: ForgotPasswordComponent
+  },
   {   
       path: 'account',
       component: AccountComponent,
       canActivate: [AuthGuard]
 
+  },
+  {
+      path: 'top-contributors',
+      component: TopContributorsComponent,
+      canActivate: [AuthGuard]
   },
   {   
       path: 'home',
@@ -77,7 +93,7 @@ const AppRoutes: Routes = [
   {
       //404 error, leave this one as last route check
       path: '**',
-      component: DashboardComponent,
+      redirectTo: 'home',
   }
 ]
 

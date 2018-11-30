@@ -94,4 +94,22 @@ export class MySubmissionsComponent implements OnInit {
       });
   }
 
+  getChildEvent(event:string){
+    this.subService.getSubmissions().then((data) =>{
+      let i:number;
+
+      let response = [];
+      response.push(data);
+
+
+      this.mySubmissions = new Array(response[0].length)
+
+      for(i = 0;i< response[0].length; i+=1) {
+          let submission = new Submission(response[0][i])
+          this.mySubmissions[i] = submission;
+       }
+       console.log(response);
+      });
+  }
+
 }
