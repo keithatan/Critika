@@ -151,7 +151,9 @@ router.post("/add-comment", authenticate, (req, res) => {
             $push: {
                 'comments': {
                     user: req.user.username,
-                    message: req.body.comment
+                    message: req.body.comment,
+                    reported: false,
+                    reportedMessage: '',
                 }
             }
         }).then(() => {
@@ -194,17 +196,16 @@ router.post("/remove", authenticate, (req, res) => {
  */
 router.post("/report-comment", authenticate, (req, res) => {
 
-    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage || !req.body.reportedReason) {
+    if (!req.body.comment || !req.body.submissionName || !req.body.reportedMessage ) {
         res.status(400).json({ message: "Report comment data is incomplete" });
         return;
     }
 
     Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
         {
-            $set: {
+            $push: {
                 'comments': {
                     reportedMessage: req.body.reportedMessage,
-                    reportedReason: req.body.reportedReason,
                     reported: true,
                 }
             },

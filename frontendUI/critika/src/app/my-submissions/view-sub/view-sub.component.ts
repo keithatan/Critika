@@ -18,6 +18,13 @@ export class ViewSubComponent implements OnInit {
     this.edit = false;
   }
 
+  sendReport(submission:Submission, commentMessage:string, comment:Object){
+    // console.log(sub)
+    this.subService.reportComment(submission.submissionName, commentMessage, comment).then((res) => {
+      console.log(this.sub)
+    });
+  }
+
   renderEditSub(sub:Submission) {
     if (this.edit == false) {
       this.edit = true;
@@ -48,7 +55,7 @@ getChildEvent(event:string){
 }
 
   ngOnInit() {
-    
+    console.log(this.sub)
   }
 
 

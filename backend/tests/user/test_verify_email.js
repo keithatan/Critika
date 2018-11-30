@@ -39,7 +39,7 @@ describe('Verify Email', () => {
                 .send(info)
                 .end((err, res) => {
                     res.should.have.status(400);
-                done();
+                     done();
             });
         })
     })
@@ -103,7 +103,7 @@ describe('Verify Email', () => {
                     console.log(err)
                     return
                 }
-                console.log(err)
+                // console.log(err)
                 let info = {
                     username: uname,
                     email: mail,
