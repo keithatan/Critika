@@ -3,6 +3,22 @@
 		<mdb-card-title>
 			<h2 class="adminTitle">Admin</h2>
 		</mdb-card-title>
+
+		<div class="table2">
+				<table mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
+					<thead>
+						<tr>
+							<th *ngFor="let el of tableElements2" scope="col">{{el}}</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr mdbTableCol *ngFor="let user of allReportedComments.username" id="cats">
+							
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
 		<div>
 			
 			

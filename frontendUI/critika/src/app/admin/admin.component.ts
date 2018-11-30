@@ -4,6 +4,7 @@ import { ProfileService } from '../services/profile.service';
 import { Submission } from '../models/submissions.model';
 import { SubmissionService } from '../services/submissions.service';
 import { Category } from '../categories/categories.model';
+import { CommentStmt } from '@angular/compiler';
 
 @Component({
   selector: 'app-admin',
@@ -11,7 +12,8 @@ import { Category } from '../categories/categories.model';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent implements OnInit {
-  tableElements = ['User', 'Standing'];
+  tableElements2 = ["Reported Comments", "User"];
+  tableElements = ["User", "Status"];
 
   allUsers:Profile[];
   allReportedComments:Submission[];
