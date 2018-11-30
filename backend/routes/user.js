@@ -556,4 +556,19 @@ router.post("/reset-password-email", (req, res) => {
     }
 })
 
+router.get("/leaderboard-reverse", authenticate, (req, res) => {
+    User.find({}).sort({ratingNum: 1}).then((response) => {
+        res.status(200).send(response);
+        return;
+
+    })
+})
+
+router.get("/leaderboard", authenticate, (req, res) => {
+    User.find({}).sort({ratingNum: -1}).then((response) => {
+        res.status(200).send(response);
+        return;
+        
+    })
+})
 module.exports = router;

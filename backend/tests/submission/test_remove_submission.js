@@ -19,7 +19,11 @@ describe('Test remove submissions', function () {
         var info = {
             category: 'example category',
             submissionName: 'submission to remove',
-            submissionText: 'submission text'
+            submissionText: 'submission text',
+            submissionDescription: 'submission description',
+            submissionLink: 'submission link',
+            submissionSkillLevel: 'submission skill level'
+
         }
         User.findOne({ username: uname }, (err, user) => {
             //do the get request here 
@@ -81,26 +85,31 @@ describe('Test remove submissions', function () {
         })
     })
 
-    describe('Test with bad info', function () {
+    describe('Test with correct info', function () {
         it('Should return 200', function (done) {
-            var info = {
-                submissionName: 'submission to remove'
-            }
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
-    
-                var token = user['tokens'][0]['token'][0]
-    
-                chai.request(server)
-                    .post('/submission/remove')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        done()
-                    })
-            });
+
+            Submission.findOne({submissionName: 'submission to remove'}).then((sub) => {
+
+                var info = {
+                    submissionID: sub._id.toString()
+                }
+
+                User.findOne({ username: uname }, (err, user) => {
+                    //do the get request here 
+        
+                    var token = user['tokens'][0]['token'][0]
+        
+                    chai.request(server)
+                        .post('/submission/remove')
+                        .set('content-type', 'application/x-www-form-urlencoded')
+                        .set('token', token)
+                        .send(info)
+                        .end((err, res) => {
+                            res.should.have.status(200);
+                            done()
+                        })
+                });
+            })            
         })
     })
 

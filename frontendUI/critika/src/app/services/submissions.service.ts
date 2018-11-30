@@ -15,13 +15,12 @@ export class SubmissionService{
         
     }
 
-    addSubmission(submissionname: string, submissiontext: string, category:string, username:string, submissionlink:string,
+    addSubmission(submissionname: string, submissiontext: string, category:string, submissionlink:string,
         submissionskilllevel:string, submissiondescription: string
         ){
-        const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, username : username, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
-        var p = new Submission(submission)
+        const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
         
-        this.http.post("http://localhost:5000/submission/add", p)
+        this.http.post("http://localhost:5000/submission/add", submission)
         .subscribe(response => {
             console.log(response)
             
@@ -83,6 +82,14 @@ export class SubmissionService{
 
     getAllReportedComments(){
         return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
+    }
+
+    getLeaderboard() {
+        return this.http.get("http://localhost:5000/user/leaderboard").toPromise();
+    }
+
+    getLeaderboardReverse() {
+        return this.http.get("http://localhost:5000/user/leaderboard-reverse").toPromise();
     }
 
     reportComment(submissionName:string, reportedMessage:string, comment:Object){

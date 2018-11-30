@@ -1,7 +1,11 @@
 .card {
     //max-width: 50%;
-    margin: 20px;
+    margin: 10px;
     
+}
+
+.main{
+    width:150%;
 }
 
 .title {
@@ -11,6 +15,7 @@
     color: #fff;
 }
 
+
 .content {
     font-size: 20px;
     text-align: center;
@@ -18,11 +23,10 @@
   
 }
 
-.all-cards {
-    margin: 10px;
+.page {
+    justify-content: space-between;
+	flex-wrap: wrap;
+}
 
-}
-.no{
-    padding: 0rem !important
-}
+
 

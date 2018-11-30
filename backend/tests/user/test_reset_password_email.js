@@ -185,8 +185,8 @@ describe('test reset password email', function () {
         it('should return 200', function (done) {
             var info = {
                 email: mail,
-                security_question: 'ok',
-                security_question_answer: 'ok',
+                securityquestion: 'ok',
+                securityquestionanswer: 'ok',
             }
             User.findOne({ username: uname }, (err, user) => {
                 //do the get request here 
@@ -199,7 +199,6 @@ describe('test reset password email', function () {
                     .set('token', token)
                     .send(info)
                     .end((err, res) => {
-                        // console.log(res)
                         res.should.have.status(200)
                         done()
                     })
