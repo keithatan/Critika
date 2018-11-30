@@ -5,7 +5,10 @@ var Feedback = require('./feedback.js')
 
 /* Make the schema */
 let submissionsSchema = new Schema({
+<<<<<<< HEAD
+=======
   category: {type: String, required: true, unique: true},
+>>>>>>> a33eb3e869ed2154323a54bfdd53bffd3eacdb32
   available: {type: Boolean},
   submissionName: {type: String, required: true},
   submissionText: {type: String},

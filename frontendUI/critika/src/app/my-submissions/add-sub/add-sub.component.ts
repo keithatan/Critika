@@ -35,11 +35,16 @@ export class AddSubComponent implements OnInit {
     this.CatChosen = false;
   }
 
+<<<<<<< HEAD
+  sendSubmission() {
+    //this.subService.addSubmission(this.SubName, this.Link, this.C, localStorage.getItem('user'));
+=======
   sendSubmission(form:NgForm) {
     console.log(form)
     console.log(form.value.Description)
     console.log(form.value.skill)
     this.subService.addSubmission(form.value.SubName, form.value.feedback, this.C, form.value.Link, form.value.skill,  form.value.Description);
+>>>>>>> a33eb3e869ed2154323a54bfdd53bffd3eacdb32
   }
 
   ngOnInit() {

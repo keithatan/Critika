@@ -32,17 +32,16 @@ export class SubmissionService{
 
     }
 
-    editSubmission(submissionname: string, submissiontext: string, submissioncategory: string){
+    editSubmission(submissionLink: string, submissionDescription: string, submissionDesiredFeedback: string, submissionID: string){
         const submission:Object = {
-            submissionName: submissionname, 
-            submissionText : submissiontext, 
-            submissionCategory: submissioncategory
-        }
-        var p = new Submission(submission)
-        
+            submissionLink: submissionLink, 
+            submissionText : submissionDesiredFeedback, 
+            submissionDescription: submissionDescription,
+            submissionID: submissionID
+        }        
 
 
-        return this.http.post("http://localhost:5000/submission/edit", p)
+        return this.http.post("http://localhost:5000/submission/edit", submission)
         
 
 

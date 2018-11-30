@@ -118,14 +118,14 @@ router.post("/add", authenticate, (req, res) => {
  */
 router.post("/edit", authenticate, (req, res) => {
 
-    if (!req.body.submissionText || !req.body.submissionName) {
+    if (!req.body.submissionText || !req.body.submissionID || !req.body.submissionDescription || !req.body.submissionLink) {
         res.status(400).json({ message: "Submission data is incomplete" });
         return;
     }
 
     /* Change submission num */
 
-    Submission.findOneAndUpdate({ submissionName: req.body.submissionName },
+    Submission.findOneAndUpdate({ _id: req.body.submissionID },
         {
             $set: {
                 submissionText: req.body.submissionText,
