@@ -153,7 +153,7 @@ router.post("/add-comment", authenticate, (req, res) => {
     Submission.findOneAndUpdate({_id: req.body.submissionID },
         {
             $push: {
-                comments: {
+                'comments': {
                     user: req.user.username,
                     message: req.body.comment,
                     reported: false,
