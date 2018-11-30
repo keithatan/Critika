@@ -25,13 +25,8 @@ export class EditProfileComponent implements OnInit {
 
   renderComponent: String;
   renderProfile() {
-    if (this.view == false){
-       this.view = true;
-    }
-    else if (this.view == true) {
-      this.view = false;
-    }
-    this.renderComponent = "Profile";
+  
+    this.returnToParent.emit('goback');
   }
 
   submitChanges(){
@@ -48,6 +43,7 @@ export class EditProfileComponent implements OnInit {
   }
 
   ngOnInit() {
+    console.log("rendered edit");
   }
 
 }
