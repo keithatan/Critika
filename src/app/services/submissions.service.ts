@@ -2,6 +2,7 @@ import { Injectable } from "@angular/core";
 import { HttpClient , HttpHeaders} from "@angular/common/http";
 import { Subject, Observable, Subscriber } from "rxjs";
 import { Submission } from '../models/submissions.model';
+import { NgForm } from "@angular/forms";
 
 @Injectable({providedIn: "root"})
 export class SubmissionService{
@@ -10,6 +11,7 @@ export class SubmissionService{
     mySubmissions:Submission[];
     myAvailable:Submission[];
     data: Object;
+    comment: string;
 
     constructor(private http:HttpClient){
         
@@ -73,6 +75,16 @@ export class SubmissionService{
         console.log(sub)
         return this.http.post("http://localhost:5000/submission/make-unavailable", sub).toPromise();
     }
+
+    addComment(comment, submissionID){
+        const options = {
+            "comment": comment,
+            "submissionID": submissionID
+        }
+        console.log(submissionID)
+        return this.http.post<Object>("http://localhost:5000/submission/add-comment", options).toPromise();
+    }
+
 
     getAllReportedComments(){
         return this.http.get("http://localhost:5000/submission/all-reported").toPromise();
