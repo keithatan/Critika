@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { Submission } from '../../models/submissions.model';
 import { SubmissionService } from '../../services/submissions.service';
 @Component({
@@ -8,6 +8,7 @@ import { SubmissionService } from '../../services/submissions.service';
 })
 export class ViewSubComponent implements OnInit {
   @Input('childSubmission') sub:Submission;
+  @Output() returnToParent = new EventEmitter<string>();
   chosenSubmission: Submission;
   renderComponent: string;
 
@@ -43,15 +44,7 @@ export class ViewSubComponent implements OnInit {
 }
 
 getChildEvent(event:string){
-  this.subService.getSubmissions().then((response) => {
-    this.sub= new Submission(response);
-    /*
-    const v = response["rating"];
-    console.log(v);
-    */
-    console.log(response);
-    console.log(this.sub)
-  })
+  this.returnToParent.emit('reload');
 }
 
   ngOnInit() {
