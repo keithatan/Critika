@@ -142,7 +142,7 @@ router.post("/add-comment", authenticate, (req, res) => {
 
     User.findOneAndUpdate({username: req.user.username}, {
         $inc: {
-            coins: -1,
+            coins: 1,
         }
     })
 
