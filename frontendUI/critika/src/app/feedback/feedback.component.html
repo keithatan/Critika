@@ -1,14 +1,13 @@
-
 <mdb-card *ngIf = "toRate == false">
   <mdb-card-body>
     <mdb-card-title>
-      <h4>My Feedbacks</h4>
+      <h4 class="title">My Feedbacks</h4>
     </mdb-card-title>
-
+    
     <h5 *ngIf = "this.isEmpty == true"> You have no feedbacks </h5>
     
-    <table *ngIf = "this.isEmpty == false" class="table table-bordered table-striped table-wrapper-scroll-y">
-      <thead>
+    <table  mdbTable *ngIf = "this.isEmpty == false" class="table table-bordered table-striped table-wrapper-scroll-y">
+      <thead class="tableColor white-text">
         <tr>
           <th *ngFor="let el of tableElements" scope="col">{{el}}</th>
         </tr>
@@ -25,43 +24,19 @@
           <td *ngIf="f.feedbackRating == 0">
             <p>Not Yet Rated</p>
             <app-rate-feedback [childFeedback]="chosen" (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
-            <button type="button" (click) = "renderRateFeedback(f)" class="btn btn-secondary">Rate</button>
+            <button *ngIf="renderComponent !='rate-feedback'" type="button" (click) = "renderRateFeedback(f)" class="btn peach-gradient btn-sm">Rate</button>
           </td>
           
           <td *ngIf="f.feedbackRating != 0">
             <p>{{f.feedbackRating}}/5</p>
           </td>
-          
-          
         </tr>
       </tbody>
     </table>
-    
-    <!-- <table mdbTable>
-      <thead class="tableColor white-text">
-        <tr>
-          <th *ngFor="let el of tableElements" scope="col">{{el}} </th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr mdbTableCol *ngFor="let f of myFeedbacks">
-          <th scope="row">{{f.submissionName}}</th>
-          <td>{{f.feedbackGood}}</td>
-          <td>{{f.feedbackBad}}</td>
-          <td>{{f.feedbackWork}}</td>
-          <td><span class="badge badge-primary badge-pill">{{sub.numberOfCritiquesReceived}}</span></td>
-          <td><button (click)="renderCritiqueForm(sub)" >Test</button></td>
-        </tr>
-      </tbody>
-    </table> -->
-    
-    <!-- <p> {{feed}}</p>
-      <p> Feedback 2 </p>
-      <p> Feedback 3 </p> -->
-      
-    </mdb-card-body>
-    
-  </mdb-card>
+  </mdb-card-body>
   
   
-  
+</mdb-card>
+
+
+

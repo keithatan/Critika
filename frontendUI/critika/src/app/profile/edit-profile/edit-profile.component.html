@@ -1,41 +1,37 @@
-<!-- <p>
-  edit-profile works!
-</p> -->
-
-
-<mdb-card *ngIf = "view == false">
+<mdb-card class="size">
   <!--Card content-->
   <mdb-card-body>
-
+    
     <!--Title-->
     <mdb-card-title>
       <h4>Edit Profile</h4>
     </mdb-card-title>
-
-<div class="md-form" *ngIf="childProfile.aboutMe != ''">
+    
+    <div class="md-form" *ngIf="childProfile.aboutMe != ''">
       <textarea mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="aboutMe" ></textarea>
-      <label>About Me</label>
+      <label for="form7">About Me</label>
     </div>
-
+    
     <div class="md-form">
-        <textarea placeholder="homepage"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="homePage"></textarea>
-         <label>Homepage</label>
-       </div>
-
-    <div class="md-form">
-     <textarea placeholder="{{childProfile.location}}"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="location"></textarea>
-      <label>Location</label>
+      <textarea placeholder="homepage"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="homePage"></textarea>
+      <label for="form7">Homepage</label>
     </div>
-
+    
+    <div class="md-form">
+      <textarea placeholder="{{childProfile.location}}"mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="location"></textarea>
+      <label for="form7">Location</label>
+    </div>
+    
     <div class="md-form">
       <textarea placeholder="{{childProfile.occupation}}" mdbInputDirective type="text" id="form7" class="md-textarea form-control" rows="3" [(ngModel)]="occupation"></textarea>
-      <label>Occupation</label>
+      <label for="form7">Occupation</label>
     </div>
-
-    <!-- <a href="#" mdbBtn color="primary" mdbWavesEffect>Button</a> -->
+    
   </mdb-card-body>
-
-  <button type="button" (click)="submitChanges()" class="btn btn-secondary">Submit Changes</button>
-  <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button>
-
+  <button mdbBtn block="true" (click)= "submitChanges()" class="btn tableColor" type="submit">Submit Changes</button>
+  <br>
+  <button mdbBtn type="button" color="danger" outline="true" mdbWavesEffect block="true" (click)="renderProfile()">Cancel</button>
 </mdb-card>
+
+  <!-- <button type="button" (click)="submitChanges()" class="btn btn-secondary">Submit Changes</button> -->
+  <!-- <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button> -->
