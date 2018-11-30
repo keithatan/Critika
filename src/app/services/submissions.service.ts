@@ -22,7 +22,7 @@ export class SubmissionService{
         ){
         const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
         
-        return this.http.post("http://critika-backend.herokuapp.com/submission/add", submission)
+        return this.http.post("https://critika-backend.herokuapp.com/submission/add", submission)
         
 
 
@@ -37,7 +37,7 @@ export class SubmissionService{
         }        
 
 
-        return this.http.post("http://critika-backend.herokuapp.com/submission/edit", submission)
+        return this.http.post("https://critika-backend.herokuapp.com/submission/edit", submission)
         
 
 
@@ -45,19 +45,19 @@ export class SubmissionService{
 
     //get submission user can critique
     getAvailable(){
-        return this.http.get("http://critika-backend.herokuapp.com/submission/available-with-categories").toPromise();
+        return this.http.get("https://critika-backend.herokuapp.com/submission/available-with-categories").toPromise();
     }
 
     //get user's submissions
     getSubmissions():Promise<Submission[]>{
-        return this.http.get<Submission[]>("http://critika-backend.herokuapp.com/submission/mine").toPromise()
+        return this.http.get<Submission[]>("https://critika-backend.herokuapp.com/submission/mine").toPromise()
     }
 
     spendCoins(username1: string, coins1: string){
         const submission:Object = {recuser : username1, coins: coins1}
         var p = new Submission(submission)
         console.log (p)
-        this.http.post("http://critika-backend.herokuapp.com/user/remove-coin", p)
+        this.http.post("https://critika-backend.herokuapp.com/user/remove-coin", p)
         .subscribe((response) => {
             console.log(response)
         }).unsubscribe();
@@ -73,7 +73,7 @@ export class SubmissionService{
         }
         var p = new Submission(sub);
         console.log(sub)
-        return this.http.post("http://critika-backend.herokuapp.com/submission/make-unavailable", sub).toPromise();
+        return this.http.post("https://critika-backend.herokuapp.com/submission/make-unavailable", sub).toPromise();
     }
 
     addComment(comment, submissionID){
@@ -83,20 +83,20 @@ export class SubmissionService{
         }
         console.log("data: " + comment + " " + submissionID)
         console.log(submissionID)
-        return this.http.post<Object>("http://critika-backend.herokuapp.com/submission/add-comment", options).toPromise();
+        return this.http.post<Object>("https://critika-backend.herokuapp.com/submission/add-comment", options).toPromise();
     }
 
 
     getAllReportedComments(){
-        return this.http.get("http://critika-backend.herokuapp.com/submission/all").toPromise();
+        return this.http.get("https://critika-backend.herokuapp.com/submission/all").toPromise();
     }
 
     getLeaderboard() {
-        return this.http.get("http://critika-backend.herokuapp.com/user/leaderboard").toPromise();
+        return this.http.get("https://critika-backend.herokuapp.com/user/leaderboard").toPromise();
     }
 
     getLeaderboardReverse() {
-        return this.http.get("http://critika-backend.herokuapp.com/user/leaderboard-reverse").toPromise();
+        return this.http.get("https://critika-backend.herokuapp.com/user/leaderboard-reverse").toPromise();
     }
 
     reportComment(commentID:string, submissionID:string, reportedMessage:string){
@@ -105,7 +105,7 @@ export class SubmissionService{
             reportedMessage: reportedMessage,
             commentID: commentID
         }
-        return this.http.post("http://critika-backend.herokuapp.com/submission/report-comment",sub).toPromise();
+        return this.http.post("https://critika-backend.herokuapp.com/submission/report-comment",sub).toPromise();
 
     }
     
