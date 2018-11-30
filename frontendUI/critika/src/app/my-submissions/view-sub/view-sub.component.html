@@ -14,7 +14,7 @@
 
 
       <p id="comments">Comments</p>
-      <div *ngIf="sub.comments.length == 0">
+      <div *ngIf="sub.comments.length === 0">
         <p>There are currently no comments on this submission.</p>
       </div>
 
@@ -55,7 +55,7 @@
     </div>
 
     <app-edit-sub [childSubmission]='sub' *ngIf="renderComponent == 'EditSub' " (returnToParent)="getChildEvent($event)"></app-edit-sub>
-    <button mdbBtn type="submit" (click)="renderEditSub(submission)" class="btn tableColor" block="true">Edit
+    <button mdbBtn type="submit" (click)="renderEditSub(sub)" class="btn tableColor" block="true">Edit
       Submission</button>
     <br>
     <button mdbBtn type="button" (click)="close()" color="danger" outline="true" mdbWavesEffect block="true">Close</button>
