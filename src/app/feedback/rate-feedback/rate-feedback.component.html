@@ -18,8 +18,8 @@
     </mdb-card-body>
 
     <app-feedback *ngIf="renderComponent == 'feedback' "></app-feedback>
-    <button type="button" (click) = "submitRate()" class="btn btn-elegant btn-sm"> Rate </button> 
-    <button type="button" (click) = "renderViewFeedback()" class="btn btn-elegant btn-sm"> Close </button> 
+    <button type="button" mdbBtn (click) = "submitRate()" class="softblue btn-sm"> Rate </button> 
+    <button type="button" color="danger" outline="true" mdbBtn (click) = "renderViewFeedback()" class="btn-sm"> Close </button> 
 
     <!-- <app-profile *ngIf="renderComponent == 'Profile' "></app-profile>
     <button type="button" (click)="renderProfile()" class="btn btn-secondary">Cancel</button> -->
