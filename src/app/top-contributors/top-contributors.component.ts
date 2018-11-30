@@ -13,13 +13,36 @@ import { AuthData } from '../auth/auth-data.model'
 
 export class TopContributorsComponent implements OnInit {
   constructor(public subservice: SubmissionService, private http: HttpClient, private formBuilder: FormBuilder) { }
-  tableElements = ['User', 'No. Submissions', 'No. Critiques', 'Rating'];
+  tableElements = ['User', 'No. Submissions', 'No. Critiques'];
   usersForward: User[];
   usersReverse: User[];
+  chosenUser: string;
+  renderComponent: String;
+
+  getChildEvent(str: string) {
+    this.renderComponent = str;
+    this.subservice.getLeaderboard().then((users) => {
+      let i: number = 0;
+      let length: number = Object.keys(users).length;
+      this.usersForward = new Array(length);
+      for (let user in users) {
+        // console.log(users[user].username)
+        let truncated_user = new User(users[user]);
+        this.usersForward[i++] = truncated_user;
+      }
+    })
+  }
 
   ngOnInit() {
+    this.renderComponent = 'dash';
     this.getLeaderBoard();
     this.getLeaderBoardReverse();
+  }
+
+  renderUser(str:string){
+    this.renderComponent = 'user';
+    this.chosenUser = str;
+    
   }
 
   getLeaderBoard() {
@@ -36,6 +59,7 @@ export class TopContributorsComponent implements OnInit {
   }
 
   getLeaderBoardReverse() {
+    /*
     this.subservice.getLeaderboardReverse().then((users) => {
       let i: number = 0;
       let length: number = Object.keys(users).length;
@@ -44,6 +68,8 @@ export class TopContributorsComponent implements OnInit {
         let truncated_user = new User(users[user]);
         this.usersReverse[i++] = truncated_user;
       }
-    })
+    })*/
+
+    this.usersForward = this.usersForward.reverse();
   }
 }
