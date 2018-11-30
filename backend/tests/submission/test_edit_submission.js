@@ -18,25 +18,28 @@ describe('Test edit submissions', function () {
     describe('Test without submissionName', function () {
 
         it('should return 400', (done) => {
-            var info = {
-                submissionText: 'submission text'
-            }
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
 
-                var token = user['tokens'][0]['token'][0]
-                // console.log(user)
-                chai.request(server)
-                    .post('/submission/edit')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        // console.log(res)
-                        res.should.have.status(400);
-                        done()
-                    })
-            });
+            Submission.findOne({submissionText: 'submission text'}).then((sub) => {
+                var info = {
+                    submissionID: sub._id.toString()
+                }
+                User.findOne({ username: uname }, (err, user) => {
+                    //do the get request here 
+    
+                    var token = user['tokens'][0]['token'][0]
+                    // console.log(user)
+                    chai.request(server)
+                        .post('/submission/edit')
+                        .set('content-type', 'application/x-www-form-urlencoded')
+                        .set('token', token)
+                        .send(info)
+                        .end((err, res) => {
+                            // console.log(res)
+                            res.should.have.status(400);
+                            done()
+                        })
+                });
+            })
         })
     })
 
@@ -66,7 +69,7 @@ describe('Test edit submissions', function () {
     describe('Test with bad auth', function () {
         it('should return 401', (done) => {
             var info = {
-                submissionName: 'submission name',
+                // submissionID: sub._id.toString(),
                 submissionText: 'submission text'
             }
             User.findOne({ username: uname }, (err, user) => {
@@ -90,24 +93,28 @@ describe('Test edit submissions', function () {
     describe('Test with correct info', function () {
 
         it('should return 200', (done) => {
-            var info = {
-                submissionName: 'submission name',
-                submissionText: 'submission text'
-            }
-            User.findOne({ username: uname }, (err, user) => {
-                //do the get request here 
+            Submission.findOne({submissionName: 'submission name'}).then((sub) => {
+                var info = {
+                    submissionID: sub._id.toString(),
+                    submissionText: 'submission text'
+                }
+                User.findOne({ username: uname }, (err, user) => {
+                    //do the get request here 
     
-                var token = user['tokens'][0]['token'][0]
-                chai.request(server)
-                    .post('/submission/edit')
-                    .set('content-type', 'application/x-www-form-urlencoded')
-                    .set('token', token)
-                    .send(info)
-                    .end((err, res) => {
-                        res.should.have.status(200);
-                        done()
-                    })
-            });
+                    var token = user['tokens'][0]['token'][0]
+                    // console.log(user)
+                    chai.request(server)
+                        .post('/submission/edit')
+                        .set('content-type', 'application/x-www-form-urlencoded')
+                        .set('token', token)
+                        .send(info)
+                        .end((err, res) => {
+                            // console.log(res)
+                            res.should.have.status(400);
+                            done()
+                        })
+                });
+            })
         })
     })
 
