@@ -22,9 +22,8 @@
           <td>{{f.feedbackWork}}</td>
           
           <td *ngIf="f.feedbackRating == 0">
-            <p>Not Yet Rated</p>
             <app-rate-feedback [childFeedback]="chosen" (returnToParent)="getChildEvent($event)" *ngIf="renderComponent == 'rate-feedback' "></app-rate-feedback>
-            <button *ngIf="renderComponent !='rate-feedback'" type="button" (click) = "renderRateFeedback(f)" class="btn peach-gradient btn-sm">Rate</button>
+            <button *ngIf="renderComponent !='rate-feedback'"  mdbWavesEffect mdbBtn (click) = "renderRateFeedback(f)" class="softblue btn-sm">Rate</button>
           </td>
           
           <td *ngIf="f.feedbackRating != 0">
