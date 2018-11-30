@@ -169,17 +169,13 @@ router.post('/rate-feedback', authenticate, (req, res) => {
             res.send(err);
             return
         })
-
-
-        
-
-    
 })
 
 
 /*
+ * DEPRECIATED, NO LONGER IN USE
  * Get all feedback for a given submission
- */
+ *
 router.get('/all-submission', authenticate, (req, res) => {
     Feedback.find({ submissionID: req.user.submissionid }).then((subs) => {
         res.send(subs)
@@ -187,6 +183,7 @@ router.get('/all-submission', authenticate, (req, res) => {
         res.status(400).send(err)
     })
 })
+*/
 
 /*
  * Get all feedback for a given submission
