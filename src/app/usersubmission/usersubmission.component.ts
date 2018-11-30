@@ -31,8 +31,9 @@ export class UsersubmissionComponent implements OnInit {
   }
 
 addComment(sub){
-  console.log(sub.submissionID)
-  this.subService.addComment(this.comment, sub.submissionID).then((sub) => {
+  console.log("id: " + sub._id)
+  console.log("comment: " + this.comment)
+  this.subService.addComment(this.comment, sub._id).then((sub) => {
     console.log(sub)
   })
   this.returnToParent.emit('reload');
