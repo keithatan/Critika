@@ -199,6 +199,7 @@ describe('test reset password email', function () {
                     .set('token', token)
                     .send(info)
                     .end((err, res) => {
+                        // console.log(res)
                         res.should.have.status(200)
                         done()
                     })
