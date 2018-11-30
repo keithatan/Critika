@@ -98,11 +98,11 @@ export class SubmissionService{
         return this.http.get("http://localhost:5000/user/leaderboard-reverse").toPromise();
     }
 
-    reportComment(submissionName:string, reportedMessage:string, comment:Object){
+    reportComment(commentID:string, submissionID:string, reportedMessage:string){
         const sub:Object = {
-            submissionName: submissionName,
+            submissionID: submissionID,
             reportedMessage: reportedMessage,
-            comment: comment
+            commentID: commentID
         }
         return this.http.post("http://localhost:5000/submission/report-comment",sub).toPromise();
 
