@@ -15,13 +15,12 @@ export class SubmissionService{
         
     }
 
-    addSubmission(submissionname: string, submissiontext: string, category:string, username:string, submissionlink:string,
+    addSubmission(submissionname: string, submissiontext: string, category:string, submissionlink:string,
         submissionskilllevel:string, submissiondescription: string
         ){
-        const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, username : username, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
-        var p = new Submission(submission)
+        const submission:Object = {submissionName: submissionname, submissionText : submissiontext, category :category, submissionSkillLevel: submissionskilllevel, submissionLink: submissionlink, submissionDescription: submissiondescription}
         
-        this.http.post("http://localhost:5000/submission/add", p)
+        this.http.post("http://localhost:5000/submission/add", submission)
         .subscribe(response => {
             console.log(response)
             
