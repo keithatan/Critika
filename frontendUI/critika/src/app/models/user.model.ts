@@ -18,7 +18,7 @@ export class User {
             this.userRating = 0
         }
         else {
-            this.userRating = response.rating / response.ratingNum;
+            this.userRating = response.rating / (response.ratingNum-1);
         }
 
     }
