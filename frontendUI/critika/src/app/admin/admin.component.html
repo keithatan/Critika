@@ -1,123 +1,122 @@
 <mdb-card>
-    <!--C-->
-    <mdb-card-body>
+	<mdb-card-body>
+		<mdb-card-title>
+			<h2 class="adminTitle">Admin</h2>
+		</mdb-card-title>
+		<div>
+			
+			
+			<div mdbModal #basicModal1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+			aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+			<div class="modal-dialog  modal-dialog-centered" role="document">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close pull-right" aria-label="Close" (click)="basicModal1.hide()">
+							<span aria-hidden="true">×</span>
+						</button>
+						<h4 class=".button" id="myModalLabel1">Ban User</h4>
+					</div>
+					
+					<div class="modal-body">
+						<input mdbInputDirective type="text" placeholder="User" id="form1" class="form-control"
+						[(ngModel)]="UserToBeBanned">
+					</div>
+					
+					<button (click)="BanEm()" (click)="basicModal1.hide()" (click)="updateUsers()" 
+					type="button" mdbBtn class="btn tableColor">Submit Changes</button>
+					
+					<button type="button" mdbBtn color="danger" outline="true" aria-label="Close"
+					(click)="basicModal1.hide()" mdbWavesEffect>Close</button>
+					
+					
+				</div>
+			</div>
+		</div>
+		
+		
+		<div mdbModal #basicModal2="mdbModal" class="modal fade " tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+		aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<button type="button" class="close pull-right" aria-label="Close" (click)="basicModal2.hide()">
+						<span aria-hidden="true">×</span>
+					</button>
+					<h4 id="myModalLabel2"> Restore User</h4>
+				</div>
+				<div class="modal-body">
+					
+					<input mdbInputDirective placeholder="User" type="text" id="form1" class="form-control"
+					[(ngModel)]="UserToBeRestored">
+				</div>
+				
+				
+				<button (click)="RestoreEm()" (click)="basicModal2.hide()" (click)="updateUsers()" type="button" 
+				mdbBtn class="btn tableColor">Submit Changes</button>
+				
+				<button type="button" mdbBtn color="danger" outline="true" aria-label="Close"
+				(click)="basicModal2.hide()" mdbWavesEffect>Close</button>
+			</div>
+		</div>
+	</div>
+	
+	
+	<div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
+	aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
+	<div class="modal-dialog modal-dialog-centered" role="document">
+		<div class="modal-content">
+			<div class="modal-header">
+				<button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
+					<span aria-hidden="true">×</span>
+				</button>
+				<h4 class=""id="myModalLabel3">User</h4>
+			</div>
+			<div class="modal-body">
+				<input mdbInputDirective type="text" id="form1" placeholder="User" class="form-control"
+				[(ngModel)]="UserToBeAdmin">
+			</div>
+			
+			
+			
+			<button mdbBtn (click)="AdminEm()" (click)="basicModal.hide()" (click)="updateUsers()" type="button" 
+			class="btn tableColor" >Submit Changes</button>
+			
+			<button type="button" mdbBtn  color="danger" outline="true" aria-label="Close"
+			(click)="basicModal.hide()" mdbWavesEffect>Close</button>
+		</div>
+	</div>
+</div>
+</div>
 
-        <!--Title-->
-        <mdb-card-title>
-            <h2>Admin</h2>
-        </mdb-card-title>
+<div>
+	<input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for User" title="Type in a category">
+	
+	<div class="table">
+		<table mdbTable class="table table-bordered table-striped table-wrapper-scroll-y">
+			<thead>
+				<tr>
+					<th *ngFor="let el of tableElements" scope="col">{{el}}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr mdbTableCol *ngFor="let user of allUsers | UserSearchPipe: queryString" id="cats">
+					<td>{{user.username}}</td>
+					<td>{{user.standing}}</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</div>
 
-        <!--/.Main wrapper-->
-
-
-
-        <!--/.Main wrapper-->
-        <div>
-            <button type="button" class="btn btn-secondary" (click)="basicModal1.show()"> Ban User </button>
-            <div mdbModal #basicModal1="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal1.hide()">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 class=".button" id="myModalLabel1">Ban User</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input mdbInputDirective type="text" placeholder="User" id="form1" class="form-control"
-                                [(ngModel)]="UserToBeBanned">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                                (click)="basicModal1.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="BanEm()" (click)="basicModal1.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
-                                class="relative waves-light" mdbWavesEffect>Submit
-                                changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+<div class="allButtons">
+	
+	<button type="button" class="btn btn-light-blue" (click)="basicModal1.show()"> Ban User </button>
+	<button type="button" class="btn btn-light-blue" (click)="basicModal2.show()"> Restore User </button>
+	<button type="button" class="btn btn-light-blue" (click)="basicModal.show()"> Make User an Admin </button>
+	
+</div>
 
 
 
-
-            <button type="button" class="btn btn-secondary" (click)="basicModal2.show()"> Restore User </button>
-            <div mdbModal #basicModal2="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal2.hide()">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 id="myModalLabel2"> Restore User</h4>
-                        </div>
-                        <div class="modal-body">
-
-                            <input mdbInputDirective placeholder="User" type="text" id="form1" class="form-control"
-                                [(ngModel)]="UserToBeRestored">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                                (click)="basicModal2.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="RestoreEm()" (click)="basicModal2.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
-                                class="relative waves-light" mdbWavesEffect>Submit
-                                changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-
-
-
-            <button type="button" class="btn btn-secondary" (click)="basicModal.show()"> Make User an Admin </button>
-            <div mdbModal #basicModal="mdbModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="myBasicModalLabel"
-                aria-hidden="true" [config]="{backdrop: false, ignoreBackdropClick: true}">
-                <div class="modal-dialog" role="document">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <button type="button" class="close pull-right" aria-label="Close" (click)="basicModal.hide()">
-                                <span aria-hidden="true">×</span>
-                            </button>
-                            <h4 id="myModalLabel3">User:</h4>
-                        </div>
-                        <div class="modal-body">
-                            <input mdbInputDirective type="text" id="form1" placeholder="User" class="form-control"
-                                [(ngModel)]="UserToBeAdmin">
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" mdbBtn color="secondary" class="waves-light" aria-label="Close"
-                                (click)="basicModal.hide()" mdbWavesEffect>Close</button>
-                            <button (click)="AdminEm()" (click)="basicModal.hide()" (click)="updateUsers()" type="button" mdbBtn color="primary"
-                                class="relative waves-light" mdbWavesEffect>Submit
-                                changes</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <ul>
-            <input type="text" [(ngModel)]="queryString" id="search" class="form-control" placeholder="Search for User"
-                title="Type in a category">
-
-            <table class="table table-bordered table-striped table-wrapper-scroll-y">
-                <thead>
-                    <tr>
-                        <th scope="col">User</th>
-                        <th>Standing</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr mdbTableCol *ngFor="let user of allUsers | UserSearchPipe: queryString" id="cats">
-                        <td>{{user.username}}</td>
-                        <td>{{user.standing}}</td>
-                    </tr>
-                </tbody>
-            </table>
-        </ul>
-
-    </mdb-card-body>
+</mdb-card-body>
 </mdb-card>
