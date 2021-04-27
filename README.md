@@ -1,6 +1,6 @@
 # Critika
 ### Team
-* Keith Tan (Backend + Project Owner)
+* Keith Tan (Backend/Frontend + Project Owner)
 * Ken Sodetz (Backend)
 * Connor Todd (Backend)
 * Brandon Sung (Frontend)
